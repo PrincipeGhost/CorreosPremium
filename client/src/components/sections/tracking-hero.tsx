@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Search, MapPin, Navigation, Mail, Package } from "lucide-react";
 
 export default function TrackingHero() {
   const [trackingNumber, setTrackingNumber] = useState("");
+  const [selectedService, setSelectedService] = useState("paqueteria");
   const [, setLocation] = useLocation();
 
   const handleTrackingSearch = () => {
@@ -15,33 +17,122 @@ export default function TrackingHero() {
   };
 
   return (
-    <section className="bg-yellow-400 py-8">
-      <div className="max-w-sm mx-auto px-4">
-        <div className="text-left mb-4">
-          <h2 className="text-xl font-bold text-gray-900">
-            Sigue tu envío
-          </h2>
-        </div>
-        
-        <div className="relative">
-          <Input
-            type="text"
-            placeholder="Nº de seguimiento de envío..."
-            value={trackingNumber}
-            onChange={(e) => setTrackingNumber(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
-            className="w-full h-12 pl-4 pr-12 text-base border-0 rounded-md shadow-sm"
-            data-testid="tracking-hero-input"
-          />
-          <Button
-            onClick={handleTrackingSearch}
-            className="absolute right-2 top-2 h-8 w-8 p-0 bg-blue-600 hover:bg-blue-700 rounded-md"
-            data-testid="tracking-hero-search-button"
-          >
-            <Search className="w-4 h-4 text-white" />
-          </Button>
-        </div>
+    <div className="bg-gray-100 py-8">
+      <div className="max-w-md mx-auto px-4 space-y-4">
+        {/* Main tracking section */}
+        <Card className="bg-yellow-400 border-0 rounded-lg">
+          <CardContent className="p-6 space-y-4">
+            <h2 className="text-xl font-bold text-gray-900">
+              Sigue tu envío
+            </h2>
+            
+            {/* Tracking input */}
+            <div className="flex gap-2">
+              <Input
+                type="text"
+                placeholder="Nº de seguimiento de en..."
+                value={trackingNumber}
+                onChange={(e) => setTrackingNumber(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
+                className="flex-1 h-12 text-base border-0 rounded-md shadow-sm bg-white"
+                data-testid="tracking-hero-input"
+              />
+              <Button
+                onClick={handleTrackingSearch}
+                className="h-12 px-4 bg-blue-600 hover:bg-blue-700 rounded-md"
+                data-testid="tracking-hero-search-button"
+              >
+                <Search className="w-4 h-4 text-white" />
+              </Button>
+            </div>
+
+            {/* Quick access buttons */}
+            <div className="space-y-3">
+              <Button
+                variant="outline"
+                className="w-full justify-start bg-white border-0 h-12 text-gray-800 hover:bg-gray-50"
+                data-testid="locate-offices-button"
+              >
+                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
+                  <MapPin className="w-4 h-4 text-blue-600" />
+                </div>
+                Localiza oficinas, buzones y Citypaq
+              </Button>
+
+              <Button
+                variant="outline"
+                className="w-full justify-start bg-white border-0 h-12 text-blue-600 hover:bg-gray-50 underline"
+                data-testid="postal-codes-button"
+              >
+                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
+                  <Navigation className="w-4 h-4 text-blue-600" />
+                </div>
+                Encuentra códigos postales
+              </Button>
+
+              <Button
+                variant="outline"
+                className="w-full justify-start bg-white border-0 h-12 text-gray-800 hover:bg-gray-50"
+                data-testid="email-verifier-button"
+              >
+                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
+                  <Mail className="w-4 h-4 text-blue-600" />
+                </div>
+                Verificador de email
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Special package service */}
+        <Card className="border-0 rounded-lg">
+          <CardContent className="p-6">
+            <h3 className="text-lg font-bold text-gray-900 mb-2">
+              Servicio especial de paquetería
+            </h3>
+            <p className="text-gray-600 text-sm mb-2">
+              Envíos rápidos y baratos para todo el mundo
+            </p>
+            <p className="text-lg font-bold text-gray-900 mb-4">
+              Desde 5.63€
+            </p>
+            
+            <p className="text-sm text-gray-600 mb-3">
+              Indica el producto que quieres enviar
+            </p>
+            
+            <div className="flex gap-4 mb-4">
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name="service"
+                  value="paqueteria"
+                  checked={selectedService === "paqueteria"}
+                  onChange={(e) => setSelectedService(e.target.value)}
+                  className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
+                />
+                <span className="ml-2 text-sm text-gray-900">Paquetería</span>
+              </label>
+              
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name="service"
+                  value="camino"
+                  checked={selectedService === "camino"}
+                  onChange={(e) => setSelectedService(e.target.value)}
+                  className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
+                />
+                <span className="ml-2 text-sm text-gray-900">Camino de Santiago</span>
+              </label>
+            </div>
+            
+            <div className="text-sm text-gray-600">
+              Código postal origen
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </section>
+    </div>
   );
 }
