@@ -9,13 +9,13 @@ export default function Footer() {
           <div>
             <div className="flex items-center mb-4">
               <div className="w-8 h-8 corporate-blue rounded flex items-center justify-center text-white font-bold">
-                TC
+                EP
               </div>
-              <span className="ml-2 text-lg font-semibold">Tu Empresa</span>
+              <span className="ml-2 text-lg font-semibold">EnvíosPro</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Servicios profesionales de calidad para empresas que buscan la
-              excelencia.
+              Servicios de paquetería y envíos de calidad para empresas y 
+              particulares en toda España.
             </p>
           </div>
 
@@ -29,7 +29,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-tracking"
                 >
-                  Seguimiento de servicios
+                  Seguimiento de envío
                 </a>
               </li>
               <li>
@@ -38,7 +38,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-services"
                 >
-                  Servicios disponibles
+                  Recibir
                 </a>
               </li>
               <li>
@@ -47,7 +47,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-request"
                 >
-                  Solicitar servicio
+                  Enviar
                 </a>
               </li>
             </ul>
@@ -63,7 +63,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-business-solutions"
                 >
-                  Soluciones empresariales
+                  Enviar
                 </a>
               </li>
               <li>
@@ -72,7 +72,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-consulting"
                 >
-                  Consultoría
+                  Ecommerce
                 </a>
               </li>
               <li>
@@ -81,7 +81,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-training"
                 >
-                  Formación
+                  Marketing
                 </a>
               </li>
             </ul>
@@ -97,7 +97,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-blog"
                 >
-                  Blog
+                  Filatelia
                 </a>
               </li>
               <li>
@@ -106,7 +106,7 @@ export default function Footer() {
                   className="hover:text-white transition-colors"
                   data-testid="footer-link-online-resources"
                 >
-                  Recursos online
+                  Tienda online
                 </a>
               </li>
               <li>
@@ -217,7 +217,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="text-xs text-gray-500">
-            ©Tu Empresa S.L. Todos los derechos reservados.
+            ©EnvíosPro S.L. Todos los derechos reservados.
           </p>
         </div>
       </div>

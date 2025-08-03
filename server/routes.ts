@@ -61,31 +61,88 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Service tracking endpoint (placeholder)
+  // Package tracking endpoint
   app.get("/api/track/:trackingNumber", async (req, res) => {
     const { trackingNumber } = req.params;
     
-    // Mock tracking data for demonstration
-    const mockTrackingData = {
-      trackingNumber,
-      status: "En tránsito",
-      location: "Centro de distribución Madrid",
-      estimatedDelivery: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
-      history: [
-        {
-          date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-          status: "Servicio iniciado",
-          location: "Oficina central"
-        },
-        {
-          date: new Date().toISOString(),
-          status: "En proceso",
-          location: "Centro de distribución Madrid"
-        }
-      ]
+    // Simulate different tracking scenarios based on tracking number
+    const mockTrackingDatabase = {
+      "EP001234567ES": {
+        trackingNumber,
+        status: "Entregado",
+        location: "Entregado en destino",
+        estimatedDelivery: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+        history: [
+          {
+            date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+            status: "Servicio iniciado",
+            location: "Oficina EnvíosPro Madrid"
+          },
+          {
+            date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+            status: "En tránsito",
+            location: "Centro de distribución Madrid"
+          },
+          {
+            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+            status: "Entregado",
+            location: "Entregado en destino"
+          }
+        ]
+      },
+      "EP987654321ES": {
+        trackingNumber,
+        status: "En tránsito",
+        location: "Centro de distribución Barcelona",
+        estimatedDelivery: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
+        history: [
+          {
+            date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+            status: "Servicio iniciado",
+            location: "Oficina EnvíosPro Barcelona"
+          },
+          {
+            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+            status: "En proceso",
+            location: "Centro de clasificación Barcelona"
+          },
+          {
+            date: new Date().toISOString(),
+            status: "En tránsito",
+            location: "Centro de distribución Barcelona"
+          }
+        ]
+      },
+      "EP456789123ES": {
+        trackingNumber,
+        status: "En proceso",
+        location: "Centro de clasificación Valencia",
+        estimatedDelivery: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
+        history: [
+          {
+            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+            status: "Servicio iniciado",
+            location: "Oficina EnvíosPro Valencia"
+          },
+          {
+            date: new Date().toISOString(),
+            status: "En proceso",
+            location: "Centro de clasificación Valencia"
+          }
+        ]
+      }
     };
     
-    res.json(mockTrackingData);
+    const trackingData = mockTrackingDatabase[trackingNumber as keyof typeof mockTrackingDatabase];
+    
+    if (trackingData) {
+      res.json(trackingData);
+    } else {
+      res.status(404).json({ 
+        message: "Número de seguimiento no encontrado",
+        trackingNumber 
+      });
+    }
   });
 
   const httpServer = createServer(app);

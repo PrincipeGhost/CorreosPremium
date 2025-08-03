@@ -3,22 +3,22 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function ProductsShowcase() {
   const products = [
     {
-      id: "integral-solutions",
-      title: "Soluciones empresariales integrales",
+      id: "travel-packages",
+      title: "Viaja y disfruta con nosotros",
       description:
-        "En nuestra empresa te acompañamos en toda tu experiencia de crecimiento empresarial para que puedas disfrutar al máximo. Descubre todo tipo de servicios, consultoría y soluciones que tenemos para ti.",
+        "En nuestra empresa te acompañamos en toda tu experiencia del Camino de Santiago para que puedas disfrutar al máximo. Descubre todo tipo de experiencias, viajes y regalos que tenemos para ti, además te llevamos a casa los productos que compres en nuestra web.",
       image:
-        "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-      alt: "Professional team collaboration in modern workspace",
+        "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+      alt: "Travel and tourism services including Camino de Santiago",
     },
     {
-      id: "specialized-services",
-      title: "¿Necesitas servicios especializados?",
+      id: "store-services",
+      title: "¿Quieres comprar en nuestras tiendas o enviar dinero?",
       description:
-        "Tenemos todo tipo de servicios especializados que te ayudarán a realizar tus proyectos más fácilmente y con mayor eficiencia.",
+        "Tenemos todo tipo de productos que te ayudarán a realizar estas gestiones más fácilmente.",
       image:
-        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-      alt: "Modern office building representing professional business services",
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
+      alt: "Store and financial services including money transfers",
     },
   ];
 

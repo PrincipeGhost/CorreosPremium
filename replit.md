@@ -1,6 +1,6 @@
 # Overview
 
-This is a modern full-stack web application built with a React frontend and Express.js backend, designed to provide professional services for businesses. The application features a corporate website with service offerings, contact forms, quote requests, and resource management. It uses a PostgreSQL database with Drizzle ORM for data persistence and includes comprehensive UI components for a polished user experience.
+This is a modern full-stack web application built with a React frontend and Express.js backend, designed as a package delivery and shipping service platform inspired by Correos.es. The application features a corporate website with package tracking functionality, shipping calculators, service offerings, and administrative tools. The platform is branded as "EnvíosPro" and focuses on package delivery services across Spain with real-time tracking capabilities.
 
 # User Preferences
 
@@ -39,7 +39,17 @@ Preferred communication style: Simple, everyday language.
 - **Users**: Basic user management with username/password authentication
 - **Contact Requests**: Form submissions with contact details and service type
 - **Service Quotes**: Detailed quote requests with project specifications and client information
+- **Package Tracking**: Mock tracking system with predefined tracking numbers for demonstration
 - **Timestamps**: Automatic creation timestamps for audit trails
+
+## Recent Changes (January 2025)
+- **Branding Update**: Changed from generic "Tu Empresa" to "EnvíosPro" for package delivery focus
+- **Correos.es Design Implementation**: Adapted homepage design to match Correos.es layout and functionality
+- **Package Tracking System**: Added dedicated tracking page with real-time package status updates
+- **Shipping Calculator**: Implemented package size selector (XS/S/M/L) with weight and dimension specifications
+- **Color Scheme**: Updated to Correos-style blue (#2B5CB8) and orange (#E55722) color palette
+- **Navigation**: Added routing for /tracking page with functional package search
+- **Mock Data**: Created test tracking numbers (EP001234567ES, EP987654321ES, EP456789123ES) for demonstration
 
 ## Development Tooling
 - **Build System**: Vite with React plugin and TypeScript support

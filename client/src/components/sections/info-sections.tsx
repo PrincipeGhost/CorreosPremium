@@ -13,12 +13,11 @@ export default function InfoSections() {
               <div className="flex items-center mb-6">
                 <Users className="w-12 h-12 text-blue-600 mr-4" />
                 <h3 className="text-2xl font-bold text-gray-900">
-                  ¿Eres nuestro cliente?
+                  ¿Estás esperando un envío?
                 </h3>
               </div>
               <p className="text-gray-600 mb-6">
-                Aquí encontrarás todo lo que necesitas saber sobre nuestros
-                servicios y cómo trabajamos contigo.
+                Aquí encontrarás todo lo que necesitas saber sobre el envío que estás esperando.
               </p>
               <Button
                 className="corporate-blue hover:bg-blue-700 text-white font-semibold"
@@ -35,12 +34,11 @@ export default function InfoSections() {
               <div className="flex items-center mb-6">
                 <Handshake className="w-12 h-12 text-blue-600 mr-4" />
                 <h3 className="text-2xl font-bold text-gray-900">
-                  ¿Quieres ser nuestro socio?
+                  ¿Quieres hacer un envío?
                 </h3>
               </div>
               <p className="text-gray-600 mb-6">
-                Descubre las oportunidades de colaboración y cómo podemos
-                trabajar juntos para crecer.
+                Todo lo que necesitas saber para realizar un envío del tipo que sea.
               </p>
               <Button
                 className="corporate-accent hover:bg-orange-600 text-white font-semibold"

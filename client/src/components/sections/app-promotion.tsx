@@ -8,11 +8,11 @@ export default function AppPromotion() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center text-white">
           <div>
             <h2 className="text-3xl font-bold mb-4">
-              Ya disponible nuestra nueva App
+              Ya disponible la nueva App de EnvíosPro
             </h2>
             <p className="text-blue-100 mb-6">
-              Descarga la nueva App de Tu Empresa y disfruta de una experiencia
-              mejorada. Gestiona tus servicios con nuestra App de manera rápida,
+              Descarga la nueva App de EnvíosPro y disfruta de una experiencia
+              mejorada. Gestiona tus envíos con nuestra App de manera rápida,
               sencilla e intuitiva.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">

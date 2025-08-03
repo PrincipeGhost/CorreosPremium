@@ -4,31 +4,31 @@ import { ArrowRight } from "lucide-react";
 export default function ServicesGrid() {
   const services = [
     {
-      id: "consultoria",
-      title: "Consultoría Estratégica",
+      id: "gestion-aduanera",
+      title: "Gestión Aduanera",
       description:
-        "Desarrollamos estrategias personalizadas para impulsar el crecimiento de tu negocio.",
+        "Infórmate sobre cómo realizar los trámites aduaneros que necesitas.",
       image:
-        "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-      alt: "Professional business consultancy meeting",
+        "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+      alt: "Customs and international shipping management",
     },
     {
-      id: "tecnologia",
-      title: "Soluciones Tecnológicas",
+      id: "tramites-dgt",
+      title: "Trámites de la DGT",
       description:
-        "Implementamos tecnología de vanguardia para optimizar tus procesos empresariales.",
+        "Realiza tus trámites de la DGT online de forma fácil y sencilla o acércate a cualquiera de nuestras oficinas.",
       image:
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-      alt: "Modern office with technology solutions",
+        "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+      alt: "DGT administrative procedures and vehicle documentation",
     },
     {
-      id: "formacion",
-      title: "Formación Profesional",
+      id: "administracion-publica",
+      title: "Trámites con la Administración Pública",
       description:
-        "Programas de capacitación diseñados para potenciar las habilidades de tu equipo.",
+        "Haz tus trámites de forma rápida y segura.",
       image:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
-      alt: "Professional training and development session",
+        "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300",
+      alt: "Public administration services and procedures",
     },
   ];
 

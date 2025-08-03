@@ -22,10 +22,10 @@ export default function Header() {
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               <div className="w-10 h-10 corporate-blue rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                TC
+                EP
               </div>
               <span className="ml-3 text-xl font-semibold text-gray-900">
-                Tu Empresa
+                EnvíosPro
               </span>
             </div>
           </div>

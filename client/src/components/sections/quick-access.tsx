@@ -1,31 +1,46 @@
+import { useState } from "react";
+import { useLocation } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function QuickAccess() {
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [, setLocation] = useLocation();
+
+  const handleTrackingSearch = () => {
+    if (trackingNumber.trim()) {
+      setLocation(`/tracking?number=${encodeURIComponent(trackingNumber)}`);
+    }
+  };
+
   return (
     <section className="corporate-light py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Card className="shadow-lg">
           <CardContent className="p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-              Acceso rápido a servicios
+              Sigue tu envío
             </h2>
 
-            {/* Service Tracking */}
+            {/* Package Tracking */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold mb-4">
-                Seguimiento de servicios
+                Nº de seguimiento de envío
               </h3>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Input
                   type="text"
-                  placeholder="Número de referencia del servicio"
+                  placeholder="Introduce tu número de seguimiento"
+                  value={trackingNumber}
+                  onChange={(e) => setTrackingNumber(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
                   className="flex-1"
                   data-testid="tracking-input"
                 />
                 <Button
+                  onClick={handleTrackingSearch}
                   className="corporate-blue hover:bg-blue-700 text-white font-semibold"
                   data-testid="tracking-search-button"
                 >
@@ -43,7 +58,7 @@ export default function QuickAccess() {
               >
                 <MapPin className="text-blue-600 w-8 h-8 mr-4" />
                 <div>
-                  <h4 className="font-semibold">Localiza oficinas</h4>
+                  <h4 className="font-semibold">Localiza oficinas, buzones y Citypaq</h4>
                   <p className="text-sm text-gray-600">
                     Encuentra nuestras ubicaciones
                   </p>
@@ -56,9 +71,9 @@ export default function QuickAccess() {
               >
                 <Phone className="text-blue-600 w-8 h-8 mr-4" />
                 <div>
-                  <h4 className="font-semibold">Contacto directo</h4>
+                  <h4 className="font-semibold">Encuentra códigos postales</h4>
                   <p className="text-sm text-gray-600">
-                    Habla con nuestro equipo
+                    Busca códigos postales
                   </p>
                 </div>
               </a>

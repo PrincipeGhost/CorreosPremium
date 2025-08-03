@@ -14,15 +14,15 @@ import AppPromotion from "@/components/sections/app-promotion";
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      <title>Tu Empresa - Servicios Profesionales</title>
+      <title>EnvíosPro - Envíos y Paquetería</title>
       <meta
         name="description"
-        content="Servicios profesionales de calidad. Consultoría, tecnología y formación para empresas que buscan la excelencia. Contáctanos hoy mismo."
+        content="Servicios de paquetería y envíos de calidad para toda España. Seguimiento en tiempo real, gestión aduanera y trámites oficiales. Envía tus paquetes con nosotros."
       />
-      <meta property="og:title" content="Tu Empresa - Servicios Profesionales" />
+      <meta property="og:title" content="EnvíosPro - Envíos y Paquetería" />
       <meta
         property="og:description"
-        content="Servicios profesionales de calidad. Consultoría, tecnología y formación para empresas que buscan la excelencia."
+        content="Servicios de paquetería y envíos de calidad para toda España. Seguimiento en tiempo real y gestión aduanera."
       />
       <meta property="og:type" content="website" />
       

@@ -24,10 +24,10 @@
   --ring: hsl(220, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Corporate colors */
-  --corporate-blue: hsl(207, 100%, 40%);
+  /* Correos-style colors */
+  --corporate-blue: hsl(215, 85%, 40%);
   --corporate-light: hsl(210, 40%, 98%);
-  --corporate-accent: hsl(14, 100%, 57%);
+  --corporate-accent: hsl(23, 90%, 55%);
   --corporate-success: hsl(134, 61%, 41%);
   --corporate-warning: hsl(45, 100%, 51%);
   --corporate-neutral: hsl(215, 14%, 45%);

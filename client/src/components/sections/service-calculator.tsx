@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
 import { Zap, Settings, Rocket, Crown } from "lucide-react";
 
 export default function ServiceCalculator() {
@@ -9,28 +10,32 @@ export default function ServiceCalculator() {
 
   const serviceSizes = [
     {
-      id: "basic",
+      id: "xs",
       icon: Zap,
-      title: "Básico",
-      description: "Hasta 1 semana",
+      title: "XS",
+      subtitle: "Hasta 2kg",
+      description: "Dimensión: 30x20x20",
     },
     {
-      id: "standard",
+      id: "s",
       icon: Settings,
-      title: "Estándar",
-      description: "Hasta 1 mes",
+      title: "S",
+      subtitle: "Hasta 5kg",
+      description: "Dimensión: 35x35x24",
     },
     {
-      id: "advanced",
+      id: "m",
       icon: Rocket,
-      title: "Avanzado",
-      description: "Hasta 3 meses",
+      title: "M",
+      subtitle: "Hasta 10kg",
+      description: "Dimensión: 40x40x37",
     },
     {
-      id: "premium",
+      id: "l",
       icon: Crown,
-      title: "Premium",
-      description: "Proyectos largos",
+      title: "L",
+      subtitle: "Hasta 20kg",
+      description: "Dimensión: 55x55x39",
     },
   ];
 
@@ -40,53 +45,80 @@ export default function ServiceCalculator() {
         <Card className="border shadow-lg">
           <CardContent className="p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Servicio especial profesional
+              Servicio especial de paquetería
             </h2>
             <p className="text-gray-600 mb-8">
-              Servicios rápidos y eficientes para todo tipo de necesidades{" "}
-              <span className="text-orange-500 font-semibold">Desde 99€</span>
+              Envíos rápidos y baratos para todo el mundo{" "}
+              <span className="text-orange-500 font-semibold">Desde 5.63€</span>
             </p>
 
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Tipo de servicio
+                    Indica el producto que quieres enviar
                   </label>
                   <Select>
                     <SelectTrigger data-testid="service-type-select">
-                      <SelectValue placeholder="Selecciona un servicio" />
+                      <SelectValue placeholder="Paquetería" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="consultoria">Consultoría</SelectItem>
-                      <SelectItem value="auditoria">Auditoría</SelectItem>
-                      <SelectItem value="formacion">Formación</SelectItem>
-                      <SelectItem value="soporte">Soporte técnico</SelectItem>
+                      <SelectItem value="paqueteria">Paquetería</SelectItem>
+                      <SelectItem value="documentos">Documentos</SelectItem>
+                      <SelectItem value="cartas">Cartas</SelectItem>
+                      <SelectItem value="otros">Otros</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Ubicación
+                    Código postal origen
                   </label>
-                  <Select>
-                    <SelectTrigger data-testid="location-select">
-                      <SelectValue placeholder="Selecciona ubicación" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="madrid">Madrid</SelectItem>
-                      <SelectItem value="barcelona">Barcelona</SelectItem>
-                      <SelectItem value="valencia">Valencia</SelectItem>
-                      <SelectItem value="sevilla">Sevilla</SelectItem>
-                      <SelectItem value="otras">Otras ubicaciones</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="flex gap-2">
+                    <Select>
+                      <SelectTrigger className="w-32" data-testid="country-select">
+                        <SelectValue placeholder="España" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="spain">España</SelectItem>
+                        <SelectItem value="portugal">Portugal</SelectItem>
+                        <SelectItem value="france">Francia</SelectItem>
+                        <SelectItem value="other">Otros países</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Input 
+                      placeholder="Código postal" 
+                      className="flex-1"
+                      data-testid="postal-code-input"
+                    />
+                  </div>
                 </div>
               </div>
 
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Código postal destino
+                </label>
+                <div className="flex gap-2 mb-6">
+                  <Select>
+                    <SelectTrigger className="w-32" data-testid="destination-country-select">
+                      <SelectValue placeholder="España" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="spain">España</SelectItem>
+                      <SelectItem value="portugal">Portugal</SelectItem>
+                      <SelectItem value="france">Francia</SelectItem>
+                      <SelectItem value="other">Otros países</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Input 
+                    placeholder="Código postal" 
+                    className="flex-1"
+                    data-testid="destination-postal-code-input"
+                  />
+                </div>
                 <label className="block text-sm font-medium text-gray-700 mb-4">
-                  ¿Qué tamaño de proyecto necesitas?
+                  ¿Qué tamaño y peso tiene tu paquete?
                 </label>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {serviceSizes.map((size) => {
@@ -103,8 +135,9 @@ export default function ServiceCalculator() {
                         data-testid={`service-size-${size.id}`}
                       >
                         <Icon className="w-8 h-8 text-blue-600 mb-2 mx-auto" />
-                        <h4 className="font-semibold">{size.title}</h4>
-                        <p className="text-sm text-gray-600">
+                        <h4 className="font-bold text-lg">{size.title}</h4>
+                        <h5 className="font-semibold text-sm">{size.subtitle}</h5>
+                        <p className="text-xs text-gray-600">
                           {size.description}
                         </p>
                       </div>
@@ -118,7 +151,7 @@ export default function ServiceCalculator() {
                 className="corporate-blue hover:bg-blue-700 text-white font-semibold"
                 data-testid="quote-request-button"
               >
-                SOLICITAR COTIZACIÓN
+COMENZAR ENVÍO
               </Button>
             </form>
           </CardContent>

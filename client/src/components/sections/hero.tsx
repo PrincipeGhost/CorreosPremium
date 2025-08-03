@@ -24,12 +24,12 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-white">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-              Donde estés, nosotros te protegemos
+              Allá donde estés, tu paquete te encuentra
             </h1>
             <p className="text-xl mb-8 text-blue-100">
-              Servicios profesionales de calidad. Ahora nuestra empresa se
-              asocia con los mejores para ofrecerte la mejor experiencia, estés
-              donde estés.
+              Servicios de paquetería y envíos de calidad. Ahora nuestra empresa se
+              une con los mejores proveedores para llegar a ti, estés donde estés.
+              Porque gracias a nuestra amplia red, podrás enviar y recibir paquetes en cualquier sitio.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -37,7 +37,7 @@ export default function Hero() {
                 className="corporate-accent hover:bg-orange-600 text-white font-semibold"
                 data-testid="hero-contact-button"
               >
-                CONTACTA CON NOSOTROS
+SEGURO, TE LLAMAMOS
               </Button>
               <Button
                 variant="outline"
@@ -45,7 +45,7 @@ export default function Hero() {
                 className="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold"
                 data-testid="hero-info-button"
               >
-                MÁS INFORMACIÓN
+MÁS INFO
               </Button>
             </div>
           </div>
