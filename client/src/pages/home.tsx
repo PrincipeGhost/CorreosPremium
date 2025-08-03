@@ -1,6 +1,8 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Hero from "@/components/sections/hero";
+import InsuranceHero from "@/components/sections/insurance-hero";
+import TrackingHero from "@/components/sections/tracking-hero";
 import QuickAccess from "@/components/sections/quick-access";
 import ServiceCalculator from "@/components/sections/service-calculator";
 import CompanyValues from "@/components/sections/company-values";
@@ -28,16 +30,8 @@ export default function Home() {
       
       <Header />
       <main>
-        <Hero />
-        <QuickAccess />
-        <ServiceCalculator />
-        <CompanyValues />
-        <ServicesGrid />
-        <InfoSections />
-        <OnlineResources />
-        <ProductsShowcase />
-        <BlogSection />
-        <AppPromotion />
+        <InsuranceHero />
+        <TrackingHero />
       </main>
       <Footer />
     </div>

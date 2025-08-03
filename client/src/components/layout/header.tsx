@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -15,66 +15,63 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <div className="w-10 h-10 corporate-blue rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                EP
+    <>
+      {/* Yellow top bar like Correos.es */}
+      <div className="bg-yellow-400 h-1"></div>
+      
+      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo - Correos style */}
+            <div className="flex items-center">
+              <div className="flex-shrink-0 flex items-center">
+                {/* Logo icon similar to Correos */}
+                <div className="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center text-white">
+                  <svg 
+                    className="w-8 h-8" 
+                    viewBox="0 0 24 24" 
+                    fill="currentColor"
+                  >
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                </div>
               </div>
-              <span className="ml-3 text-xl font-semibold text-gray-900">
-                EnvíosPro
-              </span>
+            </div>
+
+            {/* Center - Menu icon like Correos.es */}
+            <div className="flex items-center">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-blue-700 hover:text-blue-800"
+                data-testid="menu-button"
+              >
+                <Menu className="w-6 h-6" />
+              </Button>
+            </div>
+
+            {/* Right side - Search and User like Correos.es */}
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-blue-700 hover:text-blue-800"
+                data-testid="search-button"
+              >
+                <Search className="w-5 h-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-blue-700 hover:text-blue-800"
+                data-testid="user-button"
+              >
+                <User className="w-5 h-5" />
+              </Button>
             </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-corporate-blue font-medium transition-colors"
-                data-testid={`nav-link-${item.name.toLowerCase()}`}
-              >
-                {item.name}
-              </a>
-            ))}
-          </nav>
-
-          {/* Mobile menu */}
-          <div className="md:hidden">
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  data-testid="mobile-menu-trigger"
-                >
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px]">
-                <div className="flex flex-col space-y-4 mt-8">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="text-gray-700 hover:text-corporate-blue font-medium transition-colors text-lg"
-                      onClick={() => setIsOpen(false)}
-                      data-testid={`mobile-nav-link-${item.name.toLowerCase()}`}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
