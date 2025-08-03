@@ -3,11 +3,17 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, MapPin, Navigation, Mail, Package } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Search, MapPin, Navigation, Mail, Package, ChevronDown, Lock } from "lucide-react";
 
 export default function TrackingHero() {
   const [trackingNumber, setTrackingNumber] = useState("");
   const [selectedService, setSelectedService] = useState("paqueteria");
+  const [originCountry, setOriginCountry] = useState("España");
+  const [originPostalCode, setOriginPostalCode] = useState("");
+  const [destinationCountry, setDestinationCountry] = useState("");
+  const [destinationPostalCode, setDestinationPostalCode] = useState("");
+  const [selectedPackageSize, setSelectedPackageSize] = useState("");
   const [, setLocation] = useLocation();
 
   const handleTrackingSearch = () => {
@@ -127,8 +133,110 @@ export default function TrackingHero() {
               </label>
             </div>
             
-            <div className="text-sm text-gray-600">
-              Código postal origen
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm text-gray-600 block mb-2">
+                  Código postal origen
+                </label>
+                <div className="space-y-2">
+                  <div className="relative">
+                    <Input
+                      value="España"
+                      disabled
+                      className="w-full h-12 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10"
+                    />
+                    <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  </div>
+                  <Input
+                    type="text"
+                    placeholder="Código postal*"
+                    value={originPostalCode}
+                    onChange={(e) => setOriginPostalCode(e.target.value)}
+                    className="w-full h-12 border border-gray-300 rounded-md"
+                    data-testid="origin-postal-code"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-600 block mb-2">
+                  Código postal destino
+                </label>
+                <div className="space-y-2">
+                  <Select value={destinationCountry} onValueChange={setDestinationCountry}>
+                    <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md">
+                      <SelectValue placeholder="País*" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="españa">España</SelectItem>
+                      <SelectItem value="francia">Francia</SelectItem>
+                      <SelectItem value="portugal">Portugal</SelectItem>
+                      <SelectItem value="alemania">Alemania</SelectItem>
+                      <SelectItem value="italia">Italia</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Input
+                    type="text"
+                    placeholder="Código postal"
+                    value={destinationPostalCode}
+                    onChange={(e) => setDestinationPostalCode(e.target.value)}
+                    className="w-full h-12 border border-gray-300 rounded-md"
+                    data-testid="destination-postal-code"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-600 block mb-3">
+                  ¿Qué tamaño y peso tiene tu paquete?
+                </label>
+                <div className="space-y-2">
+                  <div 
+                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '2kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                    onClick={() => setSelectedPackageSize('2kg')}
+                  >
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-yellow-400 rounded flex items-center justify-center mr-3">
+                        <Package className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-medium text-gray-900">Hasta 2kg</div>
+                        <div className="text-sm text-gray-600">Dimensión: 30x20x20</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div 
+                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '5kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                    onClick={() => setSelectedPackageSize('5kg')}
+                  >
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-yellow-400 rounded flex items-center justify-center mr-3">
+                        <Package className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-medium text-gray-900">Hasta 5kg</div>
+                        <div className="text-sm text-gray-600">Dimensión: 35x35x24</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div 
+                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '10kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                    onClick={() => setSelectedPackageSize('10kg')}
+                  >
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-yellow-400 rounded flex items-center justify-center mr-3">
+                        <Package className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="font-medium text-gray-900">Hasta 10kg</div>
+                        <div className="text-sm text-gray-600">Dimensión: 40x40x37</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
