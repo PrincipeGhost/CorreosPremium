@@ -8,6 +8,11 @@ import SiemprePensando from "@/components/sections/siempre-pensando";
 import EsperandoEnvio from "@/components/sections/esperando-envio";
 import QuieresHacerEnvio from "@/components/sections/quieres-hacer-envio";
 import TiendaOnline from "@/components/sections/tienda-online";
+import ViajaDisfruta from "@/components/sections/viaja-disfruta";
+import ComprarTiendas from "@/components/sections/comprar-tiendas";
+import BlogCorreos from "@/components/sections/blog-correos";
+import Criptosello from "@/components/sections/criptosello";
+import NuevaApp from "@/components/sections/nueva-app";
 import QuickAccess from "@/components/sections/quick-access";
 import ServiceCalculator from "@/components/sections/service-calculator";
 import CompanyValues from "@/components/sections/company-values";
@@ -42,6 +47,11 @@ export default function Home() {
         <EsperandoEnvio />
         <QuieresHacerEnvio />
         <TiendaOnline />
+        <ViajaDisfruta />
+        <ComprarTiendas />
+        <BlogCorreos />
+        <Criptosello />
+        <NuevaApp />
       </main>
       <Footer />
     </div>
