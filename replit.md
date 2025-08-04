@@ -51,6 +51,7 @@ Preferred communication style: Simple, everyday language.
 - **Travel Section Image**: Updated "Viaja y disfruta con Correos" section with user's exact image showing tourists with map and camera exploring a historic city plaza
 - **Store Services Image**: Updated "¿Quieres comprar en nuestras tiendas o enviar dinero?" section with user's exact image showing authentic Correos yellow signage and logo
 - **Footer Logo Update**: Replaced "EP" text with authentic Correos logo (crown and postal horn) and adjusted footer background color to match Correos.es design
+- **Footer Structure Simplification**: Removed collapsible menu sections and reorganized footer to match Correos.es reference layout with social media icons at top, followed by app downloads, payment methods, and legal section
 
 ## Previous Changes (January 2025)
 - **Branding Update**: Changed from generic "Tu Empresa" to "EnvíosPro" for package delivery focus

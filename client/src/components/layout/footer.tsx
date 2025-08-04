@@ -13,88 +13,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-50">
+    <footer className="bg-white">
       <div className="max-w-md mx-auto px-6">
-        {/* Collapsible Menu Sections */}
-        <div className="space-y-0 border-b border-gray-200">
-          {/* Para ti */}
-          <div className="border-b border-gray-200">
-            <button
-              onClick={() => toggleSection('para-ti')}
-              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
-              data-testid="footer-toggle-para-ti"
-            >
-              Para ti
-              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('para-ti') ? 'rotate-180' : ''}`} />
-            </button>
-            {openSections.includes('para-ti') && (
-              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-tracking">Seguimiento de envío</a>
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-recibir">Recibir</a>
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-enviar">Enviar</a>
-              </div>
-            )}
-          </div>
-
-          {/* Para tu empresa */}
-          <div className="border-b border-gray-200">
-            <button
-              onClick={() => toggleSection('para-empresa')}
-              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
-              data-testid="footer-toggle-para-empresa"
-            >
-              Para tu empresa
-              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('para-empresa') ? 'rotate-180' : ''}`} />
-            </button>
-            {openSections.includes('para-empresa') && (
-              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-business-enviar">Enviar</a>
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-ecommerce">Ecommerce</a>
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-marketing">Marketing</a>
-              </div>
-            )}
-          </div>
-
-          {/* Para tu interés */}
-          <div className="border-b border-gray-200">
-            <button
-              onClick={() => toggleSection('para-interes')}
-              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
-              data-testid="footer-toggle-para-interes"
-            >
-              Para tu interés
-              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('para-interes') ? 'rotate-180' : ''}`} />
-            </button>
-            {openSections.includes('para-interes') && (
-              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-filatelia">Filatelia</a>
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-tienda">Tienda online</a>
-                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-atencion">Atención al cliente</a>
-              </div>
-            )}
-          </div>
-
-          {/* Headphones section */}
-          <div className="border-b border-gray-200">
-            <button
-              onClick={() => toggleSection('auriculares')}
-              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
-              data-testid="footer-toggle-auriculares"
-            >
-              <Headphones className="w-5 h-5 text-gray-900" />
-              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('auriculares') ? 'rotate-180' : ''}`} />
-            </button>
-            {openSections.includes('auriculares') && (
-              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
-                <a href="#" className="block hover:text-blue-600">Atención telefónica</a>
-                <a href="#" className="block hover:text-blue-600">Soporte técnico</a>
-              </div>
-            )}
-          </div>
-        </div>
-
         {/* Social Media */}
-        <div className="py-5">
+        <div className="py-5 border-b border-gray-200">
           <div className="flex space-x-5 justify-start">
             <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-facebook">
               <Facebook className="w-6 h-6" />
