@@ -38,7 +38,7 @@ export default function Footer() {
 
         {/* App Downloads */}
         <div className="py-4 border-b border-gray-200">
-          <p className="text-sm text-gray-700 mb-4">Descarga la App de Correos</p>
+          <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Descarga la App de Correos</p>
           <div className="flex space-x-3">
             <img 
               src="/app-store.png" 
@@ -54,8 +54,8 @@ export default function Footer() {
         </div>
 
         {/* Payment Methods */}
-        <div className="py-4">
-          <p className="text-sm text-gray-700 mb-4">Métodos de pago</p>
+        <div className="py-4 border-b border-gray-200">
+          <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Métodos de pago</p>
           <div className="flex flex-wrap gap-2 mb-4">
             <div className="bg-white rounded border border-gray-200 px-3 py-2 flex items-center justify-center min-w-[60px] h-9">
               <img 
@@ -135,9 +135,84 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Collapsible Sections */}
+        <div className="border-b border-gray-200">
+          <button 
+            onClick={() => toggleSection('para-ti')}
+            className="w-full flex items-center justify-between py-4 text-left text-gray-700 hover:text-gray-900"
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+          >
+            <span className="text-base font-medium">Para ti</span>
+            <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-ti') ? 'rotate-180' : ''}`} />
+          </button>
+          {openSections.includes('para-ti') && (
+            <div className="pb-4 space-y-2">
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Envíos</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Oficinas</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Seguimiento</a>
+            </div>
+          )}
+        </div>
+
+        <div className="border-b border-gray-200">
+          <button 
+            onClick={() => toggleSection('para-empresa')}
+            className="w-full flex items-center justify-between py-4 text-left text-gray-700 hover:text-gray-900"
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+          >
+            <span className="text-base font-medium">Para tu empresa</span>
+            <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-empresa') ? 'rotate-180' : ''}`} />
+          </button>
+          {openSections.includes('para-empresa') && (
+            <div className="pb-4 space-y-2">
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Soluciones empresariales</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Logística</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">E-commerce</a>
+            </div>
+          )}
+        </div>
+
+        <div className="border-b border-gray-200">
+          <button 
+            onClick={() => toggleSection('para-interes')}
+            className="w-full flex items-center justify-between py-4 text-left text-gray-700 hover:text-gray-900"
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+          >
+            <span className="text-base font-medium">Para tu interés</span>
+            <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-interes') ? 'rotate-180' : ''}`} />
+          </button>
+          {openSections.includes('para-interes') && (
+            <div className="pb-4 space-y-2">
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Filatelia</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Cultura</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Sostenibilidad</a>
+            </div>
+          )}
+        </div>
+
+        <div className="border-b border-gray-200">
+          <button 
+            onClick={() => toggleSection('atencion')}
+            className="w-full flex items-center justify-between py-4 text-left text-gray-700 hover:text-gray-900"
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+          >
+            <span className="text-base font-medium">
+              <Headphones className="w-4 h-4 inline mr-2" />
+            </span>
+            <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('atencion') ? 'rotate-180' : ''}`} />
+          </button>
+          {openSections.includes('atencion') && (
+            <div className="pb-4 space-y-2">
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Atención al cliente</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Contacto</a>
+              <a href="#" className="block text-sm text-gray-600 hover:text-blue-600">Quejas y sugerencias</a>
+            </div>
+          )}
+        </div>
+
         {/* Footer company info and legal */}
         <div className="text-white -mx-6 px-6 py-6" style={{ backgroundColor: '#333333' }}>
-          <div className="flex items-center mb-4">
+          <div className="flex items-center mb-6">
             <img 
               src="/correos-logo.png" 
               alt="Logo Correos"
@@ -145,7 +220,7 @@ export default function Footer() {
             />
           </div>
           
-          <div className="space-y-2 text-sm text-gray-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <div className="space-y-4 text-sm text-gray-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             <a href="#" className="block hover:text-white transition-colors duration-200">Política de cookies</a>
             <a href="#" className="block hover:text-white transition-colors duration-200">Aviso legal</a>
             <a href="#" className="block hover:text-white transition-colors duration-200">Privacidad web</a>
@@ -154,7 +229,7 @@ export default function Footer() {
             <a href="#" className="block hover:text-white transition-colors duration-200">Configurador de cookies</a>
           </div>
           
-          <p className="text-xs text-gray-400 mt-5 leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <p className="text-xs text-gray-400 mt-6 leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             ©Sociedad Estatal Correos y Telégrafos, S.A., S.M.E. Todos los derechos reservados.
           </p>
         </div>
