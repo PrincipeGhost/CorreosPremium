@@ -32,8 +32,8 @@ export default function Header() {
                 alt="Correos"
                 className="h-9 w-9 object-contain"
                 style={{ 
-                  filter: 'contrast(1.2) saturate(1.1) brightness(0.95)',
-                  imageRendering: 'crisp-edges'
+                  filter: 'contrast(1.1) saturate(1.05) brightness(0.92) blur(0.3px)',
+                  imageRendering: 'auto'
                 }}
               />
             </div>
