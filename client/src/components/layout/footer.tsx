@@ -1,223 +1,183 @@
-import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { useState } from "react";
+import { Facebook, Instagram, Twitter, Linkedin, Youtube, ChevronDown } from "lucide-react";
 
 export default function Footer() {
+  const [openSections, setOpenSections] = useState<string[]>([]);
+
+  const toggleSection = (section: string) => {
+    setOpenSections(prev => 
+      prev.includes(section) 
+        ? prev.filter(s => s !== section)
+        : [...prev, section]
+    );
+  };
+
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div>
-            <div className="flex items-center mb-4">
-              <div className="w-8 h-8 corporate-blue rounded flex items-center justify-center text-white font-bold">
-                EP
+    <footer className="bg-white">
+      <div className="max-w-md mx-auto px-4">
+        {/* Collapsible Menu Sections */}
+        <div className="space-y-0 border-b border-gray-200">
+          {/* Para ti */}
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => toggleSection('para-ti')}
+              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              data-testid="footer-toggle-para-ti"
+            >
+              Para ti
+              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-ti') ? 'rotate-180' : ''}`} />
+            </button>
+            {openSections.includes('para-ti') && (
+              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-tracking">Seguimiento de envío</a>
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-recibir">Recibir</a>
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-enviar">Enviar</a>
               </div>
-              <span className="ml-2 text-lg font-semibold">EnvíosPro</span>
-            </div>
-            <p className="text-gray-400 text-sm">
-              Servicios de paquetería y envíos de calidad para empresas y 
-              particulares en toda España.
-            </p>
+            )}
           </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-semibold mb-4">Para ti</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-tracking"
-                >
-                  Seguimiento de envío
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-services"
-                >
-                  Recibir
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-request"
-                >
-                  Enviar
-                </a>
-              </li>
-            </ul>
+          {/* Para tu empresa */}
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => toggleSection('para-empresa')}
+              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              data-testid="footer-toggle-para-empresa"
+            >
+              Para tu empresa
+              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-empresa') ? 'rotate-180' : ''}`} />
+            </button>
+            {openSections.includes('para-empresa') && (
+              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-business-enviar">Enviar</a>
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-ecommerce">Ecommerce</a>
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-marketing">Marketing</a>
+              </div>
+            )}
           </div>
 
-          {/* Business */}
-          <div>
-            <h4 className="font-semibold mb-4">Para tu empresa</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-business-solutions"
-                >
-                  Enviar
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-consulting"
-                >
-                  Ecommerce
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-training"
-                >
-                  Marketing
-                </a>
-              </li>
-            </ul>
+          {/* Para tu interés */}
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => toggleSection('para-interes')}
+              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              data-testid="footer-toggle-para-interes"
+            >
+              Para tu interés
+              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-interes') ? 'rotate-180' : ''}`} />
+            </button>
+            {openSections.includes('para-interes') && (
+              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-filatelia">Filatelia</a>
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-tienda">Tienda online</a>
+                <a href="#" className="block hover:text-blue-600" data-testid="footer-link-atencion">Atención al cliente</a>
+              </div>
+            )}
           </div>
 
-          {/* Resources */}
-          <div>
-            <h4 className="font-semibold mb-4">Recursos</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-blog"
-                >
-                  Filatelia
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-online-resources"
-                >
-                  Tienda online
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors"
-                  data-testid="footer-link-support"
-                >
-                  Atención al cliente
-                </a>
-              </li>
-            </ul>
+          {/* Headphones section */}
+          <div className="border-b border-gray-200">
+            <button
+              onClick={() => toggleSection('auriculares')}
+              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              data-testid="footer-toggle-auriculares"
+            >
+              🎧
+              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('auriculares') ? 'rotate-180' : ''}`} />
+            </button>
+            {openSections.includes('auriculares') && (
+              <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
+                <a href="#" className="block hover:text-blue-600">Atención telefónica</a>
+                <a href="#" className="block hover:text-blue-600">Soporte técnico</a>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Social Media and Apps */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <div className="flex flex-col lg:flex-row justify-between items-center">
-            {/* Social Media */}
-            <div className="flex space-x-4 mb-4 lg:mb-0">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-                data-testid="social-facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-                data-testid="social-instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-                data-testid="social-twitter"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-                data-testid="social-linkedin"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-                data-testid="social-youtube"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
-            </div>
+        {/* Social Media */}
+        <div className="py-6">
+          <div className="flex space-x-6 justify-start">
+            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-facebook">
+              <Facebook className="w-6 h-6" />
+            </a>
+            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-instagram">
+              <Instagram className="w-6 h-6" />
+            </a>
+            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-twitter">
+              <Twitter className="w-6 h-6" />
+            </a>
+            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-linkedin">
+              <Linkedin className="w-6 h-6" />
+            </a>
+            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-youtube">
+              <Youtube className="w-6 h-6" />
+            </a>
+          </div>
+        </div>
 
-            {/* App Downloads */}
-            <div className="flex space-x-4">
-              <a
-                href="#"
-                className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition-colors text-sm"
-                data-testid="app-store-link"
-              >
-                📱 App Store
-              </a>
-              <a
-                href="#"
-                className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition-colors text-sm"
-                data-testid="google-play-link"
-              >
-                🤖 Google Play
-              </a>
+        {/* App Downloads */}
+        <div className="py-4 border-b border-gray-200">
+          <p className="text-sm text-gray-700 mb-4">Descarga la App de Correos</p>
+          <div className="flex space-x-4">
+            <div className="bg-black text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2">
+              <span>📱</span>
+              <div>
+                <div className="text-xs">Descárgalo en el</div>
+                <div className="font-bold">App Store</div>
+              </div>
+            </div>
+            <div className="bg-black text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2">
+              <span>📱</span>
+              <div>
+                <div className="text-xs">DISPONIBLE EN</div>
+                <div className="font-bold">Google Play</div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Legal Links */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <div className="flex flex-wrap justify-center space-x-6 text-sm text-gray-400 mb-4">
-            <a
-              href="#"
-              className="hover:text-white transition-colors"
-              data-testid="legal-cookies"
-            >
-              Política de cookies
-            </a>
-            <a
-              href="#"
-              className="hover:text-white transition-colors"
-              data-testid="legal-terms"
-            >
-              Aviso legal
-            </a>
-            <a
-              href="#"
-              className="hover:text-white transition-colors"
-              data-testid="legal-privacy"
-            >
-              Privacidad web
-            </a>
-            <a
-              href="#"
-              className="hover:text-white transition-colors"
-              data-testid="legal-accessibility"
-            >
-              Accesibilidad
-            </a>
+        {/* Payment Methods */}
+        <div className="py-4">
+          <p className="text-sm text-gray-700 mb-4">Métodos de pago</p>
+          <div className="flex flex-wrap gap-2">
+            <div className="w-12 h-8 bg-red-500 rounded flex items-center justify-center text-white text-xs font-bold">MC</div>
+            <div className="w-12 h-8 bg-blue-600 rounded flex items-center justify-center text-white text-xs font-bold">PP</div>
+            <div className="w-12 h-8 bg-red-600 rounded flex items-center justify-center text-white text-xs font-bold">M</div>
+            <div className="w-12 h-8 bg-blue-700 rounded flex items-center justify-center text-white text-xs font-bold">V</div>
+            <div className="w-12 h-8 bg-blue-500 rounded flex items-center justify-center text-white text-xs font-bold">AE</div>
           </div>
-          <p className="text-xs text-gray-500">
-            ©EnvíosPro S.L. Todos los derechos reservados.
+          
+          {/* Trust certificate */}
+          <div className="mt-4">
+            <div className="w-16 h-20 bg-orange-500 rounded flex items-center justify-center">
+              <div className="text-white text-xs text-center font-bold">
+                <div>★</div>
+                <div className="text-[8px]">EMPRESA</div>
+                <div className="text-[8px]">CONFIABLE</div>
+                <div className="text-[8px]">CERTIFICADA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer company info and legal */}
+        <div className="bg-gray-900 text-white -mx-4 px-4 py-6">
+          <div className="flex items-center mb-4">
+            <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">
+              EP
+            </div>
+          </div>
+          
+          <div className="space-y-3 text-sm text-gray-300">
+            <a href="#" className="block hover:text-white">Política de cookies</a>
+            <a href="#" className="block hover:text-white">Aviso legal</a>
+            <a href="#" className="block hover:text-white">Privacidad web</a>
+            <a href="#" className="block hover:text-white">Alerta seguridad</a>
+            <a href="#" className="block hover:text-white">Accesibilidad</a>
+            <a href="#" className="block hover:text-white">Configurador de cookies</a>
+          </div>
+          
+          <p className="text-xs text-gray-400 mt-6">
+            ©Sociedad Estatal Correos y Telégrafos, S.A., S.M.E. Todos los derechos reservados.
           </p>
         </div>
       </div>
