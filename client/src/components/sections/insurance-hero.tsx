@@ -5,12 +5,12 @@ export default function InsuranceHero() {
   return (
     <section className="relative overflow-hidden">
       {/* Background Image with curved bottom - matching Correos.es proportions */}
-      <div className="relative h-72">
+      <div className="relative h-64">
         <img 
           src="/attached_assets/image_1754310350481.png"
           alt="Casa tradicional española con trabajador de Correos"
-          className="w-full h-72 object-cover"
-          style={{ objectPosition: 'center 40%' }}
+          className="w-full h-64 object-cover"
+          style={{ objectPosition: '50% 30%' }}
         />
         {/* SVG curved cut overlay - curve downward like Correos.es */}
         <svg 
