@@ -3,10 +3,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import icon2kg from "@assets/image_1754337263655.png";
-import icon5kg from "@assets/image_1754337271972.png"; 
-import icon10kg from "@assets/image_1754337279794.png";
-import icon20kg from "@assets/image_1754337288538.png";
+import icon2kg from "@assets/image_1754337530908.png";
+import icon5kg from "@assets/image_1754337539610.png"; 
+import icon10kg from "@assets/image_1754337546712.png";
+import icon20kg from "@assets/image_1754337554743.png";
 
 export default function ServiceCalculator() {
   const [selectedSize, setSelectedSize] = useState<string>("");
