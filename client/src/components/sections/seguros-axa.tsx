@@ -12,7 +12,7 @@ export default function SegurosAXA() {
             <div 
               className="h-48 bg-cover bg-center bg-no-repeat relative"
               style={{
-                backgroundImage: "url('/attached_assets/image_1754305095400.jpeg')"
+                backgroundImage: "url('/attached_assets/image_1754305323847.jpeg')"
               }}
               data-testid="img-seguros-axa"
             >
