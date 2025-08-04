@@ -46,7 +46,7 @@ Preferred communication style: Simple, everyday language.
 - **Package Size Icons Update**: Updated TrackingHero component to use custom package images for size selection icons (2kg, 5kg, 10kg) and added missing 20kg option with proper icon
 - **Enhanced Package Selection**: Package size selection now displays authentic package icons provided by user instead of generic Package icons from Lucide
 - **Action Buttons**: Added "COMENZAR ENVÍO" and "MÁS INFO" buttons to complete the package selection interface
-- **Administrative Services Icons**: Updated "Siempre pensando en ti" section with custom SVG icons representing Gestión Aduanera (shipping/transport), Trámites DGT (circular badge), and Administración Pública (government building)
+- **Administrative Services Icons**: Updated "Siempre pensando en ti" section with user-provided images for Gestión Aduanera, Trámites DGT, and Administración Pública (16x16 size for better visibility matching Correos.es design)
 
 ## Previous Changes (January 2025)
 - **Branding Update**: Changed from generic "Tu Empresa" to "EnvíosPro" for package delivery focus

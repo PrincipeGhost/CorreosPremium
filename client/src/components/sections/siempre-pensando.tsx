@@ -43,11 +43,11 @@ export default function SiemprePensando() {
               <Card key={service.id} className="border border-gray-200 rounded-lg">
                 <CardContent className="p-4">
                   <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                    <div className={`w-16 h-16 ${service.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
                       <img 
                         src={service.iconUrl} 
                         alt={`${service.title} icon`}
-                        className="w-12 h-12 object-contain"
+                        className="w-16 h-16 object-contain"
                         onError={(e) => {
                           // Fallback si la imagen no carga
                           console.log('Error loading image:', service.iconUrl);
