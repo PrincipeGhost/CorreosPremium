@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
+import axaImage from "@assets/image_1754305095400.jpeg";
 
 export default function SegurosAXA() {
   return (
@@ -12,12 +13,11 @@ export default function SegurosAXA() {
             <div 
               className="h-48 bg-cover bg-center bg-no-repeat"
               style={{
-                backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200')"
+                backgroundImage: `url(${axaImage})`,
+                clipPath: 'ellipse(100% 85% at 50% 0%)'
               }}
               data-testid="img-seguros-axa"
             />
-            {/* Curved bottom cut */}
-            <div className="absolute bottom-0 left-0 right-0 h-6 bg-white rounded-t-[50px]"></div>
           </div>
           
           <CardContent className="p-6">
