@@ -25,16 +25,12 @@ export default function Header() {
             {/* Logo - Correos style */}
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                {/* Logo icon similar to Correos */}
-                <div className="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center text-white">
-                  <svg 
-                    className="w-8 h-8" 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor"
-                  >
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                  </svg>
-                </div>
+                {/* Logo oficial de Correos */}
+                <img 
+                  src="/attached_assets/image_1754313473527.png"
+                  alt="Correos"
+                  className="h-10 w-10 object-contain"
+                />
               </div>
             </div>
 
