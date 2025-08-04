@@ -7,14 +7,18 @@ export default function SegurosAXA() {
     <section className="bg-white py-6">
       <div className="max-w-md mx-auto px-6">
         <Card className="bg-white border-0 rounded-lg shadow-sm overflow-hidden">
-          {/* Hero image */}
-          <div 
-            className="h-48 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200')"
-            }}
-            data-testid="img-seguros-axa"
-          />
+          {/* Hero image with curved bottom */}
+          <div className="relative">
+            <div 
+              className="h-48 bg-cover bg-center bg-no-repeat"
+              style={{
+                backgroundImage: "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200')"
+              }}
+              data-testid="img-seguros-axa"
+            />
+            {/* Curved bottom cut */}
+            <div className="absolute bottom-0 left-0 right-0 h-6 bg-white rounded-t-[50px]"></div>
+          </div>
           
           <CardContent className="p-6">
             <p className="text-sm text-gray-700 mb-2">
