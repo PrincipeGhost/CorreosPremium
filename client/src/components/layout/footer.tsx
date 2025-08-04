@@ -186,7 +186,7 @@ export default function Footer() {
         </div>
 
         {/* Footer company info and legal */}
-        <div className="bg-gray-800 text-white -mx-6 px-6 py-6">
+        <div className="bg-gray-900 text-white -mx-6 px-6 py-6">
           <div className="flex items-center mb-4">
             <img 
               src="/correos-logo.png" 
