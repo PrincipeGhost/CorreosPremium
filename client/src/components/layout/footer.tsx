@@ -43,12 +43,12 @@ export default function Footer() {
             <img 
               src="/app-store.png" 
               alt="Descargar en App Store"
-              className="h-10 object-contain"
+              className="h-9 w-auto object-contain"
             />
             <img 
               src="/google-play.png" 
               alt="Disponible en Google Play"
-              className="h-10 object-contain"
+              className="h-9 w-auto object-contain"
             />
           </div>
         </div>
@@ -60,27 +60,27 @@ export default function Footer() {
             <img 
               src="/mastercard.png" 
               alt="Mastercard"
-              className="h-8 object-contain bg-white rounded"
+              className="h-6 w-auto object-contain bg-white rounded px-1"
             />
             <img 
               src="/paypal.png" 
               alt="PayPal"
-              className="h-8 object-contain bg-white rounded"
+              className="h-6 w-auto object-contain bg-white rounded px-1"
             />
             <img 
               src="/maestro.png" 
               alt="Maestro"
-              className="h-8 object-contain bg-white rounded"
+              className="h-6 w-auto object-contain bg-white rounded px-1"
             />
             <img 
               src="/visa.png" 
               alt="Visa"
-              className="h-8 object-contain bg-white rounded"
+              className="h-6 w-auto object-contain bg-white rounded px-1"
             />
             <img 
               src="/american-express.png" 
               alt="American Express"
-              className="h-8 object-contain bg-white rounded"
+              className="h-6 w-auto object-contain bg-white rounded px-1"
             />
           </div>
           
@@ -89,7 +89,7 @@ export default function Footer() {
             <img 
               src="/certificado.png" 
               alt="Junta Arbitral Nacional de Consumo - Empresario Adherido"
-              className="h-20 object-contain"
+              className="h-16 w-auto object-contain"
             />
           </div>
         </div>
