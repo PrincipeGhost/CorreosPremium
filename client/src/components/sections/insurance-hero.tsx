@@ -26,28 +26,28 @@ export default function InsuranceHero() {
           />
         </svg>
       </div>
-      {/* Content Container - centered and compact like official Correos.es */}
-      <div className="bg-white px-6 pt-6 pb-8">
-        <div className="max-w-sm mx-auto text-left">
-          <p className="axa-subtitle text-base text-gray-800 mb-3 font-medium">
+      {/* Content Container - exact replica of reference image */}
+      <div className="bg-white px-8 pt-6 pb-8">
+        <div className="max-w-lg">
+          <p className="text-lg text-gray-600 mb-4 font-normal">
             Allá donde está Correos, AXA te protege
           </p>
           
-          <h2 className="axa-title text-3xl text-gray-900 mb-4 font-light">
+          <h2 className="text-5xl text-gray-800 mb-6 font-light tracking-tight">
             Seguros AXA
           </h2>
           
-          <p className="axa-body text-sm text-gray-700 mb-6 leading-relaxed">
-            Ahora Correos se une a AXA en una misión: la 
-            de llegar a ti, estés donde estés. Porque 
-            gracias a la amplia red de agentes de Correos, 
-            podrás contratar los seguros de AXA en 
-            cualquier sitio de España.
+          <p className="text-base text-gray-700 mb-8 leading-relaxed font-normal">
+            Ahora Correos se une a AXA en una misión: la de 
+            llegar a ti, estés donde estés. Porque gracias a la 
+            amplia red de agentes de Correos, podrás 
+            contratar los seguros de AXA en cualquier sitio 
+            de España.
           </p>
           
-          <div className="space-y-3 mb-6">
+          <div className="space-y-4 mb-6">
             <Button 
-              className="axa-button w-full bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-4 text-sm font-bold rounded-md border-0 transition-colors duration-200"
+              className="w-full max-w-xs bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-4 px-6 text-base font-bold rounded-lg border-0 transition-colors duration-200"
               data-testid="insurance-cta-button"
             >
               SEGURO, TE LLAMAMOS
@@ -55,11 +55,11 @@ export default function InsuranceHero() {
             
             <Button 
               variant="ghost" 
-              className="axa-link text-blue-700 hover:text-blue-800 p-0 h-auto text-sm font-bold flex items-center gap-1 transition-colors duration-200"
+              className="text-blue-800 hover:text-blue-900 p-0 h-auto text-base font-bold flex items-center gap-2 transition-colors duration-200"
               data-testid="insurance-more-info-button"
             >
               MÁS INFO
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5" />
             </Button>
           </div>
         </div>
