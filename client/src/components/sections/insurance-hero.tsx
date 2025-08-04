@@ -27,7 +27,7 @@ export default function InsuranceHero() {
         </svg>
       </div>
       {/* Content Container - tighter spacing like Correos.es */}
-      <div className="bg-white px-6 pt-4 pb-6">
+      <div className="bg-white px-8 pt-4 pb-6">
         <div className="max-w-sm">
           <p className="text-base text-gray-600 mb-3">
             Allá donde está Correos, AXA te protege

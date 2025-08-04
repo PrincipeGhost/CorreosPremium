@@ -28,10 +28,10 @@ export default function TrackingHero() {
 
   return (
     <div className="bg-gray-100 py-8">
-      <div className="max-w-md mx-auto px-4 space-y-8">
+      <div className="max-w-md mx-auto px-8 space-y-8">
         {/* Main tracking section */}
         <Card className="bg-yellow-400 border-0 rounded-lg">
-          <CardContent className="p-8 space-y-6">
+          <CardContent className="p-6 space-y-5">
             <h2 className="text-xl font-bold text-gray-900">
               Sigue tu envío
             </h2>
@@ -108,7 +108,7 @@ export default function TrackingHero() {
 
         {/* Special package service */}
         <Card className="border-0 rounded-lg">
-          <CardContent className="p-6">
+          <CardContent className="p-5">
             <h3 className="text-lg font-bold text-gray-900 mb-2">
               Servicio especial de paquetería
             </h3>
