@@ -11,7 +11,7 @@ export default function ViajaDisfruta() {
           <div 
             className="h-48 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200')"
+              backgroundImage: "url('/viaja-correos.png')"
             }}
           />
           
