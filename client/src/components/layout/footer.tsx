@@ -56,40 +56,56 @@ export default function Footer() {
         {/* Payment Methods */}
         <div className="py-4">
           <p className="text-sm text-gray-700 mb-4">Métodos de pago</p>
-          <div className="flex flex-wrap gap-2 mb-4">
-            <img 
-              src="/mastercard.png" 
-              alt="Mastercard"
-              className="h-6 w-auto object-contain bg-white rounded px-1"
-            />
-            <img 
-              src="/paypal.png" 
-              alt="PayPal"
-              className="h-6 w-auto object-contain bg-white rounded px-1"
-            />
-            <img 
-              src="/maestro.png" 
-              alt="Maestro"
-              className="h-6 w-auto object-contain bg-white rounded px-1"
-            />
-            <img 
-              src="/visa.png" 
-              alt="Visa"
-              className="h-6 w-auto object-contain bg-white rounded px-1"
-            />
-            <img 
-              src="/american-express.png" 
-              alt="American Express"
-              className="h-6 w-auto object-contain bg-white rounded px-1"
-            />
+          <div className="flex flex-wrap gap-3 mb-4">
+            <div className="bg-white rounded-lg border border-gray-200 p-2 shadow-sm">
+              <img 
+                src="/mastercard.png" 
+                alt="Mastercard"
+                className="h-8 w-auto object-contain"
+                style={{ imageRendering: 'crisp-edges' }}
+              />
+            </div>
+            <div className="bg-white rounded-lg border border-gray-200 p-2 shadow-sm">
+              <img 
+                src="/paypal.png" 
+                alt="PayPal"
+                className="h-8 w-auto object-contain"
+                style={{ imageRendering: 'crisp-edges' }}
+              />
+            </div>
+            <div className="bg-white rounded-lg border border-gray-200 p-2 shadow-sm">
+              <img 
+                src="/maestro.png" 
+                alt="Maestro"
+                className="h-8 w-auto object-contain"
+                style={{ imageRendering: 'crisp-edges' }}
+              />
+            </div>
+            <div className="bg-white rounded-lg border border-gray-200 p-2 shadow-sm">
+              <img 
+                src="/visa.png" 
+                alt="Visa"
+                className="h-8 w-auto object-contain"
+                style={{ imageRendering: 'crisp-edges' }}
+              />
+            </div>
+            <div className="bg-white rounded-lg border border-gray-200 p-2 shadow-sm">
+              <img 
+                src="/american-express.png" 
+                alt="American Express"
+                className="h-8 w-auto object-contain"
+                style={{ imageRendering: 'crisp-edges' }}
+              />
+            </div>
           </div>
           
           {/* Trust certificate */}
-          <div className="mt-4">
+          <div className="mt-6">
             <img 
               src="/certificado.png" 
               alt="Junta Arbitral Nacional de Consumo - Empresario Adherido"
-              className="h-16 w-auto object-contain"
+              className="h-20 w-auto object-contain"
+              style={{ imageRendering: 'crisp-edges' }}
             />
           </div>
         </div>
