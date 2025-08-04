@@ -4,8 +4,8 @@ import { ChevronRight } from "lucide-react";
 
 export default function ComprarTiendas() {
   return (
-    <section className="bg-white py-8">
-      <div className="max-w-md mx-auto px-4">
+    <section className="bg-white py-6">
+      <div className="max-w-md mx-auto px-6">
         <Card className="bg-white border-0 rounded-lg shadow-sm overflow-hidden">
           {/* Corporate image */}
           <div 

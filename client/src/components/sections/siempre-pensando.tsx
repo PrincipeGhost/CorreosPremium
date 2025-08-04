@@ -31,8 +31,8 @@ export default function SiemprePensando() {
   ];
 
   return (
-    <section className="bg-white py-8">
-      <div className="max-w-md mx-auto px-4">
+    <section className="bg-white py-6">
+      <div className="max-w-md mx-auto px-6">
         <h2 className="text-xl font-bold text-gray-900 mb-6">
           Siempre pensando en ti
         </h2>

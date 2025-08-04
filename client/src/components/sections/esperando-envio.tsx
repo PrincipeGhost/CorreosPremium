@@ -2,8 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function EsperandoEnvio() {
   return (
-    <section className="bg-gray-100 py-8">
-      <div className="max-w-md mx-auto px-4">
+    <section className="bg-gray-100 py-6">
+      <div className="max-w-md mx-auto px-6">
         <Card className="bg-white border-0 rounded-lg shadow-sm">
           <CardContent className="p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-4">

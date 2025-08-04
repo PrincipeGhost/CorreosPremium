@@ -13,19 +13,19 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white">
-      <div className="max-w-md mx-auto px-4">
+    <footer className="bg-gray-50">
+      <div className="max-w-md mx-auto px-6">
         {/* Collapsible Menu Sections */}
         <div className="space-y-0 border-b border-gray-200">
           {/* Para ti */}
           <div className="border-b border-gray-200">
             <button
               onClick={() => toggleSection('para-ti')}
-              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
               data-testid="footer-toggle-para-ti"
             >
               Para ti
-              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-ti') ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('para-ti') ? 'rotate-180' : ''}`} />
             </button>
             {openSections.includes('para-ti') && (
               <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
@@ -40,11 +40,11 @@ export default function Footer() {
           <div className="border-b border-gray-200">
             <button
               onClick={() => toggleSection('para-empresa')}
-              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
               data-testid="footer-toggle-para-empresa"
             >
               Para tu empresa
-              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-empresa') ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('para-empresa') ? 'rotate-180' : ''}`} />
             </button>
             {openSections.includes('para-empresa') && (
               <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
@@ -59,11 +59,11 @@ export default function Footer() {
           <div className="border-b border-gray-200">
             <button
               onClick={() => toggleSection('para-interes')}
-              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
               data-testid="footer-toggle-para-interes"
             >
               Para tu interés
-              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('para-interes') ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('para-interes') ? 'rotate-180' : ''}`} />
             </button>
             {openSections.includes('para-interes') && (
               <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
@@ -78,11 +78,11 @@ export default function Footer() {
           <div className="border-b border-gray-200">
             <button
               onClick={() => toggleSection('auriculares')}
-              className="w-full flex items-center justify-between py-4 text-left font-medium text-gray-900"
+              className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
               data-testid="footer-toggle-auriculares"
             >
               🎧
-              <ChevronDown className={`w-5 h-5 transition-transform ${openSections.includes('auriculares') ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('auriculares') ? 'rotate-180' : ''}`} />
             </button>
             {openSections.includes('auriculares') && (
               <div className="pb-4 pl-4 space-y-2 text-sm text-gray-600">
@@ -94,8 +94,8 @@ export default function Footer() {
         </div>
 
         {/* Social Media */}
-        <div className="py-6">
-          <div className="flex space-x-6 justify-start">
+        <div className="py-5">
+          <div className="flex space-x-5 justify-start">
             <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-facebook">
               <Facebook className="w-6 h-6" />
             </a>

@@ -4,8 +4,8 @@ import { ChevronRight } from "lucide-react";
 
 export default function QuieresHacerEnvio() {
   return (
-    <section className="bg-white py-8">
-      <div className="max-w-md mx-auto px-4">
+    <section className="bg-white py-6">
+      <div className="max-w-md mx-auto px-6">
         <Card className="bg-white border border-gray-200 rounded-lg shadow-sm">
           <CardContent className="p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-4">
