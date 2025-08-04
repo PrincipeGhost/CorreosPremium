@@ -47,6 +47,7 @@ Preferred communication style: Simple, everyday language.
 - **Enhanced Package Selection**: Package size selection now displays authentic package icons provided by user instead of generic Package icons from Lucide
 - **Action Buttons**: Added "COMENZAR ENVÍO" and "MÁS INFO" buttons to complete the package selection interface
 - **Administrative Services Icons**: Updated "Siempre pensando en ti" section with user-provided images for Gestión Aduanera, Trámites DGT, and Administración Pública (16x16 size for better visibility matching Correos.es design)
+- **Online Store Section Icon**: Replaced custom SVG illustration in "Compra en nuestra tienda online" section with user's exact image showing mobile phone with shopping cart and shopping bags
 
 ## Previous Changes (January 2025)
 - **Branding Update**: Changed from generic "Tu Empresa" to "EnvíosPro" for package delivery focus
