@@ -29,15 +29,15 @@ export default function InsuranceHero() {
       {/* Content Container - exact replica of reference image */}
       <div className="bg-white px-8 pt-6 pb-8">
         <div className="max-w-lg">
-          <p className="text-xs text-black mb-2 font-normal">
+          <p className="text-sm text-black mb-3 font-medium">
             Allá donde está Correos, AXA te protege
           </p>
           
-          <h2 className="text-xl text-gray-800 mb-3 font-normal">
+          <h2 className="text-2xl text-black mb-4 font-semibold">
             Seguros AXA
           </h2>
           
-          <p className="text-xs text-gray-700 mb-4 leading-relaxed font-normal">
+          <p className="text-sm text-gray-600 mb-6 leading-normal font-normal">
             Ahora Correos se une a AXA en una misión: la de 
             llegar a ti, estés donde estés. Porque gracias a la 
             amplia red de agentes de Correos, podrás 
