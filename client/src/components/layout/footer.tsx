@@ -57,47 +57,70 @@ export default function Footer() {
         <div className="py-4">
           <p className="text-sm text-gray-700 mb-4">Métodos de pago</p>
           <div className="flex flex-wrap gap-2 mb-4">
-            {/* Mastercard */}
             <div className="bg-white rounded border border-gray-200 px-3 py-2 flex items-center justify-center min-w-[60px] h-9">
-              <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="10" r="7" fill="#EB001B"/>
-                <circle cx="20" cy="10" r="7" fill="#F79E1B"/>
-                <path d="M16 5c1.2 1 2 2.6 2 4.5s-.8 3.5-2 4.5c-1.2-1-2-2.6-2-4.5s.8-3.5 2-4.5z" fill="#FF5F00"/>
-              </svg>
+              <img 
+                src="/mastercard.png" 
+                alt="Mastercard"
+                className="max-h-6 max-w-full object-contain"
+                style={{ 
+                  imageRendering: 'smooth',
+                  filter: 'brightness(1.05) contrast(1.1)',
+                  WebkitFontSmoothing: 'antialiased',
+                  MozOsxFontSmoothing: 'grayscale'
+                }}
+              />
             </div>
-            
-            {/* PayPal */}
             <div className="bg-white rounded border border-gray-200 px-3 py-2 flex items-center justify-center min-w-[60px] h-9">
-              <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 3h8c2.5 0 4 1.5 4 3.5 0 2.5-2 4.5-4.5 4.5H10L9 17H6.5L8.5 3z" fill="#003087"/>
-                <path d="M9 7h8c2.5 0 4 1.5 4 3.5 0 2.5-2 4.5-4.5 4.5H13L12 21H9.5L11.5 7z" fill="#009CDE"/>
-              </svg>
+              <img 
+                src="/paypal.png" 
+                alt="PayPal"
+                className="max-h-6 max-w-full object-contain"
+                style={{ 
+                  imageRendering: 'smooth',
+                  filter: 'brightness(1.05) contrast(1.1)',
+                  WebkitFontSmoothing: 'antialiased',
+                  MozOsxFontSmoothing: 'grayscale'
+                }}
+              />
             </div>
-            
-            {/* Maestro */}
             <div className="bg-white rounded border border-gray-200 px-3 py-2 flex items-center justify-center min-w-[60px] h-9">
-              <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="10" r="7" fill="#0099DF"/>
-                <circle cx="20" cy="10" r="7" fill="#ED0006"/>
-                <path d="M16 5c1.2 1 2 2.6 2 4.5s-.8 3.5-2 4.5c-1.2-1-2-2.6-2-4.5s.8-3.5 2-4.5z" fill="#6C6BBD"/>
-              </svg>
+              <img 
+                src="/maestro.png" 
+                alt="Maestro"
+                className="max-h-6 max-w-full object-contain"
+                style={{ 
+                  imageRendering: 'smooth',
+                  filter: 'brightness(1.05) contrast(1.1)',
+                  WebkitFontSmoothing: 'antialiased',
+                  MozOsxFontSmoothing: 'grayscale'
+                }}
+              />
             </div>
-            
-            {/* Visa */}
             <div className="bg-white rounded border border-gray-200 px-3 py-2 flex items-center justify-center min-w-[60px] h-9">
-              <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="20" fill="white"/>
-                <text x="16" y="12" fill="#1A1F71" fontSize="8" textAnchor="middle" fontWeight="bold" fontFamily="Arial">VISA</text>
-              </svg>
+              <img 
+                src="/visa.png" 
+                alt="Visa"
+                className="max-h-6 max-w-full object-contain"
+                style={{ 
+                  imageRendering: 'smooth',
+                  filter: 'brightness(1.05) contrast(1.1)',
+                  WebkitFontSmoothing: 'antialiased',
+                  MozOsxFontSmoothing: 'grayscale'
+                }}
+              />
             </div>
-            
-            {/* American Express */}
             <div className="bg-white rounded border border-gray-200 px-3 py-2 flex items-center justify-center min-w-[60px] h-9">
-              <svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg">
-                <rect width="32" height="20" rx="2" fill="#006FCF"/>
-                <text x="16" y="8" fill="white" fontSize="4" textAnchor="middle" fontWeight="bold" fontFamily="Arial">AMERICAN</text>
-                <text x="16" y="14" fill="white" fontSize="4" textAnchor="middle" fontWeight="bold" fontFamily="Arial">EXPRESS</text>
-              </svg>
+              <img 
+                src="/american-express.png" 
+                alt="American Express"
+                className="max-h-6 max-w-full object-contain"
+                style={{ 
+                  imageRendering: 'smooth',
+                  filter: 'brightness(1.05) contrast(1.1)',
+                  WebkitFontSmoothing: 'antialiased',
+                  MozOsxFontSmoothing: 'grayscale'
+                }}
+              />
             </div>
           </div>
           
