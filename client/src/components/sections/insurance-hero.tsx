@@ -29,11 +29,11 @@ export default function InsuranceHero() {
       {/* Content Container - exact replica of reference image */}
       <div className="bg-white px-8 pt-6 pb-8">
         <div className="max-w-lg">
-          <p className="text-sm text-black mb-3 font-medium">
+          <p className="text-xs text-black mb-3 font-medium">
             Allá donde está Correos, AXA te protege
           </p>
           
-          <h2 className="text-2xl text-black mb-4 font-semibold">
+          <h2 className="text-xl text-black mb-4 font-semibold">
             Seguros AXA
           </h2>
           
