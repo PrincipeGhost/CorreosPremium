@@ -3,7 +3,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Zap, Settings, Rocket, Crown } from "lucide-react";
+import icon2kg from "@assets/image_1754337263655.png";
+import icon5kg from "@assets/image_1754337271972.png"; 
+import icon10kg from "@assets/image_1754337279794.png";
+import icon20kg from "@assets/image_1754337288538.png";
 
 export default function ServiceCalculator() {
   const [selectedSize, setSelectedSize] = useState<string>("");
@@ -11,28 +14,28 @@ export default function ServiceCalculator() {
   const serviceSizes = [
     {
       id: "xs",
-      icon: Zap,
+      icon: icon2kg,
       title: "XS",
       subtitle: "Hasta 2kg",
       description: "Dimensión: 30x20x20",
     },
     {
       id: "s",
-      icon: Settings,
+      icon: icon5kg,
       title: "S",
       subtitle: "Hasta 5kg",
       description: "Dimensión: 35x35x24",
     },
     {
       id: "m",
-      icon: Rocket,
+      icon: icon10kg,
       title: "M",
       subtitle: "Hasta 10kg",
       description: "Dimensión: 40x40x37",
     },
     {
       id: "l",
-      icon: Crown,
+      icon: icon20kg,
       title: "L",
       subtitle: "Hasta 20kg",
       description: "Dimensión: 55x55x39",
@@ -122,7 +125,6 @@ export default function ServiceCalculator() {
                 </label>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {serviceSizes.map((size) => {
-                    const Icon = size.icon;
                     return (
                       <div
                         key={size.id}
@@ -134,7 +136,11 @@ export default function ServiceCalculator() {
                         onClick={() => setSelectedSize(size.id)}
                         data-testid={`service-size-${size.id}`}
                       >
-                        <Icon className="w-8 h-8 text-blue-600 mb-2 mx-auto" />
+                        <img 
+                          src={size.icon} 
+                          alt={`${size.subtitle} icon`}
+                          className="w-8 h-8 mb-2 mx-auto object-contain"
+                        />
                         <h4 className="font-bold text-lg">{size.title}</h4>
                         <h5 className="font-semibold text-sm">{size.subtitle}</h5>
                         <p className="text-xs text-gray-600">
