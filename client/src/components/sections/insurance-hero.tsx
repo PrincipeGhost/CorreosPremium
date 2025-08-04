@@ -33,7 +33,7 @@ export default function InsuranceHero() {
             Allá donde está Correos, AXA te protege
           </p>
           
-          <h2 className="text-xl text-black mb-4 font-semibold">
+          <h2 className="text-2xl text-black mb-4 font-normal">
             Seguros AXA
           </h2>
           
