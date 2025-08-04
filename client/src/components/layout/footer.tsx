@@ -136,7 +136,7 @@ export default function Footer() {
         </div>
 
         {/* Footer company info and legal */}
-        <div className="text-white -mx-6 px-6 py-6" style={{ backgroundColor: '#3a3a3a' }}>
+        <div className="text-white -mx-6 px-6 py-6" style={{ backgroundColor: '#333333' }}>
           <div className="flex items-center mb-4">
             <img 
               src="/correos-logo.png" 
