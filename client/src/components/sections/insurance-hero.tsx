@@ -29,15 +29,15 @@ export default function InsuranceHero() {
       {/* Content Container - tighter spacing like Correos.es */}
       <div className="bg-white px-8 pt-4 pb-6">
         <div className="max-w-sm">
-          <p className="text-base text-gray-600 mb-3">
+          <p className="axa-subtitle text-lg text-gray-700 mb-4">
             Allá donde está Correos, AXA te protege
           </p>
           
-          <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">
+          <h2 className="axa-title text-4xl text-gray-800 mb-6">
             Seguros AXA
           </h2>
           
-          <p className="text-base text-gray-700 leading-relaxed mb-6">
+          <p className="axa-body text-base text-gray-600 mb-8 max-w-md">
             Ahora Correos se une a AXA en una misión: la de 
             llegar a ti, estés donde estés. Porque gracias a la 
             amplia red de agentes de Correos, podrás 
@@ -47,7 +47,7 @@ export default function InsuranceHero() {
           
           <div className="space-y-4 mb-8">
             <Button 
-              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 text-base rounded-lg"
+              className="axa-button w-full bg-amber-400 hover:bg-amber-500 text-blue-900 py-4 px-6 text-base rounded-lg border-0 shadow-sm transition-colors duration-200"
               data-testid="insurance-cta-button"
             >
               SEGURO, TE LLAMAMOS
@@ -55,11 +55,11 @@ export default function InsuranceHero() {
             
             <Button 
               variant="ghost" 
-              className="text-blue-700 hover:text-blue-800 font-bold p-0 h-auto text-base flex items-center gap-1"
+              className="axa-link text-blue-800 hover:text-blue-900 p-0 h-auto text-base flex items-center gap-2 transition-colors duration-200"
               data-testid="insurance-more-info-button"
             >
               MÁS INFO
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
         </div>
