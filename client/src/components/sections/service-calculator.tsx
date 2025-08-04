@@ -3,39 +3,79 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import icon2kg from "@assets/image_1754337530908.png";
-import icon5kg from "@assets/image_1754337539610.png"; 
-import icon10kg from "@assets/image_1754337546712.png";
-import icon20kg from "@assets/image_1754337554743.png";
 
 export default function ServiceCalculator() {
   const [selectedSize, setSelectedSize] = useState<string>("");
 
+  // Iconos SVG personalizados para cada tamaño
+  const PackageIcon2kg = () => (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="12" width="24" height="16" rx="2" fill="#FED500" stroke="#E5A100" strokeWidth="2"/>
+      <rect x="10" y="14" width="20" height="12" fill="#FECB00"/>
+      <rect x="12" y="16" width="16" height="2" fill="#E5A100"/>
+      <rect x="12" y="20" width="12" height="2" fill="#E5A100"/>
+    </svg>
+  );
+
+  const PackageIcon5kg = () => (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="20" cy="26" rx="16" ry="6" fill="#FED500"/>
+      <path d="M8 18C8 16 10 14 20 14C30 14 32 16 32 18L30 26C30 28 28 30 20 30C12 30 10 28 10 26L8 18Z" fill="#FECB00" stroke="#E5A100" strokeWidth="2"/>
+      <rect x="14" y="16" width="12" height="2" fill="#E5A100"/>
+      <rect x="16" y="20" width="8" height="2" fill="#E5A100"/>
+      <circle cx="12" cy="22" r="2" fill="#4A90E2"/>
+      <circle cx="28" cy="22" r="2" fill="#4A90E2"/>
+    </svg>
+  );
+
+  const PackageIcon10kg = () => (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="16" fill="#FED500" stroke="#E5A100" strokeWidth="2"/>
+      <circle cx="20" cy="20" r="12" fill="#FECB00"/>
+      <rect x="12" y="18" width="16" height="4" rx="2" fill="#4A90E2"/>
+      <circle cx="20" cy="14" r="3" fill="#E5A100"/>
+      <rect x="18" y="24" width="4" height="6" fill="#E5A100"/>
+    </svg>
+  );
+
+  const PackageIcon20kg = () => (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="14" width="28" height="18" rx="3" fill="#FED500" stroke="#E5A100" strokeWidth="2"/>
+      <rect x="8" y="16" width="24" height="14" fill="#FECB00"/>
+      <rect x="10" y="18" width="20" height="2" fill="#4A90E2"/>
+      <rect x="10" y="22" width="20" height="2" fill="#4A90E2"/>
+      <rect x="10" y="26" width="20" height="2" fill="#4A90E2"/>
+      <circle cx="12" cy="10" r="2" fill="#E5A100"/>
+      <rect x="14" y="8" width="12" height="4" rx="2" fill="#E5A100"/>
+      <circle cx="28" cy="10" r="2" fill="#E5A100"/>
+    </svg>
+  );
+
   const serviceSizes = [
     {
       id: "xs",
-      icon: icon2kg,
+      icon: PackageIcon2kg,
       title: "XS",
       subtitle: "Hasta 2kg",
       description: "Dimensión: 30x20x20",
     },
     {
       id: "s",
-      icon: icon5kg,
+      icon: PackageIcon5kg,
       title: "S",
       subtitle: "Hasta 5kg",
       description: "Dimensión: 35x35x24",
     },
     {
       id: "m",
-      icon: icon10kg,
+      icon: PackageIcon10kg,
       title: "M",
       subtitle: "Hasta 10kg",
       description: "Dimensión: 40x40x37",
     },
     {
       id: "l",
-      icon: icon20kg,
+      icon: PackageIcon20kg,
       title: "L",
       subtitle: "Hasta 20kg",
       description: "Dimensión: 55x55x39",
@@ -125,6 +165,7 @@ export default function ServiceCalculator() {
                 </label>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {serviceSizes.map((size) => {
+                    const IconComponent = size.icon;
                     return (
                       <div
                         key={size.id}
@@ -137,11 +178,7 @@ export default function ServiceCalculator() {
                         data-testid={`service-size-${size.id}`}
                       >
                         <div className="w-12 h-12 mb-2 mx-auto flex items-center justify-center">
-                          <img 
-                            src={size.icon} 
-                            alt={`${size.subtitle} icon`}
-                            className="w-10 h-10 object-contain"
-                          />
+                          <IconComponent />
                         </div>
                         <h4 className="font-bold text-lg">{size.title}</h4>
                         <h5 className="font-semibold text-sm">{size.subtitle}</h5>
