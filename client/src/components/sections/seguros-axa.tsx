@@ -12,19 +12,19 @@ export default function SegurosAXA() {
             <img 
               src="/attached_assets/image_1754309293247.png"
               alt="Casa tradicional española con trabajador de Correos"
-              className="w-full h-48 object-cover"
+              className="w-full h-64 object-cover"
               data-testid="img-seguros-axa"
             />
-            {/* SVG curved cut overlay - deeper curve to match reference */}
+            {/* SVG curved cut overlay - smooth deep curve */}
             <svg 
               className="absolute bottom-0 left-0 w-full" 
-              height="40" 
-              viewBox="0 0 400 40" 
+              height="80" 
+              viewBox="0 0 400 80" 
               preserveAspectRatio="none"
               style={{ display: 'block' }}
             >
               <path 
-                d="M0,40 C100,10 300,10 400,40 L400,40 L0,40 Z" 
+                d="M0,80 C150,20 250,20 400,80 L400,80 L0,80 Z" 
                 fill="white"
               />
             </svg>
