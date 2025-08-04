@@ -268,6 +268,23 @@ export default function TrackingHero() {
                   </div>
                 </div>
               </div>
+
+              {/* Botones de acción */}
+              <div className="space-y-3 mt-6">
+                <Button 
+                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 h-12 rounded-lg"
+                  data-testid="comenzar-envio-button"
+                >
+                  COMENZAR ENVÍO
+                </Button>
+                
+                <div className="flex items-center justify-center">
+                  <button className="text-blue-600 font-semibold text-sm flex items-center gap-1 hover:text-blue-700">
+                    MÁS INFO
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
