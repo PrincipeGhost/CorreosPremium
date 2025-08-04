@@ -6,7 +6,7 @@ export default function SiemprePensando() {
   const services = [
     {
       id: "gestion-aduanera",
-      iconUrl: "http://localhost:5000/gestion-aduanera.png",
+      iconUrl: "/gestion-aduanera.png",
       title: "Gestión Aduanera",
       description: "Infórmate sobre cómo realizar los trámites aduaneros que necesitas.",
       color: "bg-white",
@@ -14,7 +14,7 @@ export default function SiemprePensando() {
     },
     {
       id: "tramites-dgt",
-      iconUrl: "http://localhost:5000/tramites-dgt.png",
+      iconUrl: "/tramites-dgt.png",
       title: "Trámites de la DGT",
       description: "Realiza tus trámites de la DGT online de forma fácil y sencilla o acércate a",
       color: "bg-white", 
@@ -22,7 +22,7 @@ export default function SiemprePensando() {
     },
     {
       id: "tramites-administracion",
-      iconUrl: "http://localhost:5000/tramites-admin.png",
+      iconUrl: "/tramites-admin.png",
       title: "Trámites con la Administración Pública",
       description: "Haz tus trámites de forma rápida y",
       color: "bg-white",

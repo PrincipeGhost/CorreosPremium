@@ -9,6 +9,9 @@ app.use(express.urlencoded({ extended: false }));
 // Serve attached assets
 app.use('/attached_assets', express.static('attached_assets'));
 
+// Serve public assets (images, etc.)
+app.use(express.static('client/public'));
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
