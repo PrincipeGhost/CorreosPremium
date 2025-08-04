@@ -136,11 +136,13 @@ export default function ServiceCalculator() {
                         onClick={() => setSelectedSize(size.id)}
                         data-testid={`service-size-${size.id}`}
                       >
-                        <img 
-                          src={size.icon} 
-                          alt={`${size.subtitle} icon`}
-                          className="w-8 h-8 mb-2 mx-auto object-contain"
-                        />
+                        <div className="w-12 h-12 mb-2 mx-auto flex items-center justify-center">
+                          <img 
+                            src={size.icon} 
+                            alt={`${size.subtitle} icon`}
+                            className="w-10 h-10 object-contain"
+                          />
+                        </div>
                         <h4 className="font-bold text-lg">{size.title}</h4>
                         <h5 className="font-semibold text-sm">{size.subtitle}</h5>
                         <p className="text-xs text-gray-600">
