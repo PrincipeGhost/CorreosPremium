@@ -11,7 +11,7 @@ export default function InsuranceHero() {
           alt="Casa tradicional española con trabajador de Correos"
           className="w-full h-72 object-cover"
         />
-        {/* SVG curved cut overlay - subtle curve exactly like Correos.es */}
+        {/* SVG curved cut overlay - curve downward like Correos.es */}
         <svg 
           className="absolute bottom-0 left-0 w-full" 
           height="40" 
@@ -20,7 +20,7 @@ export default function InsuranceHero() {
           style={{ display: 'block' }}
         >
           <path 
-            d="M0,40 C200,10 200,10 400,40 L400,40 L0,40 Z" 
+            d="M0,0 C200,30 200,30 400,0 L400,40 L0,40 Z" 
             fill="white"
           />
         </svg>
