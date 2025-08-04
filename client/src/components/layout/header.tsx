@@ -25,7 +25,7 @@ export default function Header() {
             {/* Logo - Left side */}
             <div className="flex items-center">
               <img 
-                src="/attached_assets/image_1754313473527.png"
+                src="/attached_assets/IMG_6692_1754313882088.png"
                 alt="Correos"
                 className="h-12 w-12 object-contain"
               />
