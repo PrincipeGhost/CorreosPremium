@@ -145,16 +145,16 @@ export default function Footer() {
             />
           </div>
           
-          <div className="space-y-3 text-sm text-gray-300">
-            <a href="#" className="block hover:text-white">Política de cookies</a>
-            <a href="#" className="block hover:text-white">Aviso legal</a>
-            <a href="#" className="block hover:text-white">Privacidad web</a>
-            <a href="#" className="block hover:text-white">Alerta seguridad</a>
-            <a href="#" className="block hover:text-white">Accesibilidad</a>
-            <a href="#" className="block hover:text-white">Configurador de cookies</a>
+          <div className="space-y-2 text-sm text-gray-300" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+            <a href="#" className="block hover:text-white transition-colors duration-200">Política de cookies</a>
+            <a href="#" className="block hover:text-white transition-colors duration-200">Aviso legal</a>
+            <a href="#" className="block hover:text-white transition-colors duration-200">Privacidad web</a>
+            <a href="#" className="block hover:text-white transition-colors duration-200">Alerta seguridad</a>
+            <a href="#" className="block hover:text-white transition-colors duration-200">Accesibilidad</a>
+            <a href="#" className="block hover:text-white transition-colors duration-200">Configurador de cookies</a>
           </div>
           
-          <p className="text-xs text-gray-400 mt-6">
+          <p className="text-xs text-gray-400 mt-5 leading-relaxed" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             ©Sociedad Estatal Correos y Telégrafos, S.A., S.M.E. Todos los derechos reservados.
           </p>
         </div>
