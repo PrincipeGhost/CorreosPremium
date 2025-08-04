@@ -57,44 +57,44 @@ export default function Footer() {
         <div className="py-4">
           <p className="text-sm text-gray-700 mb-4">Métodos de pago</p>
           <div className="flex flex-wrap gap-2 mb-4">
-            <div className="bg-white rounded border border-gray-200 px-2 py-1">
+            <div className="bg-white rounded border border-gray-200 px-2 py-1.5 flex items-center justify-center min-w-[50px] h-8">
               <img 
                 src="/mastercard.png" 
                 alt="Mastercard"
-                className="h-5 w-auto object-contain"
-                style={{ imageRendering: 'crisp-edges' }}
+                className="max-h-full max-w-full object-contain"
+                style={{ imageRendering: 'auto' }}
               />
             </div>
-            <div className="bg-white rounded border border-gray-200 px-2 py-1">
+            <div className="bg-white rounded border border-gray-200 px-2 py-1.5 flex items-center justify-center min-w-[50px] h-8">
               <img 
                 src="/paypal.png" 
                 alt="PayPal"
-                className="h-5 w-auto object-contain"
-                style={{ imageRendering: 'crisp-edges' }}
+                className="max-h-full max-w-full object-contain"
+                style={{ imageRendering: 'auto' }}
               />
             </div>
-            <div className="bg-white rounded border border-gray-200 px-2 py-1">
+            <div className="bg-white rounded border border-gray-200 px-2 py-1.5 flex items-center justify-center min-w-[50px] h-8">
               <img 
                 src="/maestro.png" 
                 alt="Maestro"
-                className="h-5 w-auto object-contain"
-                style={{ imageRendering: 'crisp-edges' }}
+                className="max-h-full max-w-full object-contain"
+                style={{ imageRendering: 'auto' }}
               />
             </div>
-            <div className="bg-white rounded border border-gray-200 px-2 py-1">
+            <div className="bg-white rounded border border-gray-200 px-2 py-1.5 flex items-center justify-center min-w-[50px] h-8">
               <img 
                 src="/visa.png" 
                 alt="Visa"
-                className="h-5 w-auto object-contain"
-                style={{ imageRendering: 'crisp-edges' }}
+                className="max-h-full max-w-full object-contain"
+                style={{ imageRendering: 'auto' }}
               />
             </div>
-            <div className="bg-white rounded border border-gray-200 px-2 py-1">
+            <div className="bg-white rounded border border-gray-200 px-2 py-1.5 flex items-center justify-center min-w-[50px] h-8">
               <img 
                 src="/american-express.png" 
                 alt="American Express"
-                className="h-5 w-auto object-contain"
-                style={{ imageRendering: 'crisp-edges' }}
+                className="max-h-full max-w-full object-contain"
+                style={{ imageRendering: 'auto' }}
               />
             </div>
           </div>
