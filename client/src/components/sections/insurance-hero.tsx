@@ -7,7 +7,7 @@ export default function InsuranceHero() {
       {/* Background Image with curved bottom */}
       <div className="relative h-96">
         <img 
-          src="/attached_assets/image_1754309293247.png"
+          src="/attached_assets/image_1754310350481.png"
           alt="Casa tradicional española con trabajador de Correos"
           className="w-full h-96 object-cover"
         />
