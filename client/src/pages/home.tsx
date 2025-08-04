@@ -46,6 +46,7 @@ export default function Home() {
         <EligeCorreos />
         <SiemprePensando />
         <EsperandoEnvio />
+        <ServiceCalculator />
         <QuieresHacerEnvio />
         <TiendaOnline />
         <ViajaDisfruta />
