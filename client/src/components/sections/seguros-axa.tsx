@@ -7,23 +7,27 @@ export default function SegurosAXA() {
     <section className="bg-white py-6">
       <div className="max-w-md mx-auto px-6">
         <Card className="bg-white border-0 rounded-lg shadow-sm overflow-hidden">
-          {/* Hero image with curved bottom */}
-          <div className="relative">
-            <div 
-              className="h-48 bg-cover bg-center bg-no-repeat relative"
-              style={{
-                backgroundImage: "url('/attached_assets/image_1754305404402.jpeg')"
-              }}
+          {/* Hero image with curved bottom - FIXED */}
+          <div className="relative overflow-hidden">
+            <img 
+              src="/attached_assets/image_1754305484021.jpeg"
+              alt="Casa tradicional española con trabajador de Correos"
+              className="w-full h-48 object-cover"
               data-testid="img-seguros-axa"
+            />
+            {/* SVG curved cut overlay - WORKING VERSION */}
+            <svg 
+              className="absolute bottom-0 left-0 w-full" 
+              height="20" 
+              viewBox="0 0 400 20" 
+              preserveAspectRatio="none"
+              style={{ display: 'block' }}
             >
-              {/* Curved bottom overlay */}
-              <div 
-                className="absolute bottom-0 left-0 right-0 h-6 bg-white"
-                style={{
-                  borderRadius: '50% 50% 0 0 / 100% 100% 0 0'
-                }}
-              ></div>
-            </div>
+              <path 
+                d="M0,20 C200,0 200,0 400,20 L400,20 L0,20 Z" 
+                fill="white"
+              />
+            </svg>
           </div>
           
           <CardContent className="p-6">
