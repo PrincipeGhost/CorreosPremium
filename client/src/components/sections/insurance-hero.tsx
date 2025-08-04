@@ -47,7 +47,7 @@ export default function InsuranceHero() {
           
           <div className="space-y-4 mb-4">
             <Button 
-              className="w-52 bg-yellow-500 hover:bg-yellow-600 text-blue-900 py-4 px-4 text-sm font-bold rounded-lg border-0 transition-colors duration-200 block mx-auto"
+              className="w-56 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-6 text-sm font-bold rounded-lg border-0 transition-colors duration-200 block"
               data-testid="insurance-cta-button"
             >
               SEGURO, TE LLAMAMOS
