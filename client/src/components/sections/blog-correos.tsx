@@ -8,7 +8,7 @@ export default function BlogCorreos() {
       <div className="max-w-md mx-auto px-6">
         <Card className="bg-white border border-gray-200 rounded-lg shadow-sm">
           <CardContent className="p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
               Descubre
               <br />
               Actualidad, el Blog
@@ -27,7 +27,7 @@ export default function BlogCorreos() {
             </p>
             
             <Button 
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 text-sm rounded-md flex items-center gap-1"
+              className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 text-sm rounded-md flex items-center gap-1"
               data-testid="button-quiero-leerlo"
             >
               ¡QUIERO LEERLO!

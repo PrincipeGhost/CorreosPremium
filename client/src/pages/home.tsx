@@ -13,7 +13,7 @@ import ComprarTiendas from "@/components/sections/comprar-tiendas";
 import BlogCorreos from "@/components/sections/blog-correos";
 import Criptosello from "@/components/sections/criptosello";
 import NuevaApp from "@/components/sections/nueva-app";
-import SegurosAXA from "@/components/sections/seguros-axa";
+
 import QuickAccess from "@/components/sections/quick-access";
 import ServiceCalculator from "@/components/sections/service-calculator";
 import CompanyValues from "@/components/sections/company-values";
@@ -45,7 +45,6 @@ export default function Home() {
         <TrackingHero />
         <EligeCorreos />
         <SiemprePensando />
-        <SegurosAXA />
         <EsperandoEnvio />
         <QuieresHacerEnvio />
         <TiendaOnline />

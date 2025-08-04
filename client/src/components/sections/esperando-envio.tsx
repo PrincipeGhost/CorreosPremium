@@ -6,7 +6,7 @@ export default function EsperandoEnvio() {
       <div className="max-w-md mx-auto px-6">
         <Card className="bg-white border-0 rounded-lg shadow-sm">
           <CardContent className="p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
               ¿Estás esperando un envío?
             </h2>
             

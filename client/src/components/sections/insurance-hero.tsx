@@ -27,16 +27,16 @@ export default function InsuranceHero() {
       </div>
       <div className="relative">
         {/* Content */}
-        <div className="absolute bottom-8 left-0 right-0 z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-lg p-6 max-w-sm shadow-xl">
-            <div className="mb-4">
-              <p className="text-xs text-gray-600 mb-2">
+        <div className="absolute bottom-12 left-6 z-10">
+          <div className="bg-white rounded-lg p-4 max-w-xs shadow-lg">
+            <div className="mb-3">
+              <p className="text-xs text-gray-600 mb-1">
                 Allá donde está Correos, AXA te protege
               </p>
-              <h2 className="text-xl font-bold text-gray-900 mb-3">
+              <h2 className="text-lg font-bold text-gray-900 mb-2">
                 Seguros AXA
               </h2>
-              <p className="text-gray-700 text-xs leading-relaxed mb-4">
+              <p className="text-gray-700 text-xs leading-relaxed mb-3">
                 Ahora Correos se une a AXA en una misión: la de 
                 llegar a ti, estés donde estés. Porque gracias a la 
                 amplia red de agentes de Correos, podrás 
@@ -47,7 +47,7 @@ export default function InsuranceHero() {
             
             <div className="space-y-2">
               <Button 
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 text-sm rounded-md"
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 text-xs rounded-md"
                 data-testid="insurance-cta-button"
               >
                 SEGURO, TE LLAMAMOS
@@ -55,7 +55,7 @@ export default function InsuranceHero() {
               
               <Button 
                 variant="ghost" 
-                className="w-full text-blue-600 hover:text-blue-700 font-semibold flex items-center justify-center gap-1 text-sm"
+                className="text-blue-700 hover:text-blue-800 font-bold p-0 h-auto text-xs flex items-center gap-1"
                 data-testid="insurance-more-info-button"
               >
                 MÁS INFO

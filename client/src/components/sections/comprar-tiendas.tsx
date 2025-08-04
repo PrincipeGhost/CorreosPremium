@@ -16,7 +16,7 @@ export default function ComprarTiendas() {
           />
           
           <CardContent className="p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">
+            <h2 className="text-lg font-bold text-gray-800 mb-4">
               ¿Quieres comprar en nuestras tiendas o enviar dinero?
             </h2>
             
@@ -27,7 +27,7 @@ export default function ComprarTiendas() {
             
             <Button 
               variant="ghost" 
-              className="text-blue-600 hover:text-blue-700 font-semibold p-0 h-auto text-sm flex items-center gap-1"
+              className="text-blue-700 hover:text-blue-800 font-bold p-0 h-auto text-sm flex items-center gap-1"
               data-testid="button-mas-info-comprar"
             >
               MÁS INFO
