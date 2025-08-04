@@ -31,6 +31,10 @@ export default function Header() {
                 src="/attached_assets/IMG_6692_1754313882088.png"
                 alt="Correos"
                 className="h-9 w-9 object-contain"
+                style={{ 
+                  filter: 'contrast(1.2) saturate(1.1) brightness(0.95)',
+                  imageRendering: 'crisp-edges'
+                }}
               />
             </div>
 
