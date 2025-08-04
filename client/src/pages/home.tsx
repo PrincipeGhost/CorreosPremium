@@ -3,6 +3,8 @@ import Footer from "@/components/layout/footer";
 import Hero from "@/components/sections/hero";
 import InsuranceHero from "@/components/sections/insurance-hero";
 import TrackingHero from "@/components/sections/tracking-hero";
+import EligeCorreos from "@/components/sections/elige-correos";
+import SiemprePensando from "@/components/sections/siempre-pensando";
 import QuickAccess from "@/components/sections/quick-access";
 import ServiceCalculator from "@/components/sections/service-calculator";
 import CompanyValues from "@/components/sections/company-values";
@@ -32,6 +34,8 @@ export default function Home() {
       <main>
         <InsuranceHero />
         <TrackingHero />
+        <EligeCorreos />
+        <SiemprePensando />
       </main>
       <Footer />
     </div>
