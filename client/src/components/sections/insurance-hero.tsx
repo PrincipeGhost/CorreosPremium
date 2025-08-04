@@ -9,8 +9,7 @@ export default function InsuranceHero() {
         <img 
           src="/attached_assets/image_1754310350481.png"
           alt="Casa tradicional española con trabajador de Correos"
-          className="w-full h-72 object-cover object-center"
-          style={{ objectPosition: 'center 20%' }}
+          className="w-full h-72 object-cover"
         />
         {/* SVG curved cut overlay - curve downward like Correos.es */}
         <svg 
