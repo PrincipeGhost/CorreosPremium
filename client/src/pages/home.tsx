@@ -41,7 +41,6 @@ export default function Home() {
       
       <Header />
       <main>
-        <InsuranceHero />
         <TrackingHero />
         <EligeCorreos />
         <SiemprePensando />
