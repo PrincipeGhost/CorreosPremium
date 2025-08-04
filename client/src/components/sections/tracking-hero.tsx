@@ -31,7 +31,7 @@ export default function TrackingHero() {
       <div className="max-w-md mx-auto px-4 space-y-4">
         {/* Main tracking section */}
         <Card className="bg-yellow-400 border-0 rounded-lg">
-          <CardContent className="p-6 space-y-4">
+          <CardContent className="p-8 space-y-6">
             <h2 className="text-xl font-bold text-gray-900">
               Sigue tu envío
             </h2>
@@ -108,18 +108,18 @@ export default function TrackingHero() {
 
         {/* Special package service */}
         <Card className="border-0 rounded-lg">
-          <CardContent className="p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
+          <CardContent className="p-8">
+            <h3 className="text-lg font-bold text-gray-900 mb-3">
               Servicio especial de paquetería
             </h3>
-            <p className="text-gray-600 text-sm mb-2">
+            <p className="text-gray-600 text-sm mb-3">
               Envíos rápidos y baratos para todo el mundo
             </p>
-            <p className="text-lg font-bold text-gray-900 mb-4">
+            <p className="text-lg font-bold text-gray-900 mb-5">
               Desde 5.63€
             </p>
             
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-sm text-gray-600 mb-4">
               Indica el producto que quieres enviar
             </p>
             
