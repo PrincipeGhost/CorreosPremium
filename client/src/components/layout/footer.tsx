@@ -40,20 +40,16 @@ export default function Footer() {
         <div className="py-4 border-b border-gray-200">
           <p className="text-sm text-gray-700 mb-4">Descarga la App de Correos</p>
           <div className="flex space-x-3">
-            <div className="bg-black text-white px-3 py-2 rounded-lg text-xs flex items-center space-x-2">
-              <div className="text-white text-lg">🍎</div>
-              <div>
-                <div className="text-xs opacity-80">Descárgalo en el</div>
-                <div className="font-bold text-sm">App Store</div>
-              </div>
-            </div>
-            <div className="bg-black text-white px-3 py-2 rounded-lg text-xs flex items-center space-x-2">
-              <div className="text-white text-lg">▶️</div>
-              <div>
-                <div className="text-xs opacity-80">DISPONIBLE EN</div>
-                <div className="font-bold text-sm">Google Play</div>
-              </div>
-            </div>
+            <img 
+              src="/app-store.png" 
+              alt="Descargar en App Store"
+              className="h-10 object-contain"
+            />
+            <img 
+              src="/google-play.png" 
+              alt="Disponible en Google Play"
+              className="h-10 object-contain"
+            />
           </div>
         </div>
 
@@ -61,49 +57,40 @@ export default function Footer() {
         <div className="py-4">
           <p className="text-sm text-gray-700 mb-4">Métodos de pago</p>
           <div className="flex flex-wrap gap-2 mb-4">
-            {/* Mastercard */}
-            <div className="w-14 h-8 bg-gradient-to-r from-red-500 to-orange-400 rounded flex items-center justify-center">
-              <div className="flex">
-                <div className="w-3 h-3 bg-red-600 rounded-full opacity-80"></div>
-                <div className="w-3 h-3 bg-yellow-400 rounded-full -ml-1"></div>
-              </div>
-            </div>
-            
-            {/* PayPal */}
-            <div className="w-14 h-8 bg-blue-600 rounded flex items-center justify-center text-white text-xs font-bold">
-              PayPal
-            </div>
-            
-            {/* Maestro */}
-            <div className="w-14 h-8 bg-red-600 rounded flex items-center justify-center">
-              <div className="flex">
-                <div className="w-2 h-2 bg-red-700 rounded-full"></div>
-                <div className="w-2 h-2 bg-blue-600 rounded-full -ml-0.5"></div>
-              </div>
-            </div>
-            
-            {/* Visa */}
-            <div className="w-14 h-8 bg-blue-700 rounded flex items-center justify-center text-white text-xs font-bold">
-              VISA
-            </div>
-            
-            {/* American Express */}
-            <div className="w-14 h-8 bg-blue-500 rounded flex items-center justify-center text-white text-xs font-bold">
-              AMEX
-            </div>
+            <img 
+              src="/mastercard.png" 
+              alt="Mastercard"
+              className="h-8 object-contain bg-white rounded"
+            />
+            <img 
+              src="/paypal.png" 
+              alt="PayPal"
+              className="h-8 object-contain bg-white rounded"
+            />
+            <img 
+              src="/maestro.png" 
+              alt="Maestro"
+              className="h-8 object-contain bg-white rounded"
+            />
+            <img 
+              src="/visa.png" 
+              alt="Visa"
+              className="h-8 object-contain bg-white rounded"
+            />
+            <img 
+              src="/american-express.png" 
+              alt="American Express"
+              className="h-8 object-contain bg-white rounded"
+            />
           </div>
           
           {/* Trust certificate */}
           <div className="mt-4">
-            <div className="w-16 h-20 bg-orange-500 rounded-lg flex flex-col items-center justify-center text-white text-center p-1">
-              <div className="text-yellow-300 text-lg mb-1">★</div>
-              <div className="text-[8px] font-bold leading-tight">
-                <div>EMPRESA</div>
-                <div>CONFIABLE</div>
-                <div>CERTIFICADA</div>
-              </div>
-              <div className="text-[6px] mt-1 opacity-80">CONFIANZA</div>
-            </div>
+            <img 
+              src="/certificado.png" 
+              alt="Junta Arbitral Nacional de Consumo - Empresario Adherido"
+              className="h-20 object-contain"
+            />
           </div>
         </div>
 
