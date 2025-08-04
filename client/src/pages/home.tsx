@@ -5,6 +5,7 @@ import InsuranceHero from "@/components/sections/insurance-hero";
 import TrackingHero from "@/components/sections/tracking-hero";
 import EligeCorreos from "@/components/sections/elige-correos";
 import SiemprePensando from "@/components/sections/siempre-pensando";
+import EsperandoEnvio from "@/components/sections/esperando-envio";
 import QuickAccess from "@/components/sections/quick-access";
 import ServiceCalculator from "@/components/sections/service-calculator";
 import CompanyValues from "@/components/sections/company-values";
@@ -36,6 +37,7 @@ export default function Home() {
         <TrackingHero />
         <EligeCorreos />
         <SiemprePensando />
+        <EsperandoEnvio />
       </main>
       <Footer />
     </div>

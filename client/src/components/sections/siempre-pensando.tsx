@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronRight, FileText, Building2 } from "lucide-react";
+import { ChevronRight, FileText, Building2, Landmark } from "lucide-react";
 
 export default function SiemprePensando() {
   const services = [
@@ -16,9 +16,17 @@ export default function SiemprePensando() {
       id: "tramites-dgt",
       icon: Building2,
       title: "Trámites de la DGT",
-      description: "Realiza tus trámites de la DGT online sin desplazarte.",
+      description: "Realiza tus trámites de la DGT online de forma fácil y sencilla o acércate a",
       color: "bg-blue-100", 
       iconColor: "text-blue-600"
+    },
+    {
+      id: "tramites-administracion",
+      icon: Landmark,
+      title: "Trámites con la Administración Pública",
+      description: "Haz tus trámites de forma rápida y",
+      color: "bg-green-100",
+      iconColor: "text-green-600"
     }
   ];
 

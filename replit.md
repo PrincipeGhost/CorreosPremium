@@ -1,6 +1,6 @@
 # Overview
 
-This is a modern full-stack web application built with a React frontend and Express.js backend, designed as a package delivery and shipping service platform inspired by Correos.es. The application features a corporate website with package tracking functionality, shipping calculators, service offerings, and administrative tools. The platform is branded as "EnvíosPro" and focuses on package delivery services across Spain with real-time tracking capabilities.
+This is a modern full-stack web application built with a React frontend and Express.js backend, designed as a package delivery and shipping service platform inspired by Correos.es. The application features a corporate website with package tracking functionality, shipping calculators, service offerings, and administrative tools. The platform is branded as "EnvíosPro" and focuses on package delivery services across Spain with real-time tracking capabilities. The design closely matches the mobile experience of Correos.es with dedicated sections for inclusive messaging, administrative services, and shipment tracking.
 
 # User Preferences
 
@@ -50,6 +50,10 @@ Preferred communication style: Simple, everyday language.
 - **Color Scheme**: Updated to Correos-style blue (#2B5CB8) and orange (#E55722) color palette
 - **Navigation**: Added routing for /tracking page with functional package search
 - **Mock Data**: Created test tracking numbers (EP001234567ES, EP987654321ES, EP456789123ES) for demonstration
+- **Mobile-First Sections**: Added "#EligeCorreos" section with inclusive messaging "De: todos y todas, Para: todos y todas"
+- **Administrative Services**: Implemented "Siempre pensando en ti" section with DGT procedures, customs management, and public administration services
+- **Shipment Waiting Section**: Added "¿Estás esperando un envío?" informational section
+- **Enhanced Service Cards**: Updated service cards with appropriate icons and consistent styling matching Correos.es mobile design
 
 ## Development Tooling
 - **Build System**: Vite with React plugin and TypeScript support
