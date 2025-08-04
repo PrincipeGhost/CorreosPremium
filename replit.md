@@ -53,7 +53,10 @@ Preferred communication style: Simple, everyday language.
 - **Mobile-First Sections**: Added "#EligeCorreos" section with inclusive messaging "De: todos y todas, Para: todos y todas"
 - **Administrative Services**: Implemented "Siempre pensando en ti" section with DGT procedures, customs management, and public administration services
 - **Shipment Waiting Section**: Added "¿Estás esperando un envío?" informational section
+- **Shipping Guide Section**: Added "¿Quieres hacer un envío?" with shipping information and guidance
+- **Online Store Section**: Implemented "Compra en nuestra tienda" with yellow background and shopping illustration
 - **Enhanced Service Cards**: Updated service cards with appropriate icons and consistent styling matching Correos.es mobile design
+- **Complete Mobile Experience**: The application now provides a comprehensive mobile-first experience that closely mirrors the Correos.es interface and user flow
 
 ## Development Tooling
 - **Build System**: Vite with React plugin and TypeScript support

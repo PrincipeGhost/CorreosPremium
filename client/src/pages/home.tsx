@@ -6,6 +6,8 @@ import TrackingHero from "@/components/sections/tracking-hero";
 import EligeCorreos from "@/components/sections/elige-correos";
 import SiemprePensando from "@/components/sections/siempre-pensando";
 import EsperandoEnvio from "@/components/sections/esperando-envio";
+import QuieresHacerEnvio from "@/components/sections/quieres-hacer-envio";
+import TiendaOnline from "@/components/sections/tienda-online";
 import QuickAccess from "@/components/sections/quick-access";
 import ServiceCalculator from "@/components/sections/service-calculator";
 import CompanyValues from "@/components/sections/company-values";
@@ -38,6 +40,8 @@ export default function Home() {
         <EligeCorreos />
         <SiemprePensando />
         <EsperandoEnvio />
+        <QuieresHacerEnvio />
+        <TiendaOnline />
       </main>
       <Footer />
     </div>
