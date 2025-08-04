@@ -13,10 +13,10 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-white">
+    <footer className="bg-gray-900 text-white">
       <div className="max-w-md mx-auto px-6">
         {/* Social Media */}
-        <div className="py-5 border-b border-gray-200">
+        <div className="py-5 border-b border-gray-700">
           <div className="flex space-x-5 justify-start">
             <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-facebook">
               <Facebook className="w-6 h-6" />
@@ -37,8 +37,8 @@ export default function Footer() {
         </div>
 
         {/* App Downloads */}
-        <div className="py-4 border-b border-gray-200">
-          <p className="text-sm text-gray-700 mb-4">Descarga la App de Correos</p>
+        <div className="py-4 border-b border-gray-700">
+          <p className="text-sm text-gray-300 mb-4">Descarga la App de Correos</p>
           <div className="flex space-x-3">
             <div className="bg-black text-white px-3 py-2 rounded-lg text-xs flex items-center space-x-2">
               <div className="text-white text-lg">🍎</div>
@@ -59,7 +59,7 @@ export default function Footer() {
 
         {/* Payment Methods */}
         <div className="py-4">
-          <p className="text-sm text-gray-700 mb-4">Métodos de pago</p>
+          <p className="text-sm text-gray-300 mb-4">Métodos de pago</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {/* Mastercard */}
             <div className="w-14 h-8 bg-gradient-to-r from-red-500 to-orange-400 rounded flex items-center justify-center">
@@ -108,7 +108,7 @@ export default function Footer() {
         </div>
 
         {/* Footer company info and legal */}
-        <div className="bg-gray-900 text-white -mx-6 px-6 py-6">
+        <div className="border-t border-gray-700 py-6">
           <div className="flex items-center mb-4">
             <img 
               src="/correos-logo.png" 
