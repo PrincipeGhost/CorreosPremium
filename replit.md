@@ -42,7 +42,11 @@ Preferred communication style: Simple, everyday language.
 - **Package Tracking**: Mock tracking system with predefined tracking numbers for demonstration
 - **Timestamps**: Automatic creation timestamps for audit trails
 
-## Recent Changes (January 2025)
+## Recent Changes (August 2025)
+- **Package Size Icons Update**: Updated TrackingHero component to use custom package images for size selection icons (2kg, 5kg, 10kg) and added missing 20kg option with proper icon
+- **Enhanced Package Selection**: Package size selection now displays authentic package icons provided by user instead of generic Package icons from Lucide
+
+## Previous Changes (January 2025)
 - **Branding Update**: Changed from generic "Tu Empresa" to "EnvíosPro" for package delivery focus
 - **Correos.es Design Implementation**: Adapted homepage design to match Correos.es layout and functionality
 - **Package Tracking System**: Added dedicated tracking page with real-time package status updates
