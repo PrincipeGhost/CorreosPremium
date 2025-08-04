@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
-import axaImage from "@assets/image_1754305095400.jpeg";
 
 export default function SegurosAXA() {
   return (
@@ -11,13 +10,20 @@ export default function SegurosAXA() {
           {/* Hero image with curved bottom */}
           <div className="relative">
             <div 
-              className="h-48 bg-cover bg-center bg-no-repeat"
+              className="h-48 bg-cover bg-center bg-no-repeat relative"
               style={{
-                backgroundImage: `url(${axaImage})`,
-                clipPath: 'ellipse(100% 85% at 50% 0%)'
+                backgroundImage: "url('/attached_assets/image_1754305095400.jpeg')"
               }}
               data-testid="img-seguros-axa"
-            />
+            >
+              {/* Curved bottom overlay */}
+              <div 
+                className="absolute bottom-0 left-0 right-0 h-6 bg-white"
+                style={{
+                  borderRadius: '50% 50% 0 0 / 100% 100% 0 0'
+                }}
+              ></div>
+            </div>
           </div>
           
           <CardContent className="p-6">
