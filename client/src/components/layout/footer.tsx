@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Facebook, Instagram, Twitter, Linkedin, Youtube, ChevronDown } from "lucide-react";
+import { Facebook, Instagram, Twitter, Linkedin, Youtube, ChevronDown, Headphones } from "lucide-react";
 
 export default function Footer() {
   const [openSections, setOpenSections] = useState<string[]>([]);
@@ -81,7 +81,7 @@ export default function Footer() {
               className="w-full flex items-center justify-between py-5 text-left font-normal text-gray-900 text-base"
               data-testid="footer-toggle-auriculares"
             >
-              🎧
+              <Headphones className="w-5 h-5 text-gray-900" />
               <ChevronDown className={`w-5 h-5 text-gray-600 transition-transform ${openSections.includes('auriculares') ? 'rotate-180' : ''}`} />
             </button>
             {openSections.includes('auriculares') && (
