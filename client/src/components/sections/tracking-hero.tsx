@@ -28,7 +28,7 @@ export default function TrackingHero() {
 
   return (
     <div className="bg-gray-100 py-8">
-      <div className="max-w-md mx-auto px-4 space-y-4">
+      <div className="max-w-md mx-auto px-4 space-y-8">
         {/* Main tracking section */}
         <Card className="bg-yellow-400 border-0 rounded-lg">
           <CardContent className="p-8 space-y-6">
@@ -108,184 +108,16 @@ export default function TrackingHero() {
 
         {/* Special package service */}
         <Card className="border-0 rounded-lg">
-          <CardContent className="p-8">
-            <h3 className="text-lg font-bold text-gray-900 mb-3">
+          <CardContent className="p-4">
+            <h3 className="text-lg font-bold text-gray-900 mb-1">
               Servicio especial de paquetería
             </h3>
-            <p className="text-gray-600 text-sm mb-3">
+            <p className="text-gray-600 text-sm mb-1">
               Envíos rápidos y baratos para todo el mundo
             </p>
-            <p className="text-lg font-bold text-gray-900 mb-5">
+            <p className="text-lg font-bold text-gray-900">
               Desde 5.63€
             </p>
-            
-            <p className="text-sm text-gray-600 mb-4">
-              Indica el producto que quieres enviar
-            </p>
-            
-            <div className="flex gap-4 mb-4">
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  name="service"
-                  value="paqueteria"
-                  checked={selectedService === "paqueteria"}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
-                />
-                <span className="ml-2 text-sm text-gray-900">Paquetería</span>
-              </label>
-              
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  name="service"
-                  value="camino"
-                  checked={selectedService === "camino"}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
-                />
-                <span className="ml-2 text-sm text-gray-900">Camino de Santiago</span>
-              </label>
-            </div>
-            
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm text-gray-600 block mb-2">
-                  Código postal origen
-                </label>
-                <div className="space-y-2">
-                  <div className="relative">
-                    <Input
-                      value="España"
-                      disabled
-                      className="w-full h-12 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10"
-                    />
-                    <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  </div>
-                  <Input
-                    type="text"
-                    placeholder="Código postal*"
-                    value={originPostalCode}
-                    onChange={(e) => setOriginPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md"
-                    data-testid="origin-postal-code"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-600 block mb-2">
-                  Código postal destino
-                </label>
-                <div className="space-y-2">
-                  <Select value={destinationCountry} onValueChange={setDestinationCountry}>
-                    <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md">
-                      <SelectValue placeholder="País*" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="españa">España</SelectItem>
-                      <SelectItem value="francia">Francia</SelectItem>
-                      <SelectItem value="portugal">Portugal</SelectItem>
-                      <SelectItem value="alemania">Alemania</SelectItem>
-                      <SelectItem value="italia">Italia</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Input
-                    type="text"
-                    placeholder="Código postal"
-                    value={destinationPostalCode}
-                    onChange={(e) => setDestinationPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md"
-                    data-testid="destination-postal-code"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-sm text-gray-600 block mb-3">
-                  ¿Qué tamaño y peso tiene tu paquete?
-                </label>
-                <div className="space-y-2">
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '2kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('2kg')}
-                  >
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                        <img src={icon2kg} alt="2kg package" className="w-8 h-8 object-contain" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900">Hasta 2kg</div>
-                        <div className="text-sm text-gray-600">Dimensión: 30x20x20</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '5kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('5kg')}
-                  >
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                        <img src={icon5kg} alt="5kg package" className="w-8 h-8 object-contain" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900">Hasta 5kg</div>
-                        <div className="text-sm text-gray-600">Dimensión: 35x35x24</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '10kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('10kg')}
-                  >
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                        <img src={icon10kg} alt="10kg package" className="w-8 h-8 object-contain" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900">Hasta 10kg</div>
-                        <div className="text-sm text-gray-600">Dimensión: 40x40x37</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '20kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('20kg')}
-                  >
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                        <img src={icon20kg} alt="20kg package" className="w-8 h-8 object-contain" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900">Hasta 20kg</div>
-                        <div className="text-sm text-gray-600">Dimensión: 55x55x39</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Botones de acción */}
-              <div className="space-y-3 mt-6">
-                <Button 
-                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 h-12 rounded-lg"
-                  data-testid="comenzar-envio-button"
-                >
-                  COMENZAR ENVÍO
-                </Button>
-                
-                <div className="flex items-center justify-center">
-                  <button className="text-blue-600 font-semibold text-sm flex items-center gap-1 hover:text-blue-700">
-                    MÁS INFO
-                    <ChevronDown className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
           </CardContent>
         </Card>
       </div>
