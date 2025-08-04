@@ -45,7 +45,7 @@ export default function InsuranceHero() {
             de España.
           </p>
           
-          <div className="space-y-4 mb-4">
+          <div className="space-y-6 mb-4">
             <Button 
               className="w-56 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-6 text-sm font-bold rounded-lg border-0 transition-colors duration-200 block"
               data-testid="insurance-cta-button"
