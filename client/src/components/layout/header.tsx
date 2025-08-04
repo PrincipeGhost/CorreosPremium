@@ -31,8 +31,11 @@ export default function Header() {
               />
             </div>
 
-            {/* Menu hamburger - positioned left of center like Correos.es */}
-            <div className="flex items-center ml-16">
+            {/* Vertical divider */}
+            <div className="w-px h-10 bg-gray-300 mx-4"></div>
+
+            {/* Menu hamburger - positioned close to logo like Correos.es */}
+            <div className="flex items-center">
               <Button
                 variant="ghost"
                 size="icon"
