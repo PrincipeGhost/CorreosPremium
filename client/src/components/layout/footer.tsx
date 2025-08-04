@@ -186,7 +186,7 @@ export default function Footer() {
         </div>
 
         {/* Footer company info and legal */}
-        <div className="bg-gray-900 text-white -mx-4 px-4 py-6">
+        <div className="bg-gray-900 text-white -mx-6 px-6 py-6">
           <div className="flex items-center mb-4">
             <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">
               EP
