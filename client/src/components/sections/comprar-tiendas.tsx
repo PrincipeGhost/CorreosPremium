@@ -11,7 +11,7 @@ export default function ComprarTiendas() {
           <div 
             className="h-40 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=160')"
+              backgroundImage: "url('/tiendas-correos.png')"
             }}
           />
           

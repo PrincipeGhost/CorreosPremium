@@ -49,6 +49,7 @@ Preferred communication style: Simple, everyday language.
 - **Administrative Services Icons**: Updated "Siempre pensando en ti" section with user-provided images for Gestión Aduanera, Trámites DGT, and Administración Pública (16x16 size for better visibility matching Correos.es design)
 - **Online Store Section Icon**: Replaced custom SVG illustration in "Compra en nuestra tienda online" section with user's exact image showing mobile phone with shopping cart and shopping bags
 - **Travel Section Image**: Updated "Viaja y disfruta con Correos" section with user's exact image showing tourists with map and camera exploring a historic city plaza
+- **Store Services Image**: Updated "¿Quieres comprar en nuestras tiendas o enviar dinero?" section with user's exact image showing authentic Correos yellow signage and logo
 
 ## Previous Changes (January 2025)
 - **Branding Update**: Changed from generic "Tu Empresa" to "EnvíosPro" for package delivery focus
