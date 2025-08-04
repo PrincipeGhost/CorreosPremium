@@ -21,7 +21,7 @@ export default function Header() {
       
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex items-center h-16">
             {/* Logo - Left side */}
             <div className="flex items-center">
               <img 
@@ -31,8 +31,8 @@ export default function Header() {
               />
             </div>
 
-            {/* Center - Menu hamburger like Correos.es */}
-            <div className="flex items-center">
+            {/* Menu hamburger - positioned left of center like Correos.es */}
+            <div className="flex items-center ml-16">
               <Button
                 variant="ghost"
                 size="icon"
@@ -42,6 +42,9 @@ export default function Header() {
                 <Menu className="w-8 h-8" />
               </Button>
             </div>
+
+            {/* Spacer to push right items to the end */}
+            <div className="flex-grow"></div>
 
             {/* Right side - Search and User icons */}
             <div className="flex items-center space-x-1">
