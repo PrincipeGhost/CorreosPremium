@@ -38,11 +38,11 @@ export default function InsuranceHero() {
           </h2>
           
           <p className="text-sm text-gray-600 mb-6 leading-normal font-normal">
-            Ahora Correos se une a AXA en una misión: la de 
-            llegar a ti, estés donde estés. Porque gracias a la 
-            amplia red de agentes de Correos, podrás 
-            contratar los seguros de AXA en cualquier sitio 
-            de España.
+            Ahora Correos se une a AXA en una misión: la 
+            de llegar a ti, estés donde estés. Porque 
+            gracias a la amplia red de agentes de Correos, 
+            podrás contratar los seguros de AXA en 
+            cualquier sitio de España.
           </p>
           
           <div className="space-y-2 mb-4">
