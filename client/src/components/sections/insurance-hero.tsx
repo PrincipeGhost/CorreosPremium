@@ -37,17 +37,17 @@ export default function InsuranceHero() {
             Seguros AXA
           </h2>
           
-          <p className="text-sm text-gray-600 mb-6 leading-normal font-normal">
-            Ahora Correos se une a AXA en una misión: la 
-            de llegar a ti, estés donde estés. Porque 
-            gracias a la amplia red de agentes de Correos, 
-            podrás contratar los seguros de AXA en 
-            cualquier sitio de España.
+          <p className="text-sm text-gray-600 mb-6 leading-relaxed font-normal max-w-xs">
+            Ahora Correos se une a AXA en una misión: la de 
+            llegar a ti, estés donde estés. Porque gracias a la 
+            amplia red de agentes de Correos, podrás 
+            contratar los seguros de AXA en cualquier sitio 
+            de España.
           </p>
           
-          <div className="space-y-2 mb-4">
+          <div className="space-y-4 mb-4">
             <Button 
-              className="w-full max-w-xs bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-2 px-4 text-xs font-bold rounded border-0 transition-colors duration-200"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-6 text-sm font-bold rounded-lg border-0 transition-colors duration-200"
               data-testid="insurance-cta-button"
             >
               SEGURO, TE LLAMAMOS
@@ -55,11 +55,11 @@ export default function InsuranceHero() {
             
             <Button 
               variant="ghost" 
-              className="text-blue-800 hover:text-blue-900 p-0 h-auto text-xs font-bold flex items-center gap-1 transition-colors duration-200"
+              className="text-blue-800 hover:text-blue-900 p-0 h-auto text-sm font-bold flex items-center gap-2 transition-colors duration-200"
               data-testid="insurance-more-info-button"
             >
               MÁS INFO
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
         </div>
