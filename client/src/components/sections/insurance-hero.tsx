@@ -28,7 +28,7 @@ export default function InsuranceHero() {
       </div>
       {/* Content Container - exact replica of reference image */}
       <div className="bg-white px-8 pt-6 pb-8">
-        <div className="max-w-lg">
+        <div className="max-w-lg ml-6">
           <p className="text-xs text-black mb-3 font-medium">
             Allá donde está Correos, AXA te protege
           </p>
