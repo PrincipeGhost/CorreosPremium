@@ -67,7 +67,7 @@ export default function TrackingHero() {
                   <img 
                     src="/attached_assets/image_1754314540403.png" 
                     alt="Localiza oficinas"
-                    className="w-8 h-8 object-contain"
+                    className="w-6 h-6 object-contain"
                   />
                 </div>
                 Localiza oficinas, buzones y Citypaq
@@ -82,7 +82,7 @@ export default function TrackingHero() {
                   <img 
                     src="/attached_assets/image_1754314575709.png" 
                     alt="Códigos postales"
-                    className="w-8 h-8 object-contain"
+                    className="w-6 h-6 object-contain"
                   />
                 </div>
                 Encuentra códigos postales
@@ -97,7 +97,7 @@ export default function TrackingHero() {
                   <img 
                     src="/attached_assets/image_1754314594642.png" 
                     alt="Verificador de email"
-                    className="w-8 h-8 object-contain"
+                    className="w-6 h-6 object-contain"
                   />
                 </div>
                 Verificador de email
