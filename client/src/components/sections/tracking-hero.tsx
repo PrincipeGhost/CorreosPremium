@@ -40,7 +40,7 @@ export default function TrackingHero() {
             <div className="flex gap-2">
               <Input
                 type="text"
-                placeholder="Nº de seguimiento de en..."
+                placeholder="Nº de seguimiento de envío"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
