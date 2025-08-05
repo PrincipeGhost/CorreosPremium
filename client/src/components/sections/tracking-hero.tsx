@@ -44,12 +44,12 @@ export default function TrackingHero() {
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
-                className="flex-1 h-12 text-base border-0 rounded-md shadow-sm bg-white"
+                className="flex-1 h-14 text-base border-0 rounded-md shadow-sm bg-white px-4"
                 data-testid="tracking-hero-input"
               />
               <Button
                 onClick={handleTrackingSearch}
-                className="h-12 px-4 bg-blue-600 hover:bg-blue-700 rounded-md"
+                className="h-14 px-4 bg-blue-600 hover:bg-blue-700 rounded-md"
                 data-testid="tracking-hero-search-button"
               >
                 <Search className="w-4 h-4 text-white" />
@@ -60,7 +60,7 @@ export default function TrackingHero() {
             <div className="space-y-3">
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-14 text-gray-800 hover:bg-gray-50"
+                className="w-full justify-start bg-white border-0 h-16 text-gray-800 hover:bg-gray-50"
                 data-testid="locate-offices-button"
               >
                 <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
@@ -75,7 +75,7 @@ export default function TrackingHero() {
 
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-14 text-blue-600 hover:bg-gray-50 underline"
+                className="w-full justify-start bg-white border-0 h-16 text-blue-600 hover:bg-gray-50 underline"
                 data-testid="postal-codes-button"
               >
                 <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
@@ -90,7 +90,7 @@ export default function TrackingHero() {
 
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-14 text-gray-800 hover:bg-gray-50"
+                className="w-full justify-start bg-white border-0 h-16 text-gray-800 hover:bg-gray-50"
                 data-testid="email-verifier-button"
               >
                 <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
