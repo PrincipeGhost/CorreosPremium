@@ -63,11 +63,11 @@ export default function TrackingHero() {
                 className="w-full justify-start bg-white border-0 h-16 text-gray-800 hover:bg-gray-50"
                 data-testid="locate-offices-button"
               >
-                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
+                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314540403.png" 
                     alt="Localiza oficinas"
-                    className="w-6 h-6 object-contain"
+                    className="w-8 h-8 object-contain"
                   />
                 </div>
                 Localiza oficinas, buzones y Citypaq
@@ -78,11 +78,11 @@ export default function TrackingHero() {
                 className="w-full justify-start bg-white border-0 h-16 text-blue-600 hover:bg-gray-50 underline"
                 data-testid="postal-codes-button"
               >
-                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
+                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314575709.png" 
                     alt="Códigos postales"
-                    className="w-6 h-6 object-contain"
+                    className="w-8 h-8 object-contain"
                   />
                 </div>
                 Encuentra códigos postales
@@ -93,11 +93,11 @@ export default function TrackingHero() {
                 className="w-full justify-start bg-white border-0 h-16 text-gray-800 hover:bg-gray-50"
                 data-testid="email-verifier-button"
               >
-                <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center mr-3">
+                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314594642.png" 
                     alt="Verificador de email"
-                    className="w-6 h-6 object-contain"
+                    className="w-8 h-8 object-contain"
                   />
                 </div>
                 Verificador de email
