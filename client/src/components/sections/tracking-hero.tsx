@@ -185,7 +185,7 @@ export default function TrackingHero() {
                     <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400" style={{ borderBottomColor: '#FFD700' }}>
                       <SelectValue placeholder="País*" />
                     </SelectTrigger>
-                    <SelectContent className="correos-select-content">
+                    <SelectContent side="bottom" className="correos-select-content">
                       <SelectItem value="afganistan" className="correos-select-item">Afganistán</SelectItem>
                       <SelectItem value="albania" className="correos-select-item">Albania</SelectItem>
                       <SelectItem value="alemania" className="correos-select-item">Alemania</SelectItem>
