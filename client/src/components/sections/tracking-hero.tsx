@@ -185,114 +185,114 @@ export default function TrackingHero() {
                     <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400" style={{ borderBottomColor: '#FFD700' }}>
                       <SelectValue placeholder="País*" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="afganistan">Afganistán</SelectItem>
-                      <SelectItem value="albania">Albania</SelectItem>
-                      <SelectItem value="alemania">Alemania</SelectItem>
-                      <SelectItem value="andorra">Andorra</SelectItem>
-                      <SelectItem value="angola">Angola</SelectItem>
-                      <SelectItem value="argentina">Argentina</SelectItem>
-                      <SelectItem value="armenia">Armenia</SelectItem>
-                      <SelectItem value="australia">Australia</SelectItem>
-                      <SelectItem value="austria">Austria</SelectItem>
-                      <SelectItem value="azerbaiyan">Azerbaiyán</SelectItem>
-                      <SelectItem value="bahamas">Bahamas</SelectItem>
-                      <SelectItem value="bangladesh">Bangladesh</SelectItem>
-                      <SelectItem value="barbados">Barbados</SelectItem>
-                      <SelectItem value="belgica">Bélgica</SelectItem>
-                      <SelectItem value="belice">Belice</SelectItem>
-                      <SelectItem value="bolivia">Bolivia</SelectItem>
-                      <SelectItem value="bosnia">Bosnia y Herzegovina</SelectItem>
-                      <SelectItem value="brasil">Brasil</SelectItem>
-                      <SelectItem value="bulgaria">Bulgaria</SelectItem>
-                      <SelectItem value="canada">Canadá</SelectItem>
-                      <SelectItem value="chile">Chile</SelectItem>
-                      <SelectItem value="china">China</SelectItem>
-                      <SelectItem value="chipre">Chipre</SelectItem>
-                      <SelectItem value="colombia">Colombia</SelectItem>
-                      <SelectItem value="corea_del_sur">Corea del Sur</SelectItem>
-                      <SelectItem value="costa_rica">Costa Rica</SelectItem>
-                      <SelectItem value="croacia">Croacia</SelectItem>
-                      <SelectItem value="cuba">Cuba</SelectItem>
-                      <SelectItem value="dinamarca">Dinamarca</SelectItem>
-                      <SelectItem value="ecuador">Ecuador</SelectItem>
-                      <SelectItem value="egipto">Egipto</SelectItem>
-                      <SelectItem value="el_salvador">El Salvador</SelectItem>
-                      <SelectItem value="emiratos_arabes">Emiratos Árabes Unidos</SelectItem>
-                      <SelectItem value="eslovaquia">Eslovaquia</SelectItem>
-                      <SelectItem value="eslovenia">Eslovenia</SelectItem>
-                      <SelectItem value="españa">España</SelectItem>
-                      <SelectItem value="estados_unidos">Estados Unidos</SelectItem>
-                      <SelectItem value="estonia">Estonia</SelectItem>
-                      <SelectItem value="etiopia">Etiopía</SelectItem>
-                      <SelectItem value="filipinas">Filipinas</SelectItem>
-                      <SelectItem value="finlandia">Finlandia</SelectItem>
-                      <SelectItem value="francia">Francia</SelectItem>
-                      <SelectItem value="georgia">Georgia</SelectItem>
-                      <SelectItem value="ghana">Ghana</SelectItem>
-                      <SelectItem value="grecia">Grecia</SelectItem>
-                      <SelectItem value="guatemala">Guatemala</SelectItem>
-                      <SelectItem value="guinea">Guinea</SelectItem>
-                      <SelectItem value="haiti">Haití</SelectItem>
-                      <SelectItem value="honduras">Honduras</SelectItem>
-                      <SelectItem value="hongkong">Hong Kong</SelectItem>
-                      <SelectItem value="hungria">Hungría</SelectItem>
-                      <SelectItem value="india">India</SelectItem>
-                      <SelectItem value="indonesia">Indonesia</SelectItem>
-                      <SelectItem value="iran">Irán</SelectItem>
-                      <SelectItem value="iraq">Iraq</SelectItem>
-                      <SelectItem value="irlanda">Irlanda</SelectItem>
-                      <SelectItem value="islandia">Islandia</SelectItem>
-                      <SelectItem value="israel">Israel</SelectItem>
-                      <SelectItem value="italia">Italia</SelectItem>
-                      <SelectItem value="jamaica">Jamaica</SelectItem>
-                      <SelectItem value="japon">Japón</SelectItem>
-                      <SelectItem value="jordania">Jordania</SelectItem>
-                      <SelectItem value="kazajistan">Kazajistán</SelectItem>
-                      <SelectItem value="kenia">Kenia</SelectItem>
-                      <SelectItem value="kuwait">Kuwait</SelectItem>
-                      <SelectItem value="letonia">Letonia</SelectItem>
-                      <SelectItem value="libano">Líbano</SelectItem>
-                      <SelectItem value="lituania">Lituania</SelectItem>
-                      <SelectItem value="luxemburgo">Luxemburgo</SelectItem>
-                      <SelectItem value="macedonia">Macedonia del Norte</SelectItem>
-                      <SelectItem value="malasia">Malasia</SelectItem>
-                      <SelectItem value="malta">Malta</SelectItem>
-                      <SelectItem value="marruecos">Marruecos</SelectItem>
-                      <SelectItem value="mexico">México</SelectItem>
-                      <SelectItem value="moldova">Moldova</SelectItem>
-                      <SelectItem value="monaco">Mónaco</SelectItem>
-                      <SelectItem value="montenegro">Montenegro</SelectItem>
-                      <SelectItem value="nicaragua">Nicaragua</SelectItem>
-                      <SelectItem value="nigeria">Nigeria</SelectItem>
-                      <SelectItem value="noruega">Noruega</SelectItem>
-                      <SelectItem value="nueva_zelanda">Nueva Zelanda</SelectItem>
-                      <SelectItem value="paises_bajos">Países Bajos</SelectItem>
-                      <SelectItem value="pakistan">Pakistán</SelectItem>
-                      <SelectItem value="panama">Panamá</SelectItem>
-                      <SelectItem value="paraguay">Paraguay</SelectItem>
-                      <SelectItem value="peru">Perú</SelectItem>
-                      <SelectItem value="polonia">Polonia</SelectItem>
-                      <SelectItem value="portugal">Portugal</SelectItem>
-                      <SelectItem value="qatar">Qatar</SelectItem>
-                      <SelectItem value="reino_unido">Reino Unido</SelectItem>
-                      <SelectItem value="republica_checa">República Checa</SelectItem>
-                      <SelectItem value="republica_dominicana">República Dominicana</SelectItem>
-                      <SelectItem value="rumania">Rumania</SelectItem>
-                      <SelectItem value="rusia">Rusia</SelectItem>
-                      <SelectItem value="serbia">Serbia</SelectItem>
-                      <SelectItem value="singapur">Singapur</SelectItem>
-                      <SelectItem value="sudafrica">Sudáfrica</SelectItem>
-                      <SelectItem value="suecia">Suecia</SelectItem>
-                      <SelectItem value="suiza">Suiza</SelectItem>
-                      <SelectItem value="tailandia">Tailandia</SelectItem>
-                      <SelectItem value="taiwan">Taiwán</SelectItem>
-                      <SelectItem value="tunez">Túnez</SelectItem>
-                      <SelectItem value="turquia">Turquía</SelectItem>
-                      <SelectItem value="ucrania">Ucrania</SelectItem>
-                      <SelectItem value="uruguay">Uruguay</SelectItem>
-                      <SelectItem value="venezuela">Venezuela</SelectItem>
-                      <SelectItem value="vietnam">Vietnam</SelectItem>
+                    <SelectContent className="max-h-[300px] bg-white border border-gray-200 rounded-md shadow-lg p-0 overflow-y-auto w-full min-w-[var(--radix-select-trigger-width)]">
+                      <SelectItem value="afganistan" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Afganistán</SelectItem>
+                      <SelectItem value="albania" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Albania</SelectItem>
+                      <SelectItem value="alemania" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Alemania</SelectItem>
+                      <SelectItem value="andorra" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Andorra</SelectItem>
+                      <SelectItem value="angola" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Angola</SelectItem>
+                      <SelectItem value="argentina" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Argentina</SelectItem>
+                      <SelectItem value="armenia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Armenia</SelectItem>
+                      <SelectItem value="australia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Australia</SelectItem>
+                      <SelectItem value="austria" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Austria</SelectItem>
+                      <SelectItem value="azerbaiyan" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Azerbaiyán</SelectItem>
+                      <SelectItem value="bahamas" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Bahamas</SelectItem>
+                      <SelectItem value="bangladesh" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Bangladesh</SelectItem>
+                      <SelectItem value="barbados" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Barbados</SelectItem>
+                      <SelectItem value="belgica" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Bélgica</SelectItem>
+                      <SelectItem value="belice" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Belice</SelectItem>
+                      <SelectItem value="bolivia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Bolivia</SelectItem>
+                      <SelectItem value="bosnia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Bosnia y Herzegovina</SelectItem>
+                      <SelectItem value="brasil" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Brasil</SelectItem>
+                      <SelectItem value="bulgaria" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Bulgaria</SelectItem>
+                      <SelectItem value="canada" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Canadá</SelectItem>
+                      <SelectItem value="chile" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Chile</SelectItem>
+                      <SelectItem value="china" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">China</SelectItem>
+                      <SelectItem value="chipre" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Chipre</SelectItem>
+                      <SelectItem value="colombia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Colombia</SelectItem>
+                      <SelectItem value="corea_del_sur" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Corea del Sur</SelectItem>
+                      <SelectItem value="costa_rica" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Costa Rica</SelectItem>
+                      <SelectItem value="croacia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Croacia</SelectItem>
+                      <SelectItem value="cuba" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Cuba</SelectItem>
+                      <SelectItem value="dinamarca" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Dinamarca</SelectItem>
+                      <SelectItem value="ecuador" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Ecuador</SelectItem>
+                      <SelectItem value="egipto" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Egipto</SelectItem>
+                      <SelectItem value="el_salvador" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">El Salvador</SelectItem>
+                      <SelectItem value="emiratos_arabes" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Emiratos Árabes Unidos</SelectItem>
+                      <SelectItem value="eslovaquia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Eslovaquia</SelectItem>
+                      <SelectItem value="eslovenia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Eslovenia</SelectItem>
+                      <SelectItem value="españa" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">España</SelectItem>
+                      <SelectItem value="estados_unidos" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Estados Unidos</SelectItem>
+                      <SelectItem value="estonia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Estonia</SelectItem>
+                      <SelectItem value="etiopia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Etiopía</SelectItem>
+                      <SelectItem value="filipinas" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Filipinas</SelectItem>
+                      <SelectItem value="finlandia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Finlandia</SelectItem>
+                      <SelectItem value="francia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Francia</SelectItem>
+                      <SelectItem value="georgia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Georgia</SelectItem>
+                      <SelectItem value="ghana" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Ghana</SelectItem>
+                      <SelectItem value="grecia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Grecia</SelectItem>
+                      <SelectItem value="guatemala" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Guatemala</SelectItem>
+                      <SelectItem value="guinea" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Guinea</SelectItem>
+                      <SelectItem value="haiti" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Haití</SelectItem>
+                      <SelectItem value="honduras" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Honduras</SelectItem>
+                      <SelectItem value="hongkong" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Hong Kong</SelectItem>
+                      <SelectItem value="hungria" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Hungría</SelectItem>
+                      <SelectItem value="india" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">India</SelectItem>
+                      <SelectItem value="indonesia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Indonesia</SelectItem>
+                      <SelectItem value="iran" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Irán</SelectItem>
+                      <SelectItem value="iraq" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Iraq</SelectItem>
+                      <SelectItem value="irlanda" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Irlanda</SelectItem>
+                      <SelectItem value="islandia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Islandia</SelectItem>
+                      <SelectItem value="israel" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Israel</SelectItem>
+                      <SelectItem value="italia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Italia</SelectItem>
+                      <SelectItem value="jamaica" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Jamaica</SelectItem>
+                      <SelectItem value="japon" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Japón</SelectItem>
+                      <SelectItem value="jordania" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Jordania</SelectItem>
+                      <SelectItem value="kazajistan" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Kazajistán</SelectItem>
+                      <SelectItem value="kenia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Kenia</SelectItem>
+                      <SelectItem value="kuwait" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Kuwait</SelectItem>
+                      <SelectItem value="letonia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Letonia</SelectItem>
+                      <SelectItem value="libano" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Líbano</SelectItem>
+                      <SelectItem value="lituania" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Lituania</SelectItem>
+                      <SelectItem value="luxemburgo" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Luxemburgo</SelectItem>
+                      <SelectItem value="macedonia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Macedonia del Norte</SelectItem>
+                      <SelectItem value="malasia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Malasia</SelectItem>
+                      <SelectItem value="malta" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Malta</SelectItem>
+                      <SelectItem value="marruecos" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Marruecos</SelectItem>
+                      <SelectItem value="mexico" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">México</SelectItem>
+                      <SelectItem value="moldova" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Moldova</SelectItem>
+                      <SelectItem value="monaco" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Mónaco</SelectItem>
+                      <SelectItem value="montenegro" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Montenegro</SelectItem>
+                      <SelectItem value="nicaragua" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Nicaragua</SelectItem>
+                      <SelectItem value="nigeria" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Nigeria</SelectItem>
+                      <SelectItem value="noruega" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Noruega</SelectItem>
+                      <SelectItem value="nueva_zelanda" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Nueva Zelanda</SelectItem>
+                      <SelectItem value="paises_bajos" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Países Bajos</SelectItem>
+                      <SelectItem value="pakistan" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Pakistán</SelectItem>
+                      <SelectItem value="panama" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Panamá</SelectItem>
+                      <SelectItem value="paraguay" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Paraguay</SelectItem>
+                      <SelectItem value="peru" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Perú</SelectItem>
+                      <SelectItem value="polonia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Polonia</SelectItem>
+                      <SelectItem value="portugal" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Portugal</SelectItem>
+                      <SelectItem value="qatar" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Qatar</SelectItem>
+                      <SelectItem value="reino_unido" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Reino Unido</SelectItem>
+                      <SelectItem value="republica_checa" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">República Checa</SelectItem>
+                      <SelectItem value="republica_dominicana" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">República Dominicana</SelectItem>
+                      <SelectItem value="rumania" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Rumania</SelectItem>
+                      <SelectItem value="rusia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Rusia</SelectItem>
+                      <SelectItem value="serbia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Serbia</SelectItem>
+                      <SelectItem value="singapur" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Singapur</SelectItem>
+                      <SelectItem value="sudafrica" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Sudáfrica</SelectItem>
+                      <SelectItem value="suecia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Suecia</SelectItem>
+                      <SelectItem value="suiza" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Suiza</SelectItem>
+                      <SelectItem value="tailandia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Tailandia</SelectItem>
+                      <SelectItem value="taiwan" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Taiwán</SelectItem>
+                      <SelectItem value="tunez" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Túnez</SelectItem>
+                      <SelectItem value="turquia" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Turquía</SelectItem>
+                      <SelectItem value="ucrania" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Ucrania</SelectItem>
+                      <SelectItem value="uruguay" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Uruguay</SelectItem>
+                      <SelectItem value="venezuela" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Venezuela</SelectItem>
+                      <SelectItem value="vietnam" className="px-3 py-2.5 text-sm text-gray-900 hover:bg-gray-50 cursor-pointer border-0 focus:bg-gray-50">Vietnam</SelectItem>
                     </SelectContent>
                   </Select>
                   <Input
