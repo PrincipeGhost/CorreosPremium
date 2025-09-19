@@ -135,15 +135,17 @@
     text-transform: uppercase;
   }
 
-  /* Correos.es style dropdown - removes shadcn styling */
+  /* Correos.es style dropdown - aggressive override of shadcn */
   .correos-select-content {
     background: white !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 8px !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 6px !important;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-    padding: 4px !important;
+    padding: 2px !important;
     max-height: 300px !important;
     overflow-y: auto !important;
+    z-index: 50 !important;
+    color: #374151 !important;
   }
 
   .correos-select-item {
@@ -152,20 +154,31 @@
     cursor: pointer !important;
     user-select: none !important;
     align-items: center !important;
-    border-radius: 4px !important;
-    padding: 10px 12px !important;
+    border-radius: 3px !important;
+    padding: 8px 12px !important;
     font-size: 14px !important;
-    color: #111827 !important;
+    color: #374151 !important;
+    background: transparent !important;
     outline: none !important;
     position: relative !important;
+    border: none !important;
+    text-decoration: none !important;
+    font-weight: 400 !important;
   }
 
   .correos-select-item:hover {
-    background-color: #f9fafb !important;
+    background-color: #f3f4f6 !important;
+    color: #374151 !important;
   }
 
   .correos-select-item:focus {
-    background-color: #f9fafb !important;
+    background-color: #f3f4f6 !important;
+    color: #374151 !important;
+  }
+
+  .correos-select-item[data-state="checked"] {
+    background-color: #f3f4f6 !important;
+    color: #374151 !important;
   }
 
   /* Hide the check icon completely */
@@ -173,9 +186,35 @@
     display: none !important;
   }
 
-  /* Ensure text is properly aligned */
+  /* Ensure text is properly aligned and styled */
   .correos-select-item [data-radix-select-item-text] {
     flex: 1 !important;
     text-align: left !important;
+    color: #374151 !important;
+    font-weight: 400 !important;
+  }
+
+  /* Override any blue accent colors */
+  .correos-select-content * {
+    color: #374151 !important;
+  }
+
+  /* Ensure scrollbar styling matches */
+  .correos-select-content::-webkit-scrollbar {
+    width: 8px !important;
+  }
+
+  .correos-select-content::-webkit-scrollbar-track {
+    background: #f3f4f6 !important;
+    border-radius: 3px !important;
+  }
+
+  .correos-select-content::-webkit-scrollbar-thumb {
+    background: #d1d5db !important;
+    border-radius: 3px !important;
+  }
+
+  .correos-select-content::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af !important;
   }
 }
