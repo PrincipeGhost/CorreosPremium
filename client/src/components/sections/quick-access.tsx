@@ -56,11 +56,7 @@ export default function QuickAccess() {
                 className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-600 hover:shadow-md transition-all"
                 data-testid="quick-link-offices"
               >
-                <img 
-                  src="/attached_assets/image_1754314540403.png" 
-                  alt="Localiza oficinas"
-                  className="w-8 h-8 mr-4 object-contain"
-                />
+                <MapPin className="w-8 h-8 mr-4 text-blue-600" />
                 <div>
                   <h4 className="font-semibold">Localiza oficinas, buzones y Citypaq</h4>
                   <p className="text-sm text-gray-600">
@@ -73,11 +69,7 @@ export default function QuickAccess() {
                 className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-600 hover:shadow-md transition-all"
                 data-testid="quick-link-contact"
               >
-                <img 
-                  src="/attached_assets/image_1754314575709.png" 
-                  alt="Códigos postales"
-                  className="w-8 h-8 mr-4 object-contain"
-                />
+                <Mail className="w-8 h-8 mr-4 text-blue-600" />
                 <div>
                   <h4 className="font-semibold">Encuentra códigos postales</h4>
                   <p className="text-sm text-gray-600">
@@ -90,11 +82,7 @@ export default function QuickAccess() {
                 className="flex items-center p-4 border border-gray-200 rounded-lg hover:border-blue-600 hover:shadow-md transition-all"
                 data-testid="quick-link-email-verify"
               >
-                <img 
-                  src="/attached_assets/image_1754314594642.png" 
-                  alt="Verificador de email"
-                  className="w-8 h-8 mr-4 object-contain"
-                />
+                <Phone className="w-8 h-8 mr-4 text-blue-600" />
                 <div>
                   <h4 className="font-semibold">Verificador de email</h4>
                   <p className="text-sm text-gray-600">
