@@ -159,7 +159,8 @@ export default function TrackingHero() {
                     <Input
                       value="España"
                       disabled
-                      className="w-full h-12 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10"
+                      className="w-full h-12 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10 border-b-2 border-b-yellow-400"
+                      style={{ borderBottomColor: '#FFD700' }}
                     />
                     <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                   </div>
@@ -168,7 +169,8 @@ export default function TrackingHero() {
                     placeholder="Código postal*"
                     value={originPostalCode}
                     onChange={(e) => setOriginPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md"
+                    className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400"
+                    style={{ borderBottomColor: '#FFD700' }}
                     data-testid="origin-postal-code"
                   />
                 </div>
@@ -180,7 +182,7 @@ export default function TrackingHero() {
                 </label>
                 <div className="space-y-2">
                   <Select value={destinationCountry} onValueChange={setDestinationCountry}>
-                    <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md">
+                    <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400" style={{ borderBottomColor: '#FFD700' }}>
                       <SelectValue placeholder="País*" />
                     </SelectTrigger>
                     <SelectContent>
@@ -196,7 +198,8 @@ export default function TrackingHero() {
                     placeholder="Código postal"
                     value={destinationPostalCode}
                     onChange={(e) => setDestinationPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md"
+                    className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400"
+                    style={{ borderBottomColor: '#FFD700' }}
                     data-testid="destination-postal-code"
                   />
                 </div>
