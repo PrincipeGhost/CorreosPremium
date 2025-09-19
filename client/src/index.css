@@ -146,8 +146,8 @@
     overflow-y: auto !important;
     z-index: 50 !important;
     color: #1e40af !important;
-    transform-origin: var(--radix-select-content-transform-origin) !important;
-    animation: none !important;
+    position: relative !important;
+    top: 2px !important;
   }
 
   .correos-select-item {
