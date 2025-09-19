@@ -134,4 +134,48 @@
     letter-spacing: 0.005em;
     text-transform: uppercase;
   }
+
+  /* Correos.es style dropdown - removes shadcn styling */
+  .correos-select-content {
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    padding: 4px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+  }
+
+  .correos-select-item {
+    display: flex !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    user-select: none !important;
+    align-items: center !important;
+    border-radius: 4px !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    color: #111827 !important;
+    outline: none !important;
+    position: relative !important;
+  }
+
+  .correos-select-item:hover {
+    background-color: #f9fafb !important;
+  }
+
+  .correos-select-item:focus {
+    background-color: #f9fafb !important;
+  }
+
+  /* Hide the check icon completely */
+  .correos-select-item > span:first-child {
+    display: none !important;
+  }
+
+  /* Ensure text is properly aligned */
+  .correos-select-item [data-radix-select-item-text] {
+    flex: 1 !important;
+    text-align: left !important;
+  }
 }
