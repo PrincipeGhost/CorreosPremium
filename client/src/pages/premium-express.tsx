@@ -173,6 +173,113 @@ export default function PremiumExpressPage() {
             </div>
           </div>
         </section>
+
+        {/* Como enviar un Paq Premium, paso a paso */}
+        <section className="bg-gray-100 py-8 px-4">
+          <div className="max-w-md mx-auto">
+            <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-como-enviar">
+              Como enviar un Paq Premium, paso a paso
+            </h2>
+            
+            {/* Mockup del proceso */}
+            <div className="bg-white rounded-lg p-6 mb-6 shadow-sm" data-testid="mockup-proceso">
+              <div className="text-center mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-400 rounded-full mb-4">
+                  <span className="text-2xl font-bold text-black">📱</span>
+                </div>
+                <p className="text-gray-600 text-sm">Paq Premium | Correos</p>
+                <p className="text-gray-900 font-semibold">Correos</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold mb-2">
+                  1
+                </div>
+                <h3 className="font-semibold text-gray-900" data-testid="step-describe-envios">
+                  Describe tus envíos
+                </h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Lo que necesitas saber para enviar un paquete */}
+        <section className="bg-white py-8 px-4">
+          <div className="max-w-md mx-auto">
+            <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-necesitas-saber">
+              Lo que necesitas saber para enviar un paquete
+            </h2>
+            
+            {/* Artículos prohibidos */}
+            <div className="border-b border-gray-200 pb-6 mb-6" data-testid="info-articulos-prohibidos">
+              <h3 className="font-semibold text-gray-900 mb-2">
+                Artículos prohibidos y mercancías peligrosas
+              </h3>
+              <p className="text-gray-700 text-sm mb-3">
+                ¿Vas a preparar tu próximo envío? Consulta aquí los artículos que no puedes enviar.
+              </p>
+              <Button 
+                variant="outline"
+                className="text-blue-600 border-blue-600 hover:bg-blue-50"
+                data-testid="button-mas-info-prohibidos"
+              >
+                MÁS INFO
+              </Button>
+            </div>
+            
+            {/* Guía de peso y medidas */}
+            <div className="border-b border-gray-200 pb-6 mb-6" data-testid="info-peso-medidas">
+              <h3 className="font-semibold text-gray-900 mb-2">
+                Guía de peso y medidas
+              </h3>
+              <p className="text-gray-700 text-sm mb-3">
+                Antes de realizar tu envío, revisa aquí que cumpla con las medidas y pesos adecuados.
+              </p>
+              <Button 
+                variant="outline"
+                className="text-blue-600 border-blue-600 hover:bg-blue-50"
+                data-testid="button-mas-info-peso"
+              >
+                MÁS INFO
+              </Button>
+            </div>
+            
+            {/* Consejos embalaje */}
+            <div className="border-b border-gray-200 pb-6 mb-6" data-testid="info-embalaje">
+              <h3 className="font-semibold text-gray-900 mb-2">
+                Consejos para un buen embalaje
+              </h3>
+              <p className="text-gray-700 text-sm mb-3">
+                ¿Tienes dudas sobre cómo preparar tu paquete para enviarlo? 
+                Aquí te contamos todo para que consigas un embalaje perfecto.
+              </p>
+              <Button 
+                variant="outline"
+                className="text-blue-600 border-blue-600 hover:bg-blue-50"
+                data-testid="button-mas-info-embalaje"
+              >
+                MÁS INFO
+              </Button>
+            </div>
+            
+            {/* Coberturas y garantías */}
+            <div className="pb-6" data-testid="info-coberturas">
+              <h3 className="font-semibold text-gray-900 mb-2">
+                Coberturas y garantías del envío
+              </h3>
+              <p className="text-gray-700 text-sm mb-3">
+                Aquí podrás consultar las garantías y coberturas que incluye tu envío.
+              </p>
+              <Button 
+                variant="outline"
+                className="text-blue-600 border-blue-600 hover:bg-blue-50"
+                data-testid="button-mas-info-coberturas"
+              >
+                MÁS INFO
+              </Button>
+            </div>
+          </div>
+        </section>
       </main>
       
       {/* Banner inferior fijo */}
