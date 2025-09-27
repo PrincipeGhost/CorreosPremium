@@ -14,50 +14,50 @@ export default function Footer() {
 
   return (
     <footer className="bg-white">
-      <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top section with social media, app downloads and payment methods */}
         <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:py-8">
           {/* Social Media */}
           <div className="py-5 border-b border-gray-200 lg:border-b-0 lg:py-0">
             <p className="text-sm text-gray-700 mb-3 lg:mb-4" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Síguenos</p>
             <div className="flex space-x-5 justify-start">
-            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-facebook">
-              <Facebook className="w-6 h-6" />
-            </a>
-            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-instagram">
-              <Instagram className="w-6 h-6" />
-            </a>
-            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-twitter">
-              <Twitter className="w-6 h-6" />
-            </a>
-            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-linkedin">
-              <Linkedin className="w-6 h-6" />
-            </a>
-            <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-youtube">
-              <Youtube className="w-6 h-6" />
-            </a>
+              <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-facebook">
+                <Facebook className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-instagram">
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-twitter">
+                <Twitter className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-linkedin">
+                <Linkedin className="w-6 h-6" />
+              </a>
+              <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-youtube">
+                <Youtube className="w-6 h-6" />
+              </a>
+            </div>
           </div>
-        </div>
 
-        {/* App Downloads */}
-        <div className="py-4 border-b border-gray-200">
-          <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Descarga la App de Correos</p>
-          <div className="flex space-x-3">
-            <img 
-              src="/app-store.png" 
-              alt="Descargar en App Store"
-              className="h-9 w-auto object-contain"
-            />
-            <img 
-              src="/google-play.png" 
-              alt="Disponible en Google Play"
-              className="h-9 w-auto object-contain"
-            />
+          {/* App Downloads */}
+          <div className="py-4 border-b border-gray-200 lg:border-b-0 lg:py-0">
+            <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Descarga la App de Correos</p>
+            <div className="flex space-x-3">
+              <img 
+                src="/app-store.png" 
+                alt="Descargar en App Store"
+                className="h-9 w-auto object-contain"
+              />
+              <img 
+                src="/google-play.png" 
+                alt="Disponible en Google Play"
+                className="h-9 w-auto object-contain"
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Payment Methods */}
-        <div className="py-4 border-b border-gray-200">
+          {/* Payment Methods */}
+          <div className="py-4 border-b border-gray-200 lg:border-b-0 lg:py-0">
           <p className="text-sm text-gray-700 mb-3" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Métodos de pago</p>
           <div className="flex flex-wrap gap-2 mb-4">
             <div className="bg-white rounded border border-gray-200 px-3 py-2 flex items-center justify-center min-w-[60px] h-9">
@@ -121,6 +121,7 @@ export default function Footer() {
               style={{ imageRendering: 'crisp-edges' }}
             />
           </div>
+        </div>
         </div>
 
         {/* Collapsible Sections */}
