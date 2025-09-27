@@ -32,8 +32,8 @@ export default function PremiumExpressPage() {
       <Header />
       <main className="pb-20">
         {/* Sección Principal Paq Premium */}
-        <section className="bg-gray-100 py-8 px-4">
-          <div className="max-w-md mx-auto">
+        <section className="bg-gray-100 py-12 px-4">
+          <div className="max-w-3xl mx-auto">
             <h1 className="text-2xl font-bold text-gray-900 mb-2" data-testid="title-paq-premium">
               Paq Premium
             </h1>
@@ -77,24 +77,24 @@ export default function PremiumExpressPage() {
             </div>
             
             {/* Precio y botón */}
-            <div className="text-center mb-8">
-              <div className="mb-4">
-                <p className="text-gray-600 text-sm mb-1" data-testid="text-desde">Desde</p>
-                <p className="text-4xl font-bold text-gray-900" data-testid="price-premium">14,88 €</p>
+            <div className="bg-white rounded-lg p-6 text-center shadow-sm">
+              <div className="mb-6">
+                <p className="text-gray-600 text-base mb-2" data-testid="text-desde">Desde</p>
+                <p className="text-5xl font-bold text-gray-900 mb-4" data-testid="price-premium">14,88 €</p>
+                <Button 
+                  className="w-48 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-4 text-lg rounded-md"
+                  data-testid="button-enviar-main"
+                >
+                  ENVIAR
+                </Button>
               </div>
-              <Button 
-                className="w-40 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 rounded-md"
-                data-testid="button-enviar-main"
-              >
-                ENVIAR
-              </Button>
             </div>
           </div>
         </section>
 
         {/* Servicios adicionales */}
-        <section className="bg-white py-8 px-4">
-          <div className="max-w-md mx-auto">
+        <section className="bg-white py-12 px-4">
+          <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-servicios-adicionales">
               Servicios adicionales
             </h2>
@@ -175,37 +175,104 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Como enviar un Paq Premium, paso a paso */}
-        <section className="bg-gray-100 py-8 px-4">
-          <div className="max-w-md mx-auto">
+        <section className="bg-gray-100 py-12 px-4">
+          <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-como-enviar">
               Como enviar un Paq Premium, paso a paso
             </h2>
             
-            {/* Mockup del proceso */}
-            <div className="bg-white rounded-lg p-6 mb-6 shadow-sm" data-testid="mockup-proceso">
-              <div className="text-center mb-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-400 rounded-full mb-4">
-                  <span className="text-2xl font-bold text-black">📱</span>
+            {/* Proceso paso a paso */}
+            <div className="grid md:grid-cols-2 gap-8" data-testid="proceso-completo">
+              {/* Mockup de la interfaz */}
+              <div className="bg-white rounded-lg p-6 shadow-sm border">
+                {/* Header del mockup */}
+                <div className="bg-gray-50 rounded-t-lg p-4 mb-4 border-b">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                      <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                      <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                    </div>
+                    <div className="text-xs text-gray-500">correos.es</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="inline-flex items-center space-x-2 mb-2">
+                      <div className="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center">
+                        <span className="text-xs font-bold">📦</span>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-900">Paq Premium | Correos</span>
+                    </div>
+                    <p className="text-xs text-gray-600">Correos</p>
+                  </div>
                 </div>
-                <p className="text-gray-600 text-sm">Paq Premium | Correos</p>
-                <p className="text-gray-900 font-semibold">Correos</p>
+                
+                {/* Información del producto */}
+                <div className="space-y-3">
+                  <div className="border-b pb-3">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-2">Información del producto</h4>
+                    <div className="bg-gray-50 p-3 rounded text-xs text-gray-600 space-y-1">
+                      <div className="flex justify-between"><span>Descripción</span><span>✓</span></div>
+                      <div className="flex justify-between"><span>Detalles de envío</span><span>✓</span></div>
+                      <div className="flex justify-between"><span>Garantías y plazos</span><span>-</span></div>
+                      <div className="flex justify-between"><span>Precio</span><span>-</span></div>
+                    </div>
+                  </div>
+                </div>
               </div>
               
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold mb-2">
-                  1
+              {/* Pasos del proceso */}
+              <div className="space-y-6">
+                {/* Paso 1 */}
+                <div className="flex items-start space-x-4" data-testid="step-1">
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    1
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Describe tus envíos</h3>
+                    <p className="text-gray-600 text-sm">Completa los datos del origen, destino y características de tu paquete</p>
+                  </div>
                 </div>
-                <h3 className="font-semibold text-gray-900" data-testid="step-describe-envios">
-                  Describe tus envíos
-                </h3>
+                
+                {/* Paso 2 */}
+                <div className="flex items-start space-x-4" data-testid="step-2">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-lg">
+                    2
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Elige servicios adicionales</h3>
+                    <p className="text-gray-600 text-sm">Selecciona PEE, seguros o reembolso según tus necesidades</p>
+                  </div>
+                </div>
+                
+                {/* Paso 3 */}
+                <div className="flex items-start space-x-4" data-testid="step-3">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-lg">
+                    3
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Confirma y paga</h3>
+                    <p className="text-gray-600 text-sm">Revisa los datos y realiza el pago de forma segura</p>
+                  </div>
+                </div>
+                
+                {/* Paso 4 */}
+                <div className="flex items-start space-x-4" data-testid="step-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-lg">
+                    4
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Imprime etiqueta</h3>
+                    <p className="text-gray-600 text-sm">Descarga e imprime la etiqueta para tu envío</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Lo que necesitas saber para enviar un paquete */}
-        <section className="bg-white py-8 px-4">
-          <div className="max-w-md mx-auto">
+        <section className="bg-white py-12 px-4">
+          <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-necesitas-saber">
               Lo que necesitas saber para enviar un paquete
             </h2>
@@ -284,7 +351,7 @@ export default function PremiumExpressPage() {
       
       {/* Banner inferior fijo */}
       <div className="fixed bottom-0 left-0 right-0 bg-yellow-400 p-4 shadow-lg" data-testid="banner-bottom">
-        <div className="flex justify-between items-center max-w-md mx-auto">
+        <div className="flex justify-between items-center max-w-3xl mx-auto px-4">
           <div>
             <p className="font-bold text-black text-sm">Paq Premium</p>
             <p className="font-bold text-black text-sm">Desde 14,88 €</p>
