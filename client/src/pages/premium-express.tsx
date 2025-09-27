@@ -28,7 +28,7 @@ export default function PremiumExpressPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-white">
       <Header />
       <main className="pb-20">
         {/* Sección Principal Paq Premium */}
