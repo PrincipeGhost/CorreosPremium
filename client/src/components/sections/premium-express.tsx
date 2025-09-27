@@ -1,7 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLocation } from "wouter";
 
 export default function PremiumExpress() {
+  const [, setLocation] = useLocation();
+
+  const handleNavigateToPremium = () => {
+    setLocation("/premium-express");
+  };
+
   return (
     <section className="bg-gray-100 py-6">
       <div className="max-w-md mx-auto px-6">
@@ -27,6 +34,7 @@ export default function PremiumExpress() {
             </div>
             
             <Button 
+              onClick={handleNavigateToPremium}
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 text-sm rounded-md"
               data-testid="button-mas-info-premium"
             >
