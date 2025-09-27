@@ -27,7 +27,7 @@ export default function PremiumExpress() {
             </div>
             
             <Button 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 text-sm rounded-md"
+              className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 text-sm rounded-md"
               data-testid="button-mas-info-premium"
             >
               MÁS INFO
