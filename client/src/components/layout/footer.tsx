@@ -63,10 +63,7 @@ export default function Footer() {
                 alt="Mastercard"
                 className="max-h-6 max-w-full object-contain"
                 style={{ 
-                  imageRendering: 'smooth',
-                  filter: 'brightness(1.05) contrast(1.1)',
-                  WebkitFontSmoothing: 'antialiased',
-                  MozOsxFontSmoothing: 'grayscale'
+                  filter: 'brightness(1.05) contrast(1.1)'
                 }}
               />
             </div>
@@ -76,10 +73,7 @@ export default function Footer() {
                 alt="PayPal"
                 className="max-h-6 max-w-full object-contain"
                 style={{ 
-                  imageRendering: 'smooth',
-                  filter: 'brightness(1.05) contrast(1.1)',
-                  WebkitFontSmoothing: 'antialiased',
-                  MozOsxFontSmoothing: 'grayscale'
+                  filter: 'brightness(1.05) contrast(1.1)'
                 }}
               />
             </div>
@@ -89,10 +83,7 @@ export default function Footer() {
                 alt="Maestro"
                 className="max-h-6 max-w-full object-contain"
                 style={{ 
-                  imageRendering: 'smooth',
-                  filter: 'brightness(1.05) contrast(1.1)',
-                  WebkitFontSmoothing: 'antialiased',
-                  MozOsxFontSmoothing: 'grayscale'
+                  filter: 'brightness(1.05) contrast(1.1)'
                 }}
               />
             </div>
@@ -102,10 +93,7 @@ export default function Footer() {
                 alt="Visa"
                 className="max-h-6 max-w-full object-contain"
                 style={{ 
-                  imageRendering: 'smooth',
-                  filter: 'brightness(1.05) contrast(1.1)',
-                  WebkitFontSmoothing: 'antialiased',
-                  MozOsxFontSmoothing: 'grayscale'
+                  filter: 'brightness(1.05) contrast(1.1)'
                 }}
               />
             </div>
@@ -115,10 +103,7 @@ export default function Footer() {
                 alt="American Express"
                 className="max-h-6 max-w-full object-contain"
                 style={{ 
-                  imageRendering: 'smooth',
-                  filter: 'brightness(1.05) contrast(1.1)',
-                  WebkitFontSmoothing: 'antialiased',
-                  MozOsxFontSmoothing: 'grayscale'
+                  filter: 'brightness(1.05) contrast(1.1)'
                 }}
               />
             </div>

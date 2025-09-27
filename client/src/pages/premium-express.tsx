@@ -1,21 +1,33 @@
+import { useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import PremiumExpress from "@/components/sections/premium-express";
 
 export default function PremiumExpressPage() {
+  useEffect(() => {
+    // Set page title
+    document.title = "Premium Express - Envíos Seguros y Rápidos";
+    
+    // Set meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Premium Express de Correos - Envíos seguros, rápidos y garantizados en toda España. Gestiona documentos importantes y ventas online de forma segura.');
+    }
+    
+    // Set Open Graph tags
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'Premium Express - Envíos Seguros y Rápidos');
+    }
+    
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', 'Premium Express de Correos - Envíos seguros, rápidos y garantizados en toda España.');
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
-      <title>Premium Express - Envíos Seguros y Rápidos</title>
-      <meta
-        name="description"
-        content="Premium Express de Correos - Envíos seguros, rápidos y garantizados en toda España. Gestiona documentos importantes y ventas online de forma segura."
-      />
-      <meta property="og:title" content="Premium Express - Envíos Seguros y Rápidos" />
-      <meta
-        property="og:description"
-        content="Premium Express de Correos - Envíos seguros, rápidos y garantizados en toda España."
-      />
-      <meta property="og:type" content="website" />
       
       <Header />
       <main>
