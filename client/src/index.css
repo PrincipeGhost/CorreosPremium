@@ -219,4 +219,10 @@
   .correos-select-content::-webkit-scrollbar-thumb:hover {
     background: #9ca3af !important;
   }
+
+  /* Elliptical bottom border radius for Paq Premium block */
+  .elliptical-bottom {
+    border-bottom-left-radius: 50% 12%;
+    border-bottom-right-radius: 50% 12%;
+  }
 }
