@@ -32,7 +32,7 @@ export default function PremiumExpressPage() {
       <Header />
       <main className="pb-20">
         {/* Sección Principal Paq Premium */}
-        <section className="bg-gray-100 py-12 px-4">
+        <section className="bg-gray-100 py-12 px-4" style={{ borderRadius: '0 0 50%/12% 50%/12%' }}>
           <div className="max-w-3xl mx-auto">
             <h1 className="text-2xl font-bold text-gray-900 mb-2" data-testid="title-paq-premium">
               Paq Premium
