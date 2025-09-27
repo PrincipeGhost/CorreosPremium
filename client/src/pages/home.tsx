@@ -4,6 +4,7 @@ import Hero from "@/components/sections/hero";
 import InsuranceHero from "@/components/sections/insurance-hero";
 import TrackingHero from "@/components/sections/tracking-hero";
 import EligeCorreos from "@/components/sections/elige-correos";
+import PremiumExpress from "@/components/sections/premium-express";
 import SiemprePensando from "@/components/sections/siempre-pensando";
 import EsperandoEnvio from "@/components/sections/esperando-envio";
 import QuieresHacerEnvio from "@/components/sections/quieres-hacer-envio";
@@ -44,6 +45,7 @@ export default function Home() {
         <InsuranceHero />
         <TrackingHero />
         <EligeCorreos />
+        <PremiumExpress />
         <SiemprePensando />
         <EsperandoEnvio />
         <QuieresHacerEnvio />
