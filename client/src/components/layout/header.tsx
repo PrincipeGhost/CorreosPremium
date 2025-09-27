@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Link } from "wouter";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,15 +28,17 @@ export default function Header() {
             
             {/* Logo - Left side with proper spacing */}
             <div className="flex items-center">
-              <img 
-                src="/attached_assets/IMG_6692_1754313882088.png"
-                alt="Correos"
-                className="h-9 w-9 object-contain"
-                style={{ 
-                  filter: 'contrast(1.18) saturate(1.1) brightness(0.94)',
-                  imageRendering: 'auto'
-                }}
-              />
+              <Link href="/" className="cursor-pointer" data-testid="logo-link">
+                <img 
+                  src="/attached_assets/IMG_6692_1754313882088.png"
+                  alt="Correos"
+                  className="h-9 w-9 object-contain hover:opacity-80 transition-opacity"
+                  style={{ 
+                    filter: 'contrast(1.18) saturate(1.1) brightness(0.94)',
+                    imageRendering: 'auto'
+                  }}
+                />
+              </Link>
             </div>
 
             {/* Vertical divider */}
