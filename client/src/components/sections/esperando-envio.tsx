@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ChevronRight } from "lucide-react";
 
 export default function EsperandoEnvio() {
   return (
@@ -10,10 +12,19 @@ export default function EsperandoEnvio() {
               ¿Estás esperando un envío?
             </h2>
             
-            <p className="text-sm text-gray-700 leading-relaxed">
+            <p className="text-sm text-gray-700 leading-relaxed mb-6">
               Aquí encontrarás todo lo que necesitas 
               saber sobre el envío que estás esperando.
             </p>
+            
+            <Button 
+              variant="ghost" 
+              className="text-blue-700 hover:text-blue-800 font-bold p-0 h-auto text-sm flex items-center gap-1"
+              data-testid="button-mas-info-esperando"
+            >
+              MÁS INFO
+              <ChevronRight className="w-4 h-4" />
+            </Button>
           </CardContent>
         </Card>
       </div>
