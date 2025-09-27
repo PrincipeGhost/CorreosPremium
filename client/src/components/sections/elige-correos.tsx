@@ -4,8 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function EligeCorreos() {
   return (
     <section className="bg-gray-100 py-6">
-      <div className="max-w-md mx-auto px-6">
-        <Card className="bg-white border-0 rounded-lg shadow-sm">
+      <div className="max-w-md lg:max-w-2xl xl:max-w-4xl mx-auto px-6">
+        <Card className="bg-white border-0 rounded-lg shadow-sm lg:max-w-md lg:mx-auto">
           <CardContent className="p-6">
             <h2 className="text-xl font-bold text-gray-800 mb-4">
               #EligeCorreos

@@ -14,10 +14,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-white">
-      <div className="max-w-md mx-auto px-6">
-        {/* Social Media */}
-        <div className="py-5 border-b border-gray-200">
-          <div className="flex space-x-5 justify-start">
+      <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-6">
+        {/* Top section with social media, app downloads and payment methods */}
+        <div className="lg:grid lg:grid-cols-3 lg:gap-8 lg:py-8">
+          {/* Social Media */}
+          <div className="py-5 border-b border-gray-200 lg:border-b-0 lg:py-0">
+            <p className="text-sm text-gray-700 mb-3 lg:mb-4" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Síguenos</p>
+            <div className="flex space-x-5 justify-start">
             <a href="#" className="text-blue-600 hover:text-blue-700" data-testid="social-facebook">
               <Facebook className="w-6 h-6" />
             </a>
