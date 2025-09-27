@@ -28,7 +28,7 @@ export default function TrackingHero() {
 
   return (
     <div className="bg-gray-100 py-8">
-      <div className="max-w-md mx-auto px-8 space-y-8">
+      <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Main tracking section */}
         <Card className="bg-yellow-400 border-0 rounded-lg">
           <CardContent className="p-6 space-y-5">

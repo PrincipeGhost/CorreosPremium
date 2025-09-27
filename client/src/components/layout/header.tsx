@@ -41,16 +41,47 @@ export default function Header() {
             {/* Vertical divider */}
             <div className="w-px h-8 bg-gray-300 mx-4"></div>
 
-            {/* Menu hamburger - positioned close to logo like Correos.es */}
-            <div className="flex items-center">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-blue-800 hover:text-blue-900 p-2"
-                data-testid="menu-button"
-              >
-                <Menu className="w-7 h-7" />
-              </Button>
+            {/* Mobile menu button - visible only on mobile */}
+            <div className="lg:hidden flex items-center">
+              <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="text-blue-800 hover:text-blue-900 p-2"
+                    data-testid="menu-button"
+                  >
+                    <Menu className="w-7 h-7" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-80">
+                  <nav className="flex flex-col space-y-4 mt-8">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className="text-lg font-medium text-gray-900 hover:text-blue-600 py-2"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </a>
+                    ))}
+                  </nav>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Desktop navigation - visible only on desktop */}
+            <div className="hidden lg:flex items-center space-x-8 ml-8">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors"
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
 
             {/* Spacer to push right items to the end */}
