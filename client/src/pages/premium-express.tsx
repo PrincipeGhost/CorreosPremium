@@ -41,6 +41,9 @@ export default function PremiumExpressPage() {
               Envío adaptado a ti, donde y cuando lo necesites.
             </p>
             
+            {/* Línea divisoria */}
+            <div className="border-b border-gray-300 mb-6"></div>
+            
             {/* Características con checkmarks */}
             <div className="space-y-4 mb-8">
               <div className="flex items-start space-x-3" data-testid="feature-agil">
@@ -84,15 +87,17 @@ export default function PremiumExpressPage() {
             </div>
             
             {/* Precio y botón */}
-            <div className="text-left mt-8">
-              <p className="text-gray-700 text-base mb-1" data-testid="text-desde">Desde</p>
-              <p className="text-5xl font-bold text-gray-900 mb-6" data-testid="price-premium">14,88 €</p>
+            <div className="flex justify-between items-end mt-8">
               <Button 
                 className="w-40 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 text-base rounded-md"
                 data-testid="button-enviar-main"
               >
                 ENVIAR
               </Button>
+              <div className="text-right">
+                <p className="text-gray-700 text-base mb-1" data-testid="text-desde">Desde</p>
+                <p className="text-5xl font-bold text-gray-900" data-testid="price-premium">14,88 €</p>
+              </div>
             </div>
           </div>
         </section>
