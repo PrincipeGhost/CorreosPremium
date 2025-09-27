@@ -163,26 +163,37 @@ export default function ServiceCalculator() {
                 <label className="block text-sm font-medium text-gray-700 mb-4">
                   ¿Qué tamaño y peso tiene tu paquete?
                 </label>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                   {serviceSizes.map((size) => {
-                    const IconComponent = size.icon;
                     return (
                       <div
                         key={size.id}
-                        className={`border rounded-lg p-4 text-center cursor-pointer transition-colors ${
-                          selectedSize === size.id
-                            ? "border-blue-600 bg-blue-50"
-                            : "border-gray-300 hover:border-blue-600"
-                        }`}
+                        className="text-center cursor-pointer transition-all duration-200"
                         onClick={() => setSelectedSize(size.id)}
                         data-testid={`service-size-${size.id}`}
                       >
-                        <div className="w-12 h-12 mb-2 mx-auto flex items-center justify-center">
-                          <IconComponent />
+                        {/* Círculo de selección */}
+                        <div className="relative mb-3">
+                          <div 
+                            className={`w-16 h-16 rounded-full mx-auto flex items-center justify-center transition-all duration-200 ${
+                              selectedSize === size.id
+                                ? "bg-yellow-400 shadow-lg"
+                                : "bg-gray-200 hover:bg-gray-300"
+                            }`}
+                          >
+                            {selectedSize === size.id && (
+                              <div className="w-8 h-8 rounded-full bg-blue-900"></div>
+                            )}
+                            {selectedSize !== size.id && (
+                              <span className="text-gray-600 font-bold text-lg">{size.title}</span>
+                            )}
+                          </div>
                         </div>
-                        <h4 className="font-bold text-lg">{size.title}</h4>
-                        <h5 className="font-semibold text-sm">{size.subtitle}</h5>
-                        <p className="text-xs text-gray-600">
+                        
+                        {/* Información del tamaño */}
+                        <h4 className="font-bold text-lg text-gray-800 mb-1">{size.title}</h4>
+                        <h5 className="font-semibold text-sm text-gray-600 mb-1">{size.subtitle}</h5>
+                        <p className="text-xs text-gray-500">
                           {size.description}
                         </p>
                       </div>
