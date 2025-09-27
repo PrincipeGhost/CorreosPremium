@@ -28,7 +28,7 @@ export default function TrackingHero() {
 
   return (
     <div className="bg-gray-100 py-8">
-      <div className="max-w-md lg:max-w-4xl xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Main tracking section */}
         <Card className="bg-yellow-400 border-0 rounded-lg">
           <CardContent className="p-6 space-y-5">
@@ -56,8 +56,8 @@ export default function TrackingHero() {
               </Button>
             </div>
 
-            {/* Quick access buttons */}
-            <div className="space-y-3">
+            {/* Quick access buttons - responsive grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
               <Button
                 variant="outline"
                 className="w-full justify-start bg-white border-0 h-16 text-gray-800 hover:bg-gray-50"
@@ -70,7 +70,7 @@ export default function TrackingHero() {
                     className="w-6 h-6 object-contain"
                   />
                 </div>
-                Localiza oficinas, buzones y Citypaq
+                <span className="text-sm lg:text-xs xl:text-sm">Localiza oficinas, buzones y Citypaq</span>
               </Button>
 
               <Button
@@ -85,7 +85,7 @@ export default function TrackingHero() {
                     className="w-6 h-6 object-contain"
                   />
                 </div>
-                Encuentra códigos postales
+                <span className="text-sm lg:text-xs xl:text-sm">Encuentra códigos postales</span>
               </Button>
 
               <Button
@@ -100,7 +100,7 @@ export default function TrackingHero() {
                     className="w-6 h-6 object-contain"
                   />
                 </div>
-                Verificador de email
+                <span className="text-sm lg:text-xs xl:text-sm">Verificador de email</span>
               </Button>
             </div>
           </CardContent>

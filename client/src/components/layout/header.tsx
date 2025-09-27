@@ -20,7 +20,7 @@ export default function Header() {
       <div className="bg-yellow-400 h-2"></div>
       
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
             {/* Left spacing */}
             <div className="w-4"></div>
