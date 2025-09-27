@@ -16,7 +16,10 @@ export default function Header() {
 
   return (
     <>
-      <header className="bg-yellow-400 shadow-sm sticky top-0 z-50">
+      {/* Yellow top bar like Correos.es */}
+      <div className="bg-yellow-400 h-2"></div>
+      
+      <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
             {/* Left spacing */}
@@ -45,7 +48,7 @@ export default function Header() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-black hover:text-gray-700 p-2"
+                    className="text-blue-800 hover:text-blue-900 p-2"
                     data-testid="menu-button"
                   >
                     <Menu className="w-7 h-7" />
@@ -89,7 +92,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-black hover:text-gray-700 p-2"
+                className="text-blue-800 hover:text-blue-900 p-2"
                 data-testid="search-button"
               >
                 <Search className="w-5 h-5" />
@@ -98,7 +101,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-black hover:text-gray-700 p-2"
+                className="text-blue-800 hover:text-blue-900 p-2"
                 data-testid="user-button"
               >
                 <User className="w-5 h-5" />
