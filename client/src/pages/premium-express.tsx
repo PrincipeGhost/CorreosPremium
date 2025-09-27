@@ -38,7 +38,7 @@ export default function PremiumExpressPage() {
               Paq Premium
             </h1>
             <p className="text-gray-700 mb-6" data-testid="subtitle-paq-premium">
-              Envío adaptado a ti, dónde y cuándo lo necesites.
+              Envío adaptado a ti, donde y cuando lo necesites.
             </p>
             
             {/* Características con checkmarks */}
@@ -46,32 +46,39 @@ export default function PremiumExpressPage() {
               <div className="flex items-start space-x-3" data-testid="feature-agil">
                 <Check className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="font-semibold text-gray-900">Ágil:</span>
-                  <span className="text-gray-700 ml-1">entrega urgente con todas las garantías.</span>
+                  <span className="font-semibold text-gray-900">Ágil: </span>
+                  <span className="text-gray-700">entrega urgente con todas las garantías.</span>
                 </div>
               </div>
               
               <div className="flex items-start space-x-3" data-testid="feature-cualquier-lugar">
                 <Check className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="font-semibold text-gray-900">Cualquier lugar:</span>
-                  <span className="text-gray-700 ml-1">entregas en domicilio, oficinas de Correos y Citypaq.</span>
+                  <span className="font-semibold text-gray-900">Cualquier lugar: </span>
+                  <span className="text-gray-700">entregas en domicilio, oficinas de Correos y Citypaq.</span>
                 </div>
               </div>
               
-              <div className="flex items-start space-x-3" data-testid="feature-flexible">
+              <div className="flex items-start space-x-3" data-testid="feature-dinero-seguro">
                 <Check className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="font-semibold text-gray-900">Flexible:</span>
-                  <span className="text-gray-700 ml-1">envíos de hasta 30 kg con entrega entre 24 y 48 horas, dependiendo del origen y destino.</span>
+                  <span className="font-semibold text-gray-900">Tu dinero está seguro con nosotros: </span>
+                  <span className="text-gray-700">evita transacciones inseguras, correos se comunica contigo antes de realizar cualquier operación</span>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3" data-testid="feature-abrir-paquete">
+                <Check className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <span className="text-gray-700">Puedes abrir el paquete y probarlo con una garantía de 48 horas antes de firmar el folleto.</span>
                 </div>
               </div>
               
               <div className="flex items-start space-x-3" data-testid="feature-cerca-de-ti">
                 <Check className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="font-semibold text-gray-900">Cerca de ti:</span>
-                  <span className="text-gray-700 ml-1">para envíos nacionales, Andorra y Portugal peninsular.</span>
+                  <span className="font-semibold text-gray-900">Cerca de ti: </span>
+                  <span className="text-gray-700">para envíos nacionales, Andorra, Portugal, Italia y Francia.</span>
                 </div>
               </div>
             </div>
