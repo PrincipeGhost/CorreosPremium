@@ -124,27 +124,39 @@ export default function TrackingHero() {
             </p>
             
             <div className="flex gap-4 mb-4">
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  name="service"
-                  value="paqueteria"
-                  checked={selectedService === "paqueteria"}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
-                />
+              <label 
+                className="flex items-center cursor-pointer"
+                onClick={() => setSelectedService("paqueteria")}
+              >
+                <div 
+                  className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200 ${
+                    selectedService === "paqueteria"
+                      ? "bg-yellow-400"
+                      : "bg-gray-300"
+                  }`}
+                >
+                  {selectedService === "paqueteria" && (
+                    <div className="w-2.5 h-2.5 rounded-full bg-blue-900"></div>
+                  )}
+                </div>
                 <span className="ml-2 text-sm text-gray-900">Paquetería</span>
               </label>
               
-              <label className="flex items-center cursor-pointer">
-                <input
-                  type="radio"
-                  name="service"
-                  value="camino"
-                  checked={selectedService === "camino"}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
-                />
+              <label 
+                className="flex items-center cursor-pointer"
+                onClick={() => setSelectedService("camino")}
+              >
+                <div 
+                  className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-200 ${
+                    selectedService === "camino"
+                      ? "bg-yellow-400"
+                      : "bg-gray-300"
+                  }`}
+                >
+                  {selectedService === "camino" && (
+                    <div className="w-2.5 h-2.5 rounded-full bg-blue-900"></div>
+                  )}
+                </div>
                 <span className="ml-2 text-sm text-gray-900">Camino de Santiago</span>
               </label>
             </div>
