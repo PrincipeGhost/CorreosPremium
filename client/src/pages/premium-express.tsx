@@ -238,66 +238,68 @@ export default function PremiumExpressPage() {
                 data-testid="video-tutorial"
               ></iframe>
             </div>
+          </div>
+        </section>
 
-            {/* Carrusel de pasos */}
-            <div className="bg-yellow-400 rounded-lg px-6 py-12 relative overflow-hidden" data-testid="steps-carousel">
-              {/* Botón anterior */}
-              <button
-                onClick={prevStep}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
-                data-testid="button-prev-step"
-              >
-                <ChevronLeft className="w-5 h-5 text-gray-700" />
-              </button>
+        {/* Carrusel de pasos - Fondo amarillo completo */}
+        <section className="bg-yellow-400 py-12 relative overflow-hidden" data-testid="steps-carousel">
+          {/* Botón anterior */}
+          <button
+            onClick={prevStep}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
+            data-testid="button-prev-step"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-700" />
+          </button>
 
-              {/* Botón siguiente */}
-              <button
-                onClick={nextStep}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
-                data-testid="button-next-step"
-              >
-                <ChevronRight className="w-5 h-5 text-gray-700" />
-              </button>
+          {/* Botón siguiente */}
+          <button
+            onClick={nextStep}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
+            data-testid="button-next-step"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-700" />
+          </button>
 
-              {/* Contenido del paso actual */}
-              <div className="text-center mx-12">
-                {/* Ilustración ovalada */}
-                <div className="w-48 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
-                  {(() => {
-                    const IconComponent = steps[currentStep].icon;
-                    return IconComponent ? <IconComponent className="w-16 h-16 text-blue-600" /> : null;
-                  })()}
-                </div>
-
-                {/* Número del paso */}
-                <div className="text-4xl font-bold text-black mb-4" data-testid={`step-number-${steps[currentStep].number}`}>
-                  {steps[currentStep].number}
-                </div>
-
-                {/* Título */}
-                <h3 className="text-xl font-bold text-black mb-4 leading-tight" data-testid={`step-title-${steps[currentStep].number}`}>
-                  {steps[currentStep].title}
-                </h3>
-
-                {/* Descripción */}
-                <p className="text-black text-base leading-relaxed max-w-md mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
-                  {steps[currentStep].description}
-                </p>
+          {/* Contenido del paso actual */}
+          <div className="max-w-3xl mx-auto px-4">
+            <div className="text-center mx-12">
+              {/* Ilustración ovalada */}
+              <div className="w-48 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+                {(() => {
+                  const IconComponent = steps[currentStep].icon;
+                  return IconComponent ? <IconComponent className="w-16 h-16 text-blue-600" /> : null;
+                })()}
               </div>
 
-              {/* Indicadores de puntos */}
-              <div className="flex justify-center mt-8 space-x-2">
-                {steps.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentStep(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentStep ? 'bg-black' : 'bg-black bg-opacity-30'
-                    }`}
-                    data-testid={`dot-indicator-${index + 1}`}
-                  />
-                ))}
+              {/* Número del paso */}
+              <div className="text-4xl font-bold text-black mb-4" data-testid={`step-number-${steps[currentStep].number}`}>
+                {steps[currentStep].number}
               </div>
+
+              {/* Título */}
+              <h3 className="text-xl font-bold text-black mb-4 leading-tight" data-testid={`step-title-${steps[currentStep].number}`}>
+                {steps[currentStep].title}
+              </h3>
+
+              {/* Descripción */}
+              <p className="text-black text-base leading-relaxed max-w-md mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
+                {steps[currentStep].description}
+              </p>
+            </div>
+
+            {/* Indicadores de puntos */}
+            <div className="flex justify-center mt-8 space-x-2">
+              {steps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentStep(index)}
+                  className={`w-3 h-3 rounded-full transition-colors ${
+                    index === currentStep ? 'bg-black' : 'bg-black bg-opacity-30'
+                  }`}
+                  data-testid={`dot-indicator-${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         </section>
