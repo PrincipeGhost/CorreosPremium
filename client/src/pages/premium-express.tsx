@@ -249,7 +249,7 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
-        <section className="bg-yellow-400 pt-3 pb-12 relative overflow-hidden" data-testid="steps-carousel">
+        <section className="bg-yellow-400 pt-1 pb-12 relative overflow-hidden" data-testid="steps-carousel">
           {/* Botón anterior */}
           <button
             onClick={prevStep}
@@ -272,7 +272,7 @@ export default function PremiumExpressPage() {
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mx-12">
               {/* Ilustración sin fondo */}
-              <div className="mx-auto mb-3 flex items-center justify-center">
+              <div className="mx-auto mb-1 flex items-center justify-center">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
