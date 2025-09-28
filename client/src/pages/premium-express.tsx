@@ -272,7 +272,7 @@ export default function PremiumExpressPage() {
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mx-12">
               {/* Ilustración sin fondo */}
-              <div className="mx-auto mb-2 flex items-center justify-center">
+              <div className="mx-auto mb-0 flex items-center justify-center">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
@@ -281,13 +281,13 @@ export default function PremiumExpressPage() {
               </div>
 
               {/* Número del paso */}
-              <div className="text-4xl font-bold text-black mb-1" data-testid={`step-number-${steps[currentStep].number}`}>
+              <div className="text-4xl font-bold text-black mb-0" data-testid={`step-number-${steps[currentStep].number}`}>
                 {steps[currentStep].number}
               </div>
 
               {/* Título */}
               {steps[currentStep].title && (
-                <h3 className="text-xl font-bold text-black mb-1 leading-tight" data-testid={`step-title-${steps[currentStep].number}`}>
+                <h3 className="text-xl font-bold text-black mb-0 leading-tight" data-testid={`step-title-${steps[currentStep].number}`}>
                   {steps[currentStep].title}
                 </h3>
               )}
@@ -305,7 +305,7 @@ export default function PremiumExpressPage() {
             </div>
 
             {/* Indicadores de puntos */}
-            <div className="flex justify-center mt-4 space-x-2">
+            <div className="flex justify-center mt-2 space-x-2">
               {steps.map((_, index) => (
                 <button
                   key={index}
