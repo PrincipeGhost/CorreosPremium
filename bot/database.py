@@ -31,13 +31,24 @@ class DatabaseManager:
             raise
     
     def initialize_database(self):
-        """Create tables and insert default data"""
+        """Initialize database connection and verify tables exist"""
         try:
             with self.get_connection() as conn:
                 with conn.cursor() as cur:
-                    cur.execute(CREATE_TABLES_SQL)
-                    conn.commit()
-            logger.info("Database initialized successfully")
+                    # Just verify that the required tables exist
+                    cur.execute("""
+                        SELECT table_name 
+                        FROM information_schema.tables 
+                        WHERE table_schema = 'public' 
+                        AND table_name IN ('trackings', 'shipping_routes', 'status_history')
+                    """)
+                    tables = cur.fetchall()
+                    if len(tables) < 3:
+                        logger.warning(f"Some tables missing. Found: {[t[0] for t in tables]}")
+                        logger.warning("Expected: trackings, shipping_routes, status_history")
+                    else:
+                        logger.info("All required database tables found")
+            logger.info("Database connection verified successfully")
         except Exception as e:
             logger.error(f"Database initialization error: {e}")
             raise
