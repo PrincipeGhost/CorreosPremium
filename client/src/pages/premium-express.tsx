@@ -3,6 +3,11 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Check, Plus, Info, ChevronLeft, ChevronRight, User, Users, CreditCard, FileText } from "lucide-react";
+// Importaciones de imágenes - usando las rutas directas por compatibilidad
+const step1Image = "/attached_assets/IMG_8294_1759057963621.PNG";
+const step2Image = "/attached_assets/IMG_8295_1759057963621.PNG";
+const step3Image = "/attached_assets/IMG_8296_1759057963621.PNG";
+const step4Image = "/attached_assets/IMG_8297_1759057985910.PNG";
 
 export default function PremiumExpressPage() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -12,25 +17,25 @@ export default function PremiumExpressPage() {
       number: 1,
       title: "Describe tus envíos",
       description: "Completa los datos del origen, destino y características de tu paquete",
-      icon: User
+      image: step1Image
     },
     {
       number: 2,
       title: "Registra el conjunto de destinatarios",
       description: "a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.",
-      icon: Users
+      image: step2Image
     },
     {
       number: 3,
       title: "Realiza el pago",
       description: "con tarjeta bancaria, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
-      icon: CreditCard
+      image: step3Image
     },
     {
       number: 4,
       title: "Imprime las etiquetas",
       description: "que identifican los paquetes antes de gestionar su recogida o de llevarlos a una de nuestras oficinas.",
-      icon: FileText
+      image: step4Image
     }
   ];
 
@@ -267,11 +272,12 @@ export default function PremiumExpressPage() {
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mx-12">
               {/* Ilustración ovalada */}
-              <div className="w-48 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
-                {(() => {
-                  const IconComponent = steps[currentStep].icon;
-                  return IconComponent ? <IconComponent className="w-16 h-16 text-blue-600" /> : null;
-                })()}
+              <div className="w-48 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg overflow-hidden">
+                <img 
+                  src={steps[currentStep].image} 
+                  alt={steps[currentStep].title}
+                  className="w-40 h-24 object-contain"
+                />
               </div>
 
               {/* Número del paso */}
