@@ -271,12 +271,12 @@ export default function PremiumExpressPage() {
           {/* Contenido del paso actual */}
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mx-12">
-              {/* Ilustración ovalada */}
-              <div className="w-48 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg overflow-hidden">
+              {/* Ilustración sin fondo */}
+              <div className="w-56 h-40 mx-auto mb-6 flex items-center justify-center">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
-                  className="w-40 h-24 object-contain"
+                  className="w-52 h-36 object-contain"
                 />
               </div>
 
