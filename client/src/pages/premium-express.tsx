@@ -227,14 +227,14 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Como enviar un Paq Premium, paso a paso */}
-        <section className="bg-gray-100 py-12 px-4">
+        <section className="bg-gray-100 pt-12 pb-4 px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-como-enviar">
               Como enviar un Paq Premium, paso a paso
             </h2>
             
             {/* Video explicativo */}
-            <div className="bg-white rounded-lg shadow-sm border overflow-hidden mb-8">
+            <div className="bg-white rounded-lg shadow-sm border overflow-hidden mb-4">
               <iframe
                 className="w-full h-64 md:h-80"
                 src="https://www.youtube.com/embed/AOGTZhWWwNo"
@@ -249,7 +249,7 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
-        <section className="bg-yellow-400 py-12 relative overflow-hidden" data-testid="steps-carousel">
+        <section className="bg-yellow-400 pt-8 pb-12 relative overflow-hidden" data-testid="steps-carousel">
           {/* Botón anterior */}
           <button
             onClick={prevStep}
