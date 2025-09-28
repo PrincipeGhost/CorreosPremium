@@ -1,5 +1,15 @@
-import { type User, type InsertUser, type ContactRequest, type InsertContactRequest, type ServiceQuote, type InsertServiceQuote } from "@shared/schema";
+import { 
+  type User, type InsertUser, 
+  type ContactRequest, type InsertContactRequest, 
+  type ServiceQuote, type InsertServiceQuote,
+  type Tracking, type InsertTracking,
+  type ShippingRoute, type InsertShippingRoute,
+  type StatusHistory, type InsertStatusHistory,
+  users, contactRequests, serviceQuotes, trackings, shippingRoutes, statusHistory 
+} from "@shared/schema";
 import { randomUUID } from "crypto";
+import { db } from "./db";
+import { eq, desc, and } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -11,69 +21,115 @@ export interface IStorage {
   
   createServiceQuote(quote: InsertServiceQuote): Promise<ServiceQuote>;
   getAllServiceQuotes(): Promise<ServiceQuote[]>;
+  
+  // Tracking operations
+  getTracking(trackingId: string): Promise<Tracking | undefined>;
+  createTracking(tracking: InsertTracking): Promise<Tracking>;
+  updateTrackingStatus(trackingId: string, newStatus: string, notes?: string): Promise<boolean>;
+  getTrackingHistory(trackingId: string): Promise<StatusHistory[]>;
+  getAllTrackings(): Promise<Tracking[]>;
+  
+  // Shipping routes operations
+  getShippingRoute(origin: string, destination: string): Promise<ShippingRoute | undefined>;
+  createShippingRoute(route: InsertShippingRoute): Promise<ShippingRoute>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private contactRequests: Map<string, ContactRequest>;
-  private serviceQuotes: Map<string, ServiceQuote>;
-
-  constructor() {
-    this.users = new Map();
-    this.contactRequests = new Map();
-    this.serviceQuotes = new Map();
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
 
   async createContactRequest(insertRequest: InsertContactRequest): Promise<ContactRequest> {
-    const id = randomUUID();
-    const request: ContactRequest = { 
-      ...insertRequest, 
-      id, 
-      createdAt: new Date() 
-    };
-    this.contactRequests.set(id, request);
+    const [request] = await db.insert(contactRequests).values(insertRequest).returning();
     return request;
   }
 
   async getAllContactRequests(): Promise<ContactRequest[]> {
-    return Array.from(this.contactRequests.values()).sort(
-      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-    );
+    return await db.select().from(contactRequests).orderBy(desc(contactRequests.createdAt));
   }
 
   async createServiceQuote(insertQuote: InsertServiceQuote): Promise<ServiceQuote> {
-    const id = randomUUID();
-    const quote: ServiceQuote = { 
-      ...insertQuote, 
-      id, 
-      createdAt: new Date() 
-    };
-    this.serviceQuotes.set(id, quote);
+    const [quote] = await db.insert(serviceQuotes).values(insertQuote).returning();
     return quote;
   }
 
   async getAllServiceQuotes(): Promise<ServiceQuote[]> {
-    return Array.from(this.serviceQuotes.values()).sort(
-      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-    );
+    return await db.select().from(serviceQuotes).orderBy(desc(serviceQuotes.createdAt));
+  }
+
+  // Tracking operations
+  async getTracking(trackingId: string): Promise<Tracking | undefined> {
+    const [tracking] = await db.select().from(trackings).where(eq(trackings.trackingId, trackingId));
+    return tracking || undefined;
+  }
+
+  async createTracking(insertTracking: InsertTracking): Promise<Tracking> {
+    const [tracking] = await db.insert(trackings).values(insertTracking).returning();
+    return tracking;
+  }
+
+  async updateTrackingStatus(trackingId: string, newStatus: string, notes?: string): Promise<boolean> {
+    try {
+      // Get current tracking to log the change
+      const currentTracking = await this.getTracking(trackingId);
+      if (!currentTracking) {
+        return false;
+      }
+
+      // Update tracking status
+      await db.update(trackings)
+        .set({ status: newStatus, updatedAt: new Date() })
+        .where(eq(trackings.trackingId, trackingId));
+
+      // Log status change
+      await db.insert(statusHistory).values({
+        trackingId,
+        oldStatus: currentTracking.status,
+        newStatus,
+        notes,
+      });
+
+      return true;
+    } catch (error) {
+      console.error("Error updating tracking status:", error);
+      return false;
+    }
+  }
+
+  async getTrackingHistory(trackingId: string): Promise<StatusHistory[]> {
+    return await db.select().from(statusHistory)
+      .where(eq(statusHistory.trackingId, trackingId))
+      .orderBy(desc(statusHistory.changedAt));
+  }
+
+  async getAllTrackings(): Promise<Tracking[]> {
+    return await db.select().from(trackings).orderBy(desc(trackings.createdAt));
+  }
+
+  async getShippingRoute(origin: string, destination: string): Promise<ShippingRoute | undefined> {
+    const [route] = await db.select().from(shippingRoutes)
+      .where(and(
+        eq(shippingRoutes.originCountry, origin),
+        eq(shippingRoutes.destinationCountry, destination)
+      ));
+    return route || undefined;
+  }
+
+  async createShippingRoute(insertRoute: InsertShippingRoute): Promise<ShippingRoute> {
+    const [route] = await db.insert(shippingRoutes).values(insertRoute).returning();
+    return route;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, bigint, serial } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -33,6 +34,57 @@ export const serviceQuotes = pgTable("service_quotes", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+// Tracking system tables from Telegram bot
+export const trackings = pgTable("trackings", {
+  trackingId: varchar("tracking_id", { length: 50 }).primaryKey(),
+  recipientName: varchar("recipient_name", { length: 255 }).notNull(),
+  deliveryAddress: text("delivery_address").notNull(),
+  countryPostal: varchar("country_postal", { length: 255 }).notNull(),
+  dateTime: varchar("date_time", { length: 255 }).notNull(),
+  packageWeight: varchar("package_weight", { length: 100 }).notNull(),
+  productName: varchar("product_name", { length: 255 }).notNull(),
+  senderName: varchar("sender_name", { length: 255 }).notNull(),
+  senderAddress: text("sender_address").notNull(),
+  senderCountry: varchar("sender_country", { length: 255 }).notNull(),
+  senderState: varchar("sender_state", { length: 255 }).notNull(),
+  productPrice: varchar("product_price", { length: 100 }).notNull(),
+  status: varchar("status", { length: 50 }).default("RETENIDO").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  estimatedDeliveryDate: varchar("estimated_delivery_date", { length: 255 }),
+  actualDelayDays: integer("actual_delay_days").default(0),
+  userTelegramId: bigint("user_telegram_id", { mode: "number" }),
+  username: varchar("username", { length: 255 }),
+});
+
+export const shippingRoutes = pgTable("shipping_routes", {
+  id: serial("id").primaryKey(),
+  originCountry: varchar("origin_country", { length: 255 }).notNull(),
+  destinationCountry: varchar("destination_country", { length: 255 }).notNull(),
+  estimatedDays: integer("estimated_days").notNull(),
+});
+
+export const statusHistory = pgTable("status_history", {
+  id: serial("id").primaryKey(),
+  trackingId: varchar("tracking_id", { length: 50 }).notNull(),
+  oldStatus: varchar("old_status", { length: 50 }),
+  newStatus: varchar("new_status", { length: 50 }).notNull(),
+  changedAt: timestamp("changed_at").defaultNow(),
+  notes: text("notes"),
+});
+
+// Relations
+export const trackingsRelations = relations(trackings, ({ many }) => ({
+  statusHistory: many(statusHistory),
+}));
+
+export const statusHistoryRelations = relations(statusHistory, ({ one }) => ({
+  tracking: one(trackings, {
+    fields: [statusHistory.trackingId],
+    references: [trackings.trackingId],
+  }),
+}));
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -58,6 +110,40 @@ export const insertServiceQuoteSchema = createInsertSchema(serviceQuotes).pick({
   description: true,
 });
 
+// Tracking system schemas
+export const insertTrackingSchema = createInsertSchema(trackings).pick({
+  trackingId: true,
+  recipientName: true,
+  deliveryAddress: true,
+  countryPostal: true,
+  dateTime: true,
+  packageWeight: true,
+  productName: true,
+  senderName: true,
+  senderAddress: true,
+  senderCountry: true,
+  senderState: true,
+  productPrice: true,
+  status: true,
+  estimatedDeliveryDate: true,
+  actualDelayDays: true,
+  userTelegramId: true,
+  username: true,
+});
+
+export const insertShippingRouteSchema = createInsertSchema(shippingRoutes).pick({
+  originCountry: true,
+  destinationCountry: true,
+  estimatedDays: true,
+});
+
+export const insertStatusHistorySchema = createInsertSchema(statusHistory).pick({
+  trackingId: true,
+  oldStatus: true,
+  newStatus: true,
+  notes: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
@@ -66,3 +152,13 @@ export type ContactRequest = typeof contactRequests.$inferSelect;
 
 export type InsertServiceQuote = z.infer<typeof insertServiceQuoteSchema>;
 export type ServiceQuote = typeof serviceQuotes.$inferSelect;
+
+// Tracking system types
+export type InsertTracking = z.infer<typeof insertTrackingSchema>;
+export type Tracking = typeof trackings.$inferSelect;
+
+export type InsertShippingRoute = z.infer<typeof insertShippingRouteSchema>;
+export type ShippingRoute = typeof shippingRoutes.$inferSelect;
+
+export type InsertStatusHistory = z.infer<typeof insertStatusHistorySchema>;
+export type StatusHistory = typeof statusHistory.$inferSelect;

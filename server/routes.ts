@@ -61,87 +61,90 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Package tracking endpoint
+  // Package tracking endpoint - now uses real database data
   app.get("/api/track/:trackingNumber", async (req, res) => {
     const { trackingNumber } = req.params;
     
-    // Simulate different tracking scenarios based on tracking number
-    const mockTrackingDatabase = {
-      "EP001234567ES": {
-        trackingNumber,
-        status: "Entregado",
-        location: "Entregado en destino",
-        estimatedDelivery: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-        history: [
-          {
-            date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
-            status: "Servicio iniciado",
-            location: "Oficina EnvíosPro Madrid"
-          },
-          {
-            date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-            status: "En tránsito",
-            location: "Centro de distribución Madrid"
-          },
-          {
-            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-            status: "Entregado",
-            location: "Entregado en destino"
-          }
-        ]
-      },
-      "EP987654321ES": {
-        trackingNumber,
-        status: "En tránsito",
-        location: "Centro de distribución Barcelona",
-        estimatedDelivery: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
-        history: [
-          {
-            date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-            status: "Servicio iniciado",
-            location: "Oficina EnvíosPro Barcelona"
-          },
-          {
-            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-            status: "En proceso",
-            location: "Centro de clasificación Barcelona"
-          },
-          {
-            date: new Date().toISOString(),
-            status: "En tránsito",
-            location: "Centro de distribución Barcelona"
-          }
-        ]
-      },
-      "EP456789123ES": {
-        trackingNumber,
-        status: "En proceso",
-        location: "Centro de clasificación Valencia",
-        estimatedDelivery: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
-        history: [
-          {
-            date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-            status: "Servicio iniciado",
-            location: "Oficina EnvíosPro Valencia"
-          },
-          {
-            date: new Date().toISOString(),
-            status: "En proceso",
-            location: "Centro de clasificación Valencia"
-          }
-        ]
+    try {
+      // Get tracking from database
+      const tracking = await storage.getTracking(trackingNumber);
+      
+      if (!tracking) {
+        return res.status(404).json({ 
+          message: "Número de seguimiento no encontrado",
+          trackingNumber 
+        });
       }
-    };
-    
-    const trackingData = mockTrackingDatabase[trackingNumber as keyof typeof mockTrackingDatabase];
-    
-    if (trackingData) {
+
+      // Get tracking history
+      const history = await storage.getTrackingHistory(trackingNumber);
+
+      // Format response to match frontend expectations
+      const trackingData = {
+        trackingNumber: tracking.trackingId,
+        status: tracking.status,
+        location: tracking.deliveryAddress,
+        estimatedDelivery: tracking.estimatedDeliveryDate || null,
+        recipient: tracking.recipientName,
+        sender: tracking.senderName,
+        product: tracking.productName,
+        weight: tracking.packageWeight,
+        price: tracking.productPrice,
+        country: tracking.countryPostal,
+        senderCountry: tracking.senderCountry,
+        created: tracking.createdAt,
+        updated: tracking.updatedAt,
+        history: history.map(h => ({
+          date: h.changedAt?.toISOString() || '',
+          status: h.newStatus,
+          location: h.notes || tracking.deliveryAddress
+        }))
+      };
+
       res.json(trackingData);
-    } else {
-      res.status(404).json({ 
-        message: "Número de seguimiento no encontrado",
-        trackingNumber 
-      });
+    } catch (error) {
+      console.error("Error getting tracking:", error);
+      res.status(500).json({ message: "Error interno del servidor" });
+    }
+  });
+
+  // Get all trackings (for admin purposes)
+  app.get("/api/trackings", async (req, res) => {
+    try {
+      const trackings = await storage.getAllTrackings();
+      res.json(trackings);
+    } catch (error) {
+      console.error("Error getting trackings:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Update tracking status (for admin/bot purposes) - Protected endpoint
+  app.post("/api/track/:trackingNumber/status", async (req, res) => {
+    const { trackingNumber } = req.params;
+    
+    // Basic authentication check - in production, use proper auth tokens
+    const authToken = req.headers.authorization;
+    if (!authToken || authToken !== `Bearer ${process.env.ADMIN_TOKEN || 'default-admin-token'}`) {
+      return res.status(401).json({ message: "No autorizado - Token requerido" });
+    }
+
+    try {
+      // Validate request body
+      const { status, notes } = req.body;
+      if (!status || typeof status !== 'string') {
+        return res.status(400).json({ message: "Estado requerido" });
+      }
+
+      const success = await storage.updateTrackingStatus(trackingNumber, status, notes);
+      if (success) {
+        res.json({ success: true, message: "Estado actualizado correctamente" });
+      } else {
+        res.status(404).json({ message: "Tracking no encontrado" });
+      }
+    } catch (error) {
+      console.error("Error updating tracking status:", error);
+      res.status(500).json({ message: "Error interno del servidor" });
     }
   });
 
