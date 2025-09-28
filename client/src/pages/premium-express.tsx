@@ -249,28 +249,19 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
-        <section className="bg-yellow-400 pt-1 pb-4 relative overflow-hidden" data-testid="steps-carousel">
-          {/* Botón anterior */}
-          <button
-            onClick={prevStep}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
-            data-testid="button-prev-step"
-          >
-            <ChevronLeft className="w-5 h-5 text-gray-700" />
-          </button>
+        <section className="bg-yellow-400 pt-1 pb-4" data-testid="steps-carousel">
+          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-center gap-4 px-4 min-h-[220px]">
+            {/* Botón anterior */}
+            <button
+              onClick={prevStep}
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+              data-testid="button-prev-step"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-700" />
+            </button>
 
-          {/* Botón siguiente */}
-          <button
-            onClick={nextStep}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
-            data-testid="button-next-step"
-          >
-            <ChevronRight className="w-5 h-5 text-gray-700" />
-          </button>
-
-          {/* Contenido del paso actual */}
-          <div className="max-w-3xl mx-auto px-4">
-            <div className="text-center mx-12">
+            {/* Contenido del paso actual */}
+            <div className="text-center">
               {/* Ilustración sin fondo */}
               <div className="mx-auto mb-0 mt-2 md:mt-0 flex items-center justify-center overflow-hidden w-[250px] h-[100px] md:w-[300px] md:h-[120px] lg:w-[340px] lg:h-[140px]">
                 <img 
@@ -302,21 +293,30 @@ export default function PremiumExpressPage() {
                   steps[currentStep].description
                 )}
               </p>
+
+              {/* Indicadores de puntos */}
+              <div className="flex justify-center mt-2 space-x-2">
+                {steps.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentStep(index)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      index === currentStep ? 'bg-black' : 'bg-black bg-opacity-30'
+                    }`}
+                    data-testid={`dot-indicator-${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
 
-            {/* Indicadores de puntos */}
-            <div className="flex justify-center mt-2 space-x-2">
-              {steps.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentStep(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentStep ? 'bg-black' : 'bg-black bg-opacity-30'
-                  }`}
-                  data-testid={`dot-indicator-${index + 1}`}
-                />
-              ))}
-            </div>
+            {/* Botón siguiente */}
+            <button
+              onClick={nextStep}
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+              data-testid="button-next-step"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-700" />
+            </button>
           </div>
         </section>
 
