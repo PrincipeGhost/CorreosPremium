@@ -203,24 +203,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Create tracking endpoint (primarily for bot integration)
-  app.post("/api/trackings", async (req, res) => {
-    try {
-      const trackingData = insertTrackingSchema.parse(req.body);
-      const tracking = await storage.createTracking(trackingData);
-      res.status(201).json({ success: true, tracking });
-    } catch (error: any) {
-      if (error.name === "ZodError") {
-        const validationError = fromZodError(error);
-        return res.status(400).json({ 
-          message: "Validation error", 
-          details: validationError.message 
-        });
-      }
-      console.error("Error creating tracking:", error);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  });
 
   // Update tracking status (for admin/bot purposes) - Protected endpoint
   app.patch("/api/trackings/:trackingId/status", async (req, res) => {
