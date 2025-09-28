@@ -75,25 +75,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Tracking lookup endpoint with proper TypeScript interfaces
+  // Tracking lookup endpoint for frontend compatibility
   app.get("/api/track/:trackingId", async (req, res) => {
     const { trackingId } = req.params;
     
     try {
       const tracking = await storage.getTracking(trackingId);
-      const history = await storage.getTrackingHistory(trackingId);
-
-      const response: TrackingLookupResponse = {
-        tracking: tracking || null,
-        history,
-        found: !!tracking
-      };
-
+      
       if (!tracking) {
-        return res.status(404).json(response);
+        return res.status(404).json({ 
+          message: "Número de seguimiento no encontrado",
+          trackingNumber: trackingId 
+        });
       }
 
-      res.json(response);
+      const history = await storage.getTrackingHistory(trackingId);
+
+      // Format response to match frontend expectations
+      const trackingData = {
+        trackingNumber: tracking.trackingId,
+        status: tracking.status,
+        location: tracking.deliveryAddress,
+        estimatedDelivery: tracking.estimatedDeliveryDate || null,
+        recipient: tracking.recipientName,
+        sender: tracking.senderName,
+        product: tracking.productName,
+        weight: tracking.packageWeight,
+        price: tracking.productPrice,
+        country: tracking.countryPostal,
+        senderCountry: tracking.senderCountry,
+        created: tracking.createdAt,
+        updated: tracking.updatedAt,
+        history: history.map(h => ({
+          date: h.changedAt?.toISOString() || '',
+          status: h.newStatus,
+          location: h.notes || tracking.deliveryAddress
+        }))
+      };
+
+      res.json(trackingData);
     } catch (error) {
       console.error("Error looking up tracking:", error);
       res.status(500).json({ message: "Error interno del servidor" });
