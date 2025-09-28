@@ -156,13 +156,14 @@ export default function PremiumExpressPage() {
                 </div>
               </div>
               <div className="ml-8">
-                <Button 
-                  variant="outline"
-                  className="text-blue-600 border-blue-600 hover:bg-blue-50"
+                <a 
+                  href="#"
+                  className="text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1"
                   data-testid="button-mas-info-pee"
                 >
-                  MÁS INFO
-                </Button>
+                  <span>MÁS INFO</span>
+                  <ChevronRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
             
@@ -207,13 +208,14 @@ export default function PremiumExpressPage() {
                 </div>
               </div>
               <div className="ml-8">
-                <Button 
-                  variant="outline"
-                  className="text-blue-600 border-blue-600 hover:bg-blue-50"
+                <a 
+                  href="#"
+                  className="text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1"
                   data-testid="button-mas-info-seguros"
                 >
-                  MÁS INFO
-                </Button>
+                  <span>MÁS INFO</span>
+                  <ChevronRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
