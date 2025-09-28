@@ -147,7 +147,7 @@ export default function PremiumExpressPage() {
             {/* PEE */}
             <div className="mb-6" data-testid="service-pee">
               <div className="flex items-start space-x-3 mb-3">
-                <Plus className="w-8 h-8 text-blue-600 mt-0.5 flex-shrink-0" />
+                <Plus className="w-8 h-8 text-blue-900 mt-0.5 flex-shrink-0" strokeWidth={3} />
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-900">Prueba de Entrega Electrónica (PEE)</h3>
                   <p className="text-gray-700 text-sm mt-1">
@@ -169,7 +169,7 @@ export default function PremiumExpressPage() {
             {/* Entrega exclusiva */}
             <div className="mb-6" data-testid="service-entrega-exclusiva">
               <div className="flex items-start space-x-3">
-                <Plus className="w-8 h-8 text-blue-600 mt-0.5 flex-shrink-0" />
+                <Plus className="w-8 h-8 text-blue-900 mt-0.5 flex-shrink-0" strokeWidth={3} />
                 <div>
                   <h3 className="font-semibold text-gray-900">Entrega exclusiva al destinatario</h3>
                   <p className="text-gray-700 text-sm mt-1">
@@ -184,7 +184,7 @@ export default function PremiumExpressPage() {
             {/* Reembolso */}
             <div className="mb-6" data-testid="service-reembolso">
               <div className="flex items-start space-x-3">
-                <Plus className="w-8 h-8 text-blue-600 mt-0.5 flex-shrink-0" />
+                <Plus className="w-8 h-8 text-blue-900 mt-0.5 flex-shrink-0" strokeWidth={3} />
                 <div>
                   <h3 className="font-semibold text-gray-900">Reembolso</h3>
                   <p className="text-gray-700 text-sm mt-1">
@@ -198,7 +198,7 @@ export default function PremiumExpressPage() {
             {/* Seguros */}
             <div className="mb-6" data-testid="service-seguros">
               <div className="flex items-start space-x-3 mb-3">
-                <Plus className="w-8 h-8 text-blue-600 mt-0.5 flex-shrink-0" />
+                <Plus className="w-8 h-8 text-blue-900 mt-0.5 flex-shrink-0" strokeWidth={3} />
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-900">Seguros</h3>
                   <p className="text-gray-700 text-sm mt-1">
