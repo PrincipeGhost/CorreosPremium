@@ -1,10 +1,47 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Check, Plus, Info } from "lucide-react";
+import { Check, Plus, Info, ChevronLeft, ChevronRight, User, Users, CreditCard, FileText } from "lucide-react";
 
 export default function PremiumExpressPage() {
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const steps = [
+    {
+      number: 1,
+      title: "Describe tus envíos",
+      description: "Completa los datos del origen, destino y características de tu paquete",
+      icon: User
+    },
+    {
+      number: 2,
+      title: "Registra el conjunto de destinatarios",
+      description: "a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.",
+      icon: Users
+    },
+    {
+      number: 3,
+      title: "Realiza el pago",
+      description: "con tarjeta bancaria, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
+      icon: CreditCard
+    },
+    {
+      number: 4,
+      title: "Imprime las etiquetas",
+      description: "que identifican los paquetes antes de gestionar su recogida o de llevarlos a una de nuestras oficinas.",
+      icon: FileText
+    }
+  ];
+
+  const nextStep = () => {
+    setCurrentStep((prev) => (prev + 1) % steps.length);
+  };
+
+  const prevStep = () => {
+    setCurrentStep((prev) => (prev - 1 + steps.length) % steps.length);
+  };
+
   useEffect(() => {
     // Set page title
     document.title = "Paq Premium - Envíos Rápidos con Correos";
@@ -189,66 +226,77 @@ export default function PremiumExpressPage() {
               Como enviar un Paq Premium, paso a paso
             </h2>
             
-            {/* Proceso paso a paso */}
-            <div className="grid md:grid-cols-2 gap-8" data-testid="proceso-completo">
-              {/* Video explicativo */}
-              <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-                <iframe
-                  className="w-full h-64 md:h-80"
-                  src="https://www.youtube.com/embed/AOGTZhWWwNo"
-                  title="Cómo enviar un Paq Premium - Video explicativo"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  data-testid="video-tutorial"
-                ></iframe>
+            {/* Video explicativo */}
+            <div className="bg-white rounded-lg shadow-sm border overflow-hidden mb-8">
+              <iframe
+                className="w-full h-64 md:h-80"
+                src="https://www.youtube.com/embed/AOGTZhWWwNo"
+                title="Cómo enviar un Paq Premium - Video explicativo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                data-testid="video-tutorial"
+              ></iframe>
+            </div>
+
+            {/* Carrusel de pasos */}
+            <div className="bg-yellow-400 rounded-lg px-6 py-12 relative overflow-hidden" data-testid="steps-carousel">
+              {/* Botón anterior */}
+              <button
+                onClick={prevStep}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
+                data-testid="button-prev-step"
+              >
+                <ChevronLeft className="w-5 h-5 text-gray-700" />
+              </button>
+
+              {/* Botón siguiente */}
+              <button
+                onClick={nextStep}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow z-10"
+                data-testid="button-next-step"
+              >
+                <ChevronRight className="w-5 h-5 text-gray-700" />
+              </button>
+
+              {/* Contenido del paso actual */}
+              <div className="text-center mx-12">
+                {/* Ilustración ovalada */}
+                <div className="w-48 h-32 bg-white rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+                  {(() => {
+                    const IconComponent = steps[currentStep].icon;
+                    return IconComponent ? <IconComponent className="w-16 h-16 text-blue-600" /> : null;
+                  })()}
+                </div>
+
+                {/* Número del paso */}
+                <div className="text-4xl font-bold text-black mb-4" data-testid={`step-number-${steps[currentStep].number}`}>
+                  {steps[currentStep].number}
+                </div>
+
+                {/* Título */}
+                <h3 className="text-xl font-bold text-black mb-4 leading-tight" data-testid={`step-title-${steps[currentStep].number}`}>
+                  {steps[currentStep].title}
+                </h3>
+
+                {/* Descripción */}
+                <p className="text-black text-base leading-relaxed max-w-md mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
+                  {steps[currentStep].description}
+                </p>
               </div>
-              
-              {/* Pasos del proceso */}
-              <div className="space-y-6">
-                {/* Paso 1 */}
-                <div className="flex items-start space-x-4" data-testid="step-1">
-                  <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
-                    1
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Describe tus envíos</h3>
-                    <p className="text-gray-600 text-sm">Completa los datos del origen, destino y características de tu paquete</p>
-                  </div>
-                </div>
-                
-                {/* Paso 2 */}
-                <div className="flex items-start space-x-4" data-testid="step-2">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-lg">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Elige servicios adicionales</h3>
-                    <p className="text-gray-600 text-sm">Selecciona PEE, seguros o reembolso según tus necesidades</p>
-                  </div>
-                </div>
-                
-                {/* Paso 3 */}
-                <div className="flex items-start space-x-4" data-testid="step-3">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-lg">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Confirma y paga</h3>
-                    <p className="text-gray-600 text-sm">Revisa los datos y realiza el pago de forma segura</p>
-                  </div>
-                </div>
-                
-                {/* Paso 4 */}
-                <div className="flex items-start space-x-4" data-testid="step-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-lg">
-                    4
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 text-lg mb-2">Imprime etiqueta</h3>
-                    <p className="text-gray-600 text-sm">Descarga e imprime la etiqueta para tu envío</p>
-                  </div>
-                </div>
+
+              {/* Indicadores de puntos */}
+              <div className="flex justify-center mt-8 space-x-2">
+                {steps.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentStep(index)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      index === currentStep ? 'bg-black' : 'bg-black bg-opacity-30'
+                    }`}
+                    data-testid={`dot-indicator-${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
