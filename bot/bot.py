@@ -2,6 +2,8 @@ import os
 import logging
 import uuid
 import re
+import httpx
+import asyncio
 from datetime import datetime
 from dotenv import load_dotenv
 from telegram import Update
@@ -32,6 +34,8 @@ logging.getLogger("telegram").setLevel(logging.WARNING)
 # Bot configuration
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')  # Can be channel ID or username (with @)
+ADMIN_TOKEN = os.getenv('ADMIN_TOKEN')  # For secure API communication
+API_BASE_URL = os.getenv('API_BASE_URL', 'http://localhost:5000')  # Default to local server
 
 # Conversation states
 (RECIPIENT_NAME, DELIVERY_ADDRESS, COUNTRY_POSTAL, DATE_TIME, PACKAGE_WEIGHT, 
@@ -44,6 +48,8 @@ class TelegramBot:
             raise ValueError("BOT_TOKEN environment variable is required")
         if not CHANNEL_ID:
             raise ValueError("CHANNEL_ID environment variable is required")
+        if not ADMIN_TOKEN:
+            logger.warning("ADMIN_TOKEN not set - API communication will be disabled")
         
         # Initialize database
         try:
@@ -160,6 +166,89 @@ class TelegramBot:
         
         return False, "Por favor ingresa una fecha válida (ejemplos: 25/12/2024 14:30, 2024-12-25, 25-12-2024 09:00)."
     
+    async def _test_api_connection(self):
+        """Test secure connection to web API"""
+        try:
+            await asyncio.sleep(2)  # Wait for services to be ready
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    f"{API_BASE_URL}/api/trackings/stats",
+                    headers={"Authorization": f"Bearer {ADMIN_TOKEN}"} if ADMIN_TOKEN else {},
+                    timeout=5.0
+                )
+                if response.status_code == 200:
+                    logger.info("✅ API connection test successful")
+                else:
+                    logger.warning(f"⚠️  API connection test failed: {response.status_code}")
+        except Exception as e:
+            logger.warning(f"⚠️  API connection test failed: {e}")
+    
+    async def update_tracking_status_via_api(self, tracking_id: str, new_status: str, notes: str = None) -> bool:
+        """Update tracking status via secure API call"""
+        if not ADMIN_TOKEN:
+            logger.error("Cannot update via API - ADMIN_TOKEN not configured")
+            return False
+            
+        try:
+            async with httpx.AsyncClient() as client:
+                payload = {"newStatus": new_status}
+                if notes:
+                    payload["notes"] = notes
+                    
+                response = await client.patch(
+                    f"{API_BASE_URL}/api/trackings/{tracking_id}/status",
+                    headers={
+                        "Authorization": f"Bearer {ADMIN_TOKEN}",
+                        "Content-Type": "application/json"
+                    },
+                    json=payload,
+                    timeout=10.0
+                )
+                
+                if response.status_code == 200:
+                    logger.info(f"✅ Status updated via API for tracking {tracking_id}: {new_status}")
+                    return True
+                else:
+                    logger.error(f"❌ API status update failed: {response.status_code} - {response.text}")
+                    return False
+                    
+        except Exception as e:
+            logger.error(f"❌ API communication error: {e}")
+            return False
+    
+    async def verify_secure_access(self, user_id: int) -> bool:
+        """Double verification: channel membership + secure API check"""
+        # First check: Channel membership
+        if not await self.is_user_in_channel(user_id):
+            logger.info(f"Access denied: User {user_id} not in channel")
+            return False
+        
+        # Second check: API connectivity with proper authentication (REQUIRED)
+        if ADMIN_TOKEN:
+            try:
+                async with httpx.AsyncClient() as client:
+                    response = await client.get(
+                        f"{API_BASE_URL}/api/trackings/stats",
+                        headers={"Authorization": f"Bearer {ADMIN_TOKEN}"},
+                        timeout=5.0
+                    )
+                    if response.status_code == 200:
+                        logger.info(f"✅ API connectivity verified for user {user_id}")
+                    elif response.status_code == 401:
+                        logger.error(f"❌ API authentication failed for user {user_id} - invalid ADMIN_TOKEN")
+                        return False
+                    else:
+                        logger.error(f"❌ API connectivity failed for user {user_id} - status {response.status_code}")
+                        return False
+            except Exception as e:
+                logger.error(f"❌ API connectivity error for user {user_id}: {e}")
+                return False
+        else:
+            logger.warning(f"⚠️  ADMIN_TOKEN not set - skipping API verification for user {user_id}")
+        
+        logger.info(f"✅ Complete secure access verified for user {user_id}")
+        return True
+    
     async def _safe_reply(self, update: Update, text: str):
         """Safe reply with basic formatting"""
         if update.message:
@@ -190,10 +279,10 @@ class TelegramBot:
         
         logger.info(f"User {username} ({user_id}) started the bot")
         
-        # Check channel membership
-        is_member = await self.is_user_in_channel(user_id)
+        # Enhanced security check: channel membership + API connectivity
+        has_secure_access = await self.verify_secure_access(user_id)
         
-        if is_member:
+        if has_secure_access:
             # User is a channel member - send verification message first
             verification_message = "✅Has sido Verificado como miembro Autorizado."
             await update.message.reply_text(verification_message)
@@ -608,9 +697,19 @@ Usa /start para crear otro tracking.
                 parse_mode='Markdown'
             )
 
+    async def _startup_checks(self, application):
+        """Run startup checks when bot starts"""
+        logger.info("Running startup checks...")
+        if ADMIN_TOKEN:
+            await self._test_api_connection()
+        else:
+            logger.warning("⚠️  ADMIN_TOKEN not set - API communication disabled")
+    
     def run(self):
         """Start the bot"""
         logger.info("Starting Telegram bot...")
+        # Add startup callback
+        self.application.post_init = self._startup_checks
         self.application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 def main():
