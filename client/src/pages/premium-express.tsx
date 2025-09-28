@@ -276,7 +276,7 @@ export default function PremiumExpressPage() {
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
-                  className="w-[320px] h-[240px] md:w-[384px] md:h-[288px] lg:w-[420px] lg:h-[315px] object-contain"
+                  className="w-[400px] h-[160px] md:w-[480px] md:h-[192px] lg:w-[560px] lg:h-[224px] object-contain"
                 />
               </div>
 
