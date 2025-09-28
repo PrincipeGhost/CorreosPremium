@@ -272,16 +272,16 @@ export default function PremiumExpressPage() {
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mx-12">
               {/* Ilustración sin fondo */}
-              <div className="mx-auto mb-0 -mt-8 flex items-center justify-center">
+              <div className="mx-auto mb-0 -mt-6 md:-mt-8 flex items-center justify-center">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
-                  className="w-[500px] h-[400px] object-cover"
+                  className="w-[320px] h-[240px] md:w-[384px] md:h-[288px] lg:w-[420px] lg:h-[315px] object-contain"
                 />
               </div>
 
               {/* Número del paso */}
-              <div className="text-4xl font-bold text-black mb-0 -mt-16" data-testid={`step-number-${steps[currentStep].number}`}>
+              <div className="text-4xl font-bold text-black mb-0 -mt-12 md:-mt-10 lg:-mt-8" data-testid={`step-number-${steps[currentStep].number}`}>
                 {steps[currentStep].number}
               </div>
 
