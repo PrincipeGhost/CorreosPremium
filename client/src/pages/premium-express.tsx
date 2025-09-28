@@ -191,41 +191,17 @@ export default function PremiumExpressPage() {
             
             {/* Proceso paso a paso */}
             <div className="grid md:grid-cols-2 gap-8" data-testid="proceso-completo">
-              {/* Mockup de la interfaz */}
-              <div className="bg-white rounded-lg p-6 shadow-sm border">
-                {/* Header del mockup */}
-                <div className="bg-gray-50 rounded-t-lg p-4 mb-4 border-b">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                      <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                      <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                    </div>
-                    <div className="text-xs text-gray-500">correos.es</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="inline-flex items-center space-x-2 mb-2">
-                      <div className="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center">
-                        <span className="text-xs font-bold">📦</span>
-                      </div>
-                      <span className="text-sm font-semibold text-gray-900">Paq Premium | Correos</span>
-                    </div>
-                    <p className="text-xs text-gray-600">Correos</p>
-                  </div>
-                </div>
-                
-                {/* Información del producto */}
-                <div className="space-y-3">
-                  <div className="border-b pb-3">
-                    <h4 className="text-sm font-semibold text-gray-900 mb-2">Información del producto</h4>
-                    <div className="bg-gray-50 p-3 rounded text-xs text-gray-600 space-y-1">
-                      <div className="flex justify-between"><span>Descripción</span><span>✓</span></div>
-                      <div className="flex justify-between"><span>Detalles de envío</span><span>✓</span></div>
-                      <div className="flex justify-between"><span>Garantías y plazos</span><span>-</span></div>
-                      <div className="flex justify-between"><span>Precio</span><span>-</span></div>
-                    </div>
-                  </div>
-                </div>
+              {/* Video explicativo */}
+              <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
+                <iframe
+                  className="w-full h-64 md:h-80"
+                  src="https://www.youtube.com/embed/AOGTZhWWwNo"
+                  title="Cómo enviar un Paq Premium - Video explicativo"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  data-testid="video-tutorial"
+                ></iframe>
               </div>
               
               {/* Pasos del proceso */}
