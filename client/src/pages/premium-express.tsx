@@ -249,7 +249,7 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
-        <section className="bg-yellow-400 pt-1 pb-12 relative overflow-hidden" data-testid="steps-carousel">
+        <section className="bg-yellow-400 pt-1 pb-4 relative overflow-hidden" data-testid="steps-carousel">
           {/* Botón anterior */}
           <button
             onClick={prevStep}
