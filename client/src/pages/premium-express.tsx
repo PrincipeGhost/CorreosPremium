@@ -272,11 +272,11 @@ export default function PremiumExpressPage() {
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mx-12">
               {/* Ilustración sin fondo */}
-              <div className="w-64 h-48 mx-auto mb-6 flex items-center justify-center">
+              <div className="w-56 h-40 mx-auto mb-6 flex items-center justify-center">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
-                  className="w-60 h-44 object-contain"
+                  className="w-72 h-52 object-contain"
                 />
               </div>
 
