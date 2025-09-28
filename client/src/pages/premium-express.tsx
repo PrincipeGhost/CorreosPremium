@@ -293,7 +293,7 @@ export default function PremiumExpressPage() {
               )}
 
               {/* Descripción */}
-              <p className="text-black text-base leading-relaxed max-w-md mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
+              <p className="text-black text-base leading-relaxed max-w-lg mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
                 {steps[currentStep].number === 2 ? (
                   <>
                     <span className="font-bold">Registra el conjunto de destinatarios</span> a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.
