@@ -272,7 +272,7 @@ export default function PremiumExpressPage() {
           <div className="max-w-3xl mx-auto px-4">
             <div className="text-center mx-12">
               {/* Ilustración sin fondo */}
-              <div className="mx-auto mb-0 -mt-6 md:-mt-8 flex items-center justify-center overflow-hidden w-[650px] h-[260px] md:w-[750px] md:h-[300px] lg:w-[850px] lg:h-[340px]">
+              <div className="mx-auto mb-0 -mt-6 md:-mt-8 flex items-center justify-center overflow-hidden w-[450px] h-[180px] md:w-[520px] md:h-[210px] lg:w-[580px] lg:h-[240px]">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
