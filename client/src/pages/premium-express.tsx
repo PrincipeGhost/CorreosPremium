@@ -21,8 +21,8 @@ export default function PremiumExpressPage() {
     },
     {
       number: 2,
-      title: "Registra el conjunto de destinatarios",
-      description: "a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.",
+      title: "",
+      description: "Registra el conjunto de destinatarios a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.",
       image: step2Image
     },
     {
@@ -286,13 +286,21 @@ export default function PremiumExpressPage() {
               </div>
 
               {/* Título */}
-              <h3 className="text-xl font-bold text-black mb-2 leading-tight" data-testid={`step-title-${steps[currentStep].number}`}>
-                {steps[currentStep].title}
-              </h3>
+              {steps[currentStep].title && (
+                <h3 className="text-xl font-bold text-black mb-2 leading-tight" data-testid={`step-title-${steps[currentStep].number}`}>
+                  {steps[currentStep].title}
+                </h3>
+              )}
 
               {/* Descripción */}
               <p className="text-black text-base leading-relaxed max-w-md mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
-                {steps[currentStep].description}
+                {steps[currentStep].number === 2 ? (
+                  <>
+                    <span className="font-bold">Registra el conjunto de destinatarios</span> a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.
+                  </>
+                ) : (
+                  steps[currentStep].description
+                )}
               </p>
             </div>
 
