@@ -5,6 +5,7 @@ import {
   type Tracking, type InsertTracking,
   type ShippingRoute, type InsertShippingRoute,
   type StatusHistory, type InsertStatusHistory,
+  type TrackingStatusType,
   users, contactRequests, serviceQuotes, trackings, shippingRoutes, statusHistory 
 } from "@shared/schema";
 import { randomUUID } from "crypto";
@@ -25,7 +26,7 @@ export interface IStorage {
   // Tracking operations
   getTracking(trackingId: string): Promise<Tracking | undefined>;
   createTracking(tracking: InsertTracking): Promise<Tracking>;
-  updateTrackingStatus(trackingId: string, newStatus: string, notes?: string): Promise<boolean>;
+  updateTrackingStatus(trackingId: string, newStatus: TrackingStatusType, notes?: string): Promise<boolean>;
   getTrackingHistory(trackingId: string): Promise<StatusHistory[]>;
   getAllTrackings(): Promise<Tracking[]>;
   
@@ -79,7 +80,7 @@ export class DatabaseStorage implements IStorage {
     return tracking;
   }
 
-  async updateTrackingStatus(trackingId: string, newStatus: string, notes?: string): Promise<boolean> {
+  async updateTrackingStatus(trackingId: string, newStatus: TrackingStatusType, notes?: string): Promise<boolean> {
     try {
       // Get current tracking to log the change
       const currentTracking = await this.getTracking(trackingId);

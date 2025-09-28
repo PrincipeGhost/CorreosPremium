@@ -1,6 +1,20 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { 
+  insertTrackingSchema,
+  updateTrackingStatusSchema,
+  TRACKING_STATUS,
+  STATUS_DISPLAY,
+  type TrackingLookupRequest,
+  type TrackingLookupResponse,
+  type TrackingCreateRequest,
+  type TrackingUpdateStatusRequest,
+  type TrackingListResponse,
+  type TrackingStatsResponse,
+  type TrackingWithStatus,
+  type TrackingStatusType
+} from "@shared/schema";
 import { insertContactRequestSchema, insertServiceQuoteSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 
@@ -61,12 +75,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Package tracking endpoint - now uses real database data
-  app.get("/api/track/:trackingNumber", async (req, res) => {
+  // Tracking lookup endpoint with proper TypeScript interfaces
+  app.get("/api/track/:trackingId", async (req, res) => {
+    const { trackingId } = req.params;
+    
+    try {
+      const tracking = await storage.getTracking(trackingId);
+      const history = await storage.getTrackingHistory(trackingId);
+
+      const response: TrackingLookupResponse = {
+        tracking: tracking || null,
+        history,
+        found: !!tracking
+      };
+
+      if (!tracking) {
+        return res.status(404).json(response);
+      }
+
+      res.json(response);
+    } catch (error) {
+      console.error("Error looking up tracking:", error);
+      res.status(500).json({ message: "Error interno del servidor" });
+    }
+  });
+
+  // Legacy tracking endpoint for existing frontend compatibility
+  app.get("/api/track-legacy/:trackingNumber", async (req, res) => {
     const { trackingNumber } = req.params;
     
     try {
-      // Get tracking from database
       const tracking = await storage.getTracking(trackingNumber);
       
       if (!tracking) {
@@ -76,10 +114,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Get tracking history
       const history = await storage.getTrackingHistory(trackingNumber);
 
-      // Format response to match frontend expectations
+      // Format response to match legacy frontend expectations
       const trackingData = {
         trackingNumber: tracking.trackingId,
         status: tracking.status,
@@ -108,41 +145,123 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all trackings (for admin purposes)
+  // Get all trackings with enhanced response format
   app.get("/api/trackings", async (req, res) => {
     try {
       const trackings = await storage.getAllTrackings();
-      res.json(trackings);
+      
+      // Calculate statistics
+      const byStatus = trackings.reduce((acc, tracking) => {
+        acc[tracking.status] = (acc[tracking.status] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+
+      const response: TrackingListResponse = {
+        trackings,
+        total: trackings.length,
+        byStatus
+      };
+
+      res.json(response);
     } catch (error) {
       console.error("Error getting trackings:", error);
       res.status(500).json({ message: "Internal server error" });
     }
   });
 
+  // Tracking statistics endpoint
+  app.get("/api/trackings/stats", async (req, res) => {
+    try {
+      const allTrackings = await storage.getAllTrackings();
+      
+      // Calculate today's trackings
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const todayTrackings = allTrackings.filter(t => {
+        const createdDate = new Date(t.createdAt || 0);
+        createdDate.setHours(0, 0, 0, 0);
+        return createdDate.getTime() === today.getTime();
+      });
+
+      // Calculate by status
+      const byStatus = allTrackings.reduce((acc, tracking) => {
+        const status = tracking.status as keyof typeof TRACKING_STATUS;
+        acc[status] = (acc[status] || 0) + 1;
+        return acc;
+      }, {} as Record<keyof typeof TRACKING_STATUS, number>);
+
+      const response: TrackingStatsResponse = {
+        total: allTrackings.length,
+        today: todayTrackings.length,
+        byStatus
+      };
+
+      res.json(response);
+    } catch (error) {
+      console.error("Error getting tracking stats:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Create tracking endpoint (primarily for bot integration)
+  app.post("/api/trackings", async (req, res) => {
+    try {
+      const trackingData = insertTrackingSchema.parse(req.body);
+      const tracking = await storage.createTracking(trackingData);
+      res.status(201).json({ success: true, tracking });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          message: "Validation error", 
+          details: validationError.message 
+        });
+      }
+      console.error("Error creating tracking:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
   // Update tracking status (for admin/bot purposes) - Protected endpoint
-  app.post("/api/track/:trackingNumber/status", async (req, res) => {
-    const { trackingNumber } = req.params;
+  app.patch("/api/trackings/:trackingId/status", async (req, res) => {
+    const { trackingId } = req.params;
     
-    // Basic authentication check - in production, use proper auth tokens
+    // Require ADMIN_TOKEN to be explicitly set - no default fallback
+    const adminToken = process.env.ADMIN_TOKEN;
+    if (!adminToken) {
+      console.error("ADMIN_TOKEN environment variable not set");
+      return res.status(500).json({ message: "Server configuration error" });
+    }
+
     const authToken = req.headers.authorization;
-    if (!authToken || authToken !== `Bearer ${process.env.ADMIN_TOKEN || 'default-admin-token'}`) {
+    if (!authToken || authToken !== `Bearer ${adminToken}`) {
       return res.status(401).json({ message: "No autorizado - Token requerido" });
     }
 
     try {
-      // Validate request body
-      const { status, notes } = req.body;
-      if (!status || typeof status !== 'string') {
-        return res.status(400).json({ message: "Estado requerido" });
-      }
+      // Validate request body using proper schema
+      const validatedData = updateTrackingStatusSchema.parse(req.body);
+      const { newStatus, notes } = validatedData;
 
-      const success = await storage.updateTrackingStatus(trackingNumber, status, notes);
+      const success = await storage.updateTrackingStatus(trackingId, newStatus, notes);
       if (success) {
-        res.json({ success: true, message: "Estado actualizado correctamente" });
+        res.json({ 
+          success: true, 
+          message: "Estado actualizado correctamente",
+          trackingId,
+          newStatus
+        });
       } else {
         res.status(404).json({ message: "Tracking no encontrado" });
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        const validationError = fromZodError(error);
+        return res.status(400).json({ 
+          message: "Validation error", 
+          details: validationError.message 
+        });
+      }
       console.error("Error updating tracking status:", error);
       res.status(500).json({ message: "Error interno del servidor" });
     }

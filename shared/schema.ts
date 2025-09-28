@@ -110,6 +110,16 @@ export const insertServiceQuoteSchema = createInsertSchema(serviceQuotes).pick({
   description: true,
 });
 
+// Status constants matching the Python bot  
+export const TRACKING_STATUS = {
+  RETENIDO: "RETENIDO",
+  CONFIRMAR_PAGO: "CONFIRMAR_PAGO", 
+  EN_TRANSITO: "EN_TRANSITO",
+  ENTREGADO: "ENTREGADO"
+} as const;
+
+export type TrackingStatusType = typeof TRACKING_STATUS[keyof typeof TRACKING_STATUS];
+
 // Tracking system schemas
 export const insertTrackingSchema = createInsertSchema(trackings).pick({
   trackingId: true,
@@ -124,11 +134,27 @@ export const insertTrackingSchema = createInsertSchema(trackings).pick({
   senderCountry: true,
   senderState: true,
   productPrice: true,
-  status: true,
   estimatedDeliveryDate: true,
   actualDelayDays: true,
   userTelegramId: true,
   username: true,
+}).extend({
+  status: z.enum([
+    TRACKING_STATUS.RETENIDO,
+    TRACKING_STATUS.CONFIRMAR_PAGO, 
+    TRACKING_STATUS.EN_TRANSITO,
+    TRACKING_STATUS.ENTREGADO
+  ]).default(TRACKING_STATUS.RETENIDO),
+});
+
+export const updateTrackingStatusSchema = z.object({
+  newStatus: z.enum([
+    TRACKING_STATUS.RETENIDO,
+    TRACKING_STATUS.CONFIRMAR_PAGO,
+    TRACKING_STATUS.EN_TRANSITO,
+    TRACKING_STATUS.ENTREGADO
+  ]),
+  notes: z.string().optional(),
 });
 
 export const insertShippingRouteSchema = createInsertSchema(shippingRoutes).pick({
@@ -162,3 +188,50 @@ export type ShippingRoute = typeof shippingRoutes.$inferSelect;
 
 export type InsertStatusHistory = z.infer<typeof insertStatusHistorySchema>;
 export type StatusHistory = typeof statusHistory.$inferSelect;
+
+// Status display with emojis for frontend
+export const STATUS_DISPLAY = {
+  [TRACKING_STATUS.RETENIDO]: "🔴 RETENIDO",
+  [TRACKING_STATUS.CONFIRMAR_PAGO]: "🟡 CONFIRMAR PAGO", 
+  [TRACKING_STATUS.EN_TRANSITO]: "🔵 EN TRÁNSITO",
+  [TRACKING_STATUS.ENTREGADO]: "🟢 ENTREGADO"
+} as const;
+
+// Frontend-friendly tracking interface with computed properties
+export interface TrackingWithStatus extends Tracking {
+  statusDisplay: string;
+  daysSinceCreated: number;
+  isDelayed: boolean;
+}
+
+// API request types for frontend
+export interface TrackingLookupRequest {
+  trackingId: string;
+}
+
+export interface TrackingCreateRequest extends InsertTracking {}
+
+export interface TrackingUpdateStatusRequest {
+  trackingId: string;
+  newStatus: TrackingStatusType;
+  notes?: string;
+}
+
+// API response types  
+export interface TrackingLookupResponse {
+  tracking: Tracking | null;
+  history: StatusHistory[];
+  found: boolean;
+}
+
+export interface TrackingListResponse {
+  trackings: Tracking[];
+  total: number;
+  byStatus: Record<string, number>;
+}
+
+export interface TrackingStatsResponse {
+  total: number;
+  today: number;
+  byStatus: Record<TrackingStatusType, number>;
+}
