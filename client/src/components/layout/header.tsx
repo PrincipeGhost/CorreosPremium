@@ -101,14 +101,17 @@ export default function Header() {
                 <Search className="w-5 h-5" />
               </Button>
               <div className="w-px h-8 bg-gray-300 mx-2"></div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-blue-800 hover:text-blue-900 p-2"
-                data-testid="user-button"
-              >
-                <User className="w-5 h-5" />
-              </Button>
+              <Link href="/admin">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-blue-800 hover:text-blue-900 p-2"
+                  data-testid="admin-button"
+                  title="Panel Administrativo"
+                >
+                  <User className="w-5 h-5" />
+                </Button>
+              </Link>
             </div>
             
             {/* Right spacing */}
