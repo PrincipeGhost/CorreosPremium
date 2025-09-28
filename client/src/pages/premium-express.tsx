@@ -155,14 +155,14 @@ export default function PremiumExpressPage() {
                   </p>
                 </div>
               </div>
-              <div className="ml-8">
+              <div className="ml-11">
                 <a 
                   href="#"
-                  className="text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1"
+                  className="text-blue-950 hover:text-blue-800 font-semibold text-sm flex items-center space-x-1"
                   data-testid="button-mas-info-pee"
                 >
                   <span>MÁS INFO</span>
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-3 h-3" />
                 </a>
               </div>
             </div>
@@ -207,14 +207,14 @@ export default function PremiumExpressPage() {
                   </p>
                 </div>
               </div>
-              <div className="ml-8">
+              <div className="ml-11">
                 <a 
                   href="#"
-                  className="text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1"
+                  className="text-blue-950 hover:text-blue-800 font-semibold text-sm flex items-center space-x-1"
                   data-testid="button-mas-info-seguros"
                 >
                   <span>MÁS INFO</span>
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-3 h-3" />
                 </a>
               </div>
             </div>
