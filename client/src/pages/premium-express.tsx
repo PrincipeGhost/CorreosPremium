@@ -16,7 +16,7 @@ export default function PremiumExpressPage() {
     {
       number: 1,
       title: "Describe tus envíos",
-      description: "Completa los datos del origen, destino y características de tu paquete",
+      description: "",
       image: step1Image
     },
     {
