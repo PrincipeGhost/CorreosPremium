@@ -334,7 +334,29 @@ export default function PremiumExpressPage() {
                   Descripción
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  Paq Premium es nuestro servicio de envío más completo que te ofrece la máxima flexibilidad y garantías para tus envíos más importantes. Con entrega adaptada a tus necesidades y todas las garantías de Correos.
+                  <div className="space-y-4">
+                    <p>Sabemos que necesitas entregas urgentes y eficientes, por eso el Paq Premium es la opción perfecta para la distribución de tus envíos:</p>
+                    
+                    <div>
+                      <p><strong>A medida:</strong> adaptado a tus necesidades, aseguramos la entrega cuándo y dónde necesite.</p>
+                    </div>
+                    
+                    <div>
+                      <p><strong>Con garantías:</strong> dos intentos de entrega en domicilio bajo firma y en plazo garantizado. También disponible entrega en oficinas de Correos o Citypaq. Si no puede realizarse, dejaremos un aviso en el buzón con la oficina indicada para recogerlo durante 15 días. Si no cumplimos los plazos, te devolvemos la tarifa abonada.</p>
+                    </div>
+                    
+                    <div>
+                      <p><strong>Incluye Modify:</strong> modifica fácilmente la entrega de tu envío desde un ordenador o móvil para ajustarla a tus necesidades en tiempo real. Además, elige si el destinatario también puede hacer cambios y qué modificaciones puede realizar. Esta opción está disponible para todos los envíos de paquetería nacional con entrega domiciliaria.</p>
+                    </div>
+                    
+                    <div>
+                      <p><strong>Por tu tranquilidad:</strong> incluye aviso de llegada vía APP de Correos, email y/o SMS a los destinatarios.</p>
+                    </div>
+                    
+                    <div>
+                      <p><strong>Cerca de ti:</strong> para envíos nacionales, Andorra y Portugal (peninsular).</p>
+                    </div>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
 
@@ -343,13 +365,41 @@ export default function PremiumExpressPage() {
                   Detalles de envío
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  <ul className="space-y-2">
-                    <li>• Peso máximo: 30 kg</li>
-                    <li>• Dimensiones máximas: 60 x 60 x 60 cm</li>
-                    <li>• Entrega en domicilio, oficinas de Correos y Citypaq</li>
-                    <li>• Seguimiento en tiempo real</li>
-                    <li>• Notificaciones SMS y email</li>
-                  </ul>
+                  <div className="space-y-4">
+                    <p>Tú eliges el embalaje perfecto. ¡Puedes comprar un montón de productos disponibles en nuestra Tienda Online y en todas las oficinas de Correos!</p>
+                    
+                    <p>Eso sí, necesitamos que el tamaño se ajuste a estas medidas:</p>
+                    
+                    <div>
+                      <p><strong>Como máximo:</strong></p>
+                      <ul className="ml-4 space-y-2 mt-2">
+                        <li>• <strong>Caja:</strong> Largo + Alto + Ancho = 240 cm, sin que ninguna supere los 120 cm.</li>
+                        <li>• <strong>Rollo o tubo:</strong> el largo no puede superar los 120 cm y el diámetro 30 cm.</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <p>Si quieres enviar algo más grande, no te preocupes, añade un Máximo Extra por un poco más de coste:</p>
+                      <ul className="ml-4 space-y-2 mt-2">
+                        <li>• Largo + Alto + Ancho = 300 cm por un 35% más.</li>
+                        <li>• Ninguna de las medidas puede superar los 240 cm por un 35% más.</li>
+                        <li>• O añade las dos dimensiones extra por un 70% más.</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <p><strong>Como mínimo:</strong></p>
+                      <ul className="ml-4 space-y-2 mt-2">
+                        <li>• <strong>Caja:</strong> 10 x 14,5 cm.</li>
+                        <li>• <strong>Rollo o tubo:</strong> las dimensiones que permitan adherir una etiqueta de 10 x 14,5 cm.</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-yellow-50 p-3 rounded-lg">
+                      <p className="font-semibold text-gray-900">¡Y que no supere los 2 kg!</p>
+                      <p className="font-semibold text-gray-900">¡Y que no supere los 30 kg de peso real!</p>
+                    </div>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
 
