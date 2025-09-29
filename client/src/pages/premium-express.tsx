@@ -661,8 +661,11 @@ export default function PremiumExpressPage() {
       <div className="fixed bottom-0 left-0 right-0 bg-yellow-400 p-4 shadow-lg" data-testid="banner-bottom">
         <div className="flex justify-between items-center max-w-3xl mx-auto px-4">
           <div>
-            <p className="font-bold text-black text-sm">Paq Premium</p>
-            <p className="font-bold text-black text-sm">Desde 14,88 €</p>
+            <p className="font-bold text-blue-900 text-sm">Paq Premium</p>
+            <p className="text-blue-900 text-sm">
+              <span className="font-normal">Desde </span>
+              <span className="font-bold">14,88 €</span>
+            </p>
           </div>
           <Button 
             className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-6 py-2"
