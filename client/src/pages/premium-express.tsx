@@ -522,16 +522,7 @@ export default function PremiumExpressPage() {
                   Precio
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  <div className="space-y-2">
-                    <p><strong>Tarifa base:</strong> Desde 14,88€</p>
-                    <p><strong>Servicios adicionales:</strong></p>
-                    <ul className="ml-4 space-y-1">
-                      <li>• Prueba de Entrega Electrónica (PEE): +2,50€</li>
-                      <li>• Entrega exclusiva al destinatario: +3,20€</li>
-                      <li>• Reembolso: según importe</li>
-                      <li>• Seguros adicionales: desde 1,80€</li>
-                    </ul>
-                  </div>
+                  <p>Consulta tu tarifa aquí o en las oficinas de Correos</p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
