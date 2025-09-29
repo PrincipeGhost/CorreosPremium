@@ -3,6 +3,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Check, Plus, Info, ChevronLeft, ChevronRight, User, Users, CreditCard, FileText } from "lucide-react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 // Importaciones de imágenes - usando las rutas directas por compatibilidad
 const step1Image = "/attached_assets/IMG_8294_1759057963621.PNG";
 const step2Image = "/attached_assets/IMG_8295_1759057963621.PNG";
@@ -317,6 +318,74 @@ export default function PremiumExpressPage() {
             >
               <ChevronRight className="w-5 h-5 text-gray-700" />
             </button>
+          </div>
+        </section>
+
+        {/* Información del producto */}
+        <section className="bg-white py-12 px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-informacion-producto">
+              Información del producto
+            </h2>
+            
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              <AccordionItem value="descripcion" className="border border-gray-200 rounded-lg">
+                <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-descripcion">
+                  Descripción
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4 text-gray-700">
+                  Paq Premium es nuestro servicio de envío más completo que te ofrece la máxima flexibilidad y garantías para tus envíos más importantes. Con entrega adaptada a tus necesidades y todas las garantías de Correos.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="detalles-envio" className="border border-gray-200 rounded-lg">
+                <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-detalles-envio">
+                  Detalles de envío
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4 text-gray-700">
+                  <ul className="space-y-2">
+                    <li>• Peso máximo: 30 kg</li>
+                    <li>• Dimensiones máximas: 60 x 60 x 60 cm</li>
+                    <li>• Entrega en domicilio, oficinas de Correos y Citypaq</li>
+                    <li>• Seguimiento en tiempo real</li>
+                    <li>• Notificaciones SMS y email</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="garantias-plazos" className="border border-gray-200 rounded-lg">
+                <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-garantias-plazos">
+                  Garantías y plazos de entrega
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4 text-gray-700">
+                  <ul className="space-y-2">
+                    <li>• Entrega en 24-48 horas laborables</li>
+                    <li>• Garantía de entrega certificada</li>
+                    <li>• Cobertura de incidencias hasta 300€</li>
+                    <li>• Seguros adicionales disponibles</li>
+                    <li>• Garantía de devolución de 48 horas para inspección</li>
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="precio" className="border border-gray-200 rounded-lg">
+                <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-precio">
+                  Precio
+                </AccordionTrigger>
+                <AccordionContent className="px-4 pb-4 text-gray-700">
+                  <div className="space-y-2">
+                    <p><strong>Tarifa base:</strong> Desde 14,88€</p>
+                    <p><strong>Servicios adicionales:</strong></p>
+                    <ul className="ml-4 space-y-1">
+                      <li>• Prueba de Entrega Electrónica (PEE): +2,50€</li>
+                      <li>• Entrega exclusiva al destinatario: +3,20€</li>
+                      <li>• Reembolso: según importe</li>
+                      <li>• Seguros adicionales: desde 1,80€</li>
+                    </ul>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </section>
 
