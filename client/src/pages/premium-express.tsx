@@ -531,7 +531,7 @@ export default function PremiumExpressPage() {
 
         {/* Lo que necesitas saber para enviar un paquete */}
         <section className="bg-gray-100 py-12 px-4">
-          <div className="max-w-sm mx-auto">
+          <div className="max-w-[336px] mr-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-8" data-testid="title-necesitas-saber">
               Lo que necesitas saber para enviar un paquete
             </h2>
