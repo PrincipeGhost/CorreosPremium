@@ -541,8 +541,12 @@ export default function PremiumExpressPage() {
               <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-articulos-prohibidos">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-yellow-100 rounded-lg flex items-center justify-center">
-                      <AlertTriangle className="w-8 h-8 text-yellow-600" />
+                    <div className="w-16 h-16 rounded-lg flex items-center justify-center">
+                      <img 
+                        src="/attached_assets/IMG_8316_1759149029028.png" 
+                        alt="Artículos prohibidos"
+                        className="w-16 h-16 object-contain"
+                      />
                     </div>
                   </div>
                   <div className="flex-1">
@@ -566,8 +570,12 @@ export default function PremiumExpressPage() {
               <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-peso-medidas">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Scale className="w-8 h-8 text-blue-600" />
+                    <div className="w-16 h-16 rounded-lg flex items-center justify-center">
+                      <img 
+                        src="/attached_assets/IMG_8317_1759149029029.png" 
+                        alt="Guía de peso y medidas"
+                        className="w-16 h-16 object-contain"
+                      />
                     </div>
                   </div>
                   <div className="flex-1">
@@ -591,8 +599,12 @@ export default function PremiumExpressPage() {
               <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-embalaje">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center">
-                      <Package className="w-8 h-8 text-green-600" />
+                    <div className="w-16 h-16 rounded-lg flex items-center justify-center">
+                      <img 
+                        src="/attached_assets/IMG_8318_1759149029029.png" 
+                        alt="Consejos para embalaje"
+                        className="w-16 h-16 object-contain"
+                      />
                     </div>
                   </div>
                   <div className="flex-1">
@@ -616,8 +628,12 @@ export default function PremiumExpressPage() {
               <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-coberturas">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <Shield className="w-8 h-8 text-purple-600" />
+                    <div className="w-16 h-16 rounded-lg flex items-center justify-center">
+                      <img 
+                        src="/attached_assets/IMG_8320_1759149029029.png" 
+                        alt="Coberturas y garantías"
+                        className="w-16 h-16 object-contain"
+                      />
                     </div>
                   </div>
                   <div className="flex-1">
