@@ -553,7 +553,7 @@ export default function PremiumExpressPage() {
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       Artículos prohibidos y mercancías peligrosas
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-sm text-gray-600 mb-4">
                       ¿Vas a preparar tu próximo envío?
                     </p>
                     <Button 
@@ -582,7 +582,7 @@ export default function PremiumExpressPage() {
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       Guía de peso y medidas
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-sm text-gray-600 mb-4">
                       Antes de realizar tu envío, revisa aquí que cumpla con las medidas y pesos
                     </p>
                     <Button 
@@ -611,7 +611,7 @@ export default function PremiumExpressPage() {
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       Consejos para un buen embalaje
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-sm text-gray-600 mb-4">
                       ¿Tienes dudas sobre cómo preparar tu
                     </p>
                     <Button 
@@ -640,7 +640,7 @@ export default function PremiumExpressPage() {
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       Coberturas y garantías del envío
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-sm text-gray-600 mb-4">
                       Aquí podrás consultar las garantías y coberturas que incluye tu envío.
                     </p>
                     <Button 
