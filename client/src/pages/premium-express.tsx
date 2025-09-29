@@ -503,6 +503,16 @@ export default function PremiumExpressPage() {
                         <p className="text-sm mt-1">Tú pones la fecha en nuestro calendario y guardamos el envío hasta que llegue el momento de llevarlo a su destino.</p>
                       </div>
                     </div>
+                    
+                    <div className="text-center mt-4">
+                      <a 
+                        href="#" 
+                        className="text-blue-900 hover:text-blue-700 underline font-medium"
+                        data-testid="link-condiciones-paqueteria"
+                      >
+                        Condiciones de los servicios paquetería Nacional
+                      </a>
+                    </div>
                   </div>
                 </AccordionContent>
               </AccordionItem>
