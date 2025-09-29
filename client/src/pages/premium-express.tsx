@@ -531,14 +531,14 @@ export default function PremiumExpressPage() {
 
         {/* Lo que necesitas saber para enviar un paquete */}
         <section className="bg-gray-100 py-12 px-4">
-          <div className="max-w-lg mx-auto">
+          <div className="max-w-md mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-8" data-testid="title-necesitas-saber">
               Lo que necesitas saber para enviar un paquete
             </h2>
             
             <div className="space-y-6">
               {/* Artículos prohibidos */}
-              <div className="bg-white rounded-lg shadow-md py-4 px-6" data-testid="info-articulos-prohibidos">
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-articulos-prohibidos">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 rounded-lg flex items-center justify-center">
@@ -567,7 +567,7 @@ export default function PremiumExpressPage() {
               </div>
               
               {/* Guía de peso y medidas */}
-              <div className="bg-white rounded-lg shadow-md py-4 px-6" data-testid="info-peso-medidas">
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-peso-medidas">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 rounded-lg flex items-center justify-center">
@@ -596,7 +596,7 @@ export default function PremiumExpressPage() {
               </div>
               
               {/* Consejos embalaje */}
-              <div className="bg-white rounded-lg shadow-md py-4 px-6" data-testid="info-embalaje">
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-embalaje">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 rounded-lg flex items-center justify-center">
@@ -625,7 +625,7 @@ export default function PremiumExpressPage() {
               </div>
               
               {/* Coberturas y garantías */}
-              <div className="bg-white rounded-lg shadow-md py-4 px-6" data-testid="info-coberturas">
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-coberturas">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 rounded-lg flex items-center justify-center">
