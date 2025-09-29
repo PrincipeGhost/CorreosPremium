@@ -399,6 +399,36 @@ export default function PremiumExpressPage() {
                       <p className="font-semibold text-gray-900">¡Y que no supere los 2 kg!</p>
                       <p className="font-semibold text-gray-900">¡Y que no supere los 30 kg de peso real!</p>
                     </div>
+                    
+                    <div>
+                      <p>El peso volumétrico ya lo calculamos nosotros.</p>
+                    </div>
+                    
+                    <div>
+                      <p>Ya solo queda que nos digas dónde quieres que lo llevemos:</p>
+                      
+                      <div className="ml-4 space-y-3 mt-3">
+                        <div>
+                          <p><strong>Domicilio:</strong> dos intentos de entrega bajo firma. Si no puede realizarse, estará disponible durante 15 días en la oficina más cercana.</p>
+                        </div>
+                        
+                        <div>
+                          <p><strong>Oficina elegida:</strong> envío a la oficina que elijas y que debe tener punto de entrega de paquetería, donde estará disponible durante 15 días. Avisamos al destinatario de su llegada mediante la APP de Correos, email y/o SMS y enviamos varios recordatorios en caso de no producirse la recogida.</p>
+                        </div>
+                        
+                        <div>
+                          <p><strong>Citypaq:</strong> entrega en una de las taquillas inteligentes de Correos situadas por toda la ciudad y disponibles a cualquier hora del día (consultar horarios en web y APP).</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-blue-50 p-3 rounded-lg">
+                      <p className="text-sm">Es importante que tus datos y los del destinatario estén en un lugar visible sobre el embalaje.</p>
+                    </div>
+                    
+                    <div>
+                      <p className="font-medium">Y recuerda que puedes generar la etiqueta y pagar el envío para agilizar el trámite</p>
+                    </div>
                   </div>
                 </AccordionContent>
               </AccordionItem>
