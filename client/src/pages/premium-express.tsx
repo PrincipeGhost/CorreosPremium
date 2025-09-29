@@ -438,13 +438,30 @@ export default function PremiumExpressPage() {
                   Garantías y plazos de entrega
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  <ul className="space-y-2">
-                    <li>• Entrega en 24-48 horas laborables</li>
-                    <li>• Garantía de entrega certificada</li>
-                    <li>• Cobertura de incidencias hasta 300€</li>
-                    <li>• Seguros adicionales disponibles</li>
-                    <li>• Garantía de devolución de 48 horas para inspección</li>
-                  </ul>
+                  <div className="space-y-4">
+                    <p>Si tu envío sufre alguna incidencia al llegar a su destino, desde Correos te indemnizamos. Si prefieres que la compensación sea cobrada por el destinatario, deberás presentarnos una autorización firmada.</p>
+                    
+                    <p>Sabemos que confías en nosotros y esta es nuestra manera de agradecértelo:</p>
+                    
+                    <div>
+                      <h4 className="font-semibold text-gray-900 mb-3">Garantías Nacionales:</h4>
+                      
+                      <div>
+                        <p className="font-medium mb-2">Por demora:</p>
+                        
+                        <ul className="ml-4 space-y-2">
+                          <li>• <strong>Plazos para que la reclamación pueda dar lugar a indemnización:</strong> mínimo 3 días y máximo 21 días, desde la fecha de entrega del envío.</li>
+                          <li>• <strong>Indemnización:</strong> se devuelve la tarifa abonada.</li>
+                          <li>• <strong>Condiciones:</strong> los plazos de entrega solo se cumplirán si la admisión se ha realizado antes de las 16:00. En caso de no ser así, el plazo podrá incrementarse en 1 día.</li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gray-50 p-3 rounded-lg">
+                      <p className="text-sm text-gray-700">En los envíos con destino u origen a...</p>
+                      <p className="text-xs text-gray-500 mt-1">(Texto adicional por completar)</p>
+                    </div>
+                  </div>
                 </AccordionContent>
               </AccordionItem>
 
