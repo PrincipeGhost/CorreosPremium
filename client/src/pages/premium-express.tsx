@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Check, Plus, Info, ChevronLeft, ChevronRight, User, Users, CreditCard, FileText } from "lucide-react";
+import { Check, Plus, Info, ChevronLeft, ChevronRight, User, Users, CreditCard, FileText, Package, Scale, Shield, AlertTriangle } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 // Importaciones de imágenes - usando las rutas directas por compatibilidad
 const step1Image = "/attached_assets/IMG_8294_1759057963621.PNG";
@@ -530,79 +530,112 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Lo que necesitas saber para enviar un paquete */}
-        <section className="bg-white py-12 px-4">
+        <section className="bg-gray-100 py-12 px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-necesitas-saber">
+            <h2 className="text-xl font-bold text-gray-900 mb-8" data-testid="title-necesitas-saber">
               Lo que necesitas saber para enviar un paquete
             </h2>
             
-            {/* Artículos prohibidos */}
-            <div className="border-b border-gray-200 pb-6 mb-6" data-testid="info-articulos-prohibidos">
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Artículos prohibidos y mercancías peligrosas
-              </h3>
-              <p className="text-gray-700 text-sm mb-3">
-                ¿Vas a preparar tu próximo envío? Consulta aquí los artículos que no puedes enviar.
-              </p>
-              <Button 
-                variant="outline"
-                className="text-blue-600 border-blue-600 hover:bg-blue-50"
-                data-testid="button-mas-info-prohibidos"
-              >
-                MÁS INFO
-              </Button>
-            </div>
-            
-            {/* Guía de peso y medidas */}
-            <div className="border-b border-gray-200 pb-6 mb-6" data-testid="info-peso-medidas">
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Guía de peso y medidas
-              </h3>
-              <p className="text-gray-700 text-sm mb-3">
-                Antes de realizar tu envío, revisa aquí que cumpla con las medidas y pesos adecuados.
-              </p>
-              <Button 
-                variant="outline"
-                className="text-blue-600 border-blue-600 hover:bg-blue-50"
-                data-testid="button-mas-info-peso"
-              >
-                MÁS INFO
-              </Button>
-            </div>
-            
-            {/* Consejos embalaje */}
-            <div className="border-b border-gray-200 pb-6 mb-6" data-testid="info-embalaje">
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Consejos para un buen embalaje
-              </h3>
-              <p className="text-gray-700 text-sm mb-3">
-                ¿Tienes dudas sobre cómo preparar tu paquete para enviarlo? 
-                Aquí te contamos todo para que consigas un embalaje perfecto.
-              </p>
-              <Button 
-                variant="outline"
-                className="text-blue-600 border-blue-600 hover:bg-blue-50"
-                data-testid="button-mas-info-embalaje"
-              >
-                MÁS INFO
-              </Button>
-            </div>
-            
-            {/* Coberturas y garantías */}
-            <div className="pb-6" data-testid="info-coberturas">
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Coberturas y garantías del envío
-              </h3>
-              <p className="text-gray-700 text-sm mb-3">
-                Aquí podrás consultar las garantías y coberturas que incluye tu envío.
-              </p>
-              <Button 
-                variant="outline"
-                className="text-blue-600 border-blue-600 hover:bg-blue-50"
-                data-testid="button-mas-info-coberturas"
-              >
-                MÁS INFO
-              </Button>
+            <div className="space-y-6">
+              {/* Artículos prohibidos */}
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-articulos-prohibidos">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-yellow-100 rounded-lg flex items-center justify-center">
+                      <AlertTriangle className="w-8 h-8 text-yellow-600" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      Artículos prohibidos y mercancías peligrosas
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      ¿Vas a preparar tu próximo envío?
+                    </p>
+                    <Button 
+                      className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold px-6 py-2 rounded-lg"
+                      data-testid="button-mas-info-prohibidos"
+                    >
+                      MÁS INFO
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Guía de peso y medidas */}
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-peso-medidas">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <Scale className="w-8 h-8 text-blue-600" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      Guía de peso y medidas
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Antes de realizar tu envío, revisa aquí que cumpla con las medidas y pesos
+                    </p>
+                    <Button 
+                      className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold px-6 py-2 rounded-lg"
+                      data-testid="button-mas-info-peso"
+                    >
+                      MÁS INFO
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Consejos embalaje */}
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-embalaje">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center">
+                      <Package className="w-8 h-8 text-green-600" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      Consejos para un buen embalaje
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      ¿Tienes dudas sobre cómo preparar tu
+                    </p>
+                    <Button 
+                      className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold px-6 py-2 rounded-lg"
+                      data-testid="button-mas-info-embalaje"
+                    >
+                      MÁS INFO
+                    </Button>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Coberturas y garantías */}
+              <div className="bg-white rounded-lg shadow-md p-6" data-testid="info-coberturas">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center">
+                      <Shield className="w-8 h-8 text-purple-600" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      Coberturas y garantías del envío
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      Aquí podrás consultar las garantías y coberturas que incluye tu envío.
+                    </p>
+                    <Button 
+                      className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold px-6 py-2 rounded-lg"
+                      data-testid="button-mas-info-coberturas"
+                    >
+                      MÁS INFO
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
