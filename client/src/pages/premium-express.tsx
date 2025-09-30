@@ -273,7 +273,7 @@ export default function PremiumExpressPage() {
               </div>
 
               {/* Número del paso */}
-              <div className="text-4xl font-bold text-black mb-0 mt-2" data-testid={`step-number-${steps[currentStep].number}`}>
+              <div className="text-xl font-bold text-black mb-0 mt-2" data-testid={`step-number-${steps[currentStep].number}`}>
                 {steps[currentStep].number}
               </div>
 
