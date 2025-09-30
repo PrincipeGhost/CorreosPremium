@@ -130,11 +130,11 @@ export default function PremiumExpressPage() {
             </div>
             
             {/* Precio y botón */}
-            <div className="text-left mt-8 ml-8">
+            <div className="mt-8 ml-8 w-40 text-center">
               <p className="text-base mb-1" style={{ color: '#000000' }} data-testid="text-desde">Desde</p>
               <p className="text-3xl font-bold text-gray-900 mb-6" data-testid="price-premium">14,88 €</p>
               <Button 
-                className="w-32 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 text-base rounded-md"
+                className="w-32 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 text-base rounded-md mx-auto"
                 data-testid="button-enviar-main"
               >
                 ENVIAR
