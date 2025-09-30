@@ -301,8 +301,10 @@ export default function PremiumExpressPage() {
                   <button
                     key={index}
                     onClick={() => setCurrentStep(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentStep ? 'bg-black' : 'bg-black bg-opacity-30'
+                    className={`rounded-full transition-all ${
+                      index === currentStep 
+                        ? 'w-8 h-3 bg-blue-950' 
+                        : 'w-3 h-3 bg-gray-600'
                     }`}
                     data-testid={`dot-indicator-${index + 1}`}
                   />
