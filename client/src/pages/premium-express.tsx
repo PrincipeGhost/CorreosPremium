@@ -322,13 +322,13 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Información del producto */}
-        <section className="bg-white py-12 px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-informacion-producto">
+        <section className="bg-white py-12 px-0">
+          <div className="w-full">
+            <h2 className="text-xl font-bold text-gray-900 mb-6 px-4" data-testid="title-informacion-producto">
               Información del producto
             </h2>
             
-            <Accordion type="single" collapsible className="w-full space-y-4">
+            <Accordion type="single" collapsible className="w-full space-y-4 px-4">
               <AccordionItem value="descripcion" className="border border-gray-200 rounded-lg">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-descripcion">
                   Descripción
