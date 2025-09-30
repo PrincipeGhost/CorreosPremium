@@ -322,14 +322,14 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Información del producto */}
-        <section className="bg-white py-12 px-0">
+        <section className="bg-white py-12">
           <div className="w-full">
             <h2 className="text-xl font-bold text-gray-900 mb-6 px-4" data-testid="title-informacion-producto">
               Información del producto
             </h2>
             
-            <Accordion type="single" collapsible className="w-full space-y-4 px-4">
-              <AccordionItem value="descripcion" className="border border-gray-200 rounded-lg">
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              <AccordionItem value="descripcion" className="border border-gray-200">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-descripcion">
                   Descripción
                 </AccordionTrigger>
@@ -360,7 +360,7 @@ export default function PremiumExpressPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="detalles-envio" className="border border-gray-200 rounded-lg">
+              <AccordionItem value="detalles-envio" className="border border-gray-200">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-detalles-envio">
                   Detalles de envío
                 </AccordionTrigger>
@@ -433,7 +433,7 @@ export default function PremiumExpressPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="garantias-plazos" className="border border-gray-200 rounded-lg">
+              <AccordionItem value="garantias-plazos" className="border border-gray-200">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-garantias-plazos">
                   Garantías y plazos de entrega
                 </AccordionTrigger>
@@ -517,7 +517,7 @@ export default function PremiumExpressPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="precio" className="border border-gray-200 rounded-lg">
+              <AccordionItem value="precio" className="border border-gray-200">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-precio">
                   Precio
                 </AccordionTrigger>
