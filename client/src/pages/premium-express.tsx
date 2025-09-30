@@ -134,7 +134,7 @@ export default function PremiumExpressPage() {
               <p className="text-base mb-1 font-bold" style={{ color: '#000000' }} data-testid="text-desde">Desde</p>
               <p className="text-3xl font-bold text-gray-900 mb-6" data-testid="price-premium">14,88 €</p>
               <Button 
-                className="w-24 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 text-base rounded-md mx-auto"
+                className="w-24 bg-yellow-400 hover:bg-yellow-500 text-blue-950 font-bold py-3 text-base rounded-md mx-auto"
                 data-testid="button-enviar-main"
               >
                 ENVIAR
