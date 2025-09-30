@@ -255,7 +255,7 @@ export default function PremiumExpressPage() {
             {/* Botón anterior */}
             <button
               onClick={prevStep}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow ${currentStep === 0 ? 'invisible' : ''}`}
               data-testid="button-prev-step"
             >
               <ChevronLeft className="w-5 h-5 text-gray-700" />
