@@ -251,11 +251,11 @@ export default function PremiumExpressPage() {
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
         <section className="bg-yellow-400 pt-2 pb-6" data-testid="steps-carousel">
-          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-center gap-4 px-4 h-[420px]">
+          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-start gap-4 px-4 h-[420px]">
             {/* Botón anterior */}
             <button
               onClick={prevStep}
-              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow ${currentStep === 0 ? 'invisible' : ''}`}
+              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[57px] md:mt-[97px] lg:mt-[122px] ${currentStep === 0 ? 'invisible' : ''}`}
               data-testid="button-prev-step"
             >
               <ChevronLeft className="w-5 h-5 text-gray-700" />
@@ -315,7 +315,7 @@ export default function PremiumExpressPage() {
             {/* Botón siguiente */}
             <button
               onClick={nextStep}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[57px] md:mt-[97px] lg:mt-[122px]"
               data-testid="button-next-step"
             >
               <ChevronRight className="w-5 h-5 text-gray-700" />
