@@ -659,7 +659,7 @@ export default function PremiumExpressPage() {
       
       {/* Banner inferior fijo */}
       <div className="fixed bottom-0 left-0 right-0 bg-yellow-400 p-4 shadow-lg" data-testid="banner-bottom">
-        <div className="flex justify-start items-center max-w-3xl mx-auto px-4 gap-x-6 pl-8">
+        <div className="flex justify-between items-center max-w-full px-4">
           <div>
             <p className="font-bold text-blue-900 text-sm">Paq Premium</p>
             <p className="text-blue-900 text-sm">
