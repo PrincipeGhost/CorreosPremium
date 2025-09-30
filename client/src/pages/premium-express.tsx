@@ -668,7 +668,7 @@ export default function PremiumExpressPage() {
             </p>
           </div>
           <Button 
-            className="bg-blue-900 hover:bg-blue-800 text-white font-bold px-6 py-2"
+            className="bg-blue-950 hover:bg-blue-900 text-white font-bold px-6 py-3"
             data-testid="button-enviar-banner"
           >
             ENVIAR
