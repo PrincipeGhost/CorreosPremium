@@ -329,7 +329,7 @@ export default function PremiumExpressPage() {
             </h2>
             
             <Accordion type="single" collapsible className="w-full space-y-4">
-              <AccordionItem value="descripcion" className="border-2 border-blue-950">
+              <AccordionItem value="descripcion" className="border border-blue-950">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-descripcion">
                   Descripción
                 </AccordionTrigger>
@@ -360,7 +360,7 @@ export default function PremiumExpressPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="detalles-envio" className="border-2 border-blue-950">
+              <AccordionItem value="detalles-envio" className="border border-blue-950">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-detalles-envio">
                   Detalles de envío
                 </AccordionTrigger>
@@ -433,7 +433,7 @@ export default function PremiumExpressPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="garantias-plazos" className="border-2 border-blue-950">
+              <AccordionItem value="garantias-plazos" className="border border-blue-950">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-garantias-plazos">
                   Garantías y plazos de entrega
                 </AccordionTrigger>
@@ -517,7 +517,7 @@ export default function PremiumExpressPage() {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="precio" className="border-2 border-blue-950">
+              <AccordionItem value="precio" className="border border-blue-950">
                 <AccordionTrigger className="px-4 text-blue-900 hover:no-underline" data-testid="accordion-precio">
                   Precio
                 </AccordionTrigger>
