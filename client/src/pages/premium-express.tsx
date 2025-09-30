@@ -29,7 +29,7 @@ export default function PremiumExpressPage() {
     {
       number: 3,
       title: "Realiza el pago",
-      description: "con tarjeta bancaria, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
+      description: "con transferencia Bancaria o Sepa, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
       image: step3Image
     },
     {
