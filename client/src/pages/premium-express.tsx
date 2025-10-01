@@ -255,7 +255,7 @@ export default function PremiumExpressPage() {
             {/* Botón anterior */}
             <button
               onClick={prevStep}
-              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-black mt-[85px] md:mt-[130px] lg:mt-[155px] -mr-6 md:-mr-8 lg:-mr-10 ${currentStep === 0 ? 'invisible' : ''}`}
+              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border border-gray-300 mt-[95px] md:mt-[140px] lg:mt-[165px] -mr-6 md:-mr-8 lg:-mr-10 ${currentStep === 0 ? 'invisible' : ''}`}
               data-testid="button-prev-step"
             >
               <ChevronLeft className="w-5 h-5 text-black" />
@@ -319,7 +319,7 @@ export default function PremiumExpressPage() {
             {/* Botón siguiente */}
             <button
               onClick={nextStep}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-black mt-[85px] md:mt-[130px] lg:mt-[155px] -ml-6 md:-ml-8 lg:-ml-10"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border border-gray-300 mt-[95px] md:mt-[140px] lg:mt-[165px] -ml-6 md:-ml-8 lg:-ml-10"
               data-testid="button-next-step"
             >
               <ChevronRight className="w-5 h-5 text-black" />
