@@ -16,8 +16,8 @@ export default function PremiumExpressPage() {
   const steps = [
     {
       number: 1,
-      title: "",
-      description: "Describe tus envíos",
+      title: "Describe tus envíos",
+      description: "",
       image: step1Image
     },
     {
@@ -28,14 +28,14 @@ export default function PremiumExpressPage() {
     },
     {
       number: 3,
-      title: "",
-      description: "Realiza el pago con transferencia Bancaria o Sepa, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
+      title: "Realiza el pago",
+      description: "con transferencia Bancaria o Sepa, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
       image: step3Image
     },
     {
       number: 4,
-      title: "",
-      description: "Imprime las etiquetas que identifican los paquetes antes de gestionar su recogida o de llevarlos a una de nuestras oficinas.",
+      title: "Imprime las etiquetas",
+      description: "que identifican los paquetes antes de gestionar su recogida o de llevarlos a una de nuestras oficinas.",
       image: step4Image
     }
   ];
@@ -273,7 +273,7 @@ export default function PremiumExpressPage() {
               </div>
 
               {/* Número del paso */}
-              <div className="text-xl font-bold text-black mb-0 mt-2" data-testid={`step-number-${steps[currentStep].number}`}>
+              <div className="text-base font-bold text-black mb-0 mt-2" data-testid={`step-number-${steps[currentStep].number}`}>
                 {steps[currentStep].number}
               </div>
 
@@ -285,15 +285,17 @@ export default function PremiumExpressPage() {
               )}
 
               {/* Descripción */}
-              <p className="text-black text-base leading-relaxed max-w-lg mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
-                {steps[currentStep].number === 2 ? (
-                  <>
-                    <span className="font-bold">Registra el conjunto de destinatarios</span> a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.
-                  </>
-                ) : (
-                  steps[currentStep].description
-                )}
-              </p>
+              {steps[currentStep].description && (
+                <p className="text-black text-base leading-relaxed max-w-lg mx-auto" data-testid={`step-description-${steps[currentStep].number}`}>
+                  {steps[currentStep].number === 2 ? (
+                    <>
+                      <span className="font-bold">Registra el conjunto de destinatarios</span> a los que quieres enviar los paquetes e indica si deseas incluir algún servicio añadido.
+                    </>
+                  ) : (
+                    steps[currentStep].description
+                  )}
+                </p>
+              )}
 
               {/* Indicadores de puntos */}
               <div className="flex justify-center mt-2 space-x-2">
