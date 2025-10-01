@@ -343,7 +343,7 @@ export default function PremiumExpressPage() {
                   <div className="space-y-4">
                     <p>Sabemos que necesitas entregas urgentes y eficientes, por eso el <strong>Paq Premium</strong> es la opción perfecta para la distribución de tus envíos:</p>
                     
-                    <ul className="space-y-3 list-disc ml-10 marker:text-black marker:font-bold marker:text-xl">
+                    <ul className="space-y-3 list-disc ml-10 marker:text-black marker:font-bold marker:text-lg">
                       <li><strong>A medida:</strong> adaptado a tus necesidades, aseguramos la entrega cuándo y dónde necesite.</li>
                       
                       <li><strong>Con garantías:</strong> dos intentos de entrega en domicilio bajo firma y en plazo garantizado. También disponible entrega en oficinas de Correos o <span className="text-blue-900 underline">Citypaq</span>. Si no puede realizarse, dejaremos un aviso en el buzón con la oficina indicada para recogerlo durante 15 días. Si no cumplimos los plazos, te devolvemos la tarifa abonada.</li>
