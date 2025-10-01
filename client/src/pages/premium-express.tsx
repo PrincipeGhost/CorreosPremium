@@ -665,7 +665,7 @@ export default function PremiumExpressPage() {
           <div>
             <p className="font-extrabold text-blue-900 text-sm">Paq Premium</p>
             <p className="text-blue-900 text-sm">
-              <span className="font-normal">Desde </span>
+              <span className="font-semibold">Desde </span>
               <span className="font-extrabold">14,88 €</span>
             </p>
           </div>
