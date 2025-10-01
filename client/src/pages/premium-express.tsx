@@ -255,10 +255,10 @@ export default function PremiumExpressPage() {
             {/* Botón anterior */}
             <button
               onClick={prevStep}
-              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-gray-300 mt-[75px] md:mt-[120px] lg:mt-[145px] -mr-6 md:-mr-8 lg:-mr-10 ${currentStep === 0 ? 'invisible' : ''}`}
+              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-black mt-[85px] md:mt-[130px] lg:mt-[155px] -mr-6 md:-mr-8 lg:-mr-10 ${currentStep === 0 ? 'invisible' : ''}`}
               data-testid="button-prev-step"
             >
-              <ChevronLeft className="w-5 h-5 text-gray-700 border border-gray-400 rounded" />
+              <ChevronLeft className="w-5 h-5 text-black" />
             </button>
 
             {/* Contenido del paso actual */}
@@ -319,10 +319,10 @@ export default function PremiumExpressPage() {
             {/* Botón siguiente */}
             <button
               onClick={nextStep}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-gray-300 mt-[75px] md:mt-[120px] lg:mt-[145px] -ml-6 md:-ml-8 lg:-ml-10"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-black mt-[85px] md:mt-[130px] lg:mt-[155px] -ml-6 md:-ml-8 lg:-ml-10"
               data-testid="button-next-step"
             >
-              <ChevronRight className="w-5 h-5 text-gray-700 border border-gray-400 rounded" />
+              <ChevronRight className="w-5 h-5 text-black" />
             </button>
           </div>
         </section>
