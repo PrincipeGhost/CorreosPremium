@@ -250,8 +250,8 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
-        <section className="bg-yellow-400 pt-2 pb-6" data-testid="steps-carousel">
-          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-start gap-0 px-4 h-[460px] md:h-[480px] lg:h-[510px]">
+        <section className="bg-yellow-400 pt-2 pb-2" data-testid="steps-carousel">
+          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-start gap-0 px-4 h-[420px] md:h-[440px] lg:h-[470px]">
             {/* Botón anterior */}
             <button
               onClick={prevStep}
