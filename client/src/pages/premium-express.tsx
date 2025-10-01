@@ -352,7 +352,7 @@ export default function PremiumExpressPage() {
                     </div>
                     
                     <div>
-                      <p>• Incluye <span className="text-blue-900 font-bold underline">Modify</span>: modifica fácilmente la entrega de tu envío desde un ordenador o móvil para ajustarla a tus necesidades en tiempo real. Además, elige si el destinatario también puede hacer cambios y qué modificaciones puede realizar. Esta opción está disponible para todos los envíos de paquetería nacional con entrega domiciliaria.</p>
+                      <p>• <strong>Incluye <span className="text-blue-900 underline">Modify</span>:</strong> modifica fácilmente la entrega de tu envío desde un ordenador o móvil para ajustarla a tus necesidades en tiempo real. Además, elige si el destinatario también puede hacer cambios y qué modificaciones puede realizar. Esta opción está disponible para todos los envíos de paquetería nacional con entrega domiciliaria.</p>
                     </div>
                     
                     <div>
