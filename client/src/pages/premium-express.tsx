@@ -255,16 +255,16 @@ export default function PremiumExpressPage() {
             {/* Botón anterior */}
             <button
               onClick={prevStep}
-              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[65px] md:mt-[110px] lg:mt-[135px] -mr-6 md:-mr-8 lg:-mr-10 ${currentStep === 0 ? 'invisible' : ''}`}
+              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-gray-300 mt-[75px] md:mt-[120px] lg:mt-[145px] -mr-6 md:-mr-8 lg:-mr-10 ${currentStep === 0 ? 'invisible' : ''}`}
               data-testid="button-prev-step"
             >
-              <ChevronLeft className="w-5 h-5 text-gray-700" />
+              <ChevronLeft className="w-5 h-5 text-gray-700 border border-gray-400 rounded" />
             </button>
 
             {/* Contenido del paso actual */}
             <div className="text-center">
               {/* Ilustración sin fondo */}
-              <div className="mx-auto mb-0 mt-2 md:mt-0 flex items-center justify-center overflow-hidden w-[320px] h-[130px] md:w-[550px] md:h-[220px] lg:w-[680px] lg:h-[270px]">
+              <div className="mx-auto mb-0 mt-8 md:mt-6 lg:mt-8 flex items-center justify-center overflow-hidden w-[320px] h-[130px] md:w-[550px] md:h-[220px] lg:w-[680px] lg:h-[270px]">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
@@ -319,10 +319,10 @@ export default function PremiumExpressPage() {
             {/* Botón siguiente */}
             <button
               onClick={nextStep}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[65px] md:mt-[110px] lg:mt-[135px] -ml-6 md:-ml-8 lg:-ml-10"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow border-2 border-gray-300 mt-[75px] md:mt-[120px] lg:mt-[145px] -ml-6 md:-ml-8 lg:-ml-10"
               data-testid="button-next-step"
             >
-              <ChevronRight className="w-5 h-5 text-gray-700" />
+              <ChevronRight className="w-5 h-5 text-gray-700 border border-gray-400 rounded" />
             </button>
           </div>
         </section>
