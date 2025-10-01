@@ -28,14 +28,14 @@ export default function PremiumExpressPage() {
     },
     {
       number: 3,
-      title: "Realiza el pago",
-      description: "con transferencia Bancaria o Sepa, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
+      title: "",
+      description: "Realiza el pago con transferencia Bancaria o Sepa, PayPal, a través de una de nuestras oficinas, mediante un contrato con Correos o enviando el paquete en un sobre prepagado.",
       image: step3Image
     },
     {
       number: 4,
-      title: "Imprime las etiquetas",
-      description: "que identifican los paquetes antes de gestionar su recogida o de llevarlos a una de nuestras oficinas.",
+      title: "",
+      description: "Imprime las etiquetas que identifican los paquetes antes de gestionar su recogida o de llevarlos a una de nuestras oficinas.",
       image: step4Image
     }
   ];
