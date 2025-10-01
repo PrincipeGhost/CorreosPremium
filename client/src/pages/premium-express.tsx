@@ -300,7 +300,7 @@ export default function PremiumExpressPage() {
               </p>
 
               {/* Indicadores de puntos */}
-              <div className="flex justify-center mt-2 space-x-2">
+              <div className="flex justify-center mt-6 space-x-2">
                 {steps.map((_, index) => (
                   <button
                     key={index}
