@@ -228,7 +228,7 @@ export default function PremiumExpressPage() {
         </section>
 
         {/* Como enviar un Paq Premium, paso a paso */}
-        <section className="bg-white pt-12 pb-4 px-4">
+        <section className="bg-white pt-6 pb-4 px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-gray-900 mb-6" data-testid="title-como-enviar">
               Como enviar un Paq Premium, paso a paso
