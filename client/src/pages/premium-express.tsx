@@ -251,11 +251,11 @@ export default function PremiumExpressPage() {
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
         <section className="bg-yellow-400 pt-2 pb-6" data-testid="steps-carousel">
-          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-start gap-2 px-4 h-[500px] md:h-[520px] lg:h-[560px]">
+          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-start gap-2 px-4 h-[460px] md:h-[480px] lg:h-[510px]">
             {/* Botón anterior */}
             <button
               onClick={prevStep}
-              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[75px] md:mt-[125px] lg:mt-[155px] ${currentStep === 0 ? 'invisible' : ''}`}
+              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[65px] md:mt-[110px] lg:mt-[135px] ${currentStep === 0 ? 'invisible' : ''}`}
               data-testid="button-prev-step"
             >
               <ChevronLeft className="w-5 h-5 text-gray-700" />
@@ -264,7 +264,7 @@ export default function PremiumExpressPage() {
             {/* Contenido del paso actual */}
             <div className="text-center">
               {/* Ilustración sin fondo */}
-              <div className="mx-auto mb-0 mt-2 md:mt-0 flex items-center justify-center overflow-hidden w-[360px] h-[145px] md:w-[620px] md:h-[245px] lg:w-[750px] lg:h-[300px]">
+              <div className="mx-auto mb-0 mt-2 md:mt-0 flex items-center justify-center overflow-hidden w-[320px] h-[130px] md:w-[550px] md:h-[220px] lg:w-[680px] lg:h-[270px]">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
@@ -315,7 +315,7 @@ export default function PremiumExpressPage() {
             {/* Botón siguiente */}
             <button
               onClick={nextStep}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[75px] md:mt-[125px] lg:mt-[155px]"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[65px] md:mt-[110px] lg:mt-[135px]"
               data-testid="button-next-step"
             >
               <ChevronRight className="w-5 h-5 text-gray-700" />
