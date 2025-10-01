@@ -307,8 +307,8 @@ export default function PremiumExpressPage() {
                     onClick={() => setCurrentStep(index)}
                     className={`rounded-full transition-all ${
                       index === currentStep 
-                        ? 'w-8 h-2 bg-blue-950' 
-                        : 'w-2 h-2 bg-gray-600'
+                        ? 'w-8 h-1.5 bg-blue-950' 
+                        : 'w-1.5 h-1.5 bg-gray-600'
                     }`}
                     data-testid={`dot-indicator-${index + 1}`}
                   />
