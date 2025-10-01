@@ -343,25 +343,17 @@ export default function PremiumExpressPage() {
                   <div className="space-y-4">
                     <p>Sabemos que necesitas entregas urgentes y eficientes, por eso el <strong>Paq Premium</strong> es la opción perfecta para la distribución de tus envíos:</p>
                     
-                    <div>
-                      <p>• <strong>A medida:</strong> adaptado a tus necesidades, aseguramos la entrega cuándo y dónde necesite.</p>
-                    </div>
-                    
-                    <div>
-                      <p>• <strong>Con garantías:</strong> dos intentos de entrega en domicilio bajo firma y en plazo garantizado. También disponible entrega en oficinas de Correos o <span className="text-blue-900 underline">Citypaq</span>. Si no puede realizarse, dejaremos un aviso en el buzón con la oficina indicada para recogerlo durante 15 días. Si no cumplimos los plazos, te devolvemos la tarifa abonada.</p>
-                    </div>
-                    
-                    <div>
-                      <p>• <strong>Incluye <span className="text-blue-900 underline">Modify</span>:</strong> modifica fácilmente la entrega de tu envío desde un ordenador o móvil para ajustarla a tus necesidades en tiempo real. Además, elige si el destinatario también puede hacer cambios y qué modificaciones puede realizar. Esta opción está disponible para todos los envíos de paquetería nacional con entrega domiciliaria.</p>
-                    </div>
-                    
-                    <div>
-                      <p>• <strong>Por tu tranquilidad:</strong> incluye aviso de llegada vía APP de Correos, email y/o SMS a los destinatarios.</p>
-                    </div>
-                    
-                    <div>
-                      <p>• <strong>Cerca de ti:</strong> para envíos nacionales, Andorra y Portugal (peninsular).</p>
-                    </div>
+                    <ul className="space-y-3 list-disc ml-5 marker:text-black marker:font-bold">
+                      <li><strong>A medida:</strong> adaptado a tus necesidades, aseguramos la entrega cuándo y dónde necesite.</li>
+                      
+                      <li><strong>Con garantías:</strong> dos intentos de entrega en domicilio bajo firma y en plazo garantizado. También disponible entrega en oficinas de Correos o <span className="text-blue-900 underline">Citypaq</span>. Si no puede realizarse, dejaremos un aviso en el buzón con la oficina indicada para recogerlo durante 15 días. Si no cumplimos los plazos, te devolvemos la tarifa abonada.</li>
+                      
+                      <li>Incluye <span className="text-blue-900 font-bold underline">Modify</span>: modifica fácilmente la entrega de tu envío desde un ordenador o móvil para ajustarla a tus necesidades en tiempo real. Además, elige si el destinatario también puede hacer cambios y qué modificaciones puede realizar. Esta opción está disponible para todos los envíos de paquetería nacional con entrega domiciliaria.</li>
+                      
+                      <li><strong>Por tu tranquilidad:</strong> incluye aviso de llegada vía APP de Correos, email y/o SMS a los destinatarios.</li>
+                      
+                      <li><strong>Cerca de ti:</strong> para envíos nacionales, Andorra y Portugal (peninsular).</li>
+                    </ul>
                   </div>
                 </AccordionContent>
               </AccordionItem>
