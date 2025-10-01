@@ -251,11 +251,11 @@ export default function PremiumExpressPage() {
 
         {/* Carrusel de pasos - Fondo amarillo completo */}
         <section className="bg-yellow-400 pt-2 pb-6" data-testid="steps-carousel">
-          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-start gap-2 px-4 h-[420px]">
+          <div className="max-w-3xl mx-auto grid grid-cols-[auto_1fr_auto] items-start gap-2 px-4 h-[500px] md:h-[520px] lg:h-[560px]">
             {/* Botón anterior */}
             <button
               onClick={prevStep}
-              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[57px] md:mt-[97px] lg:mt-[122px] ${currentStep === 0 ? 'invisible' : ''}`}
+              className={`w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[75px] md:mt-[125px] lg:mt-[155px] ${currentStep === 0 ? 'invisible' : ''}`}
               data-testid="button-prev-step"
             >
               <ChevronLeft className="w-5 h-5 text-gray-700" />
@@ -264,11 +264,11 @@ export default function PremiumExpressPage() {
             {/* Contenido del paso actual */}
             <div className="text-center">
               {/* Ilustración sin fondo */}
-              <div className="mx-auto mb-0 mt-2 md:mt-0 flex items-center justify-center overflow-hidden w-[280px] h-[110px] md:w-[480px] md:h-[190px] lg:w-[600px] lg:h-[240px]">
+              <div className="mx-auto mb-0 mt-2 md:mt-0 flex items-center justify-center overflow-hidden w-[360px] h-[145px] md:w-[620px] md:h-[245px] lg:w-[750px] lg:h-[300px]">
                 <img 
                   src={steps[currentStep].image} 
                   alt={steps[currentStep].title}
-                  className="w-full h-full object-cover object-top transform origin-top scale-95 md:scale-97 lg:scale-100"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
 
@@ -315,7 +315,7 @@ export default function PremiumExpressPage() {
             {/* Botón siguiente */}
             <button
               onClick={nextStep}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[57px] md:mt-[97px] lg:mt-[122px]"
+              className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow mt-[75px] md:mt-[125px] lg:mt-[155px]"
               data-testid="button-next-step"
             >
               <ChevronRight className="w-5 h-5 text-gray-700" />
