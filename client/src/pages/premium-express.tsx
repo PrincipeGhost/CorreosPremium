@@ -16,8 +16,8 @@ export default function PremiumExpressPage() {
   const steps = [
     {
       number: 1,
-      title: "Describe tus envíos",
-      description: "",
+      title: "",
+      description: "Describe tus envíos",
       image: step1Image
     },
     {
@@ -663,10 +663,10 @@ export default function PremiumExpressPage() {
       <div className="fixed bottom-0 left-0 right-0 bg-yellow-400 p-4 shadow-lg" data-testid="banner-bottom">
         <div className="flex justify-between items-center max-w-full pl-1 pr-1">
           <div>
-            <p className="font-bold text-blue-900 text-sm">Paq Premium</p>
+            <p className="font-extrabold text-blue-900 text-sm">Paq Premium</p>
             <p className="text-blue-900 text-sm">
               <span className="font-normal">Desde </span>
-              <span className="font-bold">14,88 €</span>
+              <span className="font-extrabold">14,88 €</span>
             </p>
           </div>
           <Button 
