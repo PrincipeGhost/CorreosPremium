@@ -1,0 +1,77 @@
+
+Perfecto ahora edítenos la sección de información del producto 
+
+
+Justo en la parte de Detalles del envió
+
+En la parte principal quiero editar esto , donde sale este texto 
+
+Tú eliges el embalaje perfecto. ¡Puedes comprar un montón de productos disponibles en nuestra Tienda Online y en todas las oficinas de Correos!
+
+Quiero que edites la parte de (Tienda Online) poniéndole un color ah la letra de azul oscuro marino, y un subrayado asi como de referencia de los (mas Info)
+
+Luego de editar eso 
+
+Quiero que donde esta esta parte del texto 
+
+Si quieres enviar algo más grande, no te preocupes, añade un Máximo Extra por un poco más de coste:
+
+Quiero editar esta parte (Máximo Extra) haciéndole ah la letra tipo negrita 
+
+Luego de editar eso quiero que editemos esta parte
+
+
+Como mínimo:
+* 		• Caja: 10 x 14,5 cm.
+* 		• Rollo o tubo: las dimensiones que permitan adherir una etiqueta de 10 x 14,5 cm.
+¡Y que no supere los 2 kg!
+¡Y que no supere los 30 kg de peso real!
+
+
+Donde quiero que elimines el tipo de letra negrita de (¡Y que no supere los 2 kg!)
+
+Ya que debería quedar asi
+
+(Como mínimo:
+* 		• Caja: 10 x 14,5 cm.
+* 		• Rollo o tubo: las dimensiones que permitan adherir una etiqueta de 10 x 14,5 cm. ¡Y que no supere los 2 kg!)
+
+Luego de editar eso también tienes que eliminar ese fondo como amarillo que le habia puesto donde aparecía o aparee 
+(¡Y que no supere los 2 kg!, ¡Y que no supere los 30 kg de peso real!)
+
+
+Luego de editar eso quiero que editemos 
+
+(¡Y que no supere los 30 kg de peso real!)
+
+Dejándolo en un tipo de letra negrita 
+
+Luego de editar eso quiero que editemos 
+
+ (El peso volumétrico ya lo calculamos nosotros)
+
+Donde la palabras o texto (peso volumétrico) debe ir en un tipo de texto negrita
+
+Luego de editar eso  quiero que editemos 
+
+ Ya solo queda que nos digas dónde quieres que lo llevemos:
+
+Donde quiero que esta parte del texto (dónde quieres que lo llevemos) tiene que ir en un tipo de letra negrita 
+
+Luego de editar eso quiero que editemos esta parte 
+
+
+Domicilio: dos intentos de entrega bajo firma. Si no puede realizarse, estará disponible durante 15 días en la oficina más cercana.
+Oficina elegida: envío a la oficina que elijas y que debe tener punto de entrega de paquetería, donde estará disponible durante 15 días. Avisamos al destinatario de su llegada mediante la APP de Correos, email y/o SMS y enviamos varios recordatorios en caso de no producirse la recogida.
+Citypaq: entrega en una de las taquillas inteligentes de Correos situadas por toda la ciudad y disponibles a cualquier hora del día (consultar horarios en web y APP).
+
+
+Estás partes ( Domcilio,Oficina Elegida y City paq) tienes que agregarle los (•) como los que manejas arriba antes de cada texto de estos que te mencione 
+
+Luego de editar eso quiero que editemos la parte de (Citypaq) donde debe ir en un tono de letra azul marino oscuro 
+
+Luego de editar eso quiero que editemos esto 
+
+ Es importante que tus datos y los del destinatario estén en un lugar visible sobre el embalaje.
+
+En esta parte quiero que elimines ese fondo medio azulado que le pusiste 
