@@ -364,7 +364,7 @@ export default function PremiumExpressPage() {
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
                   <div className="space-y-4">
-                    <p>Tú eliges el embalaje perfecto. ¡Puedes comprar un montón de productos disponibles en nuestra Tienda Online y en todas las oficinas de Correos!</p>
+                    <p>Tú eliges el embalaje perfecto. ¡Puedes comprar un montón de productos disponibles en nuestra <span className="text-blue-900 underline">Tienda Online</span> y en todas las oficinas de Correos!</p>
                     
                     <p>Eso sí, necesitamos que el tamaño se ajuste a estas medidas:</p>
                     
@@ -377,7 +377,7 @@ export default function PremiumExpressPage() {
                     </div>
                     
                     <div>
-                      <p>Si quieres enviar algo más grande, no te preocupes, añade un Máximo Extra por un poco más de coste:</p>
+                      <p>Si quieres enviar algo más grande, no te preocupes, añade un <strong>Máximo Extra</strong> por un poco más de coste:</p>
                       <ul className="ml-4 space-y-2 mt-2">
                         <li>• Largo + Alto + Ancho = 300 cm por un 35% más.</li>
                         <li>• Ninguna de las medidas puede superar los 240 cm por un 35% más.</li>
@@ -389,38 +389,37 @@ export default function PremiumExpressPage() {
                       <p><strong>Como mínimo:</strong></p>
                       <ul className="ml-4 space-y-2 mt-2">
                         <li>• <strong>Caja:</strong> 10 x 14,5 cm.</li>
-                        <li>• <strong>Rollo o tubo:</strong> las dimensiones que permitan adherir una etiqueta de 10 x 14,5 cm.</li>
+                        <li>• <strong>Rollo o tubo:</strong> las dimensiones que permitan adherir una etiqueta de 10 x 14,5 cm. ¡Y que no supere los 2 kg!</li>
                       </ul>
                     </div>
                     
-                    <div className="bg-yellow-50 p-3 rounded-lg">
-                      <p className="font-semibold text-gray-900">¡Y que no supere los 2 kg!</p>
-                      <p className="font-semibold text-gray-900">¡Y que no supere los 30 kg de peso real!</p>
+                    <div>
+                      <p><strong>¡Y que no supere los 30 kg de peso real!</strong></p>
                     </div>
                     
                     <div>
-                      <p>El peso volumétrico ya lo calculamos nosotros.</p>
+                      <p>El <strong>peso volumétrico</strong> ya lo calculamos nosotros.</p>
                     </div>
                     
                     <div>
-                      <p>Ya solo queda que nos digas dónde quieres que lo llevemos:</p>
+                      <p>Ya solo queda que nos digas <strong>dónde quieres que lo llevemos</strong>:</p>
                       
                       <div className="ml-4 space-y-3 mt-3">
                         <div>
-                          <p><strong>Domicilio:</strong> dos intentos de entrega bajo firma. Si no puede realizarse, estará disponible durante 15 días en la oficina más cercana.</p>
+                          <p>• <strong>Domicilio:</strong> dos intentos de entrega bajo firma. Si no puede realizarse, estará disponible durante 15 días en la oficina más cercana.</p>
                         </div>
                         
                         <div>
-                          <p><strong>Oficina elegida:</strong> envío a la oficina que elijas y que debe tener punto de entrega de paquetería, donde estará disponible durante 15 días. Avisamos al destinatario de su llegada mediante la APP de Correos, email y/o SMS y enviamos varios recordatorios en caso de no producirse la recogida.</p>
+                          <p>• <strong>Oficina elegida:</strong> envío a la oficina que elijas y que debe tener punto de entrega de paquetería, donde estará disponible durante 15 días. Avisamos al destinatario de su llegada mediante la APP de Correos, email y/o SMS y enviamos varios recordatorios en caso de no producirse la recogida.</p>
                         </div>
                         
                         <div>
-                          <p><strong>Citypaq:</strong> entrega en una de las taquillas inteligentes de Correos situadas por toda la ciudad y disponibles a cualquier hora del día (consultar horarios en web y APP).</p>
+                          <p>• <strong className="text-blue-900">Citypaq:</strong> entrega en una de las taquillas inteligentes de Correos situadas por toda la ciudad y disponibles a cualquier hora del día (consultar horarios en web y APP).</p>
                         </div>
                       </div>
                     </div>
                     
-                    <div className="bg-blue-50 p-3 rounded-lg">
+                    <div>
                       <p className="text-sm">Es importante que tus datos y los del destinatario estén en un lugar visible sobre el embalaje.</p>
                     </div>
                     
