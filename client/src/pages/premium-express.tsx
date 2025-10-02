@@ -532,7 +532,7 @@ export default function PremiumExpressPage() {
                   Precio
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  <p>Consulta tu tarifa aquí o en las oficinas de Correos</p>
+                  <p>Consulta tu tarifa <span className="text-blue-900 underline">aquí</span> o en las oficinas de Correos</p>
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
