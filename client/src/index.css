@@ -225,4 +225,28 @@
     border-bottom-left-radius: 50% 12%;
     border-bottom-right-radius: 50% 12%;
   }
+
+  /* Custom Correos scrollbar for product information sections */
+  .correos-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .correos-scrollbar::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  .correos-scrollbar::-webkit-scrollbar-thumb {
+    background: #002654;
+    border-radius: 0;
+  }
+
+  .correos-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #001a3d;
+  }
+
+  /* Firefox scrollbar */
+  .correos-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #002654 #f5f5f5;
+  }
 }
