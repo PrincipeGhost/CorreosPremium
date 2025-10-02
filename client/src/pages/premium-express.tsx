@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Check, Plus, Info, ChevronLeft, ChevronRight, User, Users, CreditCard, FileText, Package, Scale, Shield, AlertTriangle } from "lucide-react";
+import { Check, Plus, Info, ChevronLeft, ChevronRight, User, Users, CreditCard, FileText, Package, Scale, Shield, AlertTriangle, Bell } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 // Importaciones de imágenes - usando las rutas directas por compatibilidad
 const step1Image = "/attached_assets/IMG_8294_1759057963621.PNG";
@@ -363,7 +363,7 @@ export default function PremiumExpressPage() {
                   Detalles de envío
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  <div className="space-y-4">
+                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
                     <p>Tú eliges el embalaje perfecto. ¡Puedes comprar un montón de productos disponibles en nuestra <span className="text-blue-900 underline">Tienda Online</span> y en todas las oficinas de Correos!</p>
                     
                     <p>Eso sí, necesitamos que el tamaño se ajuste a estas medidas:</p>
@@ -371,8 +371,8 @@ export default function PremiumExpressPage() {
                     <div>
                       <p><strong>Como máximo:</strong></p>
                       <ul className="ml-4 space-y-2 mt-2">
-                        <li>• <strong>Caja:</strong> Largo + Alto + Ancho = 240 cm, sin que ninguna supere los 120 cm.</li>
-                        <li>• <strong>Rollo o tubo:</strong> el largo no puede superar los 120 cm y el diámetro 30 cm.</li>
+                        <li>• Caja: Largo + Alto + Ancho = 240 cm, sin que ninguna supere los 120 cm.</li>
+                        <li>• Rollo o tubo: el largo no puede superar los 120 cm y el diámetro 30 cm.</li>
                       </ul>
                     </div>
                     
@@ -388,8 +388,8 @@ export default function PremiumExpressPage() {
                     <div>
                       <p><strong>Como mínimo:</strong></p>
                       <ul className="ml-4 space-y-2 mt-2">
-                        <li>• <strong>Caja:</strong> 10 x 14,5 cm.</li>
-                        <li>• <strong>Rollo o tubo:</strong> las dimensiones que permitan adherir una etiqueta de 10 x 14,5 cm. ¡Y que no supere los 2 kg!</li>
+                        <li>• Caja: 10 x 14,5 cm.</li>
+                        <li>• Rollo o tubo: las dimensiones que permitan adherir una etiqueta de 10 x 14,5 cm. ¡Y que no supere los 2 kg!</li>
                       </ul>
                     </div>
                     
@@ -425,6 +425,13 @@ export default function PremiumExpressPage() {
                     
                     <div>
                       <p className="font-medium">Y recuerda que puedes generar la etiqueta y pagar el envío para agilizar el trámite</p>
+                    </div>
+                    
+                    <div className="mt-4">
+                      <a href="#" className="text-blue-900 font-bold flex items-center space-x-2" data-testid="link-peso-volumetrico">
+                        <span>Qué es el peso volumétrico</span>
+                        <Bell className="w-4 h-4" />
+                      </a>
                     </div>
                   </div>
                 </AccordionContent>
