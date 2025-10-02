@@ -1,0 +1,87 @@
+
+Perfecto ahora edítenos la sección de información del producto 
+
+En Garantías y plazos de entrega 
+
+Quiero que editemos el texto que aparece (Sabemos que confías en nosotros y esta es nuestra manera de agradecértelo:)
+
+Donde quiero que esta parte del texto (esta es nuestra manera de agradecértelo) este en letra negrita 
+
+Luego de editar eso quiero que editemos esta parte (Garantías Nacionales:) 
+
+Donde quiero que esta parte del texto la dejes tal como esta solo que le agregues un subrayado así como se aprecian los (Más info)
+
+Luego de editar eso quiero que editemos esta parte (Por demora:)
+
+Donde quiero que en un tipo de letra negrita 
+
+Luego de editar eso quiero que editemos esta parte ( Plazos para que la reclamación pueda dar lugar a indemnización:, Indemnización: , Condiciones:, ) 
+
+Quiero que ah esas parte  del texto le quites el tipo de letra que tiene de negrita
+
+Luego de editar eso quiero que editemos esta parte ( En los envíos con destino u origen a Andorra, Canarias, Ceuta y Melilla, no se contabilizará el tiempo destinado a la tramitación aduanera.) 
+
+Donde quiero que le agregues los (•) como estan en los otros lados que tiene eso
+
+Luego de editar eso quiero que editemos esta parte (Por deterioro:) donde quiero que le agregues el tipo de letra negrita
+
+Luego de editar eso quiero que editemos esta parte donde dice  (Plazos para que la reclamación pueda dar lugar a indemnización:, Indemnización: , Condiciones:, documentos a aportar ) 
+
+Donde no quiero que aparezca en negrita 
+
+Luego de editar esa parte quiero que editemos esta parte 
+
+(En caso de reclamación de un envío deteriorado o con falta de contenido que cuente con Seguro o Valor Declarado, podremos solicitar un documento justificativo del valor de la mercancía, factura de reparación o de reposición.)
+
+(Los clientes con contrato recibirán las indemnizaciones según las condiciones fijadas en el mismo.)
+
+Donde quiero que le agregues estos mismos
+(•) aue te habia hablado 
+
+
+Luego de editar esa parte quiero que editemos esta parte  (Por extravío:) donde quiero que el tipo de letra sea negrita
+
+Luego de editar esa parte quiero que editemos esta parte( Plazos para que la reclamación pueda dar lugar a indemnización:, Indemnización, Documentos a aportar) donde quiero que le quites el tipo de letra negrita
+
+Luego de editar esa parte quiero que editemos esta parte (Los envíos regulados por la LCTTM (Ley de Contratación de Transporte Terrestre de Mercancías) llevan seguro asociado por lo que, en caso de siniestro, se abonará la menor de las siguientes cantidades: Por el valor declarado. Por reposición del objeto extraviado. Por reparación del objeto dañado.)
+
+Donde quiero justo esto que en esa misma parte estos textos aparezcan con el (•) en el centro 
+(• Por el valor declarado. 
+* Por reposición del objeto extraviado. 
+* Por reparación del objeto dañado.)
+
+Luego De editar esa parte quiero que dietemos esta parte (Los clientes con contrato recibirán las indemnizaciones según las condiciones fijadas en el mismo.)
+
+Donde debe tener (•) como en los otros 
+
+Luego de editar esa parte quiero que editemos esta parte (Eso y entregar tu envío lo más rápido que podamos.
+Localiza tu oficina de Correos más cercana y tráenos tu envío, lo llevamos en 1 - 2 días dependiendo del origen y destino.
+Elige la franja horaria en la que quieres que entreguemos tu paquete:
+* 		• De 9:00 a 12:00
+* 		• De 12:00 a 15:00
+* 		• De 15:00 a 18:00
+* 		• De 18:00 a 21:00
+(No olvides que esta opción solo está disponible en capitales de provincia y poblaciones que disponen de turno de reparto de tarde).
+Para que esté entregado el día que lo necesites.
+Tú pones la fecha en nuestro calendario y guardamos el envío hasta que llegue el momento de llevar a su destino.)
+
+Donde quiero que le elimines el de fondo azulado que le pusiste )
+
+Luego de editar esa parte quiero que editemos esta parte (Eso y entregar tu envío lo más rápido que podamos.)
+
+Donde quiero que (entregar tu envío lo más rápido que podamos.) este en negrita
+
+Luego de editar esa parte quiero que editemos esta parte  (Localiza tu oficina de Correos más cercana y tráenos tu envío, lo llevamos en 1 - 2 días dependiendo del origen y destino.)
+
+Donde quiero que (Localiza) este en un tono de letra azul marino oscuro 
+
+Luego d editar eso quiero que editemos esta parte (Elige la franja horaria en la que quieres que entreguemos tu paquete:)
+
+Donde quiero que la parte de (la franja horaria) este en tipo de letra negrita
+
+Luego d editar eso quiero que editemos la parte de (Para que esté entregado el día que lo necesites.)
+
+Donde quiero que (entregado el día que lo necesites) este en un tipo de letra negrita 
+
+
+

@@ -445,54 +445,60 @@ export default function PremiumExpressPage() {
                   <div className="space-y-4">
                     <p>Si tu envío sufre alguna incidencia al llegar a su destino, desde Correos te indemnizamos. Si prefieres que la compensación sea cobrada por el destinatario, deberás presentarnos una autorización firmada.</p>
                     
-                    <p>Sabemos que confías en nosotros y esta es nuestra manera de agradecértelo:</p>
+                    <p>Sabemos que confías en nosotros y <strong>esta es nuestra manera de agradecértelo</strong>:</p>
                     
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Garantías Nacionales:</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3 underline">Garantías Nacionales:</h4>
                       
                       <div className="mb-4">
-                        <p className="font-medium mb-2">Por demora:</p>
+                        <p className="font-bold mb-2">Por demora:</p>
                         <ul className="ml-4 space-y-2">
-                          <li>• <strong>Plazos para que la reclamación pueda dar lugar a indemnización:</strong> mínimo 3 días y máximo 21 días, desde la fecha de entrega del envío.</li>
-                          <li>• <strong>Indemnización:</strong> se devuelve la tarifa abonada.</li>
-                          <li>• <strong>Condiciones:</strong> los plazos de entrega solo se cumplirán si la admisión se ha realizado antes de las 16:00. En caso de no ser así, el plazo podrá incrementarse en 1 día.</li>
+                          <li>• Plazos para que la reclamación pueda dar lugar a indemnización: mínimo 3 días y máximo 21 días, desde la fecha de entrega del envío.</li>
+                          <li>• Indemnización: se devuelve la tarifa abonada.</li>
+                          <li>• Condiciones: los plazos de entrega solo se cumplirán si la admisión se ha realizado antes de las 16:00. En caso de no ser así, el plazo podrá incrementarse en 1 día.</li>
+                          <li>• En los envíos con destino u origen a Andorra, Canarias, Ceuta y Melilla, no se contabilizará el tiempo destinado a la tramitación aduanera.</li>
                         </ul>
-                        <p className="ml-4 mt-2 text-sm">En los envíos con destino u origen a Andorra, Canarias, Ceuta y Melilla, no se contabilizará el tiempo destinado a la tramitación aduanera.</p>
                       </div>
 
                       <div className="mb-4">
-                        <p className="font-medium mb-2">Por deterioro:</p>
+                        <p className="font-bold mb-2">Por deterioro:</p>
                         <ul className="ml-4 space-y-2">
-                          <li>• <strong>Plazos para que la reclamación pueda dar lugar a indemnización:</strong> se deberá poner de manifiesto en el momento de la entrega o dentro de los siguientes 7 días naturales a la entrega.</li>
-                          <li>• <strong>Indemnización:</strong> 6,67€ por kg facturado (6,43€ por kg facturado para envíos admitidos en 2022).</li>
+                          <li>• Plazos para que la reclamación pueda dar lugar a indemnización: se deberá poner de manifiesto en el momento de la entrega o dentro de los siguientes 7 días naturales a la entrega.</li>
+                          <li>• Indemnización: 6,67€ por kg facturado (6,43€ por kg facturado para envíos admitidos en 2022).</li>
                           <li>• La indemnización mínima es de 40€ solo para el Paq Premium y clientes sin contrato. Es decir, si el cálculo de la suma de la indemnización (según la formula anterior) más la tarifa es inferior a 40€, la indemnización ascenderá a 40€.</li>
-                          <li>• <strong>Condiciones:</strong> para este tipo de incidencias se realizará un peritaje con el fin de determinar el importe a pagar por el deterioro sufrido.</li>
-                          <li>• <strong>Documentos a aportar:</strong> podemos solicitarte fotos del embalaje y el contenido deteriorado para comprobar el daño y si el embalaje es adecuado para garantizar la integridad del mismo. Durante la admisión, nuestro personal puede asesorarte sobre cómo preparar tu envío y ofrecerte el embalaje más adecuado.</li>
+                          <li>• Condiciones: para este tipo de incidencias se realizará un peritaje con el fin de determinar el importe a pagar por el deterioro sufrido.</li>
+                          <li>• Documentos a aportar: podemos solicitarte fotos del embalaje y el contenido deteriorado para comprobar el daño y si el embalaje es adecuado para garantizar la integridad del mismo. Durante la admisión, nuestro personal puede asesorarte sobre cómo preparar tu envío y ofrecerte el embalaje más adecuado.</li>
+                          <li>• En caso de reclamación de un envío deteriorado o con falta de contenido que cuente con Seguro o Valor Declarado, podremos solicitar un documento justificativo del valor de la mercancía, factura de reparación o de reposición.</li>
+                          <li>• Los clientes con contrato recibirán las indemnizaciones según las condiciones fijadas en el mismo.</li>
                         </ul>
-                        <p className="ml-4 mt-2 text-sm">En caso de reclamación de un envío deteriorado o con falta de contenido que cuente con Seguro o Valor Declarado, podremos solicitar un documento justificativo del valor de la mercancía, factura de reparación o de reposición.</p>
-                        <p className="ml-4 mt-1 text-sm">Los clientes con contrato recibirán las indemnizaciones según las condiciones fijadas en el mismo.</p>
                       </div>
 
                       <div className="mb-4">
-                        <p className="font-medium mb-2">Por extravío:</p>
+                        <p className="font-bold mb-2">Por extravío:</p>
                         <ul className="ml-4 space-y-2">
-                          <li>• <strong>Plazos para que la reclamación pueda dar lugar a indemnización:</strong> mínimo 3 días y máximo 1 año, desde la fecha de admisión del envío.</li>
-                          <li>• <strong>Indemnización:</strong> 6,67€ por kg facturado (6,43€ por kg facturado para envíos admitidos en 2022) más la devolución de la tarifa.</li>
+                          <li>• Plazos para que la reclamación pueda dar lugar a indemnización: mínimo 3 días y máximo 1 año, desde la fecha de admisión del envío.</li>
+                          <li>• Indemnización: 6,67€ por kg facturado (6,43€ por kg facturado para envíos admitidos en 2022) más la devolución de la tarifa.</li>
                           <li>• La indemnización mínima es de 40€ sólo para el Paq Premium y clientes sin contrato.</li>
                           <li>• Si el envío lleva Valor Declarado o Seguro a todo riesgo, cuya cobertura máxima son 6.000€, la indemnización consistirá en la devolución de la tarifa más el Valor Declarado o Seguro.</li>
-                          <li>• Los envíos regulados por la LCTTM (Ley de Contratación de Transporte Terrestre de Mercancías) llevan seguro asociado por lo que, en caso de siniestro, se abonará la menor de las siguientes cantidades: Por el valor declarado. Por reposición del objeto extraviado. Por reparación del objeto dañado.</li>
-                          <li>• <strong>Documentos a aportar:</strong> en caso de reclamación de un envío extraviado, deteriorado o con falta de contenido que cuente con Seguro o Valor Declarado, podremos solicitar un documento justificativo del valor de la mercancía, factura de reparación o de reposición.</li>
+                          <li>• Los envíos regulados por la LCTTM (Ley de Contratación de Transporte Terrestre de Mercancías) llevan seguro asociado por lo que, en caso de siniestro, se abonará la menor de las siguientes cantidades:
+                            <ul className="ml-6 mt-1 space-y-1">
+                              <li>• Por el valor declarado.</li>
+                              <li>• Por reposición del objeto extraviado.</li>
+                              <li>• Por reparación del objeto dañado.</li>
+                            </ul>
+                          </li>
+                          <li>• Documentos a aportar: en caso de reclamación de un envío extraviado, deteriorado o con falta de contenido que cuente con Seguro o Valor Declarado, podremos solicitar un documento justificativo del valor de la mercancía, factura de reparación o de reposición.</li>
+                          <li>• Los clientes con contrato recibirán las indemnizaciones según las condiciones fijadas en el mismo.</li>
                         </ul>
-                        <p className="ml-4 mt-2 text-sm">Los clientes con contrato recibirán las indemnizaciones según las condiciones fijadas en el mismo.</p>
                       </div>
                     </div>
                     
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <p className="font-medium mb-2">Eso y entregar tu envío lo más rápido que podamos.</p>
-                      <p className="mb-3">Localiza tu oficina de Correos más cercana y tráenos tu envío, lo llevamos en 1 - 2 días dependiendo del origen y destino.</p>
+                    <div>
+                      <p className="mb-2">Eso y <strong>entregar tu envío lo más rápido que podamos.</strong></p>
+                      <p className="mb-3"><span className="text-blue-900">Localiza</span> tu oficina de Correos más cercana y tráenos tu envío, lo llevamos en 1 - 2 días dependiendo del origen y destino.</p>
                       
                       <div className="mb-3">
-                        <p className="font-medium mb-2">Elige la franja horaria en la que quieres que entreguemos tu paquete:</p>
+                        <p className="mb-2">Elige <strong>la franja horaria</strong> en la que quieres que entreguemos tu paquete:</p>
                         <ul className="ml-4 space-y-1">
                           <li>• De 9:00 a 12:00</li>
                           <li>• De 12:00 a 15:00</li>
@@ -503,7 +509,7 @@ export default function PremiumExpressPage() {
                       </div>
                       
                       <div>
-                        <p className="font-medium">Para que esté entregado el día que lo necesites.</p>
+                        <p>Para que esté <strong>entregado el día que lo necesites.</strong></p>
                         <p className="text-sm mt-1">Tú pones la fecha en nuestro calendario y guardamos el envío hasta que llegue el momento de llevarlo a su destino.</p>
                       </div>
                     </div>
