@@ -228,25 +228,26 @@
 
   /* Custom Correos scrollbar for product information sections */
   .correos-scrollbar::-webkit-scrollbar {
-    width: 6px;
+    width: 8px !important;
   }
 
   .correos-scrollbar::-webkit-scrollbar-track {
-    background: #f5f5f5;
+    background: #f0f0f0 !important;
+    border-radius: 0 !important;
   }
 
   .correos-scrollbar::-webkit-scrollbar-thumb {
-    background: #002654;
-    border-radius: 0;
+    background: #002654 !important;
+    border-radius: 0 !important;
   }
 
   .correos-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #001a3d;
+    background: #001a3d !important;
   }
 
   /* Firefox scrollbar */
   .correos-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #002654 #f5f5f5;
+    scrollbar-width: thin !important;
+    scrollbar-color: #002654 #f0f0f0 !important;
   }
 }

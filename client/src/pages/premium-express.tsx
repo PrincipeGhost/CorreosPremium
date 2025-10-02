@@ -363,7 +363,7 @@ export default function PremiumExpressPage() {
                   Detalles de envío
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2 correos-scrollbar">
+                  <div className="space-y-4 max-h-80 overflow-y-scroll pr-2 correos-scrollbar">
                     <p>Tú eliges el embalaje perfecto. ¡Puedes comprar un montón de productos disponibles en nuestra <span className="text-blue-900 underline">Tienda Online</span> y en todas las oficinas de Correos!</p>
                     
                     <p>Eso sí, necesitamos que el tamaño se ajuste a estas medidas:</p>
@@ -442,7 +442,7 @@ export default function PremiumExpressPage() {
                   Garantías y plazos de entrega
                 </AccordionTrigger>
                 <AccordionContent className="px-4 pb-4 text-gray-700">
-                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2 correos-scrollbar">
+                  <div className="space-y-4 max-h-80 overflow-y-scroll pr-2 correos-scrollbar">
                     <p>Si tu envío sufre alguna incidencia al llegar a su destino, desde Correos te indemnizamos. Si prefieres que la compensación sea cobrada por el destinatario, deberás presentarnos una autorización firmada.</p>
                     
                     <p>Sabemos que confías en nosotros y <strong>esta es nuestra manera de agradecértelo</strong>:</p>
