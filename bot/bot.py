@@ -287,12 +287,8 @@ class TelegramBot:
             verification_message = "✅Has sido Verificado como miembro Autorizado."
             await update.message.reply_text(verification_message)
             
-            # Send welcome message with admin panel
-            welcome_message = f"¡Bienvenido al sistema de tracking! 🏴‍☠️{username}🏴‍☠️"
-            await update.message.reply_text(welcome_message)
-            
-            # Show admin panel
-            await admin_panel.admin_main_menu(update, context)
+            # Show admin panel with welcome message
+            await admin_panel.admin_main_menu(update, context, username=username)
             logger.info(f"Access granted to user {username} ({user_id}) - showing admin panel")
             
             return ConversationHandler.END

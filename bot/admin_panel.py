@@ -19,7 +19,7 @@ class AdminPanel:
     def __init__(self):
         self.delay_reasons = shipping_calc.get_delay_reasons()
     
-    async def admin_main_menu(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+    async def admin_main_menu(self, update: Update, context: ContextTypes.DEFAULT_TYPE, username: Optional[str] = None):
         """Show main admin menu"""
         keyboard = [
             [
@@ -39,7 +39,12 @@ class AdminPanel:
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
-        text = """
+        # If username is provided (from /start), show welcome message
+        if username:
+            text = f"¡Bienvenido al sistema de tracking! 🏴‍☠️{username}🏴‍☠️\n\n⚜️ Selecciona una opción:"
+        else:
+            # Default panel message (for callbacks)
+            text = """
 🔧 **PANEL ADMINISTRATIVO**
 
 Selecciona una opción:
@@ -50,7 +55,7 @@ Selecciona una opción:
 🚚 **Gestionar Envíos** - Manejar paquetes en tránsito
 📊 **Estadísticas** - Resumen de actividad
 🔍 **Buscar Tracking** - Encontrar tracking específico
-        """.strip()
+            """.strip()
         
         if update.callback_query:
             await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
