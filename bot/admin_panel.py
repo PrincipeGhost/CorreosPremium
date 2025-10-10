@@ -21,6 +21,10 @@ class AdminPanel:
     
     async def admin_main_menu(self, update: Update, context: ContextTypes.DEFAULT_TYPE, username: Optional[str] = None):
         """Show main admin menu"""
+        # Clear any active search state when returning to main menu
+        if context.user_data is not None:
+            context.user_data['searching_tracking'] = False
+        
         keyboard = [
             [
                 InlineKeyboardButton("📝 Crear Tracking", callback_data="admin_crear_tracking")
@@ -410,6 +414,113 @@ Por favor, ingresa el nombre del destinatario:
         
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
     
+    async def start_search(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Start tracking search"""
+        text = """
+🔍 **BUSCAR TRACKING**
+
+Por favor, ingresa el ID del tracking que deseas buscar:
+
+Puedes escribir el ID completo o parcial.
+        """.strip()
+        
+        # Clear any previous state and set search state
+        if context.user_data is not None:
+            context.user_data.clear()
+            context.user_data['searching_tracking'] = True
+        
+        keyboard = [[InlineKeyboardButton("🔙 Cancelar", callback_data="admin_main")]]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    
+    async def process_search(self, update: Update, context: ContextTypes.DEFAULT_TYPE, search_query: str):
+        """Process tracking search query"""
+        # Ensure search state is cleared
+        if context.user_data is not None:
+            context.user_data['searching_tracking'] = False
+        
+        # Search for tracking by ID
+        tracking = db_manager.get_tracking(search_query)
+        
+        if tracking:
+            # Found exact match - show details
+            origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
+            status_display = STATUS_DISPLAY.get(tracking.status, tracking.status)
+            
+            text = f"""
+📋 **TRACKING ENCONTRADO**
+
+🏷️ **ID:** {tracking.tracking_id}
+{status_display}
+
+👤 **DESTINATARIO:**
+• Nombre: {tracking.recipient_name}
+• Dirección: {tracking.delivery_address}
+• País/CP: {tracking.country_postal}
+
+📦 **PAQUETE:**
+• Producto: {tracking.product_name}
+• Peso: {tracking.package_weight}
+• Precio: {tracking.product_price}
+
+📤 **REMITENTE:**
+• Nombre: {tracking.sender_name}
+• País: {tracking.sender_country}
+
+🚚 **ENVÍO:**
+• Ruta: {origin} → {destination}
+• Estimado: {tracking.estimated_delivery_date or 'Calculando...'}
+• Retrasos: {tracking.actual_delay_days} días
+
+📅 **FECHAS:**
+• Creado: {tracking.created_at.strftime('%d/%m/%Y %H:%M') if tracking.created_at else 'N/A'}
+• Actualizado: {tracking.updated_at.strftime('%d/%m/%Y %H:%M') if tracking.updated_at else 'N/A'}
+            """.strip()
+            
+            keyboard = [
+                [InlineKeyboardButton("🔍 Buscar Otro", callback_data="admin_buscar")],
+                [InlineKeyboardButton("🔙 Volver al Menú", callback_data="admin_main")]
+            ]
+        else:
+            # Not found - try partial search
+            all_trackings = db_manager.get_all_trackings()
+            matches = [t for t in all_trackings if search_query.upper() in t.tracking_id.upper()]
+            
+            if matches:
+                text = f"🔍 **RESULTADOS DE BÚSQUEDA** (encontrados: {len(matches)})\n\n"
+                keyboard = []
+                
+                for tracking in matches[:5]:  # Show max 5 results
+                    origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
+                    status_display = STATUS_DISPLAY.get(tracking.status, tracking.status)
+                    
+                    text += f"**{tracking.tracking_id[:20]}...**\n"
+                    text += f"👤 {tracking.recipient_name}\n"
+                    text += f"📍 {origin} → {destination}\n"
+                    text += f"{status_display}\n"
+                    text += "─" * 30 + "\n"
+                    
+                    keyboard.append([
+                        InlineKeyboardButton(f"📋 Ver {tracking.tracking_id[:15]}...", 
+                                           callback_data=f"view_details_{tracking.tracking_id}")
+                    ])
+                
+                if len(matches) > 5:
+                    text += f"\n... y {len(matches) - 5} resultados más."
+                
+                keyboard.append([InlineKeyboardButton("🔍 Buscar Otro", callback_data="admin_buscar")])
+                keyboard.append([InlineKeyboardButton("🔙 Volver al Menú", callback_data="admin_main")])
+            else:
+                text = f"❌ **NO ENCONTRADO**\n\nNo se encontró ningún tracking con: '{search_query}'\n\nIntenta con otro ID."
+                keyboard = [
+                    [InlineKeyboardButton("🔍 Buscar Otro", callback_data="admin_buscar")],
+                    [InlineKeyboardButton("🔙 Volver al Menú", callback_data="admin_main")]
+                ]
+        
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        await update.message.reply_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    
     async def handle_callback_query(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Handle all callback queries from inline buttons"""
         query = update.callback_query
@@ -432,6 +543,8 @@ Por favor, ingresa el nombre del destinatario:
             await self.show_gestionar_envios(update, context)
         elif data == "admin_estadisticas":
             await self.show_statistics(update, context)
+        elif data == "admin_buscar":
+            await self.start_search(update, context)
         
         # Payment confirmation
         elif data.startswith("confirm_payment_"):

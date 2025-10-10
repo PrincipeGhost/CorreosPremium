@@ -86,7 +86,15 @@ class TelegramBot:
             fallbacks=[CommandHandler("cancel", self.cancel)],
         )
         
+        # Search handler (non-blocking so it doesn't interfere with conversation)
+        search_handler = MessageHandler(
+            filters.TEXT & ~filters.COMMAND,
+            self.handle_search_input,
+            block=False
+        )
+        
         self.application.add_handler(conv_handler)
+        self.application.add_handler(search_handler)
         self.application.add_handler(CommandHandler("help", self.help_command))
         self.application.add_handler(CommandHandler("admin", self.admin_command))
         self.application.add_handler(CallbackQueryHandler(admin_panel.handle_callback_query))
@@ -165,6 +173,19 @@ class TelegramBot:
                 continue
         
         return False, "Por favor ingresa una fecha válida (ejemplos: 25/12/2024 14:30, 2024-12-25, 25-12-2024 09:00)."
+    
+    async def handle_search_input(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Handle text input for tracking search"""
+        # Only process if user is in search mode
+        if context.user_data and context.user_data.get('searching_tracking'):
+            search_query = update.message.text.strip()
+            # Clear search state immediately to prevent blocking other flows
+            context.user_data['searching_tracking'] = False
+            await admin_panel.process_search(update, context, search_query)
+            return
+        
+        # If not in search mode, let other handlers process it
+        return
     
     async def _test_api_connection(self):
         """Test secure connection to web API"""
