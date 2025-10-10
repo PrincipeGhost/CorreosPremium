@@ -119,6 +119,9 @@ Por favor, ingresa el nombre del destinatario:
                 
                 keyboard.append([
                     InlineKeyboardButton("💰 Confirmar Pago", callback_data=f"confirm_payment_{tracking.tracking_id}"),
+                    InlineKeyboardButton("🗑️ Eliminar", callback_data=f"delete_tracking_{tracking.tracking_id}")
+                ])
+                keyboard.append([
                     InlineKeyboardButton("👁️ Ver Detalles", callback_data=f"view_details_{tracking.tracking_id}")
                 ])
             
@@ -154,6 +157,9 @@ Por favor, ingresa el nombre del destinatario:
                 
                 keyboard.append([
                     InlineKeyboardButton("🚚 Enviar", callback_data=f"ship_package_{tracking.tracking_id}"),
+                    InlineKeyboardButton("🗑️ Eliminar", callback_data=f"delete_tracking_{tracking.tracking_id}")
+                ])
+                keyboard.append([
                     InlineKeyboardButton("👁️ Ver Detalles", callback_data=f"view_details_{tracking.tracking_id}")
                 ])
             
