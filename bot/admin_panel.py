@@ -420,6 +420,76 @@ Por favor, ingresa el nombre del destinatario:
         
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
     
+    async def confirm_delete_tracking(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
+        """Show confirmation dialog before deleting tracking"""
+        if not update.callback_query:
+            return
+        
+        tracking = db_manager.get_tracking(tracking_id)
+        if not tracking:
+            await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        text = f"""
+🗑️ **CONFIRMAR ELIMINACIÓN**
+
+⚠️ **¿Estás seguro de eliminar este tracking?**
+
+🏷️ **ID:** {tracking.tracking_id}
+👤 **Cliente:** {tracking.recipient_name}
+📍 **Destino:** {tracking.country_postal}
+💰 **Monto:** {tracking.product_price}
+
+**Esta acción no se puede deshacer.**
+        """.strip()
+        
+        keyboard = [
+            [
+                InlineKeyboardButton("✅ SÍ, ELIMINAR", callback_data=f"delete_yes_{tracking_id}"),
+                InlineKeyboardButton("❌ CANCELAR", callback_data=f"delete_cancel_{tracking.status}")
+            ]
+        ]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    
+    async def process_delete_tracking(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
+        """Process tracking deletion"""
+        if not update.callback_query:
+            return
+        
+        # Get tracking info before deletion for the message
+        tracking = db_manager.get_tracking(tracking_id)
+        if not tracking:
+            await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        # Store the status to know where to return
+        return_status = tracking.status
+        
+        # Delete the tracking
+        success = db_manager.delete_tracking(tracking_id)
+        
+        if success:
+            await update.callback_query.answer("✅ Tracking eliminado exitosamente")
+            text = f"✅ **TRACKING ELIMINADO**\n\nEl tracking {tracking_id} ha sido eliminado del sistema."
+        else:
+            await update.callback_query.answer("❌ Error al eliminar tracking")
+            text = f"❌ **ERROR**\n\nNo se pudo eliminar el tracking {tracking_id}."
+        
+        # Return to appropriate list based on status
+        if return_status == STATUS_RETENIDO:
+            callback_data = "admin_retenidos"
+        elif return_status == STATUS_CONFIRMAR_PAGO:
+            callback_data = "admin_confirmar_pagos"
+        else:
+            callback_data = "admin_main"
+        
+        keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data=callback_data)]]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    
     async def start_search(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Start tracking search"""
         text = """
