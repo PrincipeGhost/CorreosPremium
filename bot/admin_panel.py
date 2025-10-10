@@ -656,6 +656,23 @@ Puedes escribir el ID completo o parcial.
             tracking_id = parts[3]
             await self.apply_delay(update, context, reason_index, delay_days, tracking_id)
         
+        # Delete tracking
+        elif data.startswith("delete_tracking_"):
+            tracking_id = data.replace("delete_tracking_", "")
+            await self.confirm_delete_tracking(update, context, tracking_id)
+        elif data.startswith("delete_yes_"):
+            tracking_id = data.replace("delete_yes_", "")
+            await self.process_delete_tracking(update, context, tracking_id)
+        elif data.startswith("delete_cancel_"):
+            # Extract status to return to appropriate view
+            status = data.replace("delete_cancel_", "")
+            if status == STATUS_RETENIDO:
+                await self.show_retenidos(update, context)
+            elif status == STATUS_CONFIRMAR_PAGO:
+                await self.show_confirmar_pagos(update, context)
+            else:
+                await self.admin_main_menu(update, context)
+        
         # View details
         elif data.startswith("view_details_"):
             tracking_id = data.replace("view_details_", "")
