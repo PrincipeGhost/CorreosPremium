@@ -28,6 +28,16 @@ class Tracking:
     actual_delay_days: int = 0
     user_telegram_id: Optional[int] = None
     username: Optional[str] = None
+    # OpenRouteService geocoding data
+    sender_lat: Optional[float] = None
+    sender_lon: Optional[float] = None
+    sender_formatted_address: Optional[str] = None
+    recipient_lat: Optional[float] = None
+    recipient_lon: Optional[float] = None
+    recipient_formatted_address: Optional[str] = None
+    route_distance_km: Optional[float] = None
+    route_duration_hours: Optional[float] = None
+    route_geometry: Optional[str] = None
 
 @dataclass
 class ShippingRoute:
@@ -67,7 +77,16 @@ CREATE TABLE IF NOT EXISTS trackings (
     estimated_delivery_date VARCHAR(255),
     actual_delay_days INTEGER DEFAULT 0,
     user_telegram_id BIGINT,
-    username VARCHAR(255)
+    username VARCHAR(255),
+    sender_lat DECIMAL(10, 8),
+    sender_lon DECIMAL(11, 8),
+    sender_formatted_address TEXT,
+    recipient_lat DECIMAL(10, 8),
+    recipient_lon DECIMAL(11, 8),
+    recipient_formatted_address TEXT,
+    route_distance_km DECIMAL(10, 2),
+    route_duration_hours DECIMAL(10, 2),
+    route_geometry TEXT
 );
 
 -- Shipping routes table
