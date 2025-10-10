@@ -229,6 +229,40 @@ class DatabaseManager:
         except Exception as e:
             logger.error(f"Error getting statistics: {e}")
             return {}
+    
+    def delete_tracking(self, tracking_id: str) -> bool:
+        """Delete a tracking and its related records"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cur:
+                    # Delete status history first (foreign key constraint)
+                    cur.execute("DELETE FROM status_history WHERE tracking_id = %s", (tracking_id,))
+                    
+                    # Delete the tracking
+                    cur.execute("DELETE FROM trackings WHERE tracking_id = %s", (tracking_id,))
+                    
+                    if cur.rowcount == 0:
+                        logger.warning(f"No tracking found with ID {tracking_id}")
+                        return False
+                    
+                    conn.commit()
+            logger.info(f"Tracking {tracking_id} deleted successfully")
+            return True
+        except Exception as e:
+            logger.error(f"Error deleting tracking {tracking_id}: {e}")
+            return False
+    
+    def get_all_trackings(self) -> List[Tracking]:
+        """Get all trackings"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+                    cur.execute("SELECT * FROM trackings ORDER BY created_at DESC")
+                    rows = cur.fetchall()
+                    return [Tracking(**dict(row)) for row in rows]
+        except Exception as e:
+            logger.error(f"Error getting all trackings: {e}")
+            return []
 
 # Global database manager instance
 db_manager = DatabaseManager()
