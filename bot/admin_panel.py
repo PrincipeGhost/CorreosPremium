@@ -27,7 +27,7 @@ class AdminPanel:
             ],
             [
                 InlineKeyboardButton("📦 Ver Retenidos", callback_data="admin_retenidos"),
-                InlineKeyboardButton("💰 Confirmar Pagos", callback_data="admin_confirmar_pagos")
+                InlineKeyboardButton("🚚 Confirmar Envío", callback_data="admin_confirmar_pagos")
             ],
             [
                 InlineKeyboardButton("🚚 Gestionar Envíos", callback_data="admin_gestionar_envios"),
@@ -39,23 +39,12 @@ class AdminPanel:
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
-        # If username is provided (from /start), show welcome message
-        if username:
-            text = f"¡Bienvenido al sistema de tracking! 🏴‍☠️{username}🏴‍☠️\n\n⚜️ Selecciona una opción:"
-        else:
-            # Default panel message (for callbacks)
-            text = """
-🔧 **PANEL ADMINISTRATIVO**
-
-Selecciona una opción:
-
-📝 **Crear Tracking** - Crear un nuevo seguimiento de paquete
-📦 **Ver Retenidos** - Paquetes esperando confirmación de pago
-💰 **Confirmar Pagos** - Procesar pagos recibidos  
-🚚 **Gestionar Envíos** - Manejar paquetes en tránsito
-📊 **Estadísticas** - Resumen de actividad
-🔍 **Buscar Tracking** - Encontrar tracking específico
-            """.strip()
+        # Always get username from update if not provided
+        if not username and update.effective_user:
+            username = update.effective_user.username or update.effective_user.first_name or "Usuario"
+        
+        # Always show welcome message with username
+        text = f"¡Bienvenido al sistema de tracking! 🏴‍☠️{username}🏴‍☠️\n\n⚜️ Selecciona una opción:"
         
         if update.callback_query:
             await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
