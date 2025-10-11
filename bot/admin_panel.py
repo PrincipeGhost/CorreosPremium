@@ -5,6 +5,7 @@ Administrative panel with inline buttons for tracking management
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, CallbackQueryHandler
 import logging
+import os
 from typing import List, Optional
 
 from database import db_manager
@@ -13,11 +14,23 @@ from shipping_calculator import shipping_calc
 
 logger = logging.getLogger(__name__)
 
+OWNER_TELEGRAM_ID = os.getenv('OWNER_TELEGRAM_ID')
+
 class AdminPanel:
     """Handle administrative functions with inline buttons"""
     
     def __init__(self):
         self.delay_reasons = shipping_calc.get_delay_reasons()
+    
+    def is_owner(self, user_id: int) -> bool:
+        """Check if user is the owner"""
+        if not OWNER_TELEGRAM_ID:
+            return False
+        try:
+            owner_id = int(OWNER_TELEGRAM_ID)
+            return user_id == owner_id
+        except (ValueError, TypeError):
+            return False
     
     async def admin_main_menu(self, update: Update, context: ContextTypes.DEFAULT_TYPE, username: Optional[str] = None):
         """Show main admin menu"""
@@ -103,10 +116,13 @@ Por favor, ingresa el nombre del destinatario:
     
     async def show_retenidos(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Show packages waiting for payment confirmation"""
-        if not update.callback_query:
+        if not update.callback_query or not update.effective_user:
             return
-            
-        trackings = db_manager.get_trackings_by_status(STATUS_RETENIDO)
+        
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
+        trackings = db_manager.get_trackings_by_status(STATUS_RETENIDO, admin_id=admin_id, is_owner=is_owner)
         
         if not trackings:
             text = "✅ No hay paquetes retenidos actualmente."
@@ -141,7 +157,13 @@ Por favor, ingresa el nombre del destinatario:
     
     async def show_confirmar_pagos(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Show packages ready for shipping (payment confirmed)"""
-        trackings = db_manager.get_trackings_by_status(STATUS_CONFIRMAR_PAGO)
+        if not update.effective_user:
+            return
+        
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
+        trackings = db_manager.get_trackings_by_status(STATUS_CONFIRMAR_PAGO, admin_id=admin_id, is_owner=is_owner)
         
         if not trackings:
             text = "✅ No hay pagos pendientes de confirmar."
@@ -183,7 +205,13 @@ Por favor, ingresa el nombre del destinatario:
     
     async def show_gestionar_envios(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Show packages in transit"""
-        trackings = db_manager.get_trackings_by_status(STATUS_EN_TRANSITO)
+        if not update.effective_user:
+            return
+        
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
+        trackings = db_manager.get_trackings_by_status(STATUS_EN_TRANSITO, admin_id=admin_id, is_owner=is_owner)
         
         if not trackings:
             text = "✅ No hay paquetes en tránsito actualmente."
@@ -407,7 +435,13 @@ Por favor, ingresa el nombre del destinatario:
     
     async def show_statistics(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Show tracking statistics"""
-        stats = db_manager.get_statistics()
+        if not update.effective_user:
+            return
+        
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
+        stats = db_manager.get_statistics(admin_id=admin_id, is_owner=is_owner)
         
         status_counts = stats.get('by_status', {})
         total = stats.get('total', 0)
@@ -533,8 +567,19 @@ Puedes escribir el ID completo o parcial.
         if context.user_data is not None:
             context.user_data['searching_tracking'] = False
         
+        if not update.effective_user:
+            return
+        
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
         # Search for tracking by ID
         tracking = db_manager.get_tracking(search_query)
+        
+        # Verify admin has access to this tracking
+        if tracking and not is_owner:
+            if hasattr(tracking, 'created_by_admin_id') and tracking.created_by_admin_id != admin_id:
+                tracking = None  # Admin doesn't have access to this tracking
         
         if tracking:
             # Found exact match - show details
@@ -576,8 +621,8 @@ Puedes escribir el ID completo o parcial.
                 [InlineKeyboardButton("🔙 Volver al Menú", callback_data="admin_main")]
             ]
         else:
-            # Not found - try partial search
-            all_trackings = db_manager.get_all_trackings()
+            # Not found - try partial search (filtered by admin)
+            all_trackings = db_manager.get_all_trackings(admin_id=admin_id, is_owner=is_owner)
             matches = [t for t in all_trackings if search_query.upper() in t.tracking_id.upper()]
             
             if matches:
