@@ -48,12 +48,21 @@ class AdminPanel:
             username = update.effective_user.username or update.effective_user.first_name or "Usuario"
         
         # Always show welcome message with username
-        text = f"¡Bienvenido al sistema de tracking! 🏴‍☠️{username}🏴‍☠️\n\n⚜️ Selecciona una opción:"
+        text = f"¡Bienvenido al sistema de tracking, {username}! 🏴‍☠️\n\n⚜️ Selecciona una opción:"
         
-        if update.callback_query:
-            await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
-        else:
-            await update.message.reply_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+        try:
+            if update.callback_query:
+                await update.callback_query.edit_message_text(text, reply_markup=reply_markup)
+            elif update.message:
+                await update.message.reply_text(text, reply_markup=reply_markup)
+        except Exception as e:
+            logger.error(f"Error showing admin menu: {e}")
+            # Fallback without special characters
+            simple_text = f"¡Bienvenido {username}!\n\nSelecciona una opción:"
+            if update.callback_query:
+                await update.callback_query.edit_message_text(simple_text, reply_markup=reply_markup)
+            elif update.message:
+                await update.message.reply_text(simple_text, reply_markup=reply_markup)
     
     async def start_tracking_creation(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Start tracking creation from admin panel"""

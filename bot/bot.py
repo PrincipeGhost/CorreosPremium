@@ -192,17 +192,18 @@ class TelegramBot:
     async def _test_api_connection(self):
         """Test secure connection to web API"""
         try:
-            await asyncio.sleep(2)  # Wait for services to be ready
-            async with httpx.AsyncClient() as client:
+            await asyncio.sleep(1)  # Brief wait for services to be ready
+            async with httpx.AsyncClient(timeout=3.0) as client:
                 response = await client.get(
                     f"{API_BASE_URL}/api/trackings/stats",
-                    headers={"Authorization": f"Bearer {ADMIN_TOKEN}"} if ADMIN_TOKEN else {},
-                    timeout=5.0
+                    headers={"Authorization": f"Bearer {ADMIN_TOKEN}"} if ADMIN_TOKEN else {}
                 )
                 if response.status_code == 200:
                     logger.info("✅ API connection test successful")
                 else:
                     logger.warning(f"⚠️  API connection test failed: {response.status_code}")
+        except asyncio.TimeoutError:
+            logger.warning("⚠️  API connection test timed out")
         except Exception as e:
             logger.warning(f"⚠️  API connection test failed: {e}")
     
@@ -722,9 +723,12 @@ Usa /start para crear otro tracking.
         """Run startup checks when bot starts"""
         logger.info("Running startup checks...")
         if ADMIN_TOKEN:
-            await self._test_api_connection()
+            # Run API test in background, don't block bot startup
+            asyncio.create_task(self._test_api_connection())
+            logger.info("✅ Bot started successfully - API test running in background")
         else:
             logger.warning("⚠️  ADMIN_TOKEN not set - API communication disabled")
+            logger.info("✅ Bot started successfully")
     
     def run(self):
         """Start the bot"""
