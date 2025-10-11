@@ -8,6 +8,7 @@ import psycopg2.extras
 from typing import List, Optional, Tuple
 import logging
 from datetime import datetime
+from urllib.parse import quote_plus
 
 from models import Tracking, ShippingRoute, StatusHistory, CREATE_TABLES_SQL
 
@@ -17,13 +18,24 @@ class DatabaseManager:
     """Handle all database operations"""
     
     def __init__(self):
+        # Get DATABASE_URL from environment
         self.database_url = os.getenv('DATABASE_URL')
         if not self.database_url:
             raise ValueError("DATABASE_URL environment variable is required")
         
+        # Clean the URL (strip whitespace/newlines and handle async driver prefix)
+        self.database_url = self.database_url.strip()
+        
         # Clean database URL for psycopg2 (remove SQLAlchemy async driver prefix)
         if self.database_url.startswith('postgresql+asyncpg://'):
             self.database_url = self.database_url.replace('postgresql+asyncpg://', 'postgresql://')
+        
+        # Ensure sslmode=require is present for Neon databases
+        if 'sslmode=' not in self.database_url:
+            separator = '&' if '?' in self.database_url else '?'
+            self.database_url = f"{self.database_url}{separator}sslmode=require"
+        
+        logger.info("Database connection configured")
     
     def get_connection(self):
         """Get database connection"""
