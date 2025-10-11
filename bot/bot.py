@@ -5,6 +5,7 @@ import re
 import httpx
 import asyncio
 from datetime import datetime
+from typing import Optional
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, ConversationHandler, ContextTypes, filters, CallbackQueryHandler
@@ -178,10 +179,11 @@ class TelegramBot:
         """Handle text input for tracking search"""
         # Only process if user is in search mode
         if context.user_data and context.user_data.get('searching_tracking'):
-            search_query = update.message.text.strip()
-            # Clear search state immediately to prevent blocking other flows
-            context.user_data['searching_tracking'] = False
-            await admin_panel.process_search(update, context, search_query)
+            if update.message and update.message.text:
+                search_query = update.message.text.strip()
+                # Clear search state immediately to prevent blocking other flows
+                context.user_data['searching_tracking'] = False
+                await admin_panel.process_search(update, context, search_query)
             return
         
         # If not in search mode, let other handlers process it
@@ -204,7 +206,7 @@ class TelegramBot:
         except Exception as e:
             logger.warning(f"⚠️  API connection test failed: {e}")
     
-    async def update_tracking_status_via_api(self, tracking_id: str, new_status: str, notes: str = None) -> bool:
+    async def update_tracking_status_via_api(self, tracking_id: str, new_status: str, notes: Optional[str] = None) -> bool:
         """Update tracking status via secure API call"""
         if not ADMIN_TOKEN:
             logger.error("Cannot update via API - ADMIN_TOKEN not configured")
@@ -523,7 +525,9 @@ Si el problema persiste, contacta al administrador del canal.
         
         # Calculate estimated delivery date
         delivery_date, total_days = shipping_calc.calculate_estimated_delivery(
+            context.user_data.get('sender_address', ''),
             context.user_data.get('sender_country', ''),
+            context.user_data.get('delivery_address', ''),
             context.user_data.get('country_postal', '')
         )
         
