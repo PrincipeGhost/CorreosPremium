@@ -365,6 +365,47 @@ class DatabaseManager:
             logger.error(f"Error getting statistics: {e}")
             return {}
     
+    def get_user_statistics(self) -> List[dict]:
+        """Get statistics grouped by user (owner only)"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cur:
+                    # Get statistics grouped by username with user info
+                    cur.execute("""
+                        SELECT 
+                            COALESCE(username, 'Usuario Desconocido') as username,
+                            user_telegram_id,
+                            COUNT(*) as total_trackings,
+                            COUNT(CASE WHEN status = 'RETENIDO' THEN 1 END) as retenidos,
+                            COUNT(CASE WHEN status = 'CONFIRMAR_PAGO' THEN 1 END) as confirmar_pago,
+                            COUNT(CASE WHEN status = 'EN_TRANSITO' THEN 1 END) as en_transito,
+                            COUNT(CASE WHEN status = 'ENTREGADO' THEN 1 END) as entregados,
+                            MAX(created_at) as last_tracking_date
+                        FROM trackings
+                        WHERE username IS NOT NULL OR user_telegram_id IS NOT NULL
+                        GROUP BY username, user_telegram_id
+                        ORDER BY total_trackings DESC, username
+                    """)
+                    rows = cur.fetchall()
+                    
+                    user_stats = []
+                    for row in rows:
+                        user_stats.append({
+                            'username': row[0],
+                            'user_telegram_id': row[1],
+                            'total_trackings': row[2],
+                            'retenidos': row[3],
+                            'confirmar_pago': row[4],
+                            'en_transito': row[5],
+                            'entregados': row[6],
+                            'last_tracking_date': row[7]
+                        })
+                    
+                    return user_stats
+        except Exception as e:
+            logger.error(f"Error getting user statistics: {e}")
+            return []
+    
     def delete_tracking(self, tracking_id: str) -> bool:
         """Delete a tracking and its related records"""
         try:

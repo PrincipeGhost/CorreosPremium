@@ -596,7 +596,72 @@ Por favor, ingresa el nombre del destinatario:
 • Completados: {status_counts.get(STATUS_ENTREGADO, 0)}
         """.strip()
         
-        keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
+        # Add "Ver por usuarios" button only for owner
+        if is_owner:
+            keyboard = [
+                [InlineKeyboardButton("👥 Ver por Usuarios", callback_data="admin_stats_users")],
+                [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
+            ]
+        else:
+            keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
+        
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    
+    async def show_user_statistics(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Show statistics grouped by user (owner only)"""
+        if not update.callback_query or not update.effective_user:
+            return
+        
+        admin_id = update.effective_user.id
+        
+        # Only owner can see user statistics
+        if not self.is_owner(admin_id):
+            await update.callback_query.answer("❌ Solo el propietario puede ver esta información")
+            return
+        
+        user_stats = db_manager.get_user_statistics()
+        
+        if not user_stats:
+            text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n❌ No hay datos de usuarios disponibles."
+        else:
+            text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n"
+            
+            for i, stat in enumerate(user_stats, 1):
+                username = stat['username']
+                user_id = stat['user_telegram_id'] or 'N/A'
+                total = stat['total_trackings']
+                retenidos = stat['retenidos']
+                confirmar = stat['confirmar_pago']
+                transito = stat['en_transito']
+                entregados = stat['entregados']
+                
+                # Format last tracking date
+                last_date = stat['last_tracking_date']
+                if last_date:
+                    from datetime import datetime
+                    if isinstance(last_date, str):
+                        try:
+                            last_date = datetime.fromisoformat(last_date.replace('Z', '+00:00'))
+                        except:
+                            pass
+                    last_date_str = last_date.strftime('%d/%m/%Y') if hasattr(last_date, 'strftime') else 'N/A'
+                else:
+                    last_date_str = 'N/A'
+                
+                text += f"""
+{i}. **@{username}** (ID: {user_id})
+   • Total: {total} trackings
+   • 🔴 Retenidos: {retenidos}
+   • 🟡 Confirmar: {confirmar}
+   • 🔵 Tránsito: {transito}
+   • 🟢 Entregados: {entregados}
+   • 📅 Último: {last_date_str}
+
+""".strip() + "\n\n"
+        
+        keyboard = [[InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")]]
         reply_markup = InlineKeyboardMarkup(keyboard)
         
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
@@ -818,6 +883,8 @@ Puedes escribir el ID completo o parcial.
             await self.show_gestionar_envios(update, context)
         elif data == "admin_estadisticas":
             await self.show_statistics(update, context)
+        elif data == "admin_stats_users":
+            await self.show_user_statistics(update, context)
         elif data == "admin_buscar":
             await self.start_search(update, context)
         
