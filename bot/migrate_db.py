@@ -5,19 +5,14 @@ Script to migrate database with new OpenRouteService fields
 import os
 import psycopg2
 
-# Build DATABASE_URL from Replit's PostgreSQL environment variables
-PGHOST = os.getenv('PGHOST')
-PGPORT = os.getenv('PGPORT')
-PGUSER = os.getenv('PGUSER')
-PGPASSWORD = os.getenv('PGPASSWORD')
-PGDATABASE = os.getenv('PGDATABASE')
+# Use DATABASE_URL directly
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-if all([PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE]):
-    DATABASE_URL = f"postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}:{PGPORT}/{PGDATABASE}?sslmode=require"
-    print(f"✅ Usando base de datos de Replit")
-else:
-    print("❌ Error: Variables de PostgreSQL de Replit no encontradas")
+if not DATABASE_URL:
+    print("❌ Error: DATABASE_URL no encontrado en las variables de entorno")
     exit(1)
+
+print(f"✅ Usando base de datos de Replit")
 
 MIGRATION_SQL = """
 -- Add new columns for OpenRouteService data

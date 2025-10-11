@@ -43,6 +43,14 @@ Preferred communication style: Simple, everyday language.
 - **Timestamps**: Automatic creation timestamps for audit trails
 
 ## Recent Changes (October 2025)
+- **Database Configuration (October 11, 2025)**: 
+  - **Unified Replit PostgreSQL Database**: Successfully configured a single Replit PostgreSQL database shared by both the web application and Telegram bot
+  - **Database URL Management**: Updated all scripts to use DATABASE_URL directly instead of constructing from individual PG variables for consistency
+  - **Database Schema**: Fully configured with 6 tables (users, contact_requests, service_quotes, trackings, shipping_routes, status_history)
+  - **Default Data**: Pre-populated shipping_routes with 14 default routes for Spain to various countries
+  - **Secret Management**: All required secrets configured (DATABASE_URL, BOT_TOKEN, CHANNEL_ID, ADMIN_TOKEN, ORS_API_KEY, OWNER_TELEGRAM_ID)
+  - **Scripts Updated**: Modified bot/setup_db.py and bot/migrate_db.py to use DATABASE_URL directly for reliable connections
+  
 - **Telegram Bot Role-Based Permissions**: Implemented secure two-tier permission system for admin panel
   - **Owner Role**: Full access to all trackings across all administrators (identified via OWNER_TELEGRAM_ID environment variable)
   - **Admin Role**: Can only view and manage trackings they personally created

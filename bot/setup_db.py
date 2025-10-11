@@ -6,19 +6,14 @@ import os
 import psycopg2
 from models import CREATE_TABLES_SQL
 
-# Build DATABASE_URL from Replit's PostgreSQL environment variables
-PGHOST = os.getenv('PGHOST')
-PGPORT = os.getenv('PGPORT')
-PGUSER = os.getenv('PGUSER')
-PGPASSWORD = os.getenv('PGPASSWORD')
-PGDATABASE = os.getenv('PGDATABASE')
+# Use DATABASE_URL directly
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-if all([PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE]):
-    DATABASE_URL = f"postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}:{PGPORT}/{PGDATABASE}?sslmode=require"
-    print(f"✅ Usando base de datos de Replit")
-else:
-    print("❌ Error: Variables de PostgreSQL de Replit no encontradas")
+if not DATABASE_URL:
+    print("❌ Error: DATABASE_URL no encontrado en las variables de entorno")
     exit(1)
+
+print(f"✅ Usando base de datos de Replit")
 
 try:
     # Connect to database
@@ -46,8 +41,6 @@ try:
     conn.close()
     
     print("\n✅ Base de datos configurada correctamente!")
-    print(f"\n📝 Para que el bot funcione, necesitas actualizar el secreto DATABASE_URL con:")
-    print(f"   postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}:{PGPORT}/{PGDATABASE}?sslmode=require")
     
 except Exception as e:
     print(f"❌ Error: {e}")
