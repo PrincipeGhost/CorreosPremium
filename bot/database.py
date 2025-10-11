@@ -71,7 +71,7 @@ class DatabaseManager:
             raise
     
     def save_tracking(self, tracking: Tracking, created_by_admin_id: Optional[int] = None) -> bool:
-        """Save a new tracking to database"""
+        """Save a new tracking to database and create initial history entries"""
         try:
             with self.get_connection() as conn:
                 with conn.cursor() as cur:
@@ -92,8 +92,22 @@ class DatabaseManager:
                         tracking.status, tracking.estimated_delivery_date, tracking.user_telegram_id,
                         tracking.username, created_by_admin_id
                     ))
+                    
+                    # Create initial history entries
+                    # 1. Paquete recibido en oficinas
+                    cur.execute(
+                        "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                        (tracking.tracking_id, None, "RECIBIDO", f"Paquete recibido en oficinas de {tracking.sender_state}")
+                    )
+                    
+                    # 2. Esperando confirmación de pago
+                    cur.execute(
+                        "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                        (tracking.tracking_id, "RECIBIDO", "ESPERANDO_PAGO", "Esperando confirmación de pago")
+                    )
+                    
                     conn.commit()
-            logger.info(f"Tracking {tracking.tracking_id} saved successfully")
+            logger.info(f"Tracking {tracking.tracking_id} saved successfully with initial history")
             return True
         except Exception as e:
             logger.error(f"Error saving tracking: {e}")
