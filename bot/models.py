@@ -39,6 +39,13 @@ class Tracking:
     route_distance_km: Optional[float] = None
     route_duration_hours: Optional[float] = None
     route_geometry: Optional[str] = None
+    # Additional database fields
+    route_steps: Optional[list] = None
+    current_step_index: int = 0
+    route_distance: Optional[int] = None
+    route_duration: Optional[int] = None
+    owner_id: Optional[int] = None
+    created_by: Optional[str] = None
 
 @dataclass
 class ShippingRoute:
