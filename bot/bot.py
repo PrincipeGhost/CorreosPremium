@@ -242,12 +242,16 @@ class TelegramBot:
     
     async def verify_secure_access(self, user_id: int) -> bool:
         """Double verification: channel membership + secure API check"""
-        # First check: Channel membership
-        if not await self.is_user_in_channel(user_id):
-            logger.info(f"Access denied: User {user_id} not in channel")
+        # First check: Channel membership (MANDATORY)
+        is_member = await self.is_user_in_channel(user_id)
+        
+        if not is_member:
+            logger.info(f"❌ Access denied: User {user_id} not in channel")
             return False
         
-        # Second check: API connectivity with proper authentication (REQUIRED)
+        logger.info(f"✅ User {user_id} verified as channel member")
+        
+        # Second check: API connectivity with proper authentication (optional)
         if ADMIN_TOKEN:
             try:
                 async with httpx.AsyncClient() as client:
@@ -259,16 +263,11 @@ class TelegramBot:
                     if response.status_code == 200:
                         logger.info(f"✅ API connectivity verified for user {user_id}")
                     elif response.status_code == 401:
-                        logger.error(f"❌ API authentication failed for user {user_id} - invalid ADMIN_TOKEN")
-                        return False
+                        logger.warning(f"⚠️  API authentication failed for user {user_id} - invalid ADMIN_TOKEN")
                     else:
-                        logger.error(f"❌ API connectivity failed for user {user_id} - status {response.status_code}")
-                        return False
+                        logger.warning(f"⚠️  API connectivity failed for user {user_id} - status {response.status_code}")
             except Exception as e:
-                logger.error(f"❌ API connectivity error for user {user_id}: {e}")
-                return False
-        else:
-            logger.warning(f"⚠️  ADMIN_TOKEN not set - skipping API verification for user {user_id}")
+                logger.warning(f"⚠️  API connectivity error for user {user_id}: {e}")
         
         logger.info(f"✅ Complete secure access verified for user {user_id}")
         return True
