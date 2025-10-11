@@ -46,6 +46,7 @@ class Tracking:
     route_duration: Optional[int] = None
     owner_id: Optional[int] = None
     created_by: Optional[str] = None
+    route_states: Optional[str] = None
 
 @dataclass
 class ShippingRoute:
@@ -62,6 +63,7 @@ class StatusHistory:
     new_status: str
     changed_at: datetime
     notes: Optional[str] = None
+    id: Optional[int] = None
 
 # Database table creation SQL
 CREATE_TABLES_SQL = """
