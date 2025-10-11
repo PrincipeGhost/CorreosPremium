@@ -287,6 +287,22 @@ Por favor, ingresa el nombre del destinatario:
     
     async def process_payment_confirmation(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
         """Process payment confirmation"""
+        if not update.effective_user:
+            return
+        
+        # Verify admin has access to this tracking
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        tracking = db_manager.get_tracking(tracking_id)
+        
+        if not tracking:
+            await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        if not is_owner and tracking.created_by_admin_id != admin_id:
+            await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
+            return
+        
         success = db_manager.update_tracking_status(tracking_id, STATUS_CONFIRMAR_PAGO, "Pago confirmado por administrador")
         
         if success:
@@ -303,6 +319,22 @@ Por favor, ingresa el nombre del destinatario:
     
     async def ship_package(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
         """Mark package as shipped"""
+        if not update.effective_user:
+            return
+        
+        # Verify admin has access to this tracking
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        tracking = db_manager.get_tracking(tracking_id)
+        
+        if not tracking:
+            await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        if not is_owner and tracking.created_by_admin_id != admin_id:
+            await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
+            return
+        
         success = db_manager.update_tracking_status(tracking_id, STATUS_EN_TRANSITO, "Paquete enviado")
         
         if success:
@@ -319,6 +351,22 @@ Por favor, ingresa el nombre del destinatario:
     
     async def mark_delivered(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
         """Mark package as delivered"""
+        if not update.effective_user:
+            return
+        
+        # Verify admin has access to this tracking
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        tracking = db_manager.get_tracking(tracking_id)
+        
+        if not tracking:
+            await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        if not is_owner and tracking.created_by_admin_id != admin_id:
+            await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
+            return
+        
         success = db_manager.update_tracking_status(tracking_id, STATUS_ENTREGADO, "Paquete entregado")
         
         if success:
@@ -370,6 +418,22 @@ Por favor, ingresa el nombre del destinatario:
     async def apply_delay(self, update: Update, context: ContextTypes.DEFAULT_TYPE, 
                          reason_index: int, delay_days: int, tracking_id: str):
         """Apply delay with reason"""
+        if not update.effective_user:
+            return
+        
+        # Verify admin has access to this tracking
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        tracking = db_manager.get_tracking(tracking_id)
+        
+        if not tracking:
+            await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        if not is_owner and tracking.created_by_admin_id != admin_id:
+            await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
+            return
+        
         reason = self.delay_reasons[reason_index] if reason_index < len(self.delay_reasons) else "Otro motivo"
         
         success = db_manager.add_delay_to_tracking(tracking_id, delay_days, reason)
@@ -507,13 +571,21 @@ Por favor, ingresa el nombre del destinatario:
     
     async def process_delete_tracking(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
         """Process tracking deletion"""
-        if not update.callback_query:
+        if not update.callback_query or not update.effective_user:
             return
         
         # Get tracking info before deletion for the message
         tracking = db_manager.get_tracking(tracking_id)
         if not tracking:
             await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        # Verify admin has access to this tracking
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
+        if not is_owner and tracking.created_by_admin_id != admin_id:
+            await update.callback_query.answer("❌ No tienes permiso para eliminar este tracking")
             return
         
         # Store the status to know where to return
