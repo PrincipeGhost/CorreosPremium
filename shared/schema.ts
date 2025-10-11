@@ -56,6 +56,13 @@ export const trackings = pgTable("trackings", {
   userTelegramId: bigint("user_telegram_id", { mode: "number" }),
   username: varchar("username", { length: 255 }),
   createdByAdminId: bigint("created_by_admin_id", { mode: "number" }),
+  routeStates: text("route_states"),
+  senderLat: varchar("sender_lat", { length: 50 }),
+  senderLon: varchar("sender_lon", { length: 50 }),
+  recipientLat: varchar("recipient_lat", { length: 50 }),
+  recipientLon: varchar("recipient_lon", { length: 50 }),
+  routeDistanceKm: varchar("route_distance_km", { length: 50 }),
+  routeDurationHours: varchar("route_duration_hours", { length: 50 }),
 });
 
 export const shippingRoutes = pgTable("shipping_routes", {
