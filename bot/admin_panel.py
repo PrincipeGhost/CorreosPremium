@@ -616,14 +616,76 @@ Por favor, ingresa el nombre del destinatario:
 • Completados: {status_counts.get(STATUS_ENTREGADO, 0)}
         """.strip()
         
-        # Add "Ver por usuarios" button only for owner
+        # Add buttons based on user role
         if is_owner:
             keyboard = [
+                [InlineKeyboardButton("📋 Ver Trackings Detallados", callback_data="admin_stats_trackings")],
                 [InlineKeyboardButton("👥 Ver por Usuarios", callback_data="admin_stats_users")],
                 [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
             ]
         else:
-            keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
+            keyboard = [
+                [InlineKeyboardButton("📋 Ver Mis Trackings", callback_data="admin_stats_trackings")],
+                [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
+            ]
+        
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    
+    async def show_detailed_trackings_list(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
+        """Show detailed list of trackings from statistics"""
+        if not update.callback_query or not update.effective_user:
+            return
+        
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
+        # Get all trackings for this admin
+        trackings = db_manager.get_all_trackings(admin_id=admin_id, is_owner=is_owner)
+        
+        if not trackings:
+            text = "📋 **MIS TRACKINGS**\n\n❌ No hay trackings disponibles."
+            keyboard = [[InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")]]
+        else:
+            # Limit to latest 10 trackings
+            recent_trackings = trackings[:10]
+            
+            text = f"📋 **TRACKINGS DETALLADOS** ({len(trackings)} total)\n\n"
+            
+            for i, tracking in enumerate(recent_trackings, 1):
+                status_emoji = {
+                    STATUS_RETENIDO: "🔴",
+                    STATUS_CONFIRMAR_PAGO: "🟡", 
+                    STATUS_EN_TRANSITO: "🔵",
+                    STATUS_ENTREGADO: "🟢"
+                }.get(tracking.status, "⚪")
+                
+                # Format dates
+                created_date = tracking.created_at.strftime('%d/%m/%Y') if tracking.created_at else 'N/A'
+                
+                # Get creator info
+                creator = tracking.username or 'Desconocido'
+                
+                # Get origin and destination
+                origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
+                
+                text += f"""
+{i}. {status_emoji} **{tracking.tracking_id[:12]}...**
+   👤 Cliente: {tracking.recipient_name}
+   📦 Producto: {tracking.product_name}
+   💰 Precio: {tracking.product_price}
+   🚚 Ruta: {origin} → {destination}
+   👨‍💼 Creado por: @{creator}
+   📅 Fecha: {created_date}
+   📊 Estado: {STATUS_DISPLAY.get(tracking.status, tracking.status)}
+
+""".strip() + "\n\n"
+            
+            if len(trackings) > 10:
+                text += f"_Mostrando últimos 10 de {len(trackings)} trackings_\n\n"
+            
+            keyboard = [[InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")]]
         
         reply_markup = InlineKeyboardMarkup(keyboard)
         
@@ -903,6 +965,8 @@ Puedes escribir el ID completo o parcial.
             await self.show_gestionar_envios(update, context)
         elif data == "admin_estadisticas":
             await self.show_statistics(update, context)
+        elif data == "admin_stats_trackings":
+            await self.show_detailed_trackings_list(update, context)
         elif data == "admin_stats_users":
             await self.show_user_statistics(update, context)
         elif data == "admin_buscar":
