@@ -42,7 +42,20 @@ Preferred communication style: Simple, everyday language.
 - **Package Tracking**: Mock tracking system with predefined tracking numbers for demonstration
 - **Timestamps**: Automatic creation timestamps for audit trails
 
-## Recent Changes (August 2025)
+## Recent Changes (October 2025)
+- **Telegram Bot Role-Based Permissions**: Implemented secure two-tier permission system for admin panel
+  - **Owner Role**: Full access to all trackings across all administrators (identified via OWNER_TELEGRAM_ID environment variable)
+  - **Admin Role**: Can only view and manage trackings they personally created
+  - **Database Schema**: Added `created_by_admin_id` column to trackings table to track tracking ownership
+  - **Security Hardening**: 
+    - Normalized OWNER_TELEGRAM_ID to integer at startup for consistent type-safe comparisons
+    - Eliminated all fallback queries that could bypass admin filtering
+    - admin_id always derived from authenticated user (update.effective_user.id) - never from callback data or external parameters
+    - Added permission verification before all sensitive operations (confirm payment, ship package, mark delivered, delete tracking, apply delay)
+  - **Filtered Views**: Admin filtering applies to all tracking views (retained packages, payment confirmations, shipment management, statistics, search results)
+  - **Models Updated**: Added `created_by_admin_id` field to Tracking dataclass in bot/models.py
+
+## Previous Changes (August 2025)
 - **Package Size Icons Update**: Updated TrackingHero component to use custom package images for size selection icons (2kg, 5kg, 10kg) and added missing 20kg option with proper icon
 - **Enhanced Package Selection**: Package size selection now displays authentic package icons provided by user instead of generic Package icons from Lucide
 - **Action Buttons**: Added "COMENZAR ENVÍO" and "MÁS INFO" buttons to complete the package selection interface
