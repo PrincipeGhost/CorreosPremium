@@ -18,38 +18,25 @@ class DatabaseManager:
     """Handle all database operations"""
     
     def __init__(self):
-        # Try to build DATABASE_URL from Replit's PostgreSQL environment variables first
-        pghost = os.getenv('PGHOST')
-        pgport = os.getenv('PGPORT')
-        pguser = os.getenv('PGUSER')
-        pgpassword = os.getenv('PGPASSWORD')
-        pgdatabase = os.getenv('PGDATABASE')
+        # Use DATABASE_URL directly - it's the most reliable source
+        self.database_url = os.getenv('DATABASE_URL')
         
-        if all([pghost, pgport, pguser, pgpassword, pgdatabase]):
-            # Use Replit's database variables
-            self.database_url = f"postgresql://{pguser}:{pgpassword}@{pghost}:{pgport}/{pgdatabase}?sslmode=require"
-            logger.info("Using Replit PostgreSQL database")
-        else:
-            # Fallback to DATABASE_URL if Replit variables are not available
-            self.database_url = os.getenv('DATABASE_URL')
-            if not self.database_url:
-                raise ValueError("Database configuration not found. Need either Replit PostgreSQL variables or DATABASE_URL")
-            
-            # Clean the URL (strip whitespace/newlines and handle async driver prefix)
-            self.database_url = self.database_url.strip()
-            
-            # Clean database URL for psycopg2 (remove SQLAlchemy async driver prefix)
-            if self.database_url.startswith('postgresql+asyncpg://'):
-                self.database_url = self.database_url.replace('postgresql+asyncpg://', 'postgresql://')
-            
-            # Ensure sslmode=require is present for Neon databases
-            if 'sslmode=' not in self.database_url:
-                separator = '&' if '?' in self.database_url else '?'
-                self.database_url = f"{self.database_url}{separator}sslmode=require"
-            
-            logger.info("Using DATABASE_URL for database connection")
+        if not self.database_url:
+            raise ValueError("DATABASE_URL not found in environment variables")
         
-        logger.info("Database connection configured")
+        # Clean the URL (strip whitespace/newlines and handle async driver prefix)
+        self.database_url = self.database_url.strip()
+        
+        # Clean database URL for psycopg2 (remove SQLAlchemy async driver prefix)
+        if self.database_url.startswith('postgresql+asyncpg://'):
+            self.database_url = self.database_url.replace('postgresql+asyncpg://', 'postgresql://')
+        
+        # Ensure sslmode=require is present for Neon databases
+        if 'sslmode=' not in self.database_url:
+            separator = '&' if '?' in self.database_url else '?'
+            self.database_url = f"{self.database_url}{separator}sslmode=require"
+        
+        logger.info("Database connection configured using DATABASE_URL")
     
     def get_connection(self):
         """Get database connection"""
