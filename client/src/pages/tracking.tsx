@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Package, MapPin, Clock, CheckCircle } from "lucide-react";
+import { ArrowLeft, Package, MapPin, Clock, CheckCircle, Circle, Navigation, TruckIcon } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 
@@ -40,29 +40,29 @@ export default function TrackingPage() {
   };
 
   const getStatusColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'entregado':
-        return 'bg-green-500';
-      case 'en tránsito':
-      case 'en proceso':
-        return 'bg-blue-500';
-      case 'servicio iniciado':
-        return 'bg-yellow-500';
-      default:
-        return 'bg-gray-500';
-    }
+    // Usar color amarillo/dorado corporativo para todos los iconos del historial
+    return 'bg-[#FFCC00] text-gray-900';
   };
 
   const getStatusIcon = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'entregado':
-        return <CheckCircle className="w-5 h-5" />;
-      case 'en tránsito':
-      case 'en proceso':
-        return <Package className="w-5 h-5" />;
-      default:
-        return <Clock className="w-5 h-5" />;
+    const statusLower = status.toLowerCase();
+    
+    // Iconos específicos según el estado
+    if (statusLower.includes('entregado')) {
+      return <CheckCircle className="w-5 h-5 text-gray-900" />;
     }
+    if (statusLower.includes('tránsito') || statusLower.includes('ruta')) {
+      return <TruckIcon className="w-5 h-5 text-gray-900" />;
+    }
+    if (statusLower.includes('llegó') || statusLower.includes('llego')) {
+      return <Navigation className="w-5 h-5 text-gray-900" />;
+    }
+    if (statusLower.includes('salió') || statusLower.includes('salio')) {
+      return <Navigation className="w-5 h-5 text-gray-900 rotate-180" />;
+    }
+    
+    // Icono por defecto - círculo
+    return <Circle className="w-5 h-5 text-gray-900 fill-current" />;
   };
 
   return (
@@ -184,7 +184,7 @@ export default function TrackingPage() {
                         </div>
                         <div className="flex-1">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                            <h4 className="font-semibold text-gray-900">
+                            <h4 className="font-semibold text-gray-900 text-base">
                               {event.status}
                             </h4>
                             <span className="text-sm text-gray-500">
@@ -197,8 +197,8 @@ export default function TrackingPage() {
                               })}
                             </span>
                           </div>
-                          <p className="text-gray-600 flex items-center gap-1 mt-1">
-                            <MapPin className="w-3 h-3" />
+                          <p className="text-gray-800 flex items-center gap-2 mt-2 text-base font-medium">
+                            <MapPin className="w-4 h-4 text-[#FFCC00]" />
                             {event.location}
                           </p>
                         </div>
