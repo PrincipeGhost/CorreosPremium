@@ -37,6 +37,7 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHANNEL_ID = os.getenv('CHANNEL_ID')  # Can be channel ID or username (with @)
 ADMIN_TOKEN = os.getenv('ADMIN_TOKEN')  # For secure API communication
 API_BASE_URL = os.getenv('API_BASE_URL', 'http://localhost:5000')  # Default to local server
+OWNER_TELEGRAM_ID = os.getenv('OWNER_TELEGRAM_ID')  # Owner's Telegram ID for full access
 
 # Conversation states
 (RECIPIENT_NAME, DELIVERY_ADDRESS, COUNTRY_POSTAL, DATE_TIME, PACKAGE_WEIGHT, 
