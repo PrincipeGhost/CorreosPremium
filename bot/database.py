@@ -70,7 +70,7 @@ class DatabaseManager:
             logger.error(f"Database initialization error: {e}")
             raise
     
-    def save_tracking(self, tracking: Tracking) -> bool:
+    def save_tracking(self, tracking: Tracking, created_by_admin_id: Optional[int] = None) -> bool:
         """Save a new tracking to database"""
         try:
             with self.get_connection() as conn:
@@ -80,8 +80,9 @@ class DatabaseManager:
                         tracking_id, recipient_name, delivery_address, country_postal,
                         date_time, package_weight, product_name, sender_name,
                         sender_address, sender_country, sender_state, product_price,
-                        status, estimated_delivery_date, user_telegram_id, username
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        status, estimated_delivery_date, user_telegram_id, username,
+                        created_by_admin_id
+                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                     """
                     cur.execute(sql, (
                         tracking.tracking_id, tracking.recipient_name, tracking.delivery_address,
@@ -89,7 +90,7 @@ class DatabaseManager:
                         tracking.product_name, tracking.sender_name, tracking.sender_address,
                         tracking.sender_country, tracking.sender_state, tracking.product_price,
                         tracking.status, tracking.estimated_delivery_date, tracking.user_telegram_id,
-                        tracking.username
+                        tracking.username, created_by_admin_id
                     ))
                     conn.commit()
             logger.info(f"Tracking {tracking.tracking_id} saved successfully")
@@ -112,15 +113,29 @@ class DatabaseManager:
             logger.error(f"Error getting tracking {tracking_id}: {e}")
             return None
     
-    def get_trackings_by_status(self, status: str) -> List[Tracking]:
-        """Get all trackings with specific status"""
+    def get_trackings_by_status(self, status: str, admin_id: Optional[int] = None, is_owner: bool = False) -> List[Tracking]:
+        """Get all trackings with specific status, filtered by admin if not owner"""
         try:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-                    cur.execute(
-                        "SELECT * FROM trackings WHERE status = %s ORDER BY created_at DESC",
-                        (status,)
-                    )
+                    if is_owner:
+                        # Owner sees everything
+                        cur.execute(
+                            "SELECT * FROM trackings WHERE status = %s ORDER BY created_at DESC",
+                            (status,)
+                        )
+                    elif admin_id is not None:
+                        # Admin only sees their own trackings
+                        cur.execute(
+                            "SELECT * FROM trackings WHERE status = %s AND created_by_admin_id = %s ORDER BY created_at DESC",
+                            (status, admin_id)
+                        )
+                    else:
+                        # No filter if no admin_id provided (backward compatibility)
+                        cur.execute(
+                            "SELECT * FROM trackings WHERE status = %s ORDER BY created_at DESC",
+                            (status,)
+                        )
                     rows = cur.fetchall()
                     return [Tracking(**dict(row)) for row in rows]
         except Exception as e:
@@ -216,27 +231,67 @@ class DatabaseManager:
             logger.error(f"Error getting tracking history: {e}")
             return []
     
-    def get_statistics(self) -> dict:
-        """Get tracking statistics"""
+    def get_statistics(self, admin_id: Optional[int] = None, is_owner: bool = False) -> dict:
+        """Get tracking statistics, filtered by admin if not owner"""
         try:
             with self.get_connection() as conn:
                 with conn.cursor() as cur:
                     stats = {}
                     
-                    # Count by status
-                    cur.execute("SELECT status, COUNT(*) FROM trackings GROUP BY status")
-                    status_counts = cur.fetchall()
-                    stats['by_status'] = {status: count for status, count in status_counts}
-                    
-                    # Total trackings
-                    cur.execute("SELECT COUNT(*) FROM trackings")
-                    total_result = cur.fetchone()
-                    stats['total'] = total_result[0] if total_result else 0
-                    
-                    # Today's trackings
-                    cur.execute("SELECT COUNT(*) FROM trackings WHERE DATE(created_at) = CURRENT_DATE")
-                    today_result = cur.fetchone()
-                    stats['today'] = today_result[0] if today_result else 0
+                    if is_owner:
+                        # Owner sees all statistics
+                        # Count by status
+                        cur.execute("SELECT status, COUNT(*) FROM trackings GROUP BY status")
+                        status_counts = cur.fetchall()
+                        stats['by_status'] = {status: count for status, count in status_counts}
+                        
+                        # Total trackings
+                        cur.execute("SELECT COUNT(*) FROM trackings")
+                        total_result = cur.fetchone()
+                        stats['total'] = total_result[0] if total_result else 0
+                        
+                        # Today's trackings
+                        cur.execute("SELECT COUNT(*) FROM trackings WHERE DATE(created_at) = CURRENT_DATE")
+                        today_result = cur.fetchone()
+                        stats['today'] = today_result[0] if today_result else 0
+                    elif admin_id is not None:
+                        # Admin only sees their own statistics
+                        # Count by status
+                        cur.execute(
+                            "SELECT status, COUNT(*) FROM trackings WHERE created_by_admin_id = %s GROUP BY status",
+                            (admin_id,)
+                        )
+                        status_counts = cur.fetchall()
+                        stats['by_status'] = {status: count for status, count in status_counts}
+                        
+                        # Total trackings
+                        cur.execute("SELECT COUNT(*) FROM trackings WHERE created_by_admin_id = %s", (admin_id,))
+                        total_result = cur.fetchone()
+                        stats['total'] = total_result[0] if total_result else 0
+                        
+                        # Today's trackings
+                        cur.execute(
+                            "SELECT COUNT(*) FROM trackings WHERE created_by_admin_id = %s AND DATE(created_at) = CURRENT_DATE",
+                            (admin_id,)
+                        )
+                        today_result = cur.fetchone()
+                        stats['today'] = today_result[0] if today_result else 0
+                    else:
+                        # No filter (backward compatibility)
+                        # Count by status
+                        cur.execute("SELECT status, COUNT(*) FROM trackings GROUP BY status")
+                        status_counts = cur.fetchall()
+                        stats['by_status'] = {status: count for status, count in status_counts}
+                        
+                        # Total trackings
+                        cur.execute("SELECT COUNT(*) FROM trackings")
+                        total_result = cur.fetchone()
+                        stats['total'] = total_result[0] if total_result else 0
+                        
+                        # Today's trackings
+                        cur.execute("SELECT COUNT(*) FROM trackings WHERE DATE(created_at) = CURRENT_DATE")
+                        today_result = cur.fetchone()
+                        stats['today'] = today_result[0] if today_result else 0
                     
                     return stats
         except Exception as e:
@@ -265,12 +320,23 @@ class DatabaseManager:
             logger.error(f"Error deleting tracking {tracking_id}: {e}")
             return False
     
-    def get_all_trackings(self) -> List[Tracking]:
-        """Get all trackings"""
+    def get_all_trackings(self, admin_id: Optional[int] = None, is_owner: bool = False) -> List[Tracking]:
+        """Get all trackings, filtered by admin if not owner"""
         try:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-                    cur.execute("SELECT * FROM trackings ORDER BY created_at DESC")
+                    if is_owner:
+                        # Owner sees everything
+                        cur.execute("SELECT * FROM trackings ORDER BY created_at DESC")
+                    elif admin_id is not None:
+                        # Admin only sees their own trackings
+                        cur.execute(
+                            "SELECT * FROM trackings WHERE created_by_admin_id = %s ORDER BY created_at DESC",
+                            (admin_id,)
+                        )
+                    else:
+                        # No filter if no admin_id provided (backward compatibility)
+                        cur.execute("SELECT * FROM trackings ORDER BY created_at DESC")
                     rows = cur.fetchall()
                     return [Tracking(**dict(row)) for row in rows]
         except Exception as e:
