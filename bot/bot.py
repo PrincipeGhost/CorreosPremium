@@ -560,10 +560,8 @@ Si el problema persiste, contacta al administrador del canal.
             username=context.user_data.get('username')
         )
         
-        # Save to database with admin_id if created from admin panel
-        admin_id = None
-        if context.user_data.get('from_admin_panel'):
-            admin_id = context.user_data.get('user_id')
+        # Save to database with admin_id - always set to user_id so users can see their own trackings
+        admin_id = context.user_data.get('user_id')
         save_success = db_manager.save_tracking(tracking, created_by_admin_id=admin_id)
         
         if save_success:

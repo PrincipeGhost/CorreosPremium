@@ -268,7 +268,7 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ Tracking no encontrado")
             return
         
-        if not is_owner and tracking.created_by_admin_id != admin_id:
+        if not db_manager.can_access_tracking(tracking_id, admin_id, is_owner):
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
@@ -307,7 +307,7 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ Tracking no encontrado")
             return
         
-        if not is_owner and tracking.created_by_admin_id != admin_id:
+        if not db_manager.can_access_tracking(tracking_id, admin_id, is_owner):
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
@@ -339,7 +339,7 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ Tracking no encontrado")
             return
         
-        if not is_owner and tracking.created_by_admin_id != admin_id:
+        if not db_manager.can_access_tracking(tracking_id, admin_id, is_owner):
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
@@ -371,7 +371,7 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ Tracking no encontrado")
             return
         
-        if not is_owner and tracking.created_by_admin_id != admin_id:
+        if not db_manager.can_access_tracking(tracking_id, admin_id, is_owner):
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
@@ -438,7 +438,7 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ Tracking no encontrado")
             return
         
-        if not is_owner and tracking.created_by_admin_id != admin_id:
+        if not db_manager.can_access_tracking(tracking_id, admin_id, is_owner):
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
@@ -472,7 +472,7 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ Tracking no encontrado")
             return
         
-        if not is_owner and tracking.created_by_admin_id != admin_id:
+        if not db_manager.can_access_tracking(tracking_id, admin_id, is_owner):
             await update.callback_query.answer("❌ No tienes permiso para ver este tracking")
             return
         
@@ -603,7 +603,7 @@ Por favor, ingresa el nombre del destinatario:
         admin_id = update.effective_user.id
         is_owner = self.is_owner(admin_id)
         
-        if not is_owner and tracking.created_by_admin_id != admin_id:
+        if not db_manager.can_access_tracking(tracking_id, admin_id, is_owner):
             await update.callback_query.answer("❌ No tienes permiso para eliminar este tracking")
             return
         
@@ -669,9 +669,8 @@ Puedes escribir el ID completo o parcial.
         tracking = db_manager.get_tracking(search_query)
         
         # Verify admin has access to this tracking
-        if tracking and not is_owner:
-            if hasattr(tracking, 'created_by_admin_id') and tracking.created_by_admin_id != admin_id:
-                tracking = None  # Admin doesn't have access to this tracking
+        if tracking and not db_manager.can_access_tracking(search_query, admin_id, is_owner):
+            tracking = None  # Admin doesn't have access to this tracking
         
         if tracking:
             # Found exact match - show details

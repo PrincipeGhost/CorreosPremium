@@ -122,15 +122,16 @@ class DatabaseManager:
             with self.get_connection() as conn:
                 with conn.cursor() as cur:
                     cur.execute(
-                        "SELECT created_by_admin_id FROM trackings WHERE tracking_id = %s",
+                        "SELECT created_by_admin_id, user_telegram_id FROM trackings WHERE tracking_id = %s",
                         (tracking_id,)
                     )
                     row = cur.fetchone()
                     if not row:
                         return False  # Tracking doesn't exist
                     
-                    created_by = row[0]
-                    return created_by == admin_id  # Admin can only access their own trackings
+                    created_by, user_id = row
+                    # Admin can access if they created it OR if it's for them
+                    return created_by == admin_id or user_id == admin_id
         except Exception as e:
             logger.error(f"Error checking access for tracking {tracking_id}: {e}")
             return False
@@ -147,10 +148,10 @@ class DatabaseManager:
                             (status,)
                         )
                     else:
-                        # Admin only sees their own trackings
+                        # Admin sees trackings they created OR trackings created for them
                         cur.execute(
-                            "SELECT * FROM trackings WHERE status = %s AND created_by_admin_id = %s ORDER BY created_at DESC",
-                            (status, admin_id)
+                            "SELECT * FROM trackings WHERE status = %s AND (created_by_admin_id = %s OR user_telegram_id = %s) ORDER BY created_at DESC",
+                            (status, admin_id, admin_id)
                         )
                     rows = cur.fetchall()
                     return [Tracking(**dict(row)) for row in rows]
@@ -271,24 +272,24 @@ class DatabaseManager:
                         today_result = cur.fetchone()
                         stats['today'] = today_result[0] if today_result else 0
                     else:
-                        # Admin only sees their own statistics
+                        # Admin sees statistics for trackings they created OR trackings created for them
                         # Count by status
                         cur.execute(
-                            "SELECT status, COUNT(*) FROM trackings WHERE created_by_admin_id = %s GROUP BY status",
-                            (admin_id,)
+                            "SELECT status, COUNT(*) FROM trackings WHERE created_by_admin_id = %s OR user_telegram_id = %s GROUP BY status",
+                            (admin_id, admin_id)
                         )
                         status_counts = cur.fetchall()
                         stats['by_status'] = {status: count for status, count in status_counts}
                         
                         # Total trackings
-                        cur.execute("SELECT COUNT(*) FROM trackings WHERE created_by_admin_id = %s", (admin_id,))
+                        cur.execute("SELECT COUNT(*) FROM trackings WHERE created_by_admin_id = %s OR user_telegram_id = %s", (admin_id, admin_id))
                         total_result = cur.fetchone()
                         stats['total'] = total_result[0] if total_result else 0
                         
                         # Today's trackings
                         cur.execute(
-                            "SELECT COUNT(*) FROM trackings WHERE created_by_admin_id = %s AND DATE(created_at) = CURRENT_DATE",
-                            (admin_id,)
+                            "SELECT COUNT(*) FROM trackings WHERE (created_by_admin_id = %s OR user_telegram_id = %s) AND DATE(created_at) = CURRENT_DATE",
+                            (admin_id, admin_id)
                         )
                         today_result = cur.fetchone()
                         stats['today'] = today_result[0] if today_result else 0
@@ -329,10 +330,10 @@ class DatabaseManager:
                         # Owner sees everything
                         cur.execute("SELECT * FROM trackings ORDER BY created_at DESC")
                     else:
-                        # Admin only sees their own trackings
+                        # Admin sees trackings they created OR trackings created for them
                         cur.execute(
-                            "SELECT * FROM trackings WHERE created_by_admin_id = %s ORDER BY created_at DESC",
-                            (admin_id,)
+                            "SELECT * FROM trackings WHERE created_by_admin_id = %s OR user_telegram_id = %s ORDER BY created_at DESC",
+                            (admin_id, admin_id)
                         )
                     rows = cur.fetchall()
                     return [Tracking(**dict(row)) for row in rows]
