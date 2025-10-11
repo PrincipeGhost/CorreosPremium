@@ -28,6 +28,7 @@ class Tracking:
     actual_delay_days: int = 0
     user_telegram_id: Optional[int] = None
     username: Optional[str] = None
+    created_by_admin_id: Optional[int] = None
     # OpenRouteService geocoding data
     sender_lat: Optional[float] = None
     sender_lon: Optional[float] = None

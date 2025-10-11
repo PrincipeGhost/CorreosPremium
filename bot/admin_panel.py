@@ -14,7 +14,14 @@ from shipping_calculator import shipping_calc
 
 logger = logging.getLogger(__name__)
 
-OWNER_TELEGRAM_ID = os.getenv('OWNER_TELEGRAM_ID')
+# Owner ID - normalize to integer for consistent comparisons
+OWNER_TELEGRAM_ID = None
+_owner_id_str = os.getenv('OWNER_TELEGRAM_ID')
+if _owner_id_str:
+    try:
+        OWNER_TELEGRAM_ID = int(_owner_id_str.strip())
+    except (ValueError, AttributeError):
+        logger.warning("OWNER_TELEGRAM_ID is not a valid integer, owner permissions disabled")
 
 class AdminPanel:
     """Handle administrative functions with inline buttons"""
@@ -24,13 +31,7 @@ class AdminPanel:
     
     def is_owner(self, user_id: int) -> bool:
         """Check if user is the owner"""
-        if not OWNER_TELEGRAM_ID:
-            return False
-        try:
-            owner_id = int(OWNER_TELEGRAM_ID)
-            return user_id == owner_id
-        except (ValueError, TypeError):
-            return False
+        return OWNER_TELEGRAM_ID is not None and user_id == OWNER_TELEGRAM_ID
     
     async def admin_main_menu(self, update: Update, context: ContextTypes.DEFAULT_TYPE, username: Optional[str] = None):
         """Show main admin menu"""
