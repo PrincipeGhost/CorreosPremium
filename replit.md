@@ -43,6 +43,31 @@ Preferred communication style: Simple, everyday language.
 - **Timestamps**: Automatic creation timestamps for audit trails
 
 ## Recent Changes (October 2025)
+
+- **Comprehensive Tracking History System (October 11, 2025)**:
+  - **Automatic Event Generation**: Implemented full lifecycle event tracking for all shipments
+    - **On Creation**: Auto-generates "Recibido en oficinas de [estado origen]" and "Esperando confirmación de pago" events
+    - **On Payment Confirmation**: Adds "Pago confirmado" event to history
+    - **On Shipping**: Generates complete route progression events with all intermediate states
+  - **Route State Detection**: Integrated OpenRouteService reverse geocoding to identify all states along delivery route
+    - Samples 4 waypoints along the route geometry for balanced API usage and accuracy
+    - Identifies unique states the package passes through from origin to destination
+    - Fallback mechanism uses only origin state if API fails
+  - **Complete Route History**: Auto-generates chronological events showing package journey
+    - "Salió de oficinas de [estado]" for departure from each state
+    - "Llegó a oficina de [estado]" for arrival at each state
+    - Events created in correct sequence from origin through all intermediate states to final destination
+  - **Database Schema Updates**: 
+    - Added route_states, sender_lat, sender_lon, delivery_lat, delivery_lon columns to trackings table
+    - Modified status_history ordering to use (changed_at, id) for deterministic chronological display
+  - **Backend Updates**:
+    - Modified getTrackingHistory() to order by (changed_at, id) preventing non-deterministic ordering of same-timestamp events
+    - Ensured consistent chronological display across web interface and bot
+  - **Bot Enhancements**:
+    - Added generate_route_history_events() function in database.py for bulk event creation
+    - Modified ship_package() in admin_panel.py to trigger automatic route event generation
+    - Integrated reverse geocoding in openroute_service.py with get_route_states() function
+
 - **Database Configuration (October 11, 2025)**: 
   - **Unified Replit PostgreSQL Database**: Successfully configured a single Replit PostgreSQL database shared by both the web application and Telegram bot
   - **Database URL Management**: Updated all scripts to use DATABASE_URL directly instead of constructing from individual PG variables for consistency
