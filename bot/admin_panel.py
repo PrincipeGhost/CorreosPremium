@@ -616,7 +616,7 @@ Por favor, ingresa el nombre del destinatario:
 • Completados: {status_counts.get(STATUS_ENTREGADO, 0)}
         """.strip()
         
-        # Add buttons based on user role
+        # Add buttons - detailed tracking view ONLY for owner
         if is_owner:
             keyboard = [
                 [InlineKeyboardButton("📋 Ver Trackings Detallados", callback_data="admin_stats_trackings")],
@@ -624,8 +624,8 @@ Por favor, ingresa el nombre del destinatario:
                 [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
             ]
         else:
+            # Regular users only see back button - no detailed tracking list
             keyboard = [
-                [InlineKeyboardButton("📋 Ver Mis Trackings", callback_data="admin_stats_trackings")],
                 [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
             ]
         
@@ -634,14 +634,19 @@ Por favor, ingresa el nombre del destinatario:
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
     
     async def show_detailed_trackings_list(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Show detailed list of trackings from statistics"""
+        """Show detailed list of trackings from statistics (OWNER ONLY)"""
         if not update.callback_query or not update.effective_user:
             return
         
         admin_id = update.effective_user.id
         is_owner = self.is_owner(admin_id)
         
-        # Get all trackings for this admin
+        # ONLY owner can access this view
+        if not is_owner:
+            await update.callback_query.answer("❌ Acceso denegado. Solo el administrador puede ver esta información.", show_alert=True)
+            return
+        
+        # Get all trackings for owner (sees all)
         trackings = db_manager.get_all_trackings(admin_id=admin_id, is_owner=is_owner)
         
         if not trackings:
