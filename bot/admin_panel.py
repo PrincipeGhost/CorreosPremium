@@ -256,12 +256,20 @@ Por favor, ingresa el nombre del destinatario:
     
     async def confirm_payment(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
         """Confirm payment for a tracking"""
-        if not update.callback_query:
+        if not update.callback_query or not update.effective_user:
             return
-            
+        
+        # Verify admin has access to this tracking
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
         tracking = db_manager.get_tracking(tracking_id)
         if not tracking:
             await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        if not is_owner and tracking.created_by_admin_id != admin_id:
+            await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
         text = f"""
@@ -452,9 +460,20 @@ Por favor, ingresa el nombre del destinatario:
     
     async def show_tracking_details(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
         """Show detailed tracking information"""
+        if not update.effective_user:
+            return
+        
+        # Verify admin has access to this tracking
+        admin_id = update.effective_user.id
+        is_owner = self.is_owner(admin_id)
+        
         tracking = db_manager.get_tracking(tracking_id)
         if not tracking:
             await update.callback_query.answer("❌ Tracking no encontrado")
+            return
+        
+        if not is_owner and tracking.created_by_admin_id != admin_id:
+            await update.callback_query.answer("❌ No tienes permiso para ver este tracking")
             return
         
         origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)

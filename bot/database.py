@@ -113,6 +113,28 @@ class DatabaseManager:
             logger.error(f"Error getting tracking {tracking_id}: {e}")
             return None
     
+    def can_access_tracking(self, tracking_id: str, admin_id: int, is_owner: bool = False) -> bool:
+        """Check if admin can access this tracking"""
+        if is_owner:
+            return True  # Owner can access everything
+        
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "SELECT created_by_admin_id FROM trackings WHERE tracking_id = %s",
+                        (tracking_id,)
+                    )
+                    row = cur.fetchone()
+                    if not row:
+                        return False  # Tracking doesn't exist
+                    
+                    created_by = row[0]
+                    return created_by == admin_id  # Admin can only access their own trackings
+        except Exception as e:
+            logger.error(f"Error checking access for tracking {tracking_id}: {e}")
+            return False
+    
     def get_trackings_by_status(self, status: str, admin_id: int, is_owner: bool = False) -> List[Tracking]:
         """Get all trackings with specific status, filtered by admin if not owner"""
         try:
