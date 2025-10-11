@@ -218,5 +218,120 @@ class OpenRouteService:
             logger.error(f"Error getting route info: {e}")
             return None
 
+    async def reverse_geocode(self, lat: float, lon: float) -> Optional[Dict]:
+        """
+        Reverse geocode coordinates to get location details including state/region
+        
+        Args:
+            lat: Latitude
+            lon: Longitude
+        
+        Returns:
+            Dict with location details including region/state
+        """
+        try:
+            params = {
+                "api_key": self.api_key,
+                "point.lat": lat,
+                "point.lon": lon,
+                "size": 1
+            }
+            
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                response = await client.get(
+                    f"{self.base_url}/geocode/reverse",
+                    params=params
+                )
+                response.raise_for_status()
+                
+                data = response.json()
+                
+                if data.get("features") and len(data["features"]) > 0:
+                    feature = data["features"][0]
+                    props = feature["properties"]
+                    
+                    return {
+                        "country": props.get("country", ""),
+                        "region": props.get("region", ""),
+                        "locality": props.get("locality", ""),
+                        "county": props.get("county", ""),
+                        "label": props.get("label", "")
+                    }
+                
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error reverse geocoding ({lat}, {lon}): {e}")
+            return None
+    
+    async def get_route_states(self, geometry_encoded: str, total_distance_km: float, 
+                               sender_state: str, sample_points: int = 4) -> List[str]:
+        """
+        Sample points along route and get states/regions via reverse geocoding
+        
+        Args:
+            geometry_encoded: Encoded geometry from route
+            total_distance_km: Total route distance
+            sender_state: Origin state (fallback)
+            sample_points: Number of intermediate points to sample (default 4)
+        
+        Returns:
+            List of unique states along the route
+        """
+        states = [sender_state]  # Start with origin state
+        
+        try:
+            # Decode geometry (assuming it's encoded as polyline or GeoJSON)
+            # For OpenRouteService, geometry is typically a list of coordinates
+            import json
+            
+            # Try to parse as JSON geometry
+            if isinstance(geometry_encoded, str):
+                try:
+                    geom_data = json.loads(geometry_encoded)
+                    if isinstance(geom_data, dict) and "coordinates" in geom_data:
+                        coordinates = geom_data["coordinates"]
+                    else:
+                        coordinates = geom_data
+                except:
+                    logger.warning("Could not parse geometry, using fallback")
+                    return [sender_state]
+            elif isinstance(geometry_encoded, dict):
+                coordinates = geometry_encoded.get("coordinates", [])
+            else:
+                coordinates = geometry_encoded
+            
+            if not coordinates or len(coordinates) < 2:
+                return [sender_state]
+            
+            # Sample points evenly along the route
+            total_points = len(coordinates)
+            step = max(1, total_points // (sample_points + 1))
+            
+            seen_states = {sender_state.upper()}
+            
+            for i in range(step, total_points, step):
+                if len(seen_states) >= sample_points + 2:  # Limit total states
+                    break
+                    
+                coord = coordinates[i]
+                lon, lat = coord[0], coord[1]
+                
+                # Reverse geocode this point
+                location = await self.reverse_geocode(lat, lon)
+                
+                if location:
+                    state = location.get("region") or location.get("county") or location.get("locality")
+                    if state and state.upper() not in seen_states:
+                        states.append(state)
+                        seen_states.add(state.upper())
+                        logger.info(f"Found state along route: {state}")
+            
+            return states
+            
+        except Exception as e:
+            logger.error(f"Error getting route states: {e}")
+            return [sender_state]  # Fallback to origin only
+
 # Global instance
 ors_service = OpenRouteService()

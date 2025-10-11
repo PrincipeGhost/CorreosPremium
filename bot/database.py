@@ -247,13 +247,65 @@ class DatabaseManager:
             logger.error(f"Error getting shipping route: {e}")
             return None
     
+    def generate_route_history_events(self, tracking_id: str, route_states: List[str]) -> bool:
+        """
+        Generate history events for each state along the route
+        Creates 'Salió de' and 'Llegó a' events for each state
+        
+        Args:
+            tracking_id: Tracking ID
+            route_states: List of states along the route (including origin)
+        
+        Returns:
+            True if successful
+        """
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor() as cur:
+                    # First event: "Salió de oficinas de [estado origen]"
+                    if len(route_states) > 0:
+                        cur.execute(
+                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                            (tracking_id, "EN_TRANSITO", "SALIO_ORIGEN", f"Salió de oficinas de {route_states[0]}")
+                        )
+                    
+                    # Intermediate states: "Llegó a" and "Salió de"
+                    for i in range(1, len(route_states) - 1):
+                        state = route_states[i]
+                        
+                        # Llegó a oficina de [estado]
+                        cur.execute(
+                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                            (tracking_id, "EN_RUTA", "LLEGO_A", f"Llegó a oficina de {state}")
+                        )
+                        
+                        # Salió de oficinas de [estado]
+                        cur.execute(
+                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                            (tracking_id, "LLEGO_A", "SALIO_DE", f"Salió de oficinas de {state}")
+                        )
+                    
+                    # Final state: "Llegó a oficina de [estado destino]"
+                    if len(route_states) > 1:
+                        cur.execute(
+                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                            (tracking_id, "EN_RUTA", "LLEGO_DESTINO", f"Llegó a oficina de {route_states[-1]}")
+                        )
+                    
+                    conn.commit()
+            logger.info(f"Generated route history events for tracking {tracking_id} with {len(route_states)} states")
+            return True
+        except Exception as e:
+            logger.error(f"Error generating route history: {e}")
+            return False
+    
     def get_tracking_history(self, tracking_id: str) -> List[StatusHistory]:
         """Get status change history for tracking"""
         try:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
                     cur.execute(
-                        "SELECT * FROM status_history WHERE tracking_id = %s ORDER BY changed_at DESC",
+                        "SELECT * FROM status_history WHERE tracking_id = %s ORDER BY changed_at ASC, id ASC",
                         (tracking_id,)
                     )
                     rows = cur.fetchall()

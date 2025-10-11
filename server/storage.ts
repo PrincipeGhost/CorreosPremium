@@ -111,7 +111,7 @@ export class DatabaseStorage implements IStorage {
   async getTrackingHistory(trackingId: string): Promise<StatusHistory[]> {
     return await db.select().from(statusHistory)
       .where(eq(statusHistory.trackingId, trackingId))
-      .orderBy(desc(statusHistory.changedAt));
+      .orderBy(statusHistory.changedAt, statusHistory.id);
   }
 
   async getAllTrackings(): Promise<Tracking[]> {

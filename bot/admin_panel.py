@@ -326,7 +326,7 @@ Por favor, ingresa el nombre del destinatario:
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
     
     async def ship_package(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
-        """Mark package as shipped"""
+        """Mark package as shipped and generate route history"""
         if not update.effective_user:
             return
         
@@ -343,9 +343,55 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
-        success = db_manager.update_tracking_status(tracking_id, STATUS_EN_TRANSITO, "Paquete enviado")
+        # Update status to EN_TRANSITO
+        success = db_manager.update_tracking_status(tracking_id, STATUS_EN_TRANSITO, "Paquete en tránsito")
         
         if success:
+            # Generate route history events
+            try:
+                from openroute_service import ors_service
+                import asyncio
+                
+                # Get route information to extract states
+                route_info = await ors_service.get_route_info(
+                    tracking.sender_address,
+                    tracking.sender_country,
+                    tracking.delivery_address,
+                    tracking.country_postal
+                )
+                
+                route_states = []
+                if route_info and route_info.get("route", {}).get("geometry"):
+                    # Get states along the route
+                    geometry = route_info["route"]["geometry"]
+                    distance = route_info["route"]["distance_km"]
+                    
+                    route_states = await ors_service.get_route_states(
+                        geometry, 
+                        distance,
+                        tracking.sender_state,
+                        sample_points=4
+                    )
+                else:
+                    # Fallback: use only origin state
+                    route_states = [tracking.sender_state]
+                
+                # Add destination state if different
+                destination_parts = tracking.country_postal.split(',')
+                if destination_parts:
+                    dest_state = destination_parts[0].strip()
+                    if dest_state and dest_state not in route_states:
+                        route_states.append(dest_state)
+                
+                # Generate all route history events
+                if len(route_states) > 0:
+                    db_manager.generate_route_history_events(tracking_id, route_states)
+                    logger.info(f"Generated route history for {tracking_id} with states: {route_states}")
+                
+            except Exception as e:
+                logger.error(f"Error generating route history for {tracking_id}: {e}")
+                # Continue anyway, basic EN_TRANSITO status is already set
+            
             await update.callback_query.answer("✅ Paquete marcado como enviado")
             text = f"✅ **PAQUETE ENVIADO**\n\nTracking {tracking_id} está ahora en tránsito."
         else:
