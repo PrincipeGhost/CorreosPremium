@@ -315,6 +315,11 @@ class TelegramBot:
         has_secure_access = await self.verify_secure_access(user_id)
         
         if has_secure_access:
+            # Save user information to context for tracking creation
+            if context.user_data is not None:
+                context.user_data['user_id'] = user_id
+                context.user_data['username'] = username
+            
             # User is a channel member - send verification message first
             verification_message = "✅Has sido Verificado como miembro Autorizado."
             await update.message.reply_text(verification_message)
@@ -714,12 +719,18 @@ Usa /start para crear otro tracking.
             return
             
         user_id = update.effective_user.id if update.effective_user else None
+        username = update.effective_user.username if update.effective_user else "unknown"
         
         # Check if user has admin access (you can customize this check)
         # For now, checking if user is in the required channel
         is_admin = await self.is_user_in_channel(user_id) if user_id else False
         
         if is_admin:
+            # Save user information to context for tracking creation
+            if context.user_data is not None:
+                context.user_data['user_id'] = user_id
+                context.user_data['username'] = username
+            
             await admin_panel.admin_main_menu(update, context)
         else:
             await update.message.reply_text(
