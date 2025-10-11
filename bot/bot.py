@@ -552,8 +552,11 @@ Si el problema persiste, contacta al administrador del canal.
             username=context.user_data.get('username')
         )
         
-        # Save to database
-        save_success = db_manager.save_tracking(tracking)
+        # Save to database with admin_id if created from admin panel
+        admin_id = None
+        if context.user_data.get('from_admin_panel'):
+            admin_id = context.user_data.get('user_id')
+        save_success = db_manager.save_tracking(tracking, created_by_admin_id=admin_id)
         
         if save_success:
             # Show summary with RETENIDO status
