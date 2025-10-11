@@ -186,6 +186,21 @@ class ShippingCalculator:
             logger.error(f"Error recalculating delivery for {tracking_id}: {e}")
             return None
     
+    def extract_countries(self, sender_country: str, recipient_country_postal: str) -> Tuple[str, str]:
+        """
+        Extract and format origin and destination countries
+        
+        Returns:
+            Tuple of (origin_country, destination_country)
+        """
+        # Get sender country (origin)
+        origin = sender_country.strip() if sender_country else "Desconocido"
+        
+        # Extract recipient country from country_postal field
+        destination = self._extract_country_from_postal(recipient_country_postal) if recipient_country_postal else "Desconocido"
+        
+        return origin, destination
+    
     def get_delay_reasons(self) -> list:
         """Get list of common delay reasons"""
         return [

@@ -153,7 +153,11 @@ Por favor, ingresa el nombre del destinatario:
             for tracking in trackings[:10]:
                 origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
                 delivery_date, total_days = shipping_calc.calculate_estimated_delivery(
-                    tracking.sender_country, tracking.country_postal, tracking.actual_delay_days
+                    tracking.sender_address, 
+                    tracking.sender_country,
+                    tracking.delivery_address, 
+                    tracking.country_postal, 
+                    tracking.actual_delay_days
                 )
                 
                 summary = f"**{tracking.tracking_id[:15]}...**\n"
@@ -191,7 +195,11 @@ Por favor, ingresa el nombre del destinatario:
             for tracking in trackings[:10]:
                 origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
                 delivery_date, total_days = shipping_calc.calculate_estimated_delivery(
-                    tracking.sender_country, tracking.country_postal, tracking.actual_delay_days
+                    tracking.sender_address,
+                    tracking.sender_country,
+                    tracking.delivery_address,
+                    tracking.country_postal,
+                    tracking.actual_delay_days
                 )
                 
                 delay_text = f"⚠️ Retraso: {tracking.actual_delay_days} días" if tracking.actual_delay_days > 0 else "⏰ Sin retrasos"
