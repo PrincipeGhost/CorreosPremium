@@ -78,59 +78,59 @@ def create_test_tracking():
             "old_status": None,
             "new_status": "RECIBIDO",
             "notes": "Paquete recibido en oficinas de Madrid",
-            "time_offset": timedelta(hours=0)
+            "time_offset": timedelta(hours=0, minutes=15)
         },
         {
             "old_status": "RECIBIDO",
             "new_status": "ESPERANDO_PAGO",
             "notes": "Esperando confirmación de pago",
-            "time_offset": timedelta(hours=1)
+            "time_offset": timedelta(hours=1, minutes=42)
         },
         {
             "old_status": "ESPERANDO_PAGO",
             "new_status": "PAGO_CONFIRMADO",
             "notes": "Pago confirmado - Preparando envío",
-            "time_offset": timedelta(hours=3)
+            "time_offset": timedelta(hours=3, minutes=28)
         },
         # Día 2: Salida de Madrid
         {
             "old_status": "PAGO_CONFIRMADO",
             "new_status": "SALIO_ORIGEN",
             "notes": "Salió de oficinas de Madrid",
-            "time_offset": timedelta(days=1, hours=2)
+            "time_offset": timedelta(days=1, hours=2, minutes=10)
         },
         # Día 2: Paso por Zaragoza
         {
             "old_status": "SALIO_ORIGEN",
             "new_status": "LLEGO_A",
             "notes": "Llegó a oficina de Zaragoza",
-            "time_offset": timedelta(days=1, hours=6)
+            "time_offset": timedelta(days=1, hours=6, minutes=35)
         },
         {
             "old_status": "LLEGO_A",
             "new_status": "SALIO_DE",
             "notes": "Salió de oficinas de Zaragoza",
-            "time_offset": timedelta(days=1, hours=8)
+            "time_offset": timedelta(days=1, hours=8, minutes=5)
         },
         # Día 3: Llegada a Barcelona
         {
             "old_status": "SALIO_DE",
             "new_status": "LLEGO_DESTINO",
             "notes": "Llegó a oficina de Barcelona",
-            "time_offset": timedelta(days=2, hours=2)
+            "time_offset": timedelta(days=2, hours=2, minutes=50)
         },
         {
             "old_status": "LLEGO_DESTINO",
             "new_status": "EN_TRANSITO",
             "notes": "En reparto - Asignado a mensajero local",
-            "time_offset": timedelta(days=2, hours=10)
+            "time_offset": timedelta(days=2, hours=10, minutes=18)
         },
         # Día 3: Entrega final
         {
             "old_status": "EN_TRANSITO",
             "new_status": "ENTREGADO",
             "notes": "Paquete entregado - Firmado por el destinatario",
-            "time_offset": timedelta(days=2, hours=14)
+            "time_offset": timedelta(days=2, hours=14, minutes=45)
         }
     ]
     

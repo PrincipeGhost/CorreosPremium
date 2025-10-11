@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Package, MapPin, Clock, CheckCircle, Circle, Navigation, TruckIcon } from "lucide-react";
+import { ArrowLeft, Package, MapPin, Clock, CheckCircle } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 
@@ -55,24 +55,8 @@ export default function TrackingPage() {
   };
 
   const getStatusIcon = (status: string) => {
-    const statusLower = status.toLowerCase();
-    
-    // Iconos específicos según el estado
-    if (statusLower.includes('entregado')) {
-      return <CheckCircle className="w-4 h-4 text-gray-900" />;
-    }
-    if (statusLower.includes('transito') || statusLower.includes('ruta')) {
-      return <TruckIcon className="w-4 h-4 text-gray-900" />;
-    }
-    if (statusLower.includes('llego')) {
-      return <Navigation className="w-4 h-4 text-gray-900" />;
-    }
-    if (statusLower.includes('salio')) {
-      return <Navigation className="w-4 h-4 text-gray-900 rotate-180" />;
-    }
-    
-    // Icono por defecto - círculo
-    return <Circle className="w-4 h-4 text-gray-900 fill-current" />;
+    // Todos los eventos usan el mismo icono de check (como el de entregado)
+    return <CheckCircle className="w-4 h-4 text-gray-900" />;
   };
 
   return (
