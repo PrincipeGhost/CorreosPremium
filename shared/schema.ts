@@ -55,6 +55,7 @@ export const trackings = pgTable("trackings", {
   actualDelayDays: integer("actual_delay_days").default(0),
   userTelegramId: bigint("user_telegram_id", { mode: "number" }),
   username: varchar("username", { length: 255 }),
+  createdByAdminId: bigint("created_by_admin_id", { mode: "number" }),
 });
 
 export const shippingRoutes = pgTable("shipping_routes", {
@@ -138,6 +139,7 @@ export const insertTrackingSchema = createInsertSchema(trackings).pick({
   actualDelayDays: true,
   userTelegramId: true,
   username: true,
+  createdByAdminId: true,
 }).extend({
   status: z.enum([
     TRACKING_STATUS.RETENIDO,
