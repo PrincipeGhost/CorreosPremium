@@ -311,7 +311,7 @@ Por favor, ingresa el nombre del destinatario:
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
-        success = db_manager.update_tracking_status(tracking_id, STATUS_CONFIRMAR_PAGO, "Pago confirmado por administrador")
+        success = db_manager.update_tracking_status(tracking_id, STATUS_CONFIRMAR_PAGO, "Pago confirmado")
         
         if success:
             await update.callback_query.answer("✅ Pago confirmado exitosamente")
