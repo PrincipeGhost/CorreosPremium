@@ -39,6 +39,16 @@ export default function TrackingPage() {
     }
   };
 
+  // Formatear el nombre del estado: quitar guiones bajos y capitalizar
+  const formatStatusName = (status: string) => {
+    return status
+      .replace(/_/g, ' ')  // Reemplazar guiones bajos con espacios
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   const getStatusColor = (status: string) => {
     // Usar color amarillo/dorado corporativo para todos los iconos del historial
     return 'bg-[#FFCC00] text-gray-900';
@@ -49,20 +59,20 @@ export default function TrackingPage() {
     
     // Iconos específicos según el estado
     if (statusLower.includes('entregado')) {
-      return <CheckCircle className="w-5 h-5 text-gray-900" />;
+      return <CheckCircle className="w-4 h-4 text-gray-900" />;
     }
-    if (statusLower.includes('tránsito') || statusLower.includes('ruta')) {
-      return <TruckIcon className="w-5 h-5 text-gray-900" />;
+    if (statusLower.includes('transito') || statusLower.includes('ruta')) {
+      return <TruckIcon className="w-4 h-4 text-gray-900" />;
     }
-    if (statusLower.includes('llegó') || statusLower.includes('llego')) {
-      return <Navigation className="w-5 h-5 text-gray-900" />;
+    if (statusLower.includes('llego')) {
+      return <Navigation className="w-4 h-4 text-gray-900" />;
     }
-    if (statusLower.includes('salió') || statusLower.includes('salio')) {
-      return <Navigation className="w-5 h-5 text-gray-900 rotate-180" />;
+    if (statusLower.includes('salio')) {
+      return <Navigation className="w-4 h-4 text-gray-900 rotate-180" />;
     }
     
     // Icono por defecto - círculo
-    return <Circle className="w-5 h-5 text-gray-900 fill-current" />;
+    return <Circle className="w-4 h-4 text-gray-900 fill-current" />;
   };
 
   return (
@@ -183,9 +193,9 @@ export default function TrackingPage() {
                           {getStatusIcon(event.status)}
                         </div>
                         <div className="flex-1">
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                             <h4 className="font-semibold text-gray-900 text-base">
-                              {event.status}
+                              {formatStatusName(event.status)}
                             </h4>
                             <span className="text-sm text-gray-500">
                               {new Date(event.date).toLocaleDateString('es-ES', {
@@ -197,8 +207,8 @@ export default function TrackingPage() {
                               })}
                             </span>
                           </div>
-                          <p className="text-gray-800 flex items-center gap-2 mt-2 text-base font-medium">
-                            <MapPin className="w-4 h-4 text-[#FFCC00]" />
+                          <p className="text-sm text-gray-500 flex items-center gap-2 mt-1">
+                            <MapPin className="w-3 h-3 text-[#FFCC00]" />
                             {event.location}
                           </p>
                         </div>
