@@ -525,6 +525,22 @@ Por favor, ingresa el nombre del destinatario:
         origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
         status_display = STATUS_DISPLAY.get(tracking.status, tracking.status)
         
+        # Get creator info
+        creator_username = tracking.username or 'Desconocido'
+        creator_id = tracking.user_telegram_id or 'N/A'
+        
+        # Get status history
+        history = db_manager.get_tracking_history(tracking_id)
+        history_text = ""
+        if history:
+            history_text = "\n\n📜 **HISTORIAL DE ESTADOS:**\n"
+            for h in history[-5:]:  # Show last 5 changes
+                old_status = STATUS_DISPLAY.get(h.old_status, h.old_status) if h.old_status else "Nuevo"
+                new_status = STATUS_DISPLAY.get(h.new_status, h.new_status)
+                date_str = h.changed_at.strftime('%d/%m %H:%M') if h.changed_at else 'N/A'
+                notes = f" - {h.notes}" if h.notes else ""
+                history_text += f"• {date_str}: {old_status} → {new_status}{notes}\n"
+        
         text = f"""
 📋 **DETALLES DEL TRACKING**
 
@@ -553,9 +569,13 @@ Por favor, ingresa el nombre del destinatario:
 • Estimado: {tracking.estimated_delivery_date or 'Calculando...'}
 • Retrasos: {tracking.actual_delay_days} días
 
+👨‍💼 **CREADO POR:**
+• Usuario: @{creator_username}
+• Telegram ID: {creator_id}
+
 📅 **FECHAS:**
 • Creado: {tracking.created_at.strftime('%d/%m/%Y %H:%M') if tracking.created_at else 'N/A'}
-• Actualizado: {tracking.updated_at.strftime('%d/%m/%Y %H:%M') if tracking.updated_at else 'N/A'}
+• Actualizado: {tracking.updated_at.strftime('%d/%m/%Y %H:%M') if tracking.updated_at else 'N/A'}{history_text}
         """.strip()
         
         keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
