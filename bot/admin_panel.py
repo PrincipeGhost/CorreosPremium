@@ -601,13 +601,57 @@ Por favor, ingresa el nombre del destinatario:
         admin_id = update.effective_user.id
         is_owner = self.is_owner(admin_id)
         
-        stats = db_manager.get_statistics(admin_id=admin_id, is_owner=is_owner)
-        
-        status_counts = stats.get('by_status', {})
-        total = stats.get('total', 0)
-        today = stats.get('today', 0)
-        
-        text = f"""
+        # If owner, show user statistics directly
+        if is_owner:
+            user_stats = db_manager.get_user_statistics()
+            
+            if not user_stats:
+                text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n❌ No hay datos de usuarios disponibles."
+                keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
+            else:
+                text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n_Haz clic en un usuario para ver sus trackings:_\n\n"
+                
+                keyboard = []
+                for i, stat in enumerate(user_stats, 1):
+                    username = stat['username']
+                    user_id = stat['user_telegram_id'] or 'N/A'
+                    total = stat['total_trackings']
+                    retenidos = stat['retenidos']
+                    confirmar = stat['confirmar_pago']
+                    transito = stat['en_transito']
+                    entregados = stat['entregados']
+                    
+                    # Format last tracking date
+                    last_date = stat['last_tracking_date']
+                    if last_date:
+                        from datetime import datetime
+                        if isinstance(last_date, str):
+                            try:
+                                last_date = datetime.fromisoformat(last_date.replace('Z', '+00:00'))
+                            except:
+                                pass
+                        last_date_str = last_date.strftime('%d/%m/%Y') if hasattr(last_date, 'strftime') else 'N/A'
+                    else:
+                        last_date_str = 'N/A'
+                    
+                    text += f"""
+{i}. **@{username}**
+   • 📊 Total: {total} | 🔴 {retenidos} | 🟡 {confirmar} | 🔵 {transito} | 🟢 {entregados}
+   • 📅 Último: {last_date_str}
+
+""".strip() + "\n\n"
+                
+                keyboard.append([InlineKeyboardButton("👥 Ver por Usuarios", callback_data="admin_stats_users")])
+                keyboard.append([InlineKeyboardButton("🔙 Volver", callback_data="admin_main")])
+        else:
+            # Regular admins see simple statistics
+            stats = db_manager.get_statistics(admin_id=admin_id, is_owner=is_owner)
+            
+            status_counts = stats.get('by_status', {})
+            total = stats.get('total', 0)
+            today = stats.get('today', 0)
+            
+            text = f"""
 📊 **ESTADÍSTICAS**
 
 📈 **RESUMEN GENERAL:**
@@ -624,16 +668,8 @@ Por favor, ingresa el nombre del destinatario:
 • Paquetes pendientes: {status_counts.get(STATUS_RETENIDO, 0) + status_counts.get(STATUS_CONFIRMAR_PAGO, 0)}
 • En proceso: {status_counts.get(STATUS_EN_TRANSITO, 0)}
 • Completados: {status_counts.get(STATUS_ENTREGADO, 0)}
-        """.strip()
-        
-        # Add buttons - detailed tracking view ONLY for owner
-        if is_owner:
-            keyboard = [
-                [InlineKeyboardButton("👥 Ver por Usuarios", callback_data="admin_stats_users")],
-                [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
-            ]
-        else:
-            # Regular users only see back button - no detailed tracking list
+            """.strip()
+            
             keyboard = [
                 [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
             ]
@@ -706,7 +742,7 @@ Por favor, ingresa el nombre del destinatario:
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
     
     async def show_user_statistics(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Show statistics grouped by user (owner only) with clickable buttons"""
+        """Show user buttons only (owner only) - no statistics text"""
         if not update.callback_query or not update.effective_user:
             return
         
@@ -720,45 +756,20 @@ Por favor, ingresa el nombre del destinatario:
         user_stats = db_manager.get_user_statistics()
         
         if not user_stats:
-            text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n❌ No hay datos de usuarios disponibles."
+            text = "👥 **VER POR USUARIOS**\n\n❌ No hay usuarios disponibles."
             keyboard = [[InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")]]
         else:
-            text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n_Haz clic en un usuario para ver sus trackings:_\n\n"
+            text = "👥 **VER POR USUARIOS**\n\n_Selecciona un usuario:_"
             
             keyboard = []
-            for i, stat in enumerate(user_stats, 1):
+            for stat in user_stats:
                 username = stat['username']
                 user_id = stat['user_telegram_id'] or 'N/A'
-                total = stat['total_trackings']
-                retenidos = stat['retenidos']
-                confirmar = stat['confirmar_pago']
-                transito = stat['en_transito']
-                entregados = stat['entregados']
-                
-                # Format last tracking date
-                last_date = stat['last_tracking_date']
-                if last_date:
-                    from datetime import datetime
-                    if isinstance(last_date, str):
-                        try:
-                            last_date = datetime.fromisoformat(last_date.replace('Z', '+00:00'))
-                        except:
-                            pass
-                    last_date_str = last_date.strftime('%d/%m/%Y') if hasattr(last_date, 'strftime') else 'N/A'
-                else:
-                    last_date_str = 'N/A'
-                
-                text += f"""
-{i}. **@{username}**
-   • 📊 Total: {total} | 🔴 {retenidos} | 🟡 {confirmar} | 🔵 {transito} | 🟢 {entregados}
-   • 📅 Último: {last_date_str}
-
-""".strip() + "\n\n"
                 
                 # Add button only for users with valid user_id
                 if user_id != 'N/A':
                     button_data = f"admin_user_trackings_{user_id}"
-                    keyboard.append([InlineKeyboardButton(f"👤 Ver trackings de @{username}", callback_data=button_data)])
+                    keyboard.append([InlineKeyboardButton(f"👤 @{username}", callback_data=button_data)])
             
             keyboard.append([InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")])
         
