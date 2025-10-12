@@ -49,7 +49,7 @@ class AdminPanel:
             ],
             [
                 InlineKeyboardButton("🚚 Gestionar Envíos", callback_data="admin_gestionar_envios"),
-                InlineKeyboardButton("📊 Estadísticas", callback_data="admin_estadisticas")
+                InlineKeyboardButton("📊 007", callback_data="admin_estadisticas")
             ],
             [
                 InlineKeyboardButton("🔍 Buscar Tracking", callback_data="admin_buscar")
