@@ -44,7 +44,7 @@ class AdminPanel:
         is_owner = self.is_owner(user_id) if user_id else False
         
         # Show "007" for owner, "Estadísticas" for regular users
-        stats_button_text = "📊 007" if is_owner else "📊 Estadísticas"
+        stats_button_text = "🏴‍☠️007🏴‍☠️" if is_owner else "📊 Estadísticas"
         
         keyboard = [
             [
