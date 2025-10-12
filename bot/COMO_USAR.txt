@@ -1,0 +1,163 @@
+═══════════════════════════════════════════════════════════════
+    🤖 CÓMO USAR EL BOT DE TELEGRAM EN TERMUX
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│  MÉTODO 1: INSTALACIÓN AUTOMÁTICA (RECOMENDADO)            │
+└─────────────────────────────────────────────────────────────┘
+
+En Termux, ejecuta estos comandos:
+
+  1. Ir al directorio del bot:
+     → cd bot
+
+  2. Ejecutar el instalador:
+     → bash instalar.sh
+
+  3. ¡Listo! El instalador hace todo por ti:
+     ✓ Verifica dependencias
+     ✓ Las instala si faltan
+     ✓ Te guía en la configuración
+     ✓ Prepara la base de datos
+     ✓ Inicia el bot
+
+
+┌─────────────────────────────────────────────────────────────┐
+│  MÉTODO 2: INSTALACIÓN MANUAL                               │
+└─────────────────────────────────────────────────────────────┘
+
+Si prefieres hacerlo paso a paso:
+
+  1. Instalar dependencias del sistema:
+     → pkg update && pkg upgrade -y
+     → pkg install -y python git postgresql libpq
+
+  2. Ir al directorio:
+     → cd bot
+
+  3. Instalar dependencias de Python:
+     → pip install -r requirements.txt
+
+  4. Configurar el bot (interactivo):
+     → python3 setup_termux.py
+
+  5. Preparar base de datos:
+     → python3 setup_db.py
+
+  6. Iniciar el bot:
+     → python3 bot.py
+
+
+┌─────────────────────────────────────────────────────────────┐
+│  ¿QUÉ NECESITAS ANTES DE CONFIGURAR?                        │
+└─────────────────────────────────────────────────────────────┘
+
+Durante la configuración te pedirá:
+
+  1. BOT_TOKEN
+     → Abre Telegram
+     → Busca @BotFather
+     → Crea tu bot con /newbot
+     → Copia el token
+
+  2. CHANNEL_ID
+     → Agrega @userinfobot a tu canal
+     → Te dará el ID
+     → O usa @nombredelcanal
+
+  3. OWNER_TELEGRAM_ID
+     → Habla con @userinfobot
+     → Te enviará tu ID
+
+  4. ORS_API_KEY
+     → Ve a https://openrouteservice.org/
+     → Regístrate gratis
+     → Genera un API token
+
+  5. DATABASE_URL
+     → Ve a https://neon.tech
+     → Crea cuenta gratis
+     → Crea un proyecto
+     → Copia la connection string
+
+  6. ADMIN_TOKEN
+     → Inventa uno tú mismo
+     → Ejemplo: "miTokenSecreto123xyz"
+
+
+┌─────────────────────────────────────────────────────────────┐
+│  COMANDOS ÚTILES                                            │
+└─────────────────────────────────────────────────────────────┘
+
+  • Verificar configuración:
+    → python3 verificar_config.py
+
+  • Iniciar bot:
+    → python3 bot.py
+
+  • Iniciar con auto-reinicio:
+    → bash run_bot.sh
+
+  • Ver si está corriendo:
+    → pgrep -f bot.py
+
+  • Detener el bot:
+    → pkill -f bot.py
+
+  • Ver logs en tiempo real:
+    → tail -f bot.log
+
+  • Reconfigurar:
+    → python3 setup_termux.py
+
+
+┌─────────────────────────────────────────────────────────────┐
+│  ARCHIVOS IMPORTANTES                                       │
+└─────────────────────────────────────────────────────────────┘
+
+  📄 instalar.sh          → Instalador automático
+  📄 setup_termux.py      → Configuración interactiva
+  📄 verificar_config.py  → Verifica tu configuración
+  📄 bot.py               → Código principal del bot
+  📄 .env                 → Tus secretos (NO compartir)
+  📄 run_bot.sh           → Ejecutar con auto-reinicio
+  
+  📚 INICIO_RAPIDO.md     → Guía express
+  📚 README_TERMUX.md     → Guía completa detallada
+  📚 COMO_USAR.txt        → Este archivo
+
+
+┌─────────────────────────────────────────────────────────────┐
+│  SOLUCIÓN RÁPIDA DE PROBLEMAS                               │
+└─────────────────────────────────────────────────────────────┘
+
+  ❌ "BOT_TOKEN is required"
+     → Ejecuta: python3 setup_termux.py
+
+  ❌ "DATABASE_URL not found"
+     → Verifica: cat .env
+     → Reconfigura: python3 setup_termux.py
+
+  ❌ El bot no responde
+     → Verifica que esté corriendo: pgrep -f bot.py
+     → Revisa los logs: tail -f bot.log
+
+  ❌ Error de base de datos
+     → Verifica tu internet
+     → Ejecuta: python3 setup_db.py
+
+
+┌─────────────────────────────────────────────────────────────┐
+│  INICIO SUPER RÁPIDO (COPY-PASTE)                          │
+└─────────────────────────────────────────────────────────────┘
+
+  cd bot && bash instalar.sh
+
+  ¡Eso es todo! El instalador hace el resto.
+
+
+═══════════════════════════════════════════════════════════════
+  💡 TIP: Para más detalles, lee README_TERMUX.md
+  
+  📖 Ver guía completa: cat README_TERMUX.md
+═══════════════════════════════════════════════════════════════
