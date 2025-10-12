@@ -1,0 +1,214 @@
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║  ✅ CHECKLIST: CONFIGURAR BOT + WEB                       ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+
+📋 FASE 1: PREPARACIÓN
+══════════════════════════════════════════════════════════════
+
+□ Termux instalado (desde F-Droid, NO Google Play)
+□ Conexión a internet activa
+□ Al menos 500MB de espacio libre
+□ Cuenta de Telegram creada
+
+
+📋 FASE 2: OBTENER CREDENCIALES
+══════════════════════════════════════════════════════════════
+
+Telegram:
+□ BOT_TOKEN obtenido de @BotFather
+□ CHANNEL_ID obtenido de @userinfobot
+□ OWNER_TELEGRAM_ID obtenido de @userinfobot
+
+Servicios externos:
+□ Cuenta en https://openrouteservice.org/
+□ ORS_API_KEY generado
+
+Base de datos:
+□ Cuenta en https://neon.tech (o Supabase/Render)
+□ Proyecto de PostgreSQL creado
+□ DATABASE_URL copiada
+
+
+📋 FASE 3: CONFIGURAR WEB EN RENDER (Si aplica)
+══════════════════════════════════════════════════════════════
+
+□ Web desplegada en Render
+□ DATABASE_URL agregada en Environment Variables
+□ ADMIN_TOKEN creado y agregado en Environment Variables
+□ Web redesplegada con las nuevas variables
+□ URL de la web copiada (ej: https://miapp.onrender.com)
+
+
+📋 FASE 4: INSTALAR BOT EN TERMUX
+══════════════════════════════════════════════════════════════
+
+□ Termux actualizado: pkg update && pkg upgrade -y
+□ Navegado al directorio del bot: cd bot
+□ Instalador ejecutado: bash instalar.sh
+
+O manualmente:
+□ Python instalado: pkg install -y python
+□ PostgreSQL instalado: pkg install -y postgresql libpq
+□ Dependencias instaladas: pip install -r requirements.txt
+
+
+📋 FASE 5: CONFIGURAR BOT
+══════════════════════════════════════════════════════════════
+
+Usando el asistente:
+□ Ejecutado: python3 setup_termux.py
+□ BOT_TOKEN ingresado
+□ CHANNEL_ID ingresado
+□ OWNER_TELEGRAM_ID ingresado
+□ ORS_API_KEY ingresado
+□ DATABASE_URL ingresado (LA MISMA que en Render)
+□ ADMIN_TOKEN ingresado (EL MISMO que en Render)
+□ API_BASE_URL ingresado (URL de Render)
+□ Archivo .env creado automáticamente
+
+
+📋 FASE 6: PREPARAR BASE DE DATOS
+══════════════════════════════════════════════════════════════
+
+□ Ejecutado: python3 setup_db.py
+□ Tablas creadas exitosamente
+□ Sin errores en la consola
+
+
+📋 FASE 7: VERIFICAR CONFIGURACIÓN
+══════════════════════════════════════════════════════════════
+
+□ Ejecutado: python3 verificar_config.py
+□ Todas las variables marcadas con ✅
+□ Ejecutado: python3 test_conexion.py
+□ Conexión a base de datos: ✅
+□ Conexión a API web: ✅
+□ Configuración de Telegram: ✅
+□ OpenRouteService: ✅
+
+
+📋 FASE 8: INICIAR EL BOT
+══════════════════════════════════════════════════════════════
+
+□ Bot iniciado: python3 bot.py
+□ Sin errores en la consola
+□ Mensaje "Bot started" visible
+□ Bot responde /start en Telegram
+
+
+📋 FASE 9: PROBAR SINCRONIZACIÓN (Con Web)
+══════════════════════════════════════════════════════════════
+
+□ Tracking creado en Telegram
+□ Tracking visible en la web (Render)
+□ Datos iguales en ambos lados
+□ Actualización de estado reflejada en web
+
+
+📋 FASE 10: CONFIGURACIÓN AVANZADA (Opcional)
+══════════════════════════════════════════════════════════════
+
+□ tmux instalado: pkg install tmux
+□ Sesión tmux creada: tmux new -s bot
+□ Bot ejecutándose en tmux
+□ Termux:Boot configurado (para auto-inicio)
+□ Logs configurados: tail -f bot.log
+
+
+🎯 VERIFICACIÓN FINAL
+══════════════════════════════════════════════════════════════
+
+TEST 1: Bot en Telegram
+□ El bot responde a /start
+□ Se puede crear un tracking
+□ Los botones del panel admin funcionan
+
+TEST 2: Sincronización con Web
+□ Trackings del bot aparecen en la web
+□ Los datos son correctos
+□ Actualización en tiempo real funciona
+
+TEST 3: Estabilidad
+□ Bot funciona sin errores por 5+ minutos
+□ No hay warnings críticos en logs
+□ Conexión a BD estable
+
+
+🚨 CHECKLIST DE SEGURIDAD
+══════════════════════════════════════════════════════════════
+
+□ Archivo .env creado y protegido
+□ .env NO compartido con nadie
+□ .env NO subido a GitHub/repositorios
+□ DATABASE_URL igual en bot y web
+□ ADMIN_TOKEN igual en bot y web
+□ ADMIN_TOKEN es complejo y secreto
+□ DATABASE_URL termina en ?sslmode=require
+
+
+📊 COMPARACIÓN DE VARIABLES
+══════════════════════════════════════════════════════════════
+
+Render Environment:
+□ DATABASE_URL = postgresql://... ✓
+□ ADMIN_TOKEN = tu_token_123 ✓
+
+Termux .env:
+□ DATABASE_URL = postgresql://... ✓ (IGUAL a Render)
+□ ADMIN_TOKEN = tu_token_123 ✓ (IGUAL a Render)
+□ API_BASE_URL = https://miapp.onrender.com ✓
+□ BOT_TOKEN = ... ✓
+□ CHANNEL_ID = ... ✓
+□ OWNER_TELEGRAM_ID = ... ✓
+□ ORS_API_KEY = ... ✓
+
+
+🛠️ TROUBLESHOOTING CHECKLIST
+══════════════════════════════════════════════════════════════
+
+Si algo falla, verifica:
+
+□ Internet conectado en Termux
+□ Todas las variables en .env correctas
+□ DATABASE_URL exactamente igual en bot y web
+□ ADMIN_TOKEN exactamente igual en bot y web
+□ Base de datos activa y accesible
+□ Sin errores en: python3 test_conexion.py
+□ Logs revisados: tail -f bot.log
+
+
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║  ✅ CHECKLIST COMPLETO                                    ║
+║                                                            ║
+║  Si marcaste todo ✅ → ¡Tu bot está perfectamente         ║
+║  configurado y sincronizado con tu web!                   ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+
+📝 NOTAS:
+───────────────────────────────────────────────────────────────
+
+• Mantén Termux abierto para que el bot funcione
+• Usa tmux para ejecutar en segundo plano
+• Revisa logs regularmente: tail -f bot.log
+• Backup de .env en lugar seguro
+• Actualiza dependencias: pip install -r requirements.txt --upgrade
+
+
+🎉 ¡FELICIDADES!
+───────────────────────────────────────────────────────────────
+
+Si completaste todo este checklist, tu sistema está listo
+para producción. Ahora puedes:
+
+  • Crear trackings desde Telegram
+  • Verlos en tu web en Render
+  • Sincronización automática funcionando
+  • Bot estable y seguro
+
+¡Disfruta tu bot de Telegram! 🚀

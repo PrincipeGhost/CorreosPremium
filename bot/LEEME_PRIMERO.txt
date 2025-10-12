@@ -1,0 +1,233 @@
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║    🤖 BOT DE TELEGRAM - GUÍA DE INICIO                    ║
+║       Para Termux + Web en Render                         ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+
+📚 ÍNDICE DE GUÍAS
+══════════════════════════════════════════════════════════════
+
+1. ⚡ INICIO_RAPIDO.md
+   → Guía express (5 minutos)
+   → Para empezar rápido sin detalles
+
+2. 📖 README_TERMUX.md
+   → Guía completa y detallada
+   → Instrucciones paso a paso
+   → Solución de problemas
+
+3. 🌐 CONFIGURAR_RENDER.md
+   → Conectar bot (Termux) + web (Render)
+   → Sincronización automática
+   → Variables compartidas
+
+4. 📄 COMO_USAR.txt
+   → Guía visual simple
+   → Comandos útiles
+   → Referencia rápida
+
+5. 🔄 RESUMEN_SINCRONIZACION.txt
+   → Cómo funciona la sincronización
+   → Arquitectura del sistema
+   → Diagramas visuales
+
+
+🚀 ¿POR DÓNDE EMPEZAR?
+══════════════════════════════════════════════════════════════
+
+┌─ OPCIÓN 1: Súper Rápido ─────────────────────────────────┐
+│                                                           │
+│   Si solo quieres que funcione YA:                       │
+│                                                           │
+│   cd bot                                                  │
+│   bash instalar.sh                                        │
+│                                                           │
+│   El instalador hace TODO automáticamente                │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+
+┌─ OPCIÓN 2: Entender y Configurar ────────────────────────┐
+│                                                           │
+│   1. Lee: INICIO_RAPIDO.md                               │
+│   2. Lee: CONFIGURAR_RENDER.md (si tienes web en Render) │
+│   3. Ejecuta: bash instalar.sh                           │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+
+
+🛠️ SCRIPTS DISPONIBLES
+══════════════════════════════════════════════════════════════
+
+┌──────────────────┬───────────────────────────────────────┐
+│ SCRIPT           │ DESCRIPCIÓN                           │
+├──────────────────┼───────────────────────────────────────┤
+│ instalar.sh      │ Instalador automático completo        │
+│ setup_termux.py  │ Configuración interactiva             │
+│ test_conexion.py │ Probar conexión bot + web             │
+│ verificar_config.py │ Ver variables configuradas         │
+│ setup_db.py      │ Preparar base de datos                │
+│ run_bot.sh       │ Iniciar bot con auto-reinicio         │
+│ bot.py           │ Código principal del bot              │
+└──────────────────┴───────────────────────────────────────┘
+
+
+📋 LO QUE NECESITAS ANTES DE EMPEZAR
+══════════════════════════════════════════════════════════════
+
+Prepara estos datos (los pedirá el instalador):
+
+┌─ Datos de Telegram ───────────────────────────────────────┐
+│ • BOT_TOKEN          → De @BotFather                      │
+│ • CHANNEL_ID         → De @userinfobot                    │
+│ • OWNER_TELEGRAM_ID  → Tu ID de @userinfobot             │
+└───────────────────────────────────────────────────────────┘
+
+┌─ Servicios Externos ──────────────────────────────────────┐
+│ • ORS_API_KEY        → https://openrouteservice.org/      │
+│ • DATABASE_URL       → https://neon.tech (gratis)        │
+└───────────────────────────────────────────────────────────┘
+
+┌─ Si tienes Web en Render ─────────────────────────────────┐
+│ • API_BASE_URL       → URL de tu app en Render           │
+│ • ADMIN_TOKEN        → El mismo que en Render            │
+└───────────────────────────────────────────────────────────┘
+
+
+🎯 PROCESO RECOMENDADO
+══════════════════════════════════════════════════════════════
+
+1️⃣  Leer esta guía (ya lo hiciste ✅)
+
+2️⃣  Ejecutar instalador:
+    cd bot
+    bash instalar.sh
+
+3️⃣  Seguir las instrucciones en pantalla
+
+4️⃣  Verificar que todo funciona:
+    python3 test_conexion.py
+
+5️⃣  Iniciar el bot:
+    python3 bot.py
+
+
+🔗 SINCRONIZACIÓN CON WEB
+══════════════════════════════════════════════════════════════
+
+Si tienes una página web en Render:
+
+   ✅ Bot y Web usan la MISMA base de datos
+   ✅ Creas tracking en Telegram → Aparece en la web
+   ✅ Sincronización automática e instantánea
+
+   📖 Lee: CONFIGURAR_RENDER.md
+   📖 Lee: RESUMEN_SINCRONIZACION.txt
+
+
+✅ COMANDOS MÁS USADOS
+══════════════════════════════════════════════════════════════
+
+# Instalación completa
+bash instalar.sh
+
+# Verificar configuración
+python3 verificar_config.py
+
+# Probar conexiones
+python3 test_conexion.py
+
+# Iniciar bot
+python3 bot.py
+
+# Iniciar con auto-reinicio
+bash run_bot.sh
+
+# Ver logs en tiempo real
+tail -f bot.log
+
+# Detener bot
+pkill -f bot.py
+
+# Reconfigurar todo
+python3 setup_termux.py
+
+
+🆘 AYUDA RÁPIDA
+══════════════════════════════════════════════════════════════
+
+❌ No sé cómo empezar
+   → Ejecuta: bash instalar.sh
+
+❌ No tengo los datos necesarios
+   → Lee: COMO_USAR.txt (sección "QUÉ NECESITAS")
+
+❌ Tengo problemas
+   → Lee: README_TERMUX.md (sección "SOLUCIÓN DE PROBLEMAS")
+
+❌ Quiero conectar con mi web
+   → Lee: CONFIGURAR_RENDER.md
+
+❌ No entiendo la sincronización
+   → Lee: RESUMEN_SINCRONIZACION.txt
+
+
+📖 CÓMO LEER UNA GUÍA
+══════════════════════════════════════════════════════════════
+
+En Termux:
+
+# Ver una guía
+cat INICIO_RAPIDO.md
+
+# Ver con scroll (presiona q para salir)
+less INICIO_RAPIDO.md
+
+# Ver con colores
+bat INICIO_RAPIDO.md  # (si tienes bat instalado)
+
+
+💡 TIPS IMPORTANTES
+══════════════════════════════════════════════════════════════
+
+1. Mantén Termux abierto para que el bot funcione
+2. Usa tmux para ejecutar en segundo plano
+3. El archivo .env contiene tus secretos - NO lo compartas
+4. Si tienes web en Render, usa la MISMA DATABASE_URL
+5. ADMIN_TOKEN debe ser IGUAL en bot y web
+
+
+📂 ESTRUCTURA DE ARCHIVOS
+══════════════════════════════════════════════════════════════
+
+bot/
+├── 📄 LEEME_PRIMERO.txt          ← ESTÁS AQUÍ
+├── 📘 INICIO_RAPIDO.md            ← Guía express
+├── 📕 README_TERMUX.md            ← Guía completa
+├── 📗 CONFIGURAR_RENDER.md        ← Bot + Web
+├── 📙 COMO_USAR.txt               ← Referencia rápida
+├── 📓 RESUMEN_SINCRONIZACION.txt  ← Arquitectura
+│
+├── 🔧 instalar.sh                 ← Instalador principal
+├── 🔧 setup_termux.py             ← Configurador
+├── 🔧 test_conexion.py            ← Test de conexión
+├── 🔧 verificar_config.py         ← Ver config
+│
+├── 🤖 bot.py                      ← Código del bot
+├── 🚀 run_bot.sh                  ← Iniciar bot
+├── 🗄️  setup_db.py                ← Setup DB
+└── 📦 requirements.txt            ← Dependencias
+
+
+╔════════════════════════════════════════════════════════════╗
+║                                                            ║
+║  🎉 ¡ESTÁS LISTO PARA EMPEZAR!                            ║
+║                                                            ║
+║  Ejecuta: bash instalar.sh                                ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+
+Última actualización: 2025
+Versión del sistema: 2.0
