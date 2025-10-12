@@ -697,7 +697,7 @@ Por favor, ingresa el nombre del destinatario:
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
     
     async def show_user_statistics(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
-        """Show statistics grouped by user (owner only)"""
+        """Show statistics grouped by user (owner only) with clickable buttons"""
         if not update.callback_query or not update.effective_user:
             return
         
@@ -712,9 +712,11 @@ Por favor, ingresa el nombre del destinatario:
         
         if not user_stats:
             text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n❌ No hay datos de usuarios disponibles."
+            keyboard = [[InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")]]
         else:
-            text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n"
+            text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n_Haz clic en un usuario para ver sus trackings:_\n\n"
             
+            keyboard = []
             for i, stat in enumerate(user_stats, 1):
                 username = stat['username']
                 user_id = stat['user_telegram_id'] or 'N/A'
@@ -738,17 +740,84 @@ Por favor, ingresa el nombre del destinatario:
                     last_date_str = 'N/A'
                 
                 text += f"""
-{i}. **@{username}** (ID: {user_id})
-   • Total: {total} trackings
-   • 🔴 Retenidos: {retenidos}
-   • 🟡 Confirmar: {confirmar}
-   • 🔵 Tránsito: {transito}
-   • 🟢 Entregados: {entregados}
+{i}. **@{username}**
+   • 📊 Total: {total} | 🔴 {retenidos} | 🟡 {confirmar} | 🔵 {transito} | 🟢 {entregados}
    • 📅 Último: {last_date_str}
 
 """.strip() + "\n\n"
+                
+                # Add button for each user (use user_id if available, otherwise username)
+                button_data = f"admin_user_trackings_{user_id if user_id != 'N/A' else username}"
+                keyboard.append([InlineKeyboardButton(f"👤 Ver trackings de @{username}", callback_data=button_data)])
+            
+            keyboard.append([InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")])
         
-        keyboard = [[InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")]]
+        reply_markup = InlineKeyboardMarkup(keyboard)
+        
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+    
+    async def show_user_trackings(self, update: Update, context: ContextTypes.DEFAULT_TYPE, user_id: str):
+        """Show all trackings for a specific user (owner only)"""
+        if not update.callback_query or not update.effective_user:
+            return
+        
+        admin_id = update.effective_user.id
+        
+        # Only owner can see this
+        if not self.is_owner(admin_id):
+            await update.callback_query.answer("❌ Solo el propietario puede ver esta información")
+            return
+        
+        # Convert user_id to int
+        try:
+            user_id_int = int(user_id)
+        except ValueError:
+            await update.callback_query.answer("❌ ID de usuario inválido")
+            return
+        
+        trackings = db_manager.get_trackings_by_user(user_id_int)
+        
+        if not trackings:
+            text = f"📦 **TRACKINGS DEL USUARIO**\n\n❌ No se encontraron trackings para este usuario."
+            keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_stats_users")]]
+        else:
+            # Get username from first tracking
+            username = trackings[0].username if trackings[0].username else "Usuario"
+            
+            text = f"📦 **TRACKINGS DE @{username}**\n\n_Total: {len(trackings)} trackings_\n\n"
+            
+            keyboard = []
+            for i, tracking in enumerate(trackings[:10], 1):  # Show max 10
+                status_emoji = {
+                    STATUS_RETENIDO: "🔴",
+                    STATUS_CONFIRMAR_PAGO: "🟡", 
+                    STATUS_EN_TRANSITO: "🔵",
+                    STATUS_ENTREGADO: "🟢"
+                }.get(tracking.status, "⚪")
+                
+                created_date = tracking.created_at.strftime('%d/%m') if tracking.created_at else 'N/A'
+                origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
+                
+                text += f"""
+{i}. {status_emoji} **{tracking.tracking_id[:15]}...**
+   👤 {tracking.recipient_name}
+   🚚 {origin} → {destination}
+   💰 {tracking.product_price}
+   📅 {created_date}
+
+""".strip() + "\n\n"
+                
+                # Add button to view tracking details
+                keyboard.append([InlineKeyboardButton(
+                    f"📋 Ver detalles de {tracking.tracking_id[:12]}...",
+                    callback_data=f"view_{tracking.tracking_id}"
+                )])
+            
+            if len(trackings) > 10:
+                text += f"_Mostrando 10 de {len(trackings)} trackings_\n\n"
+            
+            keyboard.append([InlineKeyboardButton("🔙 Volver a Usuarios", callback_data="admin_stats_users")])
+        
         reply_markup = InlineKeyboardMarkup(keyboard)
         
         await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')

@@ -406,6 +406,21 @@ class DatabaseManager:
             logger.error(f"Error getting user statistics: {e}")
             return []
     
+    def get_trackings_by_user(self, user_id: int) -> List[Tracking]:
+        """Get all trackings created by or for a specific user"""
+        try:
+            with self.get_connection() as conn:
+                with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
+                    cur.execute(
+                        "SELECT * FROM trackings WHERE user_telegram_id = %s ORDER BY created_at DESC",
+                        (user_id,)
+                    )
+                    rows = cur.fetchall()
+                    return [Tracking(**dict(row)) for row in rows]
+        except Exception as e:
+            logger.error(f"Error getting trackings for user {user_id}: {e}")
+            return []
+    
     def delete_tracking(self, tracking_id: str) -> bool:
         """Delete a tracking and its related records"""
         try:
