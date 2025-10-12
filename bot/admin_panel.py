@@ -540,7 +540,7 @@ Por favor, ingresa el nombre del destinatario:
         history = db_manager.get_tracking_history(tracking_id)
         history_text = ""
         if history:
-            history_text = "\n\n📜 **HISTORIAL DE ESTADOS:**\n"
+            history_text = "\n\n📜 HISTORIAL DE ESTADOS:\n"
             for h in history[-5:]:  # Show last 5 changes
                 old_status = STATUS_DISPLAY.get(h.old_status, h.old_status) if h.old_status else "Nuevo"
                 new_status = STATUS_DISPLAY.get(h.new_status, h.new_status)
@@ -548,47 +548,50 @@ Por favor, ingresa el nombre del destinatario:
                 notes = f" - {h.notes}" if h.notes else ""
                 history_text += f"• {date_str}: {old_status} → {new_status}{notes}\n"
         
-        text = f"""
-📋 **DETALLES DEL TRACKING**
+        text = f"""📋 DETALLES DEL TRACKING
 
-🏷️ **ID:** {tracking.tracking_id}
+🏷️ ID: {tracking.tracking_id}
 {status_display}
 
-👤 **DESTINATARIO:**
+👤 DESTINATARIO:
 • Nombre: {tracking.recipient_name}
 • Dirección: {tracking.delivery_address}
 • País/CP: {tracking.country_postal}
 
-📦 **PAQUETE:**
+📦 PAQUETE:
 • Producto: {tracking.product_name}
 • Peso: {tracking.package_weight}
 • Precio: {tracking.product_price}
 • Fecha ingreso: {tracking.date_time}
 
-📤 **REMITENTE:**
+📤 REMITENTE:
 • Nombre: {tracking.sender_name}
 • Dirección: {tracking.sender_address}
 • País: {tracking.sender_country}
 • Estado: {tracking.sender_state}
 
-🚚 **ENVÍO:**
+🚚 ENVÍO:
 • Ruta: {origin} → {destination}
 • Estimado: {tracking.estimated_delivery_date or 'Calculando...'}
 • Retrasos: {tracking.actual_delay_days} días
 
-👨‍💼 **CREADO POR:**
+👨‍💼 CREADO POR:
 • Usuario: @{creator_username}
 • Telegram ID: {creator_id}
 
-📅 **FECHAS:**
+📅 FECHAS:
 • Creado: {tracking.created_at.strftime('%d/%m/%Y %H:%M') if tracking.created_at else 'N/A'}
-• Actualizado: {tracking.updated_at.strftime('%d/%m/%Y %H:%M') if tracking.updated_at else 'N/A'}{history_text}
-        """.strip()
+• Actualizado: {tracking.updated_at.strftime('%d/%m/%Y %H:%M') if tracking.updated_at else 'N/A'}{history_text}"""
         
-        keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
+        # Return to user trackings list if owner, otherwise main menu
+        if is_owner and creator_id != 'N/A':
+            keyboard = [[InlineKeyboardButton("🔙 Volver a Trackings", callback_data=f"admin_user_trackings_{creator_id}")]]
+        else:
+            keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
+        
         reply_markup = InlineKeyboardMarkup(keyboard)
         
-        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup)
     
     async def show_statistics(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Show tracking statistics"""
