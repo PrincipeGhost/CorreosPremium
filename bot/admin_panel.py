@@ -1052,6 +1052,11 @@ Puedes escribir el ID completo o parcial.
         elif data == "admin_buscar":
             await self.start_search(update, context)
         
+        # User trackings view
+        elif data.startswith("admin_user_trackings_"):
+            user_id = data.replace("admin_user_trackings_", "")
+            await self.show_user_trackings(update, context, user_id)
+        
         # Payment confirmation
         elif data.startswith("confirm_payment_"):
             tracking_id = data.replace("confirm_payment_", "")
@@ -1106,6 +1111,9 @@ Puedes escribir el ID completo o parcial.
         # View details
         elif data.startswith("view_details_"):
             tracking_id = data.replace("view_details_", "")
+            await self.show_tracking_details(update, context, tracking_id)
+        elif data.startswith("view_"):
+            tracking_id = data.replace("view_", "")
             await self.show_tracking_details(update, context, tracking_id)
 
 # Global admin panel instance
