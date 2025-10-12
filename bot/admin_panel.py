@@ -785,13 +785,15 @@ Por favor, ingresa el nombre del destinatario:
         trackings = db_manager.get_trackings_by_user(user_id_int)
         
         if not trackings:
-            text = f"📦 **TRACKINGS DEL USUARIO**\n\n❌ No se encontraron trackings para este usuario."
+            text = "📦 TRACKINGS DEL USUARIO\n\n❌ No se encontraron trackings para este usuario."
             keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_stats_users")]]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            await update.callback_query.edit_message_text(text, reply_markup=reply_markup)
         else:
             # Get username from first tracking
             username = trackings[0].username if trackings[0].username else "Usuario"
             
-            text = f"📦 **TRACKINGS DE @{username}**\n\nTotal: {len(trackings)} trackings\n\n"
+            text = f"📦 TRACKINGS DE @{username}\n\nTotal: {len(trackings)} trackings\n\n"
             
             keyboard = []
             for i, tracking in enumerate(trackings[:10], 1):  # Show max 10
@@ -805,18 +807,11 @@ Por favor, ingresa el nombre del destinatario:
                 created_date = tracking.created_at.strftime('%d/%m') if tracking.created_at else 'N/A'
                 origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
                 
-                # Escape special markdown characters
-                recipient_name = str(tracking.recipient_name).replace('_', '\\_').replace('*', '\\*').replace('[', '\\[').replace('`', '\\`')
-                product_price = str(tracking.product_price).replace('_', '\\_').replace('*', '\\*')
-                
-                text += f"""
-{i}. {status_emoji} {tracking.tracking_id[:15]}...
-   👤 {recipient_name}
-   🚚 {origin} → {destination}
-   💰 {product_price}
-   📅 {created_date}
-
-""".strip() + "\n\n"
+                text += f"{i}. {status_emoji} {tracking.tracking_id[:15]}...\n"
+                text += f"   👤 {tracking.recipient_name}\n"
+                text += f"   🚚 {origin} → {destination}\n"
+                text += f"   💰 {tracking.product_price}\n"
+                text += f"   📅 {created_date}\n\n"
                 
                 # Add button to view tracking details
                 keyboard.append([InlineKeyboardButton(
@@ -828,10 +823,9 @@ Por favor, ingresa el nombre del destinatario:
                 text += f"Mostrando 10 de {len(trackings)} trackings\n\n"
             
             keyboard.append([InlineKeyboardButton("🔙 Volver a Usuarios", callback_data="admin_stats_users")])
-        
-        reply_markup = InlineKeyboardMarkup(keyboard)
-        
-        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+            
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            await update.callback_query.edit_message_text(text, reply_markup=reply_markup)
     
     async def confirm_delete_tracking(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
         """Show confirmation dialog before deleting tracking"""
