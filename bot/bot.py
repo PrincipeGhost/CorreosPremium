@@ -12,14 +12,14 @@ from telegram.ext import Application, CommandHandler, MessageHandler, Conversati
 from telegram.error import TelegramError
 from telegram.helpers import escape_markdown
 
+# Load environment variables FIRST (before importing our modules)
+load_dotenv()
+
 # Import our custom modules
 from database import db_manager
 from models import Tracking, STATUS_RETENIDO
 from shipping_calculator import shipping_calc
 from admin_panel import admin_panel
-
-# Load environment variables
-load_dotenv()
 
 # Configure logging
 logging.basicConfig(

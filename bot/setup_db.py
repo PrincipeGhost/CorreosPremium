@@ -4,7 +4,11 @@ Script to setup database tables using Replit's PostgreSQL variables
 """
 import os
 import psycopg2
+from dotenv import load_dotenv
 from models import CREATE_TABLES_SQL
+
+# Load environment variables first
+load_dotenv()
 
 # Use DATABASE_URL directly
 DATABASE_URL = os.getenv('DATABASE_URL')
