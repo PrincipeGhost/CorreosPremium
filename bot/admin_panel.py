@@ -606,10 +606,10 @@ Por favor, ingresa el nombre del destinatario:
             user_stats = db_manager.get_user_statistics()
             
             if not user_stats:
-                text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n❌ No hay datos de usuarios disponibles."
+                text = "📊 ESTADÍSTICAS POR USUARIO\n\n❌ No hay datos de usuarios disponibles."
                 keyboard = [[InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]]
             else:
-                text = "📊 **ESTADÍSTICAS POR USUARIO**\n\n_Haz clic en un usuario para ver sus trackings:_\n\n"
+                text = "📊 ESTADÍSTICAS POR USUARIO\n\nHaz clic en un usuario para ver sus trackings:\n\n"
                 
                 keyboard = []
                 for i, stat in enumerate(user_stats, 1):
@@ -634,12 +634,9 @@ Por favor, ingresa el nombre del destinatario:
                     else:
                         last_date_str = 'N/A'
                     
-                    text += f"""
-{i}. **@{username}**
-   • 📊 Total: {total} | 🔴 {retenidos} | 🟡 {confirmar} | 🔵 {transito} | 🟢 {entregados}
-   • 📅 Último: {last_date_str}
-
-""".strip() + "\n\n"
+                    text += f"{i}. @{username}\n"
+                    text += f"   • 📊 Total: {total} | 🔴 {retenidos} | 🟡 {confirmar} | 🔵 {transito} | 🟢 {entregados}\n"
+                    text += f"   • 📅 Último: {last_date_str}\n\n"
                 
                 keyboard.append([InlineKeyboardButton("👥 Ver por Usuarios", callback_data="admin_stats_users")])
                 keyboard.append([InlineKeyboardButton("🔙 Volver", callback_data="admin_main")])
@@ -676,7 +673,7 @@ Por favor, ingresa el nombre del destinatario:
         
         reply_markup = InlineKeyboardMarkup(keyboard)
         
-        await update.callback_query.edit_message_text(text, reply_markup=reply_markup, parse_mode='Markdown')
+        await update.callback_query.edit_message_text(text, reply_markup=reply_markup)
     
     async def show_detailed_trackings_list(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         """Show detailed list of trackings from statistics (OWNER ONLY)"""
