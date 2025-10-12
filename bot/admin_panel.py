@@ -39,6 +39,13 @@ class AdminPanel:
         if context.user_data is not None:
             context.user_data['searching_tracking'] = False
         
+        # Check if user is owner
+        user_id = update.effective_user.id if update.effective_user else None
+        is_owner = self.is_owner(user_id) if user_id else False
+        
+        # Show "007" for owner, "Estadísticas" for regular users
+        stats_button_text = "📊 007" if is_owner else "📊 Estadísticas"
+        
         keyboard = [
             [
                 InlineKeyboardButton("📝 Crear Tracking", callback_data="admin_crear_tracking")
@@ -49,7 +56,7 @@ class AdminPanel:
             ],
             [
                 InlineKeyboardButton("🚚 Gestionar Envíos", callback_data="admin_gestionar_envios"),
-                InlineKeyboardButton("📊 007", callback_data="admin_estadisticas")
+                InlineKeyboardButton(stats_button_text, callback_data="admin_estadisticas")
             ],
             [
                 InlineKeyboardButton("🔍 Buscar Tracking", callback_data="admin_buscar")
