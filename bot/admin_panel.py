@@ -791,7 +791,7 @@ Por favor, ingresa el nombre del destinatario:
             # Get username from first tracking
             username = trackings[0].username if trackings[0].username else "Usuario"
             
-            text = f"📦 **TRACKINGS DE @{username}**\n\n_Total: {len(trackings)} trackings_\n\n"
+            text = f"📦 **TRACKINGS DE @{username}**\n\nTotal: {len(trackings)} trackings\n\n"
             
             keyboard = []
             for i, tracking in enumerate(trackings[:10], 1):  # Show max 10
@@ -805,11 +805,15 @@ Por favor, ingresa el nombre del destinatario:
                 created_date = tracking.created_at.strftime('%d/%m') if tracking.created_at else 'N/A'
                 origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
                 
+                # Escape special markdown characters
+                recipient_name = str(tracking.recipient_name).replace('_', '\\_').replace('*', '\\*').replace('[', '\\[').replace('`', '\\`')
+                product_price = str(tracking.product_price).replace('_', '\\_').replace('*', '\\*')
+                
                 text += f"""
-{i}. {status_emoji} **{tracking.tracking_id[:15]}...**
-   👤 {tracking.recipient_name}
+{i}. {status_emoji} {tracking.tracking_id[:15]}...
+   👤 {recipient_name}
    🚚 {origin} → {destination}
-   💰 {tracking.product_price}
+   💰 {product_price}
    📅 {created_date}
 
 """.strip() + "\n\n"
@@ -821,7 +825,7 @@ Por favor, ingresa el nombre del destinatario:
                 )])
             
             if len(trackings) > 10:
-                text += f"_Mostrando 10 de {len(trackings)} trackings_\n\n"
+                text += f"Mostrando 10 de {len(trackings)} trackings\n\n"
             
             keyboard.append([InlineKeyboardButton("🔙 Volver a Usuarios", callback_data="admin_stats_users")])
         
