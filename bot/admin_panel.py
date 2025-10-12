@@ -752,9 +752,10 @@ Por favor, ingresa el nombre del destinatario:
 
 """.strip() + "\n\n"
                 
-                # Add button for each user (use user_id if available, otherwise username)
-                button_data = f"admin_user_trackings_{user_id if user_id != 'N/A' else username}"
-                keyboard.append([InlineKeyboardButton(f"👤 Ver trackings de @{username}", callback_data=button_data)])
+                # Add button only for users with valid user_id
+                if user_id != 'N/A':
+                    button_data = f"admin_user_trackings_{user_id}"
+                    keyboard.append([InlineKeyboardButton(f"👤 Ver trackings de @{username}", callback_data=button_data)])
             
             keyboard.append([InlineKeyboardButton("🔙 Volver a Estadísticas", callback_data="admin_estadisticas")])
         
