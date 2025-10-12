@@ -626,7 +626,6 @@ Por favor, ingresa el nombre del destinatario:
         # Add buttons - detailed tracking view ONLY for owner
         if is_owner:
             keyboard = [
-                [InlineKeyboardButton("📋 Ver Trackings Detallados", callback_data="admin_stats_trackings")],
                 [InlineKeyboardButton("👥 Ver por Usuarios", callback_data="admin_stats_users")],
                 [InlineKeyboardButton("🔙 Volver", callback_data="admin_main")]
             ]
