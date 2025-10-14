@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: enviospro-web
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: enviospro-db
+          property: connectionString
+
+databases:
+  - name: enviospro-db
+    databaseName: enviospro
+    user: enviospro
+    region: frankfurt
+    plan: free
