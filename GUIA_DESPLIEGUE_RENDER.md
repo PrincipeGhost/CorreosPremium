@@ -125,24 +125,31 @@ git push -u origin main
 
 ---
 
-## 🗄️ Paso 3: Crear Base de Datos PostgreSQL en Render
+## 🗄️ Paso 3: Obtener tu Connection String de Neon
 
-1. Ve a **https://dashboard.render.com** en tu navegador
-2. Haz clic en **"New +"** → **"PostgreSQL"**
-3. Configura la base de datos:
-   - **Name:** `enviospro-db`
-   - **Database:** `enviospro` (o déjalo en blanco)
-   - **User:** `enviospro` (o déjalo en blanco)
-   - **Region:** Elige **Frankfurt** (o el más cercano a España)
-   - **PostgreSQL Version:** **17** (última versión)
-   - **Plan:** Selecciona **Free** (gratis, válido por 90 días)
-4. Haz clic en **"Create Database"**
-5. Espera 1-2 minutos a que se cree
-6. Una vez creada, verás la página de la base de datos
+**Ya tienes tu base de datos en Neon, NO necesitas crear una nueva** ✅
 
-**⚠️ IMPORTANTE:** Guarda la **Internal Database URL** (la necesitarás después)
-- En la página de la base de datos, busca **"Connections"**
-- Copia la **"Internal Database URL"** (empieza con `postgresql://`)
+### 3.1 Opción A - Desde tu proyecto Replit
+
+Si tienes la URL guardada en tu proyecto:
+
+```bash
+# Busca en archivos .env o similares
+cat .env
+# O busca DATABASE_URL
+grep -r "DATABASE_URL" .
+```
+
+### 3.2 Opción B - Desde Neon Console
+
+1. Ve a **https://console.neon.tech** en tu navegador
+2. Inicia sesión
+3. Selecciona tu proyecto/base de datos
+4. Ve a **"Connection Details"** o **"Dashboard"**
+5. Copia la **Connection String**
+   - Ejemplo: `postgresql://usuario:password@ep-xxxxx.us-east-2.aws.neon.tech/dbname?sslmode=require`
+
+**⚠️ IMPORTANTE:** Guarda esta URL, la necesitarás en el siguiente paso
 
 ---
 
@@ -183,8 +190,8 @@ Completa los campos:
 
 **Variable 2:**
 - **Key:** `DATABASE_URL`
-- **Value:** Pega aquí la **Internal Database URL** que copiaste antes
-  - Ejemplo: `postgresql://enviospro_user:password123@dpg-xxxxx-a.frankfurt-postgres.render.com/enviospro_db`
+- **Value:** Pega aquí la **Connection String de Neon** que copiaste en el Paso 3
+  - Ejemplo: `postgresql://usuario:password@ep-xxxxx.us-east-2.aws.neon.tech/dbname?sslmode=require`
 
 ### 4.4 Iniciar el Despliegue
 
@@ -242,9 +249,11 @@ git push origin main
 
 ## 🔧 Configuración de la Base de Datos
 
-### Ejecutar Migraciones de Base de Datos
+### Migraciones de Base de Datos
 
-Después del primer despliegue, necesitas configurar las tablas de la base de datos:
+**Si tu base de datos de Neon ya tiene las tablas creadas:** ✅ No necesitas hacer nada
+
+**Si es una base de datos nueva o vacía:** Solo entonces ejecuta:
 
 1. En Render Dashboard, ve a tu **Web Service** (`enviospro-web`)
 2. Ve a la pestaña **"Shell"** en el menú lateral
@@ -255,7 +264,9 @@ Después del primer despliegue, necesitas configurar las tablas de la base de da
 npm run db:push
 ```
 
-Esto creará todas las tablas necesarias en tu base de datos PostgreSQL.
+Esto creará todas las tablas necesarias en tu base de datos de Neon.
+
+**⚠️ IMPORTANTE:** Si ya tienes datos en Neon, NO ejecutes `db:push --force` o perderás tus datos.
 
 ---
 
@@ -273,9 +284,9 @@ Esto creará todas las tablas necesarias en tu base de datos PostgreSQL.
 
 **Problema:** La app no puede conectarse a PostgreSQL
 **Solución:**
-1. Verifica que `DATABASE_URL` esté en las variables de entorno
-2. Asegúrate de usar la **Internal Database URL**
-3. Verifica que la base de datos y el web service estén en la **misma región**
+1. Verifica que `DATABASE_URL` esté en las variables de entorno de Render
+2. Asegúrate de que la URL de Neon tenga `?sslmode=require` al final
+3. Verifica que la base de datos de Neon esté activa (a veces Neon suspende proyectos inactivos)
 
 ### ❌ Error: "Port already in use"
 
@@ -314,10 +325,10 @@ git remote set-url origin https://TU_TOKEN@github.com/TuUsuario/enviospro.git
 
 ### Ver la Base de Datos
 
-1. Ve a Render Dashboard
-2. Selecciona tu base de datos `enviospro-db`
-3. Copia la **External Connection String**
-4. Usa un cliente como **pgAdmin** o **TablePlus** para conectarte
+1. Ve a **https://console.neon.tech** 
+2. Selecciona tu proyecto
+3. Usa la interfaz web de Neon para ver/editar datos
+4. O usa un cliente como **pgAdmin** o **TablePlus** con tu Connection String de Neon
 
 ---
 
@@ -354,22 +365,23 @@ git diff
 Antes de considerarlo completado, verifica:
 
 - [ ] Código subido a GitHub
-- [ ] Base de datos PostgreSQL creada en Render
-- [ ] Web Service creado y desplegado
-- [ ] Variables de entorno configuradas (`NODE_ENV`, `DATABASE_URL`)
-- [ ] Migraciones de base de datos ejecutadas (`npm run db:push`)
+- [ ] Connection String de Neon obtenida
+- [ ] Web Service creado y desplegado en Render
+- [ ] Variables de entorno configuradas (`NODE_ENV`, `DATABASE_URL` con URL de Neon)
+- [ ] Migraciones de base de datos ejecutadas si es necesario (`npm run db:push`)
 - [ ] Aplicación accesible desde la URL pública
 - [ ] Sin errores en los logs
 
 ---
 
-## 🌟 Ventajas de Render
+## 🌟 Ventajas de esta Configuración
 
-✅ **HTTPS gratuito** - Certificado SSL automático
+✅ **HTTPS gratuito** - Certificado SSL automático en Render
 ✅ **Despliegue automático** - Push a GitHub = nueva versión
-✅ **Sin tarjeta de crédito** - Plan gratuito real
-✅ **PostgreSQL incluido** - Base de datos gratis (90 días)
+✅ **Sin tarjeta de crédito** - Plan gratuito real en Render
+✅ **Neon PostgreSQL** - Base de datos gratis e ilimitada (no expira como Render)
 ✅ **Compatible con Termux** - Todo funciona desde Android
+✅ **Mismo DB en desarrollo y producción** - Tu base de datos Neon funciona en ambos
 
 ---
 
@@ -377,6 +389,8 @@ Antes de considerarlo completado, verifica:
 
 - **Tu Dashboard de Render:** https://dashboard.render.com
 - **Documentación de Render:** https://render.com/docs
+- **Tu Dashboard de Neon:** https://console.neon.tech
+- **Documentación de Neon:** https://neon.tech/docs
 - **GitHub:** https://github.com
 - **Termux:** https://termux.dev
 
@@ -385,8 +399,9 @@ Antes de considerarlo completado, verifica:
 ## 💡 Consejos Adicionales
 
 1. **Backups de la Base de Datos:**
-   - Render hace backups automáticos en planes pagos
-   - En el plan gratuito, exporta tu base de datos regularmente
+   - Neon hace backups automáticos (hasta 7 días en plan gratuito)
+   - Puedes descargar backups desde la consola de Neon
+   - También puedes exportar manualmente usando pg_dump
 
 2. **Dominio Personalizado:**
    - Puedes añadir un dominio propio (ej: `enviospro.com`)
@@ -395,10 +410,12 @@ Antes de considerarlo completado, verifica:
 3. **Monitoreo:**
    - Render te notifica por email si hay errores
    - Configura alertas en Settings → Notifications
+   - Neon también tiene monitoreo de consultas
 
 4. **Rendimiento:**
-   - El plan Free tiene cold starts (15 min de inactividad)
+   - El plan Free de Render tiene cold starts (15 min de inactividad)
    - Para eliminar esto, actualiza a un plan de pago ($7/mes)
+   - Neon escala automáticamente según el uso
 
 ---
 

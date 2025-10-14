@@ -9,14 +9,5 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATABASE_URL
-        fromDatabase:
-          name: enviospro-db
-          property: connectionString
-
-databases:
-  - name: enviospro-db
-    databaseName: enviospro
-    user: enviospro
-    region: frankfurt
-    plan: free
+      # DATABASE_URL debe ser añadida manualmente en Render Dashboard
+      # Usa tu Connection String de Neon
