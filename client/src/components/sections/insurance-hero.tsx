@@ -77,7 +77,7 @@ export default function InsuranceHero() {
               src="/attached_assets/image_1754310350481.png"
               alt="Casa tradicional española con trabajador de Correos"
               className="w-full h-full object-cover"
-              style={{ objectPosition: '50% 60%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 80%)' }}
+              style={{ objectPosition: '50% 60%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 60px 100%, 0 calc(100% - 60px))' }}
             />
           </div>
           
