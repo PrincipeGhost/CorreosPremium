@@ -44,11 +44,21 @@ export default function Home() {
       <main>
         <InsuranceHero />
         <TrackingHero />
-        <EligeCorreos />
-        <PremiumExpress />
+        
+        {/* Agrupadas en grid para desktop */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-0">
+          <EligeCorreos />
+          <PremiumExpress />
+        </div>
+        
         <SiemprePensando />
-        <EsperandoEnvio />
-        <QuieresHacerEnvio />
+        
+        {/* Agrupadas en grid para desktop */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-0">
+          <EsperandoEnvio />
+          <QuieresHacerEnvio />
+        </div>
+        
         <TiendaOnline />
         <ViajaDisfruta />
         <ComprarTiendas />
