@@ -41,9 +41,13 @@ export default function Home() {
       <meta property="og:type" content="website" />
       
       <Header />
-      <main className="space-y-0">
-        <InsuranceHero />
-        <TrackingHero />
+      <main style={{ display: 'block' }}>
+        <div style={{ margin: 0, padding: 0 }}>
+          <InsuranceHero />
+        </div>
+        <div style={{ margin: 0, padding: 0 }}>
+          <TrackingHero />
+        </div>
         
         {/* Agrupadas en grid para desktop */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-0">

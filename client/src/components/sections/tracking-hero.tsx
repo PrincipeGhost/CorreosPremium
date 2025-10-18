@@ -27,7 +27,7 @@ export default function TrackingHero() {
   };
 
   return (
-    <section className="mt-0">
+    <section style={{ marginTop: 0, paddingTop: 0 }}>
       
       {/* Mobile Layout */}
       <div className="lg:hidden bg-gray-100 pb-8 pt-0">
