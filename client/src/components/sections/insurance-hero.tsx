@@ -72,7 +72,7 @@ export default function InsuranceHero() {
       <div className="hidden lg:block bg-white">
         <div className="grid grid-cols-[50%_50%] max-w-full">
           {/* Columna izquierda - Imagen del edificio */}
-          <div className="relative h-[380px]">
+          <div className="relative h-[300px]">
             <img 
               src="/attached_assets/image_1754310350481.png"
               alt="Casa tradicional española con trabajador de Correos"
@@ -82,7 +82,7 @@ export default function InsuranceHero() {
           </div>
           
           {/* Columna derecha - Contenido de Seguros AXA */}
-          <div className="px-12 py-12 flex flex-col justify-center bg-white">
+          <div className="px-12 py-8 flex flex-col justify-center bg-white">
             <p className="text-sm text-black mb-4 font-medium">
               Allá donde está Correos, AXA te protege
             </p>
