@@ -72,12 +72,12 @@ export default function InsuranceHero() {
       <div className="hidden lg:block bg-white">
         <div className="grid grid-cols-[50%_50%] max-w-full">
           {/* Columna izquierda - Imagen del edificio */}
-          <div className="relative h-[300px]">
+          <div className="relative h-[300px] overflow-hidden">
             <img 
               src="/attached_assets/image_1754310350481.png"
               alt="Casa tradicional española con trabajador de Correos"
               className="w-full h-full object-cover"
-              style={{ objectPosition: '50% 60%' }}
+              style={{ objectPosition: '50% 60%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 80%)' }}
             />
           </div>
           
