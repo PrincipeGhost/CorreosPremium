@@ -32,7 +32,7 @@ export default function TrackingHero() {
       <div className="lg:hidden bg-gray-100 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {/* Main tracking section */}
-          <Card className="bg-yellow-400 border-0 rounded-lg">
+          <Card className="bg-yellow-400 border-0 rounded-lg" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50px 100%, 0 calc(100% - 50px))' }}>
             <CardContent className="p-6 lg:p-8 space-y-5">
               <h2 className="text-xl lg:text-2xl font-bold text-gray-900">
                 Sigue tu envío
@@ -414,7 +414,7 @@ export default function TrackingHero() {
       <div className="hidden lg:grid lg:grid-cols-[50%_50%] bg-gray-50">
         {/* Columna izquierda - Sigue tu envío (Amarillo) */}
         <div className="relative bg-gray-50 flex items-start justify-start pt-0 pl-6 pb-6">
-          <div className="bg-yellow-400 p-6 w-[450px] shadow-lg mt-0">
+          <div className="bg-yellow-400 p-6 w-[450px] shadow-lg mt-0" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50px 100%, 0 calc(100% - 50px))' }}>
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               Sigue tu envío
             </h2>
