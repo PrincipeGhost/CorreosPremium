@@ -70,7 +70,7 @@ export default function InsuranceHero() {
 
       {/* Desktop Layout - Grid 2x2 */}
       <div className="hidden lg:block bg-white">
-        <div className="grid grid-cols-2 max-w-full">
+        <div className="grid grid-cols-[45%_55%] max-w-full">
           {/* Columna izquierda - Imagen del edificio */}
           <div className="relative h-[400px]">
             <img 
