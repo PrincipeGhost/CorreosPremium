@@ -30,7 +30,7 @@ export default function TrackingHero() {
     <section className="mt-0">
       
       {/* Mobile Layout */}
-      <div className="lg:hidden bg-gray-100 pb-8">
+      <div className="lg:hidden bg-gray-100 pb-8 pt-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {/* Main tracking section */}
           <Card className="bg-yellow-400 border-0 rounded-lg">
@@ -412,7 +412,7 @@ export default function TrackingHero() {
       </div>
 
       {/* Desktop Layout - Grid 2 columnas */}
-      <div className="hidden lg:grid lg:grid-cols-[50%_50%] bg-gray-50 mt-0">
+      <div className="hidden lg:grid lg:grid-cols-[50%_50%] bg-gray-50">
         {/* Columna izquierda - Sigue tu envío (Amarillo) */}
         <div className="relative bg-gray-50 flex items-start justify-start pt-0 pl-6 pb-6">
           <div className="bg-yellow-400 p-6 w-[450px] shadow-lg mt-0">

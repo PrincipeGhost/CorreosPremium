@@ -29,7 +29,7 @@ export default function InsuranceHero() {
           </svg>
         </div>
         {/* Content Container - exact replica of reference image */}
-        <div className="bg-white px-8 pt-6 pb-8">
+        <div className="bg-white px-8 pt-6 pb-0">
           <div className="max-w-lg ml-6">
             <p className="text-xs text-black mb-3 font-medium">
               Allá donde está Correos, AXA te protege
@@ -69,7 +69,7 @@ export default function InsuranceHero() {
       </div>
 
       {/* Desktop Layout - Grid 2x2 */}
-      <div className="hidden lg:block bg-white mb-0">
+      <div className="hidden lg:block bg-white mb-0 pb-0">
         <div className="grid grid-cols-[50%_50%] max-w-full">
           {/* Columna izquierda - Imagen del edificio */}
           <div className="relative h-[300px] overflow-hidden">
