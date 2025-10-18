@@ -68,55 +68,53 @@ export default function InsuranceHero() {
         </div>
       </div>
 
-      {/* Desktop Layout */}
+      {/* Desktop Layout - Grid 2x2 */}
       <div className="hidden lg:block bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
-            {/* Image on the left */}
-            <div className="relative lg:h-96">
-              <img 
-                src="/attached_assets/image_1754310350481.png"
-                alt="Casa tradicional española con trabajador de Correos"
-                className="w-full h-full object-cover rounded-r-lg"
-                style={{ objectPosition: '50% 60%' }}
-              />
-            </div>
+        <div className="grid grid-cols-2 max-w-full">
+          {/* Columna izquierda - Imagen del edificio */}
+          <div className="relative h-[400px]">
+            <img 
+              src="/attached_assets/image_1754310350481.png"
+              alt="Casa tradicional española con trabajador de Correos"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: '50% 60%' }}
+            />
+          </div>
+          
+          {/* Columna derecha - Contenido de Seguros AXA */}
+          <div className="px-12 py-12 flex flex-col justify-center bg-white">
+            <p className="text-sm text-black mb-4 font-medium">
+              Allá donde está Correos, AXA te protege
+            </p>
             
-            {/* Content on the right */}
-            <div className="px-8 py-12">
-              <p className="text-sm text-black mb-4 font-medium">
-                Allá donde está Correos, AXA te protege
-              </p>
+            <h2 className="text-3xl text-black mb-6 font-normal">
+              Seguros AXA
+            </h2>
+            
+            <p className="text-base text-gray-600 mb-8 leading-relaxed font-normal max-w-lg">
+              Ahora Correos se une a AXA en una misión: la de 
+              llegar a ti, estés donde estés. Porque gracias a la 
+              amplia red de agentes de Correos, podrás 
+              contratar los seguros de AXA en cualquier sitio 
+              de España.
+            </p>
+            
+            <div className="flex gap-6 items-center">
+              <Button 
+                className="w-60 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-6 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-center"
+                data-testid="insurance-cta-button"
+              >
+                SEGURO, TE LLAMAMOS
+              </Button>
               
-              <h2 className="text-3xl lg:text-4xl text-black mb-6 font-normal">
-                Seguros AXA
-              </h2>
-              
-              <p className="text-base text-gray-600 mb-8 leading-relaxed font-normal max-w-lg">
-                Ahora Correos se une a AXA en una misión: la de 
-                llegar a ti, estés donde estés. Porque gracias a la 
-                amplia red de agentes de Correos, podrás 
-                contratar los seguros de AXA en cualquier sitio 
-                de España.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-6 items-start">
-                <Button 
-                  className="w-60 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-6 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-center"
-                  data-testid="insurance-cta-button"
-                >
-                  SEGURO, TE LLAMAMOS
-                </Button>
-                
-                <Button 
-                  variant="ghost" 
-                  className="text-blue-800 hover:text-blue-900 p-0 h-auto text-sm font-bold flex items-center gap-2 transition-colors duration-200"
-                  data-testid="insurance-more-info-button"
-                >
-                  MÁS INFO
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </div>
+              <Button 
+                variant="ghost" 
+                className="text-blue-800 hover:text-blue-900 p-0 h-auto text-sm font-bold flex items-center gap-2 transition-colors duration-200"
+                data-testid="insurance-more-info-button"
+              >
+                MÁS INFO
+                <ArrowRight className="w-4 h-4" />
+              </Button>
             </div>
           </div>
         </div>
