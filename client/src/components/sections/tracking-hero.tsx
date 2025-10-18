@@ -411,10 +411,10 @@ export default function TrackingHero() {
       </div>
 
       {/* Desktop Layout - Grid 2 columnas */}
-      <div className="hidden lg:grid lg:grid-cols-[45%_55%] bg-gray-50">
+      <div className="hidden lg:grid lg:grid-cols-[40%_60%] bg-gray-50">
         {/* Columna izquierda - Sigue tu envío (Amarillo) */}
-        <div className="bg-yellow-400 p-8">
-          <div className="max-w-xl">
+        <div className="bg-yellow-400 p-6">
+          <div className="max-w-md">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
               Sigue tu envío
             </h2>
