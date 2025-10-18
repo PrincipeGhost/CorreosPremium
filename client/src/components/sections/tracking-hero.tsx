@@ -31,76 +31,76 @@ export default function TrackingHero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Main tracking section */}
         <Card className="bg-yellow-400 border-0 rounded-lg">
-          <CardContent className="p-6 space-y-5">
-            <h2 className="text-xl font-bold text-gray-900">
+          <CardContent className="p-6 lg:p-8 space-y-5">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-900">
               Sigue tu envío
             </h2>
             
             {/* Tracking input */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 lg:gap-4">
               <Input
                 type="text"
                 placeholder="Nº de seguimiento de envío"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
-                className="flex-1 h-14 text-base border-0 rounded-md shadow-sm bg-white px-4"
+                className="flex-1 h-14 lg:h-16 text-base lg:text-lg border-0 rounded-md shadow-sm bg-white px-4 lg:px-6"
                 data-testid="tracking-hero-input"
               />
               <Button
                 onClick={handleTrackingSearch}
-                className="h-14 px-4 bg-blue-600 hover:bg-blue-700 rounded-md"
+                className="h-14 lg:h-16 px-4 lg:px-6 bg-blue-600 hover:bg-blue-700 rounded-md"
                 data-testid="tracking-hero-search-button"
               >
-                <Search className="w-4 h-4 text-white" />
+                <Search className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
               </Button>
             </div>
 
             {/* Quick access buttons - responsive grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4">
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-16 text-gray-800 hover:bg-gray-50"
+                className="w-full justify-start bg-white border-0 h-16 lg:h-18 text-gray-800 hover:bg-gray-50"
                 data-testid="locate-offices-button"
               >
-                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314540403.png" 
                     alt="Localiza oficinas"
-                    className="w-6 h-6 object-contain"
+                    className="w-6 h-6 lg:w-7 lg:h-7 object-contain"
                   />
                 </div>
-                <span className="text-sm lg:text-xs xl:text-sm">Localiza oficinas, buzones y Citypaq</span>
+                <span className="text-sm lg:text-base">Localiza oficinas, buzones y Citypaq</span>
               </Button>
 
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-16 text-blue-600 hover:bg-gray-50 underline"
+                className="w-full justify-start bg-white border-0 h-16 lg:h-18 text-blue-600 hover:bg-gray-50 underline"
                 data-testid="postal-codes-button"
               >
-                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314575709.png" 
                     alt="Códigos postales"
-                    className="w-6 h-6 object-contain"
+                    className="w-6 h-6 lg:w-7 lg:h-7 object-contain"
                   />
                 </div>
-                <span className="text-sm lg:text-xs xl:text-sm">Encuentra códigos postales</span>
+                <span className="text-sm lg:text-base">Encuentra códigos postales</span>
               </Button>
 
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-16 text-gray-800 hover:bg-gray-50"
+                className="w-full justify-start bg-white border-0 h-16 lg:h-18 text-gray-800 hover:bg-gray-50"
                 data-testid="email-verifier-button"
               >
-                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314594642.png" 
                     alt="Verificador de email"
-                    className="w-6 h-6 object-contain"
+                    className="w-6 h-6 lg:w-7 lg:h-7 object-contain"
                   />
                 </div>
-                <span className="text-sm lg:text-xs xl:text-sm">Verificador de email</span>
+                <span className="text-sm lg:text-base">Verificador de email</span>
               </Button>
             </div>
           </CardContent>
@@ -108,14 +108,14 @@ export default function TrackingHero() {
 
         {/* Special package service */}
         <Card className="border-0 rounded-lg">
-          <CardContent className="p-5">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">
+          <CardContent className="p-5 lg:p-8">
+            <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2">
               Servicio especial de paquetería
             </h3>
-            <p className="text-gray-600 text-sm mb-2">
+            <p className="text-gray-600 text-sm lg:text-base mb-2">
               Envíos rápidos y baratos para todo el mundo
             </p>
-            <p className="text-lg font-bold text-gray-900 mb-4">
+            <p className="text-lg lg:text-xl font-bold text-gray-900 mb-4">
               Desde 5.63€
             </p>
             
@@ -161,9 +161,9 @@ export default function TrackingHero() {
               </label>
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-4 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
               <div>
-                <label className="text-sm text-gray-600 block mb-2">
+                <label className="text-sm lg:text-base text-gray-600 block mb-2">
                   Código postal origen
                 </label>
                 <div className="space-y-2">
@@ -171,7 +171,7 @@ export default function TrackingHero() {
                     <Input
                       value="España"
                       disabled
-                      className="w-full h-12 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10 border-b-2 border-b-yellow-400"
+                      className="w-full h-12 lg:h-14 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10 border-b-2 border-b-yellow-400"
                       style={{ borderBottomColor: '#FFD700' }}
                     />
                     <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -181,7 +181,7 @@ export default function TrackingHero() {
                     placeholder="Código postal*"
                     value={originPostalCode}
                     onChange={(e) => setOriginPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400"
+                    className="w-full h-12 lg:h-14 border border-gray-300 rounded-md border-b-2 border-b-yellow-400"
                     style={{ borderBottomColor: '#FFD700' }}
                     data-testid="origin-postal-code"
                   />
@@ -189,12 +189,12 @@ export default function TrackingHero() {
               </div>
 
               <div>
-                <label className="text-sm text-gray-600 block mb-2">
+                <label className="text-sm lg:text-base text-gray-600 block mb-2">
                   Código postal destino
                 </label>
                 <div className="space-y-2">
                   <Select value={destinationCountry} onValueChange={setDestinationCountry}>
-                    <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400" style={{ borderBottomColor: '#FFD700' }}>
+                    <SelectTrigger className="w-full h-12 lg:h-14 border border-gray-300 rounded-md border-b-2 border-b-yellow-400" style={{ borderBottomColor: '#FFD700' }}>
                       <SelectValue placeholder="País*" />
                     </SelectTrigger>
                     <SelectContent side="bottom" className="correos-select-content">
@@ -312,22 +312,23 @@ export default function TrackingHero() {
                     placeholder="Código postal"
                     value={destinationPostalCode}
                     onChange={(e) => setDestinationPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md border-b-2 border-b-yellow-400"
+                    className="w-full h-12 lg:h-14 border border-gray-300 rounded-md border-b-2 border-b-yellow-400"
                     style={{ borderBottomColor: '#FFD700' }}
                     data-testid="destination-postal-code"
                   />
                 </div>
               </div>
+            </div>
 
-              <div>
-                <label className="text-sm text-gray-600 block mb-3">
-                  ¿Qué tamaño y peso tiene tu paquete?
-                </label>
-                <div className="space-y-2">
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '2kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('2kg')}
-                  >
+            <div className="mt-4 lg:mt-6">
+              <label className="text-sm lg:text-base text-gray-600 block mb-3">
+                ¿Qué tamaño y peso tiene tu paquete?
+              </label>
+              <div className="space-y-2 lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0">
+                <div 
+                  className={`p-3 lg:p-4 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '2kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  onClick={() => setSelectedPackageSize('2kg')}
+                >
                     <div className="flex items-center">
                       <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                         <img src={icon2kg} alt="2kg package" className="w-8 h-8 object-contain" />
@@ -339,10 +340,10 @@ export default function TrackingHero() {
                     </div>
                   </div>
 
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '5kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('5kg')}
-                  >
+                <div 
+                  className={`p-3 lg:p-4 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '5kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  onClick={() => setSelectedPackageSize('5kg')}
+                >
                     <div className="flex items-center">
                       <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                         <img src={icon5kg} alt="5kg package" className="w-8 h-8 object-contain" />
@@ -354,10 +355,10 @@ export default function TrackingHero() {
                     </div>
                   </div>
 
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '10kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('10kg')}
-                  >
+                <div 
+                  className={`p-3 lg:p-4 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '10kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  onClick={() => setSelectedPackageSize('10kg')}
+                >
                     <div className="flex items-center">
                       <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                         <img src={icon10kg} alt="10kg package" className="w-8 h-8 object-contain" />
@@ -369,39 +370,39 @@ export default function TrackingHero() {
                     </div>
                   </div>
 
-                  <div 
-                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '20kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
-                    onClick={() => setSelectedPackageSize('20kg')}
-                  >
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                        <img src={icon20kg} alt="20kg package" className="w-8 h-8 object-contain" />
-                      </div>
-                      <div>
-                        <div className="font-medium text-gray-900">Hasta 20kg</div>
-                        <div className="text-sm text-gray-600">Dimensión: 55x55x39</div>
-                      </div>
+                <div 
+                  className={`p-3 lg:p-4 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '20kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  onClick={() => setSelectedPackageSize('20kg')}
+                >
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
+                      <img src={icon20kg} alt="20kg package" className="w-8 h-8 object-contain" />
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900">Hasta 20kg</div>
+                      <div className="text-sm text-gray-600">Dimensión: 55x55x39</div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Botones de acción */}
-              <div className="space-y-3 mt-6">
-                <Button 
-                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 h-12 rounded-lg"
-                  data-testid="comenzar-envio-button"
-                >
-                  COMENZAR ENVÍO
-                </Button>
-                
-                <div className="flex items-center justify-center">
-                  <button className="text-blue-600 font-semibold text-sm flex items-center gap-1 hover:text-blue-700">
-                    MÁS INFO
-                    <ChevronDown className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
+            {/* Botones de acción */}
+            <div className="space-y-3 mt-6 lg:flex lg:space-y-0 lg:space-x-4">
+              <Button 
+                className="w-full lg:flex-1 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 h-12 lg:h-14 rounded-lg text-sm lg:text-base"
+                data-testid="comenzar-envio-button"
+              >
+                COMENZAR ENVÍO
+              </Button>
+              
+              <Button 
+                variant="outline"
+                className="w-full lg:flex-1 bg-white hover:bg-gray-50 text-gray-800 font-semibold py-3 h-12 lg:h-14 rounded-lg border border-gray-300 text-sm lg:text-base"
+                data-testid="calcular-precio-button"
+              >
+                CALCULAR PRECIO
+              </Button>
             </div>
           </CardContent>
         </Card>
