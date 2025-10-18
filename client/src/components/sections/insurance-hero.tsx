@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function InsuranceHero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden mb-0">
       {/* Mobile Layout */}
       <div className="lg:hidden">
         {/* Background Image with curved bottom - matching Correos.es proportions */}

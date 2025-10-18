@@ -41,7 +41,7 @@ export default function Home() {
       <meta property="og:type" content="website" />
       
       <Header />
-      <main>
+      <main className="space-y-0">
         <InsuranceHero />
         <TrackingHero />
         

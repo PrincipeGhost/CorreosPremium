@@ -27,7 +27,8 @@ export default function TrackingHero() {
   };
 
   return (
-    <>
+    <section className="mt-0">
+      
       {/* Mobile Layout */}
       <div className="lg:hidden bg-gray-100 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
@@ -585,6 +586,6 @@ export default function TrackingHero() {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 }
