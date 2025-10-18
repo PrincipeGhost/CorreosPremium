@@ -70,9 +70,9 @@ export default function InsuranceHero() {
 
       {/* Desktop Layout - Grid 2x2 */}
       <div className="hidden lg:block bg-white">
-        <div className="grid grid-cols-[35%_65%] max-w-full">
+        <div className="grid grid-cols-[50%_50%] max-w-full">
           {/* Columna izquierda - Imagen del edificio */}
-          <div className="relative h-[400px]">
+          <div className="relative h-[380px]">
             <img 
               src="/attached_assets/image_1754310350481.png"
               alt="Casa tradicional española con trabajador de Correos"

@@ -411,28 +411,28 @@ export default function TrackingHero() {
       </div>
 
       {/* Desktop Layout - Grid 2 columnas */}
-      <div className="hidden lg:grid lg:grid-cols-[35%_65%] bg-gray-50">
+      <div className="hidden lg:grid lg:grid-cols-[50%_50%] bg-gray-50">
         {/* Columna izquierda - Sigue tu envío (Amarillo) */}
-        <div className="bg-yellow-400 p-5 relative rounded-tr-[80px]">
-          <div className="max-w-sm">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
+        <div className="relative bg-gray-50 flex items-end justify-start p-8">
+          <div className="bg-yellow-400 rounded-tr-[60px] rounded-tl-lg rounded-bl-lg p-6 w-[380px] shadow-lg">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
               Sigue tu envío
             </h2>
             
             {/* Tracking input */}
-            <div className="flex gap-2 mb-4">
+            <div className="flex gap-2 mb-3">
               <Input
                 type="text"
                 placeholder="Nº de seguimiento de envío*"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
-                className="flex-1 h-12 text-sm border-0 rounded-md shadow-sm bg-white px-3"
+                className="flex-1 h-11 text-sm border-0 rounded-md shadow-sm bg-white px-3"
                 data-testid="tracking-hero-input"
               />
               <Button
                 onClick={handleTrackingSearch}
-                className="h-12 px-4 bg-blue-900 hover:bg-blue-800 rounded-md text-white font-bold text-xs"
+                className="h-11 px-5 bg-blue-900 hover:bg-blue-800 rounded-md text-white font-bold text-xs"
                 data-testid="tracking-hero-search-button"
               >
                 BUSCAR
@@ -443,14 +443,14 @@ export default function TrackingHero() {
             <div className="space-y-2">
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-12 text-gray-800 hover:bg-gray-50 text-xs"
+                className="w-full justify-start bg-white border-0 h-11 text-gray-800 hover:bg-gray-50 text-xs px-3"
                 data-testid="locate-offices-button"
               >
                 <div className="w-6 h-6 rounded flex items-center justify-center mr-2">
                   <img 
                     src="/attached_assets/image_1754314540403.png" 
                     alt="Localiza oficinas"
-                    className="w-5 h-5 object-contain"
+                    className="w-4 h-4 object-contain"
                   />
                 </div>
                 <span className="text-xs">Localiza oficinas, buzones y Citypaq</span>
@@ -458,14 +458,14 @@ export default function TrackingHero() {
 
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-12 text-blue-600 hover:bg-gray-50 underline text-xs"
+                className="w-full justify-start bg-white border-0 h-11 text-blue-600 hover:bg-gray-50 underline text-xs px-3"
                 data-testid="postal-codes-button"
               >
                 <div className="w-6 h-6 rounded flex items-center justify-center mr-2">
                   <img 
                     src="/attached_assets/image_1754314575709.png" 
                     alt="Códigos postales"
-                    className="w-5 h-5 object-contain"
+                    className="w-4 h-4 object-contain"
                   />
                 </div>
                 <span className="text-xs">Encuentra códigos postales</span>
