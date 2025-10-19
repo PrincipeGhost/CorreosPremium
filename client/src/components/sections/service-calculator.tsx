@@ -82,7 +82,7 @@ export default function ServiceCalculator() {
   ];
 
   return (
-    <section className="py-16 hidden" style={{ backgroundColor: '#f3f4f6' }}>
+    <section className="py-16" style={{ backgroundColor: '#f3f4f6' }}>
       <div className="max-w-7xl mr-auto px-4 sm:px-6 lg:px-8">
         <div 
           className="rounded-lg p-8"
