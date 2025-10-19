@@ -55,7 +55,6 @@ export default function Home() {
             {/* Columna izquierda - Secciones apiladas */}
             <div className="lg:flex lg:flex-col lg:justify-center lg:gap-0 space-y-6 lg:space-y-0 lg:pl-8 lg:pr-12">
               <EligeCorreos />
-              <div className="lg:border-t lg:border-gray-300 lg:my-4"></div>
               <PremiumExpress />
             </div>
             
