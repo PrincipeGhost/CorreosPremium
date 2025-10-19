@@ -415,25 +415,25 @@ export default function TrackingHero() {
       <div className="hidden lg:grid lg:grid-cols-[50%_50%] lg:items-stretch bg-gray-50" style={{ marginTop: 0, paddingTop: 0 }}>
         {/* Columna izquierda - Sigue tu envío (Amarillo) */}
         <div className="relative bg-gray-50 flex items-stretch justify-end pr-4">
-          <div className="bg-yellow-400 p-6 w-[613px] shadow-lg h-full">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">
+          <div className="bg-yellow-400 p-8 w-[613px] shadow-lg h-full">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
               Sigue tu envío
             </h2>
             
             {/* Tracking input */}
-            <div className="flex gap-2 mb-3">
+            <div className="flex gap-3 mb-5">
               <Input
                 type="text"
                 placeholder="Nº de seguimiento de envío*"
                 value={trackingNumber}
                 onChange={(e) => setTrackingNumber(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleTrackingSearch()}
-                className="flex-1 h-11 text-sm border-0 rounded-md shadow-sm bg-white px-3"
+                className="flex-1 h-14 text-base border-0 rounded-md shadow-sm bg-white px-4"
                 data-testid="tracking-hero-input"
               />
               <Button
                 onClick={handleTrackingSearch}
-                className="h-11 px-5 bg-blue-900 hover:bg-blue-800 rounded-md text-white font-bold text-xs"
+                className="h-14 px-6 bg-blue-900 hover:bg-blue-800 rounded-md text-white font-bold text-sm"
                 data-testid="tracking-hero-search-button"
               >
                 BUSCAR
@@ -441,50 +441,50 @@ export default function TrackingHero() {
             </div>
 
             {/* Quick access buttons */}
-            <div className="space-y-2">
+            <div className="space-y-3">
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-11 text-gray-800 hover:bg-gray-50 text-xs px-3"
+                className="w-full justify-start bg-white border-0 h-14 text-gray-800 hover:bg-gray-50 text-sm px-4"
                 data-testid="locate-offices-button"
               >
-                <div className="w-6 h-6 rounded flex items-center justify-center mr-2">
+                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314540403.png" 
                     alt="Localiza oficinas"
-                    className="w-4 h-4 object-contain"
+                    className="w-6 h-6 object-contain"
                   />
                 </div>
-                <span className="text-xs">Localiza oficinas, buzones y Citypaq</span>
+                <span className="text-sm">Localiza oficinas, buzones y Citypaq</span>
               </Button>
 
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-11 text-blue-600 hover:bg-gray-50 underline text-xs px-3"
+                className="w-full justify-start bg-white border-0 h-14 text-blue-600 hover:bg-gray-50 underline text-sm px-4"
                 data-testid="postal-codes-button"
               >
-                <div className="w-6 h-6 rounded flex items-center justify-center mr-2">
+                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314575709.png" 
                     alt="Códigos postales"
-                    className="w-4 h-4 object-contain"
+                    className="w-6 h-6 object-contain"
                   />
                 </div>
-                <span className="text-xs">Encuentra códigos postales</span>
+                <span className="text-sm">Encuentra códigos postales</span>
               </Button>
 
               <Button
                 variant="outline"
-                className="w-full justify-start bg-white border-0 h-11 text-gray-800 hover:bg-gray-50 text-xs px-3"
+                className="w-full justify-start bg-white border-0 h-14 text-gray-800 hover:bg-gray-50 text-sm px-4"
                 data-testid="email-verifier-button"
               >
-                <div className="w-6 h-6 rounded flex items-center justify-center mr-2">
+                <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
                   <img 
                     src="/attached_assets/image_1754314594642.png" 
                     alt="Verificador de email"
-                    className="w-4 h-4 object-contain"
+                    className="w-6 h-6 object-contain"
                   />
                 </div>
-                <span className="text-xs">Verificador de email</span>
+                <span className="text-sm">Verificador de email</span>
               </Button>
             </div>
           </div>
@@ -492,18 +492,18 @@ export default function TrackingHero() {
 
         {/* Columna derecha - Servicio especial de paquetería */}
         <div className="bg-gray-50 pt-0 pl-4 pr-8 pb-8 flex items-start justify-start">
-          <div className="bg-white p-6 border-2 border-gray-300 rounded-lg shadow-sm max-w-xl w-full">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
+          <div className="bg-white p-8 border-2 border-gray-300 rounded-lg shadow-sm max-w-xl w-full">
+            <h3 className="text-2xl font-bold text-gray-900 mb-3">
               Servicio especial de paquetería
             </h3>
-            <p className="text-gray-600 text-sm mb-1">
+            <p className="text-gray-600 text-base mb-2">
               Envíos rápidos y baratos para todo el mundo
             </p>
-            <p className="text-lg font-bold text-gray-900 mb-4">
+            <p className="text-xl font-bold text-gray-900 mb-5">
               Desde 5.63€
             </p>
             
-            <p className="text-sm text-gray-600 mb-3">
+            <p className="text-base text-gray-600 mb-4">
               Indica el producto que quieres enviar
             </p>
             
@@ -545,38 +545,38 @@ export default function TrackingHero() {
               </label>
             </div>
             
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-2 gap-5 mb-5">
               <div>
-                <label className="text-sm text-gray-600 block mb-2">
+                <label className="text-base text-gray-600 block mb-3">
                   Código postal origen
                 </label>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <div className="relative">
                     <Input
                       value="España"
                       disabled
-                      className="w-full h-12 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10"
+                      className="w-full h-14 bg-gray-100 text-gray-700 border border-gray-300 rounded-md pr-10 text-base"
                     />
-                    <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   </div>
                   <Input
                     type="text"
                     placeholder="Código postal*"
                     value={originPostalCode}
                     onChange={(e) => setOriginPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md"
+                    className="w-full h-14 border border-gray-300 rounded-md text-base"
                     data-testid="origin-postal-code"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-sm text-gray-600 block mb-2">
+                <label className="text-base text-gray-600 block mb-3">
                   Código postal destino
                 </label>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <Select value={destinationCountry} onValueChange={setDestinationCountry}>
-                    <SelectTrigger className="w-full h-12 border border-gray-300 rounded-md">
+                    <SelectTrigger className="w-full h-14 border border-gray-300 rounded-md text-base">
                       <SelectValue placeholder="País*" />
                     </SelectTrigger>
                     <SelectContent side="bottom" className="correos-select-content max-h-60">
@@ -592,7 +592,7 @@ export default function TrackingHero() {
                     placeholder="Código postal"
                     value={destinationPostalCode}
                     onChange={(e) => setDestinationPostalCode(e.target.value)}
-                    className="w-full h-12 border border-gray-300 rounded-md"
+                    className="w-full h-14 border border-gray-300 rounded-md text-base"
                     data-testid="destination-postal-code"
                   />
                 </div>
@@ -601,7 +601,7 @@ export default function TrackingHero() {
 
             {/* Tamaños de paquetes para desktop */}
             <div className="mt-6">
-              <label className="text-sm text-gray-600 block mb-3">
+              <label className="text-base text-gray-600 block mb-4">
                 ¿Qué tamaño y peso tiene tu paquete?
               </label>
               <div className="grid grid-cols-4 gap-4">
@@ -660,16 +660,16 @@ export default function TrackingHero() {
             </div>
 
             {/* Botones de acción */}
-            <div className="mt-6 flex gap-3">
+            <div className="mt-6 flex gap-4">
               <Button 
-                className="flex-1 bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-md text-sm"
+                className="flex-1 bg-blue-900 hover:bg-blue-800 text-white py-3 rounded-md text-base"
                 data-testid="calculate-price-button"
               >
                 Calcular precio
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border-blue-900 text-blue-900 hover:bg-blue-50 py-2 rounded-md text-sm"
+                className="flex-1 border-blue-900 text-blue-900 hover:bg-blue-50 py-3 rounded-md text-base"
                 data-testid="start-shipment-button"
               >
                 Comenzar envío
