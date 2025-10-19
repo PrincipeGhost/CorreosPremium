@@ -414,8 +414,8 @@ export default function TrackingHero() {
       {/* Desktop Layout - Grid 2 columnas */}
       <div className="hidden lg:grid lg:grid-cols-[50%_50%] bg-gray-50 lg:mt-8">
         {/* Columna izquierda - Sigue tu envío (Amarillo) */}
-        <div className="relative bg-gray-50 flex items-start justify-start pt-0 pl-6 pb-6">
-          <div className="bg-yellow-400 p-6 w-[450px] shadow-lg mt-0">
+        <div className="relative bg-gray-50 flex items-start justify-start pt-6 pl-6 pb-6">
+          <div className="bg-yellow-400 p-6 w-[450px] shadow-lg">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               Sigue tu envío
             </h2>
@@ -476,7 +476,7 @@ export default function TrackingHero() {
         </div>
 
         {/* Columna derecha - Servicio especial de paquetería */}
-        <div className="bg-gray-50 p-8 flex items-start justify-center">
+        <div className="bg-gray-50 pt-6 px-8 pb-8 flex items-start justify-center">
           <div className="bg-white p-6 border-2 border-gray-300 rounded-lg shadow-sm max-w-xl w-full">
             <h3 className="text-xl font-bold text-gray-900 mb-2">
               Servicio especial de paquetería
