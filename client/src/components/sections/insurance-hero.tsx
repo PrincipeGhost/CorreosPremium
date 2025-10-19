@@ -143,12 +143,13 @@ export default function InsuranceHero() {
               AXA en cualquier sitio de España.
             </p>
             
-            <div className="flex gap-6 items-center ml-5">
+            <div className="flex gap-20 items-center ml-10 ">
               <Button 
-                className="w-60 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-6 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-center"
+                className="w-56 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-7 px-6 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-center"
                 data-testid="insurance-cta-button"
               >
-                SEGURO, TE LLAMAMOS
+                SEGURO, TE<br />
+                LLAMAMOS
               </Button>
               
               <Button 
