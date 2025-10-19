@@ -107,7 +107,7 @@ export default function InsuranceHero() {
           {/* Columna derecha - Contenido de Seguros AXA */}
           <div className="px-12 py-8 flex flex-col justify-center bg-white relative overflow-visible h-[360px]">
             {/* Triángulos amarillos decorativos - esquina superior derecha */}
-            <div className="absolute top-[57px] right-[-42px]">
+            <div className="absolute top-[12px] right-[-42px]">
               {/* Primera fila de triángulos */}
               <div className="flex gap-1 mb-1">
                 <div className="w-0 h-0 border-t-[42px] border-t-yellow-400 border-r-[42px] border-r-transparent"></div>
