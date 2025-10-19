@@ -107,7 +107,7 @@ export default function InsuranceHero() {
           {/* Columna derecha - Contenido de Seguros AXA */}
           <div className="px-12 py-8 flex flex-col justify-center bg-white relative overflow-visible h-[360px]">
             {/* Triángulos amarillos decorativos - esquina superior derecha */}
-            <div className="absolute top-[12px] right-[-42px]">
+            <div className="absolute top-[100px] right-[-42px]">
               {/* Primera fila de triángulos */}
               <div className="flex gap-1 mb-1">
                 <div className="w-0 h-0 border-t-[42px] border-t-yellow-400 border-r-[42px] border-r-transparent"></div>
@@ -129,15 +129,15 @@ export default function InsuranceHero() {
               <div className="w-24 h-4 bg-blue-900"></div>
             </div>
 
-            <p className="text-sm text-black mb-4 font-medium ml-[108px]">
+            <p className="text-sm text-black mb-4 font-medium ml-[84px]">
               Allá donde está Correos, AXA te protege
             </p>
             
-            <h2 className="text-3xl text-black mb-6 font-normal ml-[108px]">
+            <h2 className="text-3xl text-black mb-6 font-normal ml-[84px]">
               Seguros AXA
             </h2>
             
-            <p className="text-base text-gray-600 mb-10 leading-relaxed font-normal max-w-lg ml-[108px]">
+            <p className="text-base text-gray-600 mb-10 leading-relaxed font-normal max-w-lg ml-[84px]">
               Ahora Correos se une a AXA en una misión: la de llegar a
               ti,<br />
               estés donde estés. Porque gracias a la amplia red de<br />
