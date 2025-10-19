@@ -412,7 +412,7 @@ export default function TrackingHero() {
       </div>
 
       {/* Desktop Layout - Grid 2 columnas */}
-      <div className="hidden lg:grid lg:grid-cols-[50%_50%] bg-gray-50" style={{ marginTop: 0, paddingTop: 0 }}>
+      <div className="hidden lg:grid lg:grid-cols-[50%_50%] lg:items-stretch bg-gray-50" style={{ marginTop: 0, paddingTop: 0 }}>
         {/* Columna izquierda - Sigue tu envío (Amarillo) */}
         <div className="relative bg-gray-50 flex items-stretch justify-end">
           <div className="bg-yellow-400 p-6 w-[450px] shadow-lg h-full">
