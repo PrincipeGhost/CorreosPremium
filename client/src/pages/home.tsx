@@ -57,8 +57,6 @@ export default function Home() {
         
         <SiemprePensando />
         
-        <ServiceCalculator />
-        
         {/* Agrupadas en grid para desktop */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-0">
           <EsperandoEnvio />
