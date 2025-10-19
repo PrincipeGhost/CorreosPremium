@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Menu, X, Search, User } from "lucide-react";
+import { Menu, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Input } from "@/components/ui/input";
 import { Link } from "wouter";
 
 export default function Header() {
@@ -9,8 +10,6 @@ export default function Header() {
 
   const navigation = [
     { name: "Servicios", href: "#servicios" },
-    { name: "Empresa", href: "#empresa" },
-    { name: "Particulares", href: "#particulares" },
     { name: "Ayuda", href: "#ayuda" },
     { name: "Contacto", href: "#contacto" },
   ];
@@ -22,12 +21,9 @@ export default function Header() {
       
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center h-[4.75rem]">
-            {/* Left spacing */}
-            <div className="w-4"></div>
-            
-            {/* Logo - Left side with proper spacing */}
-            <div className="flex items-center">
+          <div className="flex items-center h-[69px] gap-4">
+            {/* Logo */}
+            <div className="flex items-center flex-shrink-0">
               <Link href="/" className="cursor-pointer" data-testid="logo-link">
                 <img 
                   src="/attached_assets/IMG_6692_1754313882088.png"
@@ -41,20 +37,17 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Vertical divider */}
-            <div className="w-px h-8 bg-gray-300 mx-4"></div>
-
-            {/* Mobile menu button - visible only on mobile */}
-            <div className="lg:hidden flex items-center">
+            {/* Hamburger menu button */}
+            <div className="flex items-center">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="text-blue-800 hover:text-blue-900 p-2"
+                    className="text-blue-900 hover:text-blue-700 p-2"
                     data-testid="menu-button"
                   >
-                    <Menu className="w-7 h-7" />
+                    <Menu className="w-6 h-6" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="left" className="w-80">
@@ -74,45 +67,54 @@ export default function Header() {
               </Sheet>
             </div>
 
-            {/* Desktop navigation - visible only on desktop */}
-            <div className="hidden lg:flex items-center space-x-8 ml-8">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
+            {/* Navigation links - Particular and Empresa */}
+            <nav className="hidden lg:flex items-center space-x-6">
+              <a
+                href="#particulares"
+                className="text-sm font-semibold text-blue-900 hover:text-blue-700 transition-colors"
+                data-testid="link-particular"
+              >
+                Particular
+              </a>
+              <a
+                href="#empresa"
+                className="text-sm font-semibold text-blue-900 hover:text-blue-700 transition-colors"
+                data-testid="link-empresa"
+              >
+                Empresa
+              </a>
+            </nav>
 
-            {/* Spacer to push right items to the end */}
+            {/* Spacer */}
             <div className="flex-grow"></div>
 
-            {/* Right side - Search and User icons with proper spacing */}
-            <div className="flex items-center space-x-1">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-blue-800 hover:text-blue-900 p-2"
-                data-testid="search-button"
-              >
-                <Search className="w-5 h-5" />
-              </Button>
-              <div className="w-px h-8 bg-gray-300 mx-2"></div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-blue-800 hover:text-blue-900 p-2"
-                data-testid="user-button"
-              >
-                <User className="w-5 h-5" />
-              </Button>
+            {/* Search bar - Desktop only */}
+            <div className="hidden lg:flex items-center flex-1 max-w-md">
+              <div className="relative w-full">
+                <Input
+                  type="text"
+                  placeholder="Busca en correos.es"
+                  className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  data-testid="input-search"
+                />
+                <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                  <Search className="w-5 h-5" />
+                </button>
+              </div>
             </div>
-            
-            {/* Right spacing */}
-            <div className="w-4"></div>
+
+            {/* Spacer */}
+            <div className="flex-grow lg:flex-grow-0"></div>
+
+            {/* Login button */}
+            <Button
+              variant="ghost"
+              className="flex items-center gap-2 text-blue-900 hover:text-blue-700 font-semibold text-sm"
+              data-testid="button-login"
+            >
+              <User className="w-5 h-5" />
+              <span className="hidden lg:inline">INICIAR SESIÓN</span>
+            </Button>
           </div>
         </div>
       </header>
