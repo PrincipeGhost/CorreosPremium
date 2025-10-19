@@ -148,13 +148,12 @@ export default function InsuranceHero() {
                 className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-7 pl-6 pr-[132px] text-sm font-bold rounded-md border-0 transition-colors duration-200 ml-11"
                 data-testid="insurance-cta-button"
               >
-                SEGURO, TE<br />
-                LLAMAMOS
+                SEGURO, TE LLAMAMOS
               </Button>
               
               <Button 
                 variant="ghost" 
-                className="text-blue-800 hover:text-blue-900 p-0 h-auto text-sm font-bold flex items-center gap-2 transition-colors duration-200 ml-[-35px]"
+                className="text-blue-800 hover:text-blue-900 p-0 h-auto text-sm font-bold flex items-center gap-2 transition-colors duration-200 ml-[-30px]"
                 data-testid="insurance-more-info-button"
               >
                 MÁS INFO
