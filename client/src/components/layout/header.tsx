@@ -73,14 +73,14 @@ export default function Header() {
               <nav className="hidden lg:flex items-center space-x-6">
                 <a
                   href="#particulares"
-                  className="text-lg font-semibold text-blue-900 hover:text-blue-700 transition-colors"
+                  className="text-2xl font-semibold text-blue-900 hover:text-blue-700 transition-colors"
                   data-testid="link-particular"
                 >
                   Particular
                 </a>
                 <a
                   href="#empresa"
-                  className="text-lg font-semibold text-blue-900 hover:text-blue-700 transition-colors"
+                  className="text-2xl font-semibold text-blue-900 hover:text-blue-700 transition-colors"
                   data-testid="link-empresa"
                 >
                   Empresa
@@ -94,11 +94,11 @@ export default function Header() {
                 <Input
                   type="text"
                   placeholder="Busca en correos.es"
-                  className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                  className="w-full pl-4 pr-10 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl"
                   data-testid="input-search"
                 />
                 <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
-                  <Search className="w-6 h-6" />
+                  <Search className="w-8 h-8" />
                 </button>
               </div>
             </div>
@@ -107,10 +107,10 @@ export default function Header() {
             <div className="flex items-center justify-end flex-1">
               <Button
                 variant="ghost"
-                className="flex items-center gap-2 text-blue-900 hover:text-blue-700 font-semibold text-lg"
+                className="flex items-center gap-2 text-blue-900 hover:text-blue-700 font-semibold text-2xl"
                 data-testid="button-login"
               >
-                <User className="w-6 h-6" />
+                <User className="w-8 h-8" />
                 <span className="hidden lg:inline">INICIAR SESIÓN</span>
               </Button>
             </div>
