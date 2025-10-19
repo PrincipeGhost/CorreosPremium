@@ -21,75 +21,75 @@ export default function Header() {
       
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center h-[69px] gap-4">
-            {/* Logo */}
-            <div className="flex items-center flex-shrink-0">
-              <Link href="/" className="cursor-pointer" data-testid="logo-link">
-                <img 
-                  src="/attached_assets/IMG_6692_1754313882088.png"
-                  alt="Correos"
-                  className="h-9 w-9 object-contain hover:opacity-80 transition-opacity"
-                  style={{ 
-                    filter: 'contrast(1.18) saturate(1.1) brightness(0.94)',
-                    imageRendering: 'auto'
-                  }}
-                />
-              </Link>
+          <div className="flex items-center justify-between h-[69px] gap-4 relative">
+            {/* Left section - Logo, Hamburger, Navigation */}
+            <div className="flex items-center gap-4 flex-1">
+              {/* Logo */}
+              <div className="flex items-center flex-shrink-0">
+                <Link href="/" className="cursor-pointer" data-testid="logo-link">
+                  <img 
+                    src="/attached_assets/IMG_6692_1754313882088.png"
+                    alt="Correos"
+                    className="h-9 w-9 object-contain hover:opacity-80 transition-opacity"
+                    style={{ 
+                      filter: 'contrast(1.18) saturate(1.1) brightness(0.94)',
+                      imageRendering: 'auto'
+                    }}
+                  />
+                </Link>
+              </div>
+
+              {/* Hamburger menu button */}
+              <div className="flex items-center">
+                <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                  <SheetTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-blue-900 hover:text-blue-700 p-2"
+                      data-testid="menu-button"
+                    >
+                      <Menu className="w-6 h-6" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-80">
+                    <nav className="flex flex-col space-y-4 mt-8">
+                      {navigation.map((item) => (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className="text-lg font-medium text-gray-900 hover:text-blue-600 py-2"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.name}
+                        </a>
+                      ))}
+                    </nav>
+                  </SheetContent>
+                </Sheet>
+              </div>
+
+              {/* Navigation links - Particular and Empresa */}
+              <nav className="hidden lg:flex items-center space-x-6">
+                <a
+                  href="#particulares"
+                  className="text-sm font-semibold text-blue-900 hover:text-blue-700 transition-colors"
+                  data-testid="link-particular"
+                >
+                  Particular
+                </a>
+                <a
+                  href="#empresa"
+                  className="text-sm font-semibold text-blue-900 hover:text-blue-700 transition-colors"
+                  data-testid="link-empresa"
+                >
+                  Empresa
+                </a>
+              </nav>
             </div>
 
-            {/* Hamburger menu button */}
-            <div className="flex items-center">
-              <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-blue-900 hover:text-blue-700 p-2"
-                    data-testid="menu-button"
-                  >
-                    <Menu className="w-6 h-6" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-80">
-                  <nav className="flex flex-col space-y-4 mt-8">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="text-lg font-medium text-gray-900 hover:text-blue-600 py-2"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </nav>
-                </SheetContent>
-              </Sheet>
-            </div>
-
-            {/* Navigation links - Particular and Empresa */}
-            <nav className="hidden lg:flex items-center space-x-6">
-              <a
-                href="#particulares"
-                className="text-sm font-semibold text-blue-900 hover:text-blue-700 transition-colors"
-                data-testid="link-particular"
-              >
-                Particular
-              </a>
-              <a
-                href="#empresa"
-                className="text-sm font-semibold text-blue-900 hover:text-blue-700 transition-colors"
-                data-testid="link-empresa"
-              >
-                Empresa
-              </a>
-            </nav>
-
-            {/* Spacer */}
-            <div className="flex-grow"></div>
-
-            {/* Search bar - Desktop only */}
-            <div className="hidden lg:flex items-center flex-1 max-w-md">
+            {/* Search bar - Desktop only - Centered */}
+            <div className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2 w-96">
               <div className="relative w-full">
                 <Input
                   type="text"
@@ -103,18 +103,17 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Spacer */}
-            <div className="flex-grow lg:flex-grow-0"></div>
-
-            {/* Login button */}
-            <Button
-              variant="ghost"
-              className="flex items-center gap-2 text-blue-900 hover:text-blue-700 font-semibold text-sm"
-              data-testid="button-login"
-            >
-              <User className="w-5 h-5" />
-              <span className="hidden lg:inline">INICIAR SESIÓN</span>
-            </Button>
+            {/* Right section - Login button */}
+            <div className="flex items-center justify-end flex-1">
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2 text-blue-900 hover:text-blue-700 font-semibold text-sm"
+                data-testid="button-login"
+              >
+                <User className="w-5 h-5" />
+                <span className="hidden lg:inline">INICIAR SESIÓN</span>
+              </Button>
+            </div>
           </div>
         </div>
       </header>
