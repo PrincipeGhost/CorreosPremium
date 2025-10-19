@@ -11,7 +11,7 @@ export default function PremiumExpress() {
 
   return (
     <Card className="bg-white border-0 rounded-none shadow-none">
-      <CardContent className="p-3 lg:p-0">
+      <CardContent className="p-3 lg:p-2">
         <h2 className="text-base lg:text-lg font-bold text-gray-800 mb-2 lg:mb-3">
           No mides distancia, dónde estés correos te protege.
         </h2>
