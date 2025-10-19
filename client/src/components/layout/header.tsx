@@ -22,7 +22,7 @@ export default function Header() {
       
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center h-16">
+          <div className="flex items-center h-[4.75rem]">
             {/* Left spacing */}
             <div className="w-4"></div>
             
