@@ -33,7 +33,7 @@ export default function PremiumExpress() {
         
         <Button 
           onClick={handleNavigateToPremium}
-          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-0 px-0 lg:py-2 lg:px-0 text-sm lg:text-sm rounded-md h-8 lg:h-9"
+          className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold !py-2 !px-4 text-sm rounded-md !h-9"
           data-testid="button-mas-info-premium"
         >
           MÁS INFO
