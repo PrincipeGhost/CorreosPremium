@@ -49,11 +49,27 @@ export default function Home() {
           <TrackingHero />
         </div>
         
-        {/* Agrupadas en grid para desktop */}
-        <div className="lg:grid lg:grid-cols-2 lg:gap-0">
-          <EligeCorreos />
-          <PremiumExpress />
-        </div>
+        {/* Sección con imagen a la derecha y contenido a la izquierda */}
+        <section className="bg-gray-100 py-6 lg:py-0">
+          <div className="max-w-md lg:max-w-none mx-auto lg:mx-0 px-6 lg:px-0 lg:grid lg:grid-cols-[60%_40%] lg:min-h-[600px]">
+            {/* Columna izquierda - Secciones apiladas */}
+            <div className="lg:flex lg:flex-col lg:justify-center lg:gap-0 space-y-6 lg:space-y-0 lg:pl-8 lg:pr-12">
+              <EligeCorreos />
+              <div className="lg:border-t lg:border-gray-300 lg:my-4"></div>
+              <PremiumExpress />
+            </div>
+            
+            {/* Columna derecha - Imagen pegada al borde */}
+            <div className="hidden lg:block lg:relative lg:h-full">
+              <img 
+                src="/attached_assets/Captura_1760880797169.PNG"
+                alt="Trabajador de delivery con moto amarilla"
+                className="w-full h-full object-cover"
+                data-testid="img-delivery-worker"
+              />
+            </div>
+          </div>
+        </section>
         
         <SiemprePensando />
         
