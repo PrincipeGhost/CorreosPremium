@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
@@ -83,17 +82,16 @@ export default function ServiceCalculator() {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Card className="border-2 border-gray-300 shadow-lg bg-white rounded-lg">
-          <CardContent className="p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Servicio especial de paquetería
-            </h2>
-            <p className="text-gray-600 mb-8">
-              Envíos rápidos y baratos para todo el mundo{" "}
-              <span className="text-orange-500 font-semibold">Desde 5.63€</span>
-            </p>
+        <div className="border border-gray-200 shadow-sm bg-white rounded-md p-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Servicio especial de paquetería
+          </h2>
+          <p className="text-gray-600 mb-8">
+            Envíos rápidos y baratos para todo el mundo{" "}
+            <span className="text-orange-500 font-semibold">Desde 5.63€</span>
+          </p>
 
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -210,8 +208,7 @@ export default function ServiceCalculator() {
 COMENZAR ENVÍO
               </Button>
             </form>
-          </CardContent>
-        </Card>
+        </div>
       </div>
     </section>
   );
