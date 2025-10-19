@@ -82,9 +82,9 @@ export default function ServiceCalculator() {
   ];
 
   return (
-    <section className="py-16 bg-[#f6f8fb]">
+    <section className="py-16 bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="border border-gray-400 shadow-md bg-white rounded-md p-8">
+        <div className="border-2 border-gray-500 shadow-lg bg-white rounded-lg p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Servicio especial de paquetería
           </h2>
