@@ -95,17 +95,17 @@ export default function InsuranceHero() {
       <div className="hidden lg:block bg-white" style={{ margin: 0, padding: 0 }}>
         <div className="grid grid-cols-[50%_50%] max-w-full">
           {/* Columna izquierda - Imagen del edificio */}
-          <div className="relative h-[360px] overflow-hidden">
+          <div className="relative h-[320px] overflow-hidden">
             <img 
               src="/attached_assets/image_1754310350481.png"
               alt="Casa tradicional española con trabajador de Correos"
               className="w-full h-full object-cover"
-              style={{ objectPosition: '50% 15%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 60px 100%, 0 calc(100% - 60px))' }}
+              style={{ objectPosition: '50% 10%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 60px 100%, 0 calc(100% - 60px))' }}
             />
           </div>
           
           {/* Columna derecha - Contenido de Seguros AXA */}
-          <div className="px-12 py-8 flex flex-col justify-center bg-white relative overflow-visible h-[360px]">
+          <div className="px-12 py-8 flex flex-col justify-center bg-white relative overflow-visible h-[320px]">
             {/* Triángulos amarillos decorativos - esquina superior derecha */}
             <div className="absolute top-8 right-8">
               {/* Primera fila de triángulos */}
