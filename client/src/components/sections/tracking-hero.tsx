@@ -589,64 +589,56 @@ export default function TrackingHero() {
               <label className="text-sm text-gray-600 block mb-3">
                 ¿Qué tamaño y peso tiene tu paquete?
               </label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-4 gap-4">
                 <div 
-                  className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '2kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  className={`p-4 border rounded-lg cursor-pointer transition-colors text-center ${selectedPackageSize === '2kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
                   onClick={() => setSelectedPackageSize('2kg')}
                 >
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                      <img src={icon2kg} alt="2kg package" className="w-8 h-8 object-contain" />
+                  <div className="flex flex-col items-center">
+                    <div className="w-16 h-16 flex items-center justify-center mb-2">
+                      <img src={icon2kg} alt="2kg package" className="w-12 h-12 object-contain" />
                     </div>
-                    <div>
-                      <div className="font-medium text-gray-900 text-sm">Hasta 2kg</div>
-                      <div className="text-xs text-gray-600">Dimensión: 30x20x20</div>
-                    </div>
+                    <div className="font-medium text-gray-900 text-sm mb-1">Hasta 2kg</div>
+                    <div className="text-xs text-gray-600">Dimensión: 30x20x20</div>
                   </div>
                 </div>
 
                 <div 
-                  className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '5kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  className={`p-4 border rounded-lg cursor-pointer transition-colors text-center ${selectedPackageSize === '5kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
                   onClick={() => setSelectedPackageSize('5kg')}
                 >
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                      <img src={icon5kg} alt="5kg package" className="w-8 h-8 object-contain" />
+                  <div className="flex flex-col items-center">
+                    <div className="w-16 h-16 flex items-center justify-center mb-2">
+                      <img src={icon5kg} alt="5kg package" className="w-12 h-12 object-contain" />
                     </div>
-                    <div>
-                      <div className="font-medium text-gray-900 text-sm">Hasta 5kg</div>
-                      <div className="text-xs text-gray-600">Dimensión: 35x35x24</div>
-                    </div>
+                    <div className="font-medium text-gray-900 text-sm mb-1">Hasta 5kg</div>
+                    <div className="text-xs text-gray-600">Dimensión: 35x35x24</div>
                   </div>
                 </div>
 
                 <div 
-                  className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '10kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  className={`p-4 border rounded-lg cursor-pointer transition-colors text-center ${selectedPackageSize === '10kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
                   onClick={() => setSelectedPackageSize('10kg')}
                 >
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                      <img src={icon10kg} alt="10kg package" className="w-8 h-8 object-contain" />
+                  <div className="flex flex-col items-center">
+                    <div className="w-16 h-16 flex items-center justify-center mb-2">
+                      <img src={icon10kg} alt="10kg package" className="w-12 h-12 object-contain" />
                     </div>
-                    <div>
-                      <div className="font-medium text-gray-900 text-sm">Hasta 10kg</div>
-                      <div className="text-xs text-gray-600">Dimensión: 40x40x37</div>
-                    </div>
+                    <div className="font-medium text-gray-900 text-sm mb-1">Hasta 10kg</div>
+                    <div className="text-xs text-gray-600">Dimensión: 40x40x37</div>
                   </div>
                 </div>
 
                 <div 
-                  className={`p-3 border rounded-lg cursor-pointer transition-colors ${selectedPackageSize === '20kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
+                  className={`p-4 border rounded-lg cursor-pointer transition-colors text-center ${selectedPackageSize === '20kg' ? 'border-yellow-400 bg-yellow-50' : 'border-gray-300 bg-white'}`}
                   onClick={() => setSelectedPackageSize('20kg')}
                 >
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 rounded flex items-center justify-center mr-3">
-                      <img src={icon20kg} alt="20kg package" className="w-8 h-8 object-contain" />
+                  <div className="flex flex-col items-center">
+                    <div className="w-16 h-16 flex items-center justify-center mb-2">
+                      <img src={icon20kg} alt="20kg package" className="w-12 h-12 object-contain" />
                     </div>
-                    <div>
-                      <div className="font-medium text-gray-900 text-sm">Hasta 20kg</div>
-                      <div className="text-xs text-gray-600">Dimensión: 55x55x39</div>
-                    </div>
+                    <div className="font-medium text-gray-900 text-sm mb-1">Hasta 20kg</div>
+                    <div className="text-xs text-gray-600">Dimensión: 55x55x39</div>
                   </div>
                 </div>
               </div>
