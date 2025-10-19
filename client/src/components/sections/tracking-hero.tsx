@@ -471,6 +471,21 @@ export default function TrackingHero() {
                 </div>
                 <span className="text-xs">Encuentra códigos postales</span>
               </Button>
+
+              <Button
+                variant="outline"
+                className="w-full justify-start bg-white border-0 h-11 text-gray-800 hover:bg-gray-50 text-xs px-3"
+                data-testid="email-verifier-button"
+              >
+                <div className="w-6 h-6 rounded flex items-center justify-center mr-2">
+                  <img 
+                    src="/attached_assets/image_1754314594642.png" 
+                    alt="Verificador de email"
+                    className="w-4 h-4 object-contain"
+                  />
+                </div>
+                <span className="text-xs">Verificador de email</span>
+              </Button>
             </div>
           </div>
         </div>
