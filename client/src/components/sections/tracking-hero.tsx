@@ -491,7 +491,7 @@ export default function TrackingHero() {
         </div>
 
         {/* Columna derecha - Servicio especial de paquetería */}
-        <div className="bg-gray-50 pt-6 px-8 pb-8 flex items-start justify-center">
+        <div className="bg-gray-50 pt-6 px-8 pb-8 flex items-start justify-start">
           <div className="bg-white p-6 border-2 border-gray-300 rounded-lg shadow-sm max-w-xl w-full">
             <h3 className="text-xl font-bold text-gray-900 mb-2">
               Servicio especial de paquetería
