@@ -85,9 +85,11 @@ export default function ServiceCalculator() {
     <section className="py-16" style={{ backgroundColor: '#f3f4f6' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div 
-          className="bg-white rounded-lg p-8"
+          className="rounded-lg p-8"
           style={{
-            border: '5px solid #ff0000',
+            border: '10px solid red',
+            backgroundColor: 'yellow',
+            minHeight: '400px',
             boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
           }}
         >
