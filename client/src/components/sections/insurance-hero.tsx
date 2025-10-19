@@ -12,7 +12,7 @@ export default function InsuranceHero() {
             src="/attached_assets/image_1754310350481.png"
             alt="Casa tradicional española con trabajador de Correos"
             className="w-full h-48 object-cover"
-            style={{ objectPosition: '50% 30%' }}
+            style={{ objectPosition: '50% 35%' }}
           />
           {/* SVG curved cut overlay - curve downward like Correos.es */}
           <svg 
@@ -100,7 +100,7 @@ export default function InsuranceHero() {
               src="/attached_assets/image_1754310350481.png"
               alt="Casa tradicional española con trabajador de Correos"
               className="w-full h-full object-cover"
-              style={{ objectPosition: '50% 30%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 60px 100%, 0 calc(100% - 60px))' }}
+              style={{ objectPosition: '50% 35%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 60px 100%, 0 calc(100% - 60px))' }}
             />
           </div>
           
