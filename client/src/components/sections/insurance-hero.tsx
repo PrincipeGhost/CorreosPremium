@@ -63,14 +63,12 @@ export default function InsuranceHero() {
             </h2>
             
             <p className="text-sm text-gray-600 mb-6 leading-relaxed font-normal max-w-xs">
-              Ahora Correos se une a AXA en una misión: la de 
-              llegar a ti, estés donde estés. Porque gracias a la 
-              amplia red de agentes de Correos, podrás 
-              contratar los seguros de AXA en cualquier sitio 
-              de España.
+              Ahora Correos se une a AXA en una misión: la de llegar a<br />
+              ti, estés donde estés. Porque gracias a la amplia red de agentes de Correos, podrás contratar los seguros de<br />
+              AXA en cualquier sitio de España.
             </p>
             
-            <div className="space-y-6 mb-4">
+            <div className="space-y-6 mb-4 ml-5">
               <Button 
                 className="w-52 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-4 text-sm font-bold rounded-md border-0 transition-colors duration-200 block text-center flex items-center justify-center"
                 data-testid="insurance-cta-button"
@@ -138,14 +136,12 @@ export default function InsuranceHero() {
             </h2>
             
             <p className="text-base text-gray-600 mb-8 leading-relaxed font-normal max-w-lg">
-              Ahora Correos se une a AXA en una misión: la de 
-              llegar a ti, estés donde estés. Porque gracias a la 
-              amplia red de agentes de Correos, podrás 
-              contratar los seguros de AXA en cualquier sitio 
-              de España.
+              Ahora Correos se une a AXA en una misión: la de llegar a<br />
+              ti, estés donde estés. Porque gracias a la amplia red de agentes de Correos, podrás contratar los seguros de<br />
+              AXA en cualquier sitio de España.
             </p>
             
-            <div className="flex gap-6 items-center">
+            <div className="flex gap-6 items-center ml-5">
               <Button 
                 className="w-60 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-6 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-center"
                 data-testid="insurance-cta-button"
