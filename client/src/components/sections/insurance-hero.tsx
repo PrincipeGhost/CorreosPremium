@@ -137,7 +137,7 @@ export default function InsuranceHero() {
               Seguros AXA
             </h2>
             
-            <p className="text-base text-gray-600 mb-8 leading-relaxed font-normal max-w-lg">
+            <p className="text-base text-gray-600 mb-10 leading-relaxed font-normal max-w-lg">
               Ahora Correos se une a AXA en una misión: la de llegar a<br />
               ti, estés donde estés. Porque gracias a la amplia red de agentes de Correos, podrás contratar los seguros de<br />
               AXA en cualquier sitio de España.
@@ -145,7 +145,7 @@ export default function InsuranceHero() {
             
             <div className="flex gap-20 items-center ml-10 ">
               <Button 
-                className="w-60 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-7 pl-1 pr-6 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-center"
+                className="w-52 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-8 pl-0 pr-6 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-center"
                 data-testid="insurance-cta-button"
               >
                 SEGURO, TE<br />
