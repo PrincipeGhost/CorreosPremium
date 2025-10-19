@@ -34,15 +34,15 @@ export default function InsuranceHero() {
           <div className="absolute top-6 right-4">
             {/* Primera fila de triángulos */}
             <div className="flex gap-1 mb-1">
-              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
-              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
-              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
             </div>
             {/* Segunda fila de triángulos */}
             <div className="flex gap-1">
-              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
-              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
-              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
             </div>
           </div>
 
@@ -110,15 +110,15 @@ export default function InsuranceHero() {
             <div className="absolute top-8 right-8">
               {/* Primera fila de triángulos */}
               <div className="flex gap-1 mb-1">
-                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
-                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
-                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+                <div className="w-0 h-0 border-t-[32px] border-t-yellow-400 border-r-[32px] border-r-transparent"></div>
+                <div className="w-0 h-0 border-t-[32px] border-t-yellow-400 border-r-[32px] border-r-transparent"></div>
+                <div className="w-0 h-0 border-t-[32px] border-t-yellow-400 border-r-[32px] border-r-transparent"></div>
               </div>
               {/* Segunda fila de triángulos */}
               <div className="flex gap-1">
-                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
-                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
-                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+                <div className="w-0 h-0 border-t-[32px] border-t-yellow-400 border-r-[32px] border-r-transparent"></div>
+                <div className="w-0 h-0 border-t-[32px] border-t-yellow-400 border-r-[32px] border-r-transparent"></div>
+                <div className="w-0 h-0 border-t-[32px] border-t-yellow-400 border-r-[32px] border-r-transparent"></div>
               </div>
             </div>
 
