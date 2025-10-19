@@ -54,7 +54,7 @@ export default function Home() {
           <div className="max-w-md lg:max-w-none mx-auto lg:mx-0 px-6 lg:px-0 lg:grid lg:grid-cols-[60%_40%] lg:min-h-[600px]">
             {/* Columna izquierda - Secciones apiladas */}
             <div className="lg:flex lg:flex-col lg:justify-center lg:gap-0 space-y-6 lg:space-y-0 lg:pl-8 lg:pr-12">
-              <div className="hidden lg:block lg:border-t-[3px] lg:border-green-500 lg:mt-3"></div>
+              <div className="hidden lg:block lg:border-t-[3px] lg:border-green-500 lg:mt-1"></div>
               <EligeCorreos />
               <div className="lg:border-t lg:border-gray-300 lg:my-4"></div>
               <PremiumExpress />
