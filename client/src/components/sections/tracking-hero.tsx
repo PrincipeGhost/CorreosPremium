@@ -413,12 +413,8 @@ export default function TrackingHero() {
 
       {/* Desktop Layout - Grid 2 columnas */}
       <div className="hidden lg:grid lg:grid-cols-[50%_50%] lg:items-stretch bg-gray-50" style={{ marginTop: 0, paddingTop: 0 }}>
-        {/* Columna izquierda - Sigue tu envío (Amarillo) con imagen de fondo */}
-        <div className="relative bg-gray-50 flex items-stretch justify-end" style={{ 
-          backgroundImage: 'url(/attached_assets/image_1754310350481.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: '50% 15%'
-        }}>
+        {/* Columna izquierda - Sigue tu envío (Amarillo) */}
+        <div className="relative bg-gray-50 flex items-stretch justify-end">
           <div className="bg-yellow-400 p-6 w-[450px] shadow-lg h-full">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               Sigue tu envío
