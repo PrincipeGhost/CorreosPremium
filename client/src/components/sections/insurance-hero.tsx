@@ -158,7 +158,7 @@ export default function InsuranceHero() {
                 data-testid="insurance-more-info-button"
               >
                 MÁS INFO
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 ml-5" />
               </Button>
             </div>
           </div>
