@@ -97,7 +97,7 @@ export default function InsuranceHero() {
           {/* Columna izquierda - Imagen del edificio */}
           <div className="relative h-[360px] overflow-hidden">
             <img 
-              src="/attached_assets/image_1754310350481.png"
+              src="/attached_assets/Captura_1760873976922.PNG"
               alt="Casa tradicional española con trabajador de Correos"
               className="w-full h-full object-cover"
               style={{ objectPosition: '50% 15%', clipPath: 'polygon(0 0, 100% 0, 100% 100%, 60px 100%, 0 calc(100% - 60px))' }}
