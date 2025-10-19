@@ -47,7 +47,7 @@ export default function InsuranceHero() {
           </div>
 
           {/* Barras azules decorativas - lado derecho */}
-          <div className="absolute right-[-50px] bottom-20 flex flex-col gap-2">
+          <div className="absolute right-[-90px] bottom-20 flex flex-col gap-2">
             <div className="w-20 h-3 bg-blue-900"></div>
             <div className="w-20 h-3 bg-blue-900"></div>
             <div className="w-20 h-3 bg-blue-900"></div>
@@ -123,7 +123,7 @@ export default function InsuranceHero() {
             </div>
 
             {/* Barras azules decorativas - lado derecho */}
-            <div className="absolute right-[-50px] bottom-16 flex flex-col gap-3">
+            <div className="absolute right-[-90px] bottom-16 flex flex-col gap-3">
               <div className="w-24 h-4 bg-blue-900"></div>
               <div className="w-24 h-4 bg-blue-900"></div>
               <div className="w-24 h-4 bg-blue-900"></div>
