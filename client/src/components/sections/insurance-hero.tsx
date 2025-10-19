@@ -154,7 +154,7 @@ export default function InsuranceHero() {
               
               <Button 
                 variant="ghost" 
-                className="text-blue-800 hover:text-blue-900 p-0 h-auto text-sm font-bold flex items-center gap-2 transition-colors duration-200 ml-10"
+                className="text-blue-800 hover:text-blue-900 p-0 h-auto text-sm font-bold flex items-center gap-2 transition-colors duration-200 ml-18"
                 data-testid="insurance-more-info-button"
               >
                 MÁS INFO
