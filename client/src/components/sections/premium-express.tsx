@@ -11,12 +11,12 @@ export default function PremiumExpress() {
 
   return (
     <Card className="bg-white border border-gray-200 rounded-none shadow-none">
-      <CardContent className="p-4 lg:p-6">
-        <h2 className="text-lg lg:text-xl font-bold text-gray-800 mb-3 lg:mb-4">
+      <CardContent className="p-3 lg:p-4">
+        <h2 className="text-base lg:text-lg font-bold text-gray-800 mb-2 lg:mb-3">
           No mides distancia, dónde estés correos te protege.
         </h2>
         
-        <div className="space-y-2 mb-4">
+        <div className="space-y-1 mb-3">
           <div>
             <p className="text-sm lg:text-base font-bold text-gray-900">
               PREMIUM EXPRESS
