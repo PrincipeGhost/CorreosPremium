@@ -87,7 +87,7 @@ export default function ServiceCalculator() {
         <div 
           className="bg-white rounded-lg p-8"
           style={{
-            border: '2px solid #6b7280',
+            border: '2px solid #000000',
             boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
           }}
         >
