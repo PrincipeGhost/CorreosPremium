@@ -61,7 +61,7 @@ export default function Home() {
             </div>
             
             {/* Columna derecha - Imagen pegada al borde */}
-            <div className="hidden lg:block lg:relative lg:mt-10 lg:-ml-5">
+            <div className="hidden lg:block lg:relative lg:mt-10 lg:-ml-24">
               <img 
                 src="/attached_assets/Captura_1760880797169.PNG"
                 alt="Trabajador de delivery con moto amarilla"
