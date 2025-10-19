@@ -21,7 +21,7 @@ export default function Header() {
       
       <header className="bg-white shadow-sm sticky top-0 z-50 border-b-2 border-gray-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[69px] gap-4 relative">
+          <div className="flex items-center justify-between h-[84px] gap-4 relative">
             {/* Left section - Logo, Hamburger, Navigation */}
             <div className="flex items-center gap-4 flex-1">
               {/* Logo */}
