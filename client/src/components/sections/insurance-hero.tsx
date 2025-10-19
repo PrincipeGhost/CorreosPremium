@@ -145,7 +145,7 @@ export default function InsuranceHero() {
             
             <div className="flex gap-20 items-center ml-10 ">
               <Button 
-                className="w-60 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-8 px-2 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-start"
+                className="w-60 bg-yellow-400 hover:bg-yellow-500 text-blue-900 py-3 px-2 text-sm font-bold rounded-md border-0 transition-colors duration-200 flex items-center justify-start"
                 data-testid="insurance-cta-button"
               >
                 SEGURO, TE<br />
