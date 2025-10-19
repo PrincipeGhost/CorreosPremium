@@ -31,10 +31,19 @@ export default function InsuranceHero() {
         {/* Content Container - exact replica of reference image */}
         <div className="bg-white px-8 pt-6 pb-0 relative overflow-visible">
           {/* Triángulos amarillos decorativos - esquina superior derecha */}
-          <div className="absolute top-6 right-4 flex gap-1">
-            <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[26px] border-b-yellow-400"></div>
-            <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[26px] border-b-yellow-400"></div>
-            <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[26px] border-b-yellow-400"></div>
+          <div className="absolute top-6 right-4">
+            {/* Primera fila de triángulos */}
+            <div className="flex gap-1 mb-1">
+              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+            </div>
+            {/* Segunda fila de triángulos */}
+            <div className="flex gap-1">
+              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+              <div className="w-0 h-0 border-t-[14px] border-t-transparent border-b-[14px] border-b-transparent border-l-[18px] border-l-yellow-400"></div>
+            </div>
           </div>
 
           {/* Barras azules decorativas - lado derecho */}
@@ -98,10 +107,19 @@ export default function InsuranceHero() {
           {/* Columna derecha - Contenido de Seguros AXA */}
           <div className="px-12 py-8 flex flex-col justify-center bg-white relative overflow-visible">
             {/* Triángulos amarillos decorativos - esquina superior derecha */}
-            <div className="absolute top-8 right-8 flex gap-1">
-              <div className="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[35px] border-b-yellow-400"></div>
-              <div className="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[35px] border-b-yellow-400"></div>
-              <div className="w-0 h-0 border-l-[20px] border-l-transparent border-r-[20px] border-r-transparent border-b-[35px] border-b-yellow-400"></div>
+            <div className="absolute top-8 right-8">
+              {/* Primera fila de triángulos */}
+              <div className="flex gap-1 mb-1">
+                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+              </div>
+              {/* Segunda fila de triángulos */}
+              <div className="flex gap-1">
+                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+                <div className="w-0 h-0 border-t-[18px] border-t-transparent border-b-[18px] border-b-transparent border-l-[24px] border-l-yellow-400"></div>
+              </div>
             </div>
 
             {/* Barras azules decorativas - lado derecho */}
