@@ -31,23 +31,23 @@ export default function InsuranceHero() {
         {/* Content Container - exact replica of reference image */}
         <div className="bg-white px-8 pt-6 pb-0 relative overflow-visible">
           {/* Triángulos amarillos decorativos - esquina superior derecha */}
-          <div className="absolute top-[29px] right-[-30px]">
+          <div className="absolute top-6 right-4">
             {/* Primera fila de triángulos */}
             <div className="flex gap-1 mb-1">
-              <div className="w-0 h-0 border-t-[34px] border-t-yellow-400 border-r-[34px] border-r-transparent"></div>
-              <div className="w-0 h-0 border-t-[34px] border-t-yellow-400 border-r-[34px] border-r-transparent"></div>
-              <div className="w-0 h-0 border-t-[34px] border-t-yellow-400 border-r-[34px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
             </div>
             {/* Segunda fila de triángulos */}
             <div className="flex gap-1">
-              <div className="w-0 h-0 border-t-[34px] border-t-yellow-400 border-r-[34px] border-r-transparent"></div>
-              <div className="w-0 h-0 border-t-[34px] border-t-yellow-400 border-r-[34px] border-r-transparent"></div>
-              <div className="w-0 h-0 border-t-[34px] border-t-yellow-400 border-r-[34px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
+              <div className="w-0 h-0 border-t-[24px] border-t-yellow-400 border-r-[24px] border-r-transparent"></div>
             </div>
           </div>
 
           {/* Barras azules decorativas - lado derecho */}
-          <div className="absolute right-[-100px] bottom-20 flex flex-col gap-2">
+          <div className="absolute right-0 bottom-20 flex flex-col gap-2">
             <div className="w-20 h-3 bg-blue-900"></div>
             <div className="w-20 h-3 bg-blue-900"></div>
             <div className="w-20 h-3 bg-blue-900"></div>
@@ -107,7 +107,7 @@ export default function InsuranceHero() {
           {/* Columna derecha - Contenido de Seguros AXA */}
           <div className="px-12 py-8 flex flex-col justify-center bg-white relative overflow-visible h-[360px]">
             {/* Triángulos amarillos decorativos - esquina superior derecha */}
-            <div className="absolute top-[37px] right-[-40px]">
+            <div className="absolute top-[47px] right-[-42px]">
               {/* Primera fila de triángulos */}
               <div className="flex gap-1 mb-1">
                 <div className="w-0 h-0 border-t-[42px] border-t-yellow-400 border-r-[42px] border-r-transparent"></div>
