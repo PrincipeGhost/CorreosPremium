@@ -111,7 +111,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         history: history.map(h => ({
           date: h.changedAt?.toISOString() || '',
           status: h.newStatus,
-          location: h.notes || (h.newStatus === 'RECIBIDO' ? tracking.senderAddress : tracking.deliveryAddress)
+          location: h.newStatus === 'RECIBIDO' ? tracking.senderAddress : (h.notes || tracking.deliveryAddress)
         }))
       };
 
@@ -158,7 +158,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         history: history.map(h => ({
           date: h.changedAt?.toISOString() || '',
           status: h.newStatus,
-          location: h.notes || (h.newStatus === 'RECIBIDO' ? tracking.senderAddress : tracking.deliveryAddress)
+          location: h.newStatus === 'RECIBIDO' ? tracking.senderAddress : (h.notes || tracking.deliveryAddress)
         }))
       };
 
