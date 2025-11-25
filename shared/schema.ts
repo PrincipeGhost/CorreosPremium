@@ -37,16 +37,16 @@ export const serviceQuotes = pgTable("service_quotes", {
 // Tracking system tables from Telegram bot
 export const trackings = pgTable("trackings", {
   trackingId: varchar("tracking_id", { length: 50 }).primaryKey(),
-  recipientName: varchar("recipient_name", { length: 255 }).notNull(),
+  recipientName: varchar("recipient_name", { length: 255 }),
   deliveryAddress: text("delivery_address").notNull(),
-  countryPostal: varchar("country_postal", { length: 255 }).notNull(),
+  countryPostal: varchar("country_postal", { length: 255 }),
   dateTime: varchar("date_time", { length: 255 }).notNull(),
   packageWeight: varchar("package_weight", { length: 100 }).notNull(),
   productName: varchar("product_name", { length: 255 }).notNull(),
-  senderName: varchar("sender_name", { length: 255 }).notNull(),
+  senderName: varchar("sender_name", { length: 255 }),
   senderAddress: text("sender_address").notNull(),
-  senderCountry: varchar("sender_country", { length: 255 }).notNull(),
-  senderState: varchar("sender_state", { length: 255 }).notNull(),
+  senderCountry: varchar("sender_country", { length: 255 }),
+  senderState: varchar("sender_state", { length: 255 }),
   productPrice: varchar("product_price", { length: 100 }).notNull(),
   status: varchar("status", { length: 50 }).default("RETENIDO").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
@@ -63,6 +63,11 @@ export const trackings = pgTable("trackings", {
   recipientLon: varchar("recipient_lon", { length: 50 }),
   routeDistanceKm: varchar("route_distance_km", { length: 50 }),
   routeDurationHours: varchar("route_duration_hours", { length: 50 }),
+  recipientPostalCode: varchar("recipient_postal_code", { length: 20 }),
+  recipientProvince: varchar("recipient_province", { length: 255 }),
+  recipientCountry: varchar("recipient_country", { length: 255 }),
+  senderPostalCode: varchar("sender_postal_code", { length: 20 }),
+  senderProvince: varchar("sender_province", { length: 255 }),
 });
 
 export const shippingRoutes = pgTable("shipping_routes", {
@@ -147,6 +152,11 @@ export const insertTrackingSchema = createInsertSchema(trackings).pick({
   userTelegramId: true,
   username: true,
   createdByAdminId: true,
+  recipientPostalCode: true,
+  recipientProvince: true,
+  recipientCountry: true,
+  senderPostalCode: true,
+  senderProvince: true,
 }).extend({
   status: z.enum([
     TRACKING_STATUS.RETENIDO,

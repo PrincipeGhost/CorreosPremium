@@ -105,6 +105,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const history = await storage.getTrackingHistory(trackingId);
 
+      // Build full address from new fields or fallback to legacy fields
+      const recipientPostalCode = tracking.recipientPostalCode || '';
+      const recipientProvince = tracking.recipientProvince || '';
+      const recipientCountry = tracking.recipientCountry || '';
+      
+      // Build complete delivery address with all components
+      let fullDeliveryAddress = tracking.deliveryAddress || '';
+      
+      // Build country/postal info - prioritize new fields, fallback to legacy
+      let countryPostalInfo = '';
+      if (recipientProvince || recipientCountry || recipientPostalCode) {
+        const parts = [];
+        if (recipientProvince) parts.push(recipientProvince);
+        if (recipientCountry) parts.push(recipientCountry);
+        if (recipientPostalCode) parts.push(`CP ${recipientPostalCode}`);
+        countryPostalInfo = parts.join(', ');
+      } else if (tracking.countryPostal) {
+        countryPostalInfo = tracking.countryPostal;
+      }
+
       // Format response to match frontend expectations
       const trackingData = {
         trackingNumber: tracking.trackingId,
@@ -114,12 +134,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         recipient: tracking.recipientName,
         sender: tracking.senderName,
         senderAddress: tracking.senderAddress,
-        deliveryAddress: tracking.deliveryAddress,
+        deliveryAddress: fullDeliveryAddress,
         product: tracking.productName,
         weight: tracking.packageWeight,
         price: tracking.productPrice,
-        country: tracking.countryPostal,
-        senderCountry: tracking.senderCountry,
+        country: countryPostalInfo,
+        postalCode: recipientPostalCode,
+        province: recipientProvince,
+        recipientCountry: recipientCountry,
+        senderCountry: tracking.senderCountry || tracking.senderProvince || '',
         created: tracking.createdAt,
         updated: tracking.updatedAt,
         history: history.map(h => ({
@@ -154,6 +177,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const history = await storage.getTrackingHistory(trackingNumber);
 
+      // Build full address from new fields or fallback to legacy fields
+      const recipientPostalCode = tracking.recipientPostalCode || '';
+      const recipientProvince = tracking.recipientProvince || '';
+      const recipientCountry = tracking.recipientCountry || '';
+      
+      // Build complete delivery address with all components
+      let fullDeliveryAddress = tracking.deliveryAddress || '';
+      
+      // Build country/postal info - prioritize new fields, fallback to legacy
+      let countryPostalInfo = '';
+      if (recipientProvince || recipientCountry || recipientPostalCode) {
+        const parts = [];
+        if (recipientProvince) parts.push(recipientProvince);
+        if (recipientCountry) parts.push(recipientCountry);
+        if (recipientPostalCode) parts.push(`CP ${recipientPostalCode}`);
+        countryPostalInfo = parts.join(', ');
+      } else if (tracking.countryPostal) {
+        countryPostalInfo = tracking.countryPostal;
+      }
+
       // Format response to match legacy frontend expectations
       const trackingData = {
         trackingNumber: tracking.trackingId,
@@ -163,12 +206,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         recipient: tracking.recipientName,
         sender: tracking.senderName,
         senderAddress: tracking.senderAddress,
-        deliveryAddress: tracking.deliveryAddress,
+        deliveryAddress: fullDeliveryAddress,
         product: tracking.productName,
         weight: tracking.packageWeight,
         price: tracking.productPrice,
-        country: tracking.countryPostal,
-        senderCountry: tracking.senderCountry,
+        country: countryPostalInfo,
+        postalCode: recipientPostalCode,
+        province: recipientProvince,
+        recipientCountry: recipientCountry,
+        senderCountry: tracking.senderCountry || tracking.senderProvince || '',
         created: tracking.createdAt,
         updated: tracking.updatedAt,
         history: history.map(h => ({

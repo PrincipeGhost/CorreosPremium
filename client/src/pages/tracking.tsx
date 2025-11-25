@@ -17,6 +17,9 @@ interface TrackingInfo {
   senderAddress: string;
   estimatedDelivery: string;
   country: string;
+  postalCode: string;
+  province: string;
+  recipientCountry: string;
   weight: string;
   history: Array<{
     date: string;
@@ -143,7 +146,7 @@ export default function TrackingPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="flex items-center gap-3">
                       <Badge className={`${getStatusColor(trackingInfo.status)} text-white`}>
                         {getStatusIcon(trackingInfo.status)}
@@ -151,18 +154,23 @@ export default function TrackingPage() {
                       </Badge>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
-                      <MapPin className="w-4 h-4" />
-                      <span>{trackingInfo.deliveryAddress}, {trackingInfo.country}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Weight className="w-4 h-4" />
+                      <Weight className="w-4 h-4 flex-shrink-0" />
                       <span>Peso: {trackingInfo.weight}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <Clock className="w-4 h-4" />
+                    <div className="flex items-start gap-2 text-gray-600 md:col-span-2">
+                      <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <div className="flex flex-col">
+                        <span className="font-medium text-gray-700" data-testid="text-delivery-address">{trackingInfo.deliveryAddress}</span>
+                        {trackingInfo.country && (
+                          <span className="text-sm" data-testid="text-country-postal">{trackingInfo.country}</span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600 md:col-span-2">
+                      <Clock className="w-4 h-4 flex-shrink-0" />
                       <span>
                         Entrega estimada:{" "}
-                        {new Date(trackingInfo.estimatedDelivery).toLocaleDateString('es-ES')}
+                        {trackingInfo.estimatedDelivery ? new Date(trackingInfo.estimatedDelivery).toLocaleDateString('es-ES') : 'Pendiente'}
                       </span>
                     </div>
                   </div>
