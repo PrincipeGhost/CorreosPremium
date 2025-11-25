@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Package, MapPin, Clock, CheckCircle } from "lucide-react";
+import { ArrowLeft, Package, MapPin, Clock, CheckCircle, Weight } from "lucide-react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 
@@ -143,7 +143,7 @@ export default function TrackingPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div className="flex items-center gap-3">
                       <Badge className={`${getStatusColor(trackingInfo.status)} text-white`}>
                         {getStatusIcon(trackingInfo.status)}
@@ -152,7 +152,11 @@ export default function TrackingPage() {
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
                       <MapPin className="w-4 h-4" />
-                      <span>{trackingInfo.deliveryAddress}, {trackingInfo.country} • Peso: {trackingInfo.weight}</span>
+                      <span>{trackingInfo.deliveryAddress}, {trackingInfo.country}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-600">
+                      <Weight className="w-4 h-4" />
+                      <span>Peso: {trackingInfo.weight}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
                       <Clock className="w-4 h-4" />
