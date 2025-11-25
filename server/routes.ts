@@ -18,6 +18,20 @@ import {
 import { insertContactRequestSchema, insertServiceQuoteSchema } from "@shared/schema";
 import { fromZodError } from "zod-validation-error";
 
+// Helper function to extract city/province from address
+function extractCityFromAddress(address: string): string {
+  if (!address) return 'ubicación desconocida';
+  
+  // Split by comma and get the second part (usually city) or first part if no commas
+  const parts = address.split(',').map(part => part.trim());
+  
+  // If we have multiple parts, return the second one (city)
+  // Otherwise return the first part
+  const city = parts.length > 1 ? parts[1] : parts[0];
+  
+  return city || 'ubicación desconocida';
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact request endpoint
   app.post("/api/contact", async (req, res) => {
@@ -111,7 +125,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         history: history.map(h => ({
           date: h.changedAt?.toISOString() || '',
           status: h.newStatus,
-          location: h.newStatus === 'RECIBIDO' ? tracking.senderAddress : (h.notes || tracking.deliveryAddress)
+          location: h.newStatus === 'RECIBIDO' 
+            ? `Paquete recibido en oficinas de ${extractCityFromAddress(tracking.senderAddress)}` 
+            : (h.notes || tracking.deliveryAddress)
         }))
       };
 
@@ -158,7 +174,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         history: history.map(h => ({
           date: h.changedAt?.toISOString() || '',
           status: h.newStatus,
-          location: h.newStatus === 'RECIBIDO' ? tracking.senderAddress : (h.notes || tracking.deliveryAddress)
+          location: h.newStatus === 'RECIBIDO' 
+            ? `Paquete recibido en oficinas de ${extractCityFromAddress(tracking.senderAddress)}` 
+            : (h.notes || tracking.deliveryAddress)
         }))
       };
 
