@@ -13,6 +13,8 @@ interface TrackingInfo {
   trackingNumber: string;
   status: string;
   location: string;
+  deliveryAddress: string;
+  senderAddress: string;
   estimatedDelivery: string;
   history: Array<{
     date: string;
@@ -148,7 +150,7 @@ export default function TrackingPage() {
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
                       <MapPin className="w-4 h-4" />
-                      <span>{trackingInfo.location}</span>
+                      <span>{trackingInfo.deliveryAddress}</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600">
                       <Clock className="w-4 h-4" />

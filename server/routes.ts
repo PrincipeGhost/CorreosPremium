@@ -99,6 +99,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         estimatedDelivery: tracking.estimatedDeliveryDate || null,
         recipient: tracking.recipientName,
         sender: tracking.senderName,
+        senderAddress: tracking.senderAddress,
+        deliveryAddress: tracking.deliveryAddress,
         product: tracking.productName,
         weight: tracking.packageWeight,
         price: tracking.productPrice,
@@ -109,7 +111,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         history: history.map(h => ({
           date: h.changedAt?.toISOString() || '',
           status: h.newStatus,
-          location: h.notes || tracking.deliveryAddress
+          location: h.notes || (h.newStatus === 'RECIBIDO' ? tracking.senderAddress : tracking.deliveryAddress)
         }))
       };
 
@@ -144,6 +146,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         estimatedDelivery: tracking.estimatedDeliveryDate || null,
         recipient: tracking.recipientName,
         sender: tracking.senderName,
+        senderAddress: tracking.senderAddress,
+        deliveryAddress: tracking.deliveryAddress,
         product: tracking.productName,
         weight: tracking.packageWeight,
         price: tracking.productPrice,
@@ -154,7 +158,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         history: history.map(h => ({
           date: h.changedAt?.toISOString() || '',
           status: h.newStatus,
-          location: h.notes || tracking.deliveryAddress
+          location: h.notes || (h.newStatus === 'RECIBIDO' ? tracking.senderAddress : tracking.deliveryAddress)
         }))
       };
 
