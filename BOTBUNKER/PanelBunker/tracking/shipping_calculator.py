@@ -55,8 +55,15 @@ class ShippingCalculator:
     
     def _extract_country_from_postal(self, country_postal: str) -> str:
         """Extract country from country_postal field"""
+        # Validate input is not None or empty
+        if not country_postal:
+            return "Desconocido"
+        
         # Split by common separators and take first part
         text = country_postal.strip()
+        if not text:
+            return "Desconocido"
+        
         for separator in [',', '-', '/', '|']:
             if separator in text:
                 return text.split(separator)[0].strip()

@@ -184,7 +184,9 @@ export default function TrackingPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {trackingInfo.history.map((event, index) => (
+                    {trackingInfo.history
+                      .filter((event) => new Date(event.date) <= new Date())
+                      .map((event, index) => (
                       <div
                         key={index}
                         className="flex items-start gap-4 pb-4 border-b border-gray-200 last:border-b-0"
