@@ -1,0 +1,36 @@
+~/.../BOTBUNKER/PanelBunker$ bash start_bot.sh
+🤖 Iniciando Bot de Telegram...
+================================
+
+▶️  Iniciando bot...
+python-dotenv could not parse statement starting at line 27
+2025-11-27 21:31:28,899 - tracking.database - INFO - All required database tables found
+2025-11-27 21:31:29,041 - tracking.database - INFO - Database connection verified successfully
+2025-11-27 21:31:29,042 - __main__ - INFO - Database initialized successfully
+2025-11-27 21:31:29,042 - __main__ - INFO - Iniciando bot...
+2025-11-27 21:31:29,042 - __main__ - INFO - Canal configurado: -1002889052376
+2025-11-27 21:31:51,047 - __main__ - INFO - Usuario Sofi_lovee (8305740334) ejecutó /start
+2025-11-27 21:31:51,482 - __main__ - INFO - Usuario 8305740334 - Estado en canal: member
+2025-11-27 21:31:55,813 - __main__ - INFO - Usuario 8305740334 - Estado en canal: member
+2025-11-27 21:31:56,490 - __main__ - INFO - User Sofi_lovee (8305740334) accessed tracking bot
+2025-11-27 21:31:58,477 - tracking.admin_panel - INFO - Tracking creation started from admin panel by user Sofi_lovee (8305740334)
+2025-11-27 21:32:43,593 - tracking.shipping_calculator - INFO - Calculating route from Carrer d'Anníbal, 2-6, Sants-Montjuïc (BA) to Gran Vía 23 (MA)
+2025-11-27 21:32:43,595 - tracking.openroute_service - INFO - Geocoding sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc, BA
+2025-11-27 21:32:44,300 - tracking.openroute_service - WARNING - No geocoding results found for: Carrer d'Anníbal, 2-6, Sants-Montjuïc
+2025-11-27 21:32:44,300 - tracking.openroute_service - ERROR - Could not geocode sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc
+2025-11-27 21:32:44,300 - tracking.shipping_calculator - WARNING - Could not calculate route, using fallback estimation
+2025-11-27 21:32:45,897 - tracking.database - INFO - Tracking PKPQ34B2ZJSRIXE1C941WZM saved successfully with initial history
+2025-11-27 21:32:46,089 - __main__ - INFO - Tracking PKPQ34B2ZJSRIXE1C941WZM created and saved to database by user Sofi_lovee
+2025-11-27 21:33:56,038 - tracking.database - INFO - Tracking PKPQ34B2ZJSRIXE1C941WZM status updated from RETENIDO to CONFIRMAR_PAGO
+2025-11-27 21:34:04,972 - tracking.shipping_calculator - ERROR - Error calculating delivery: 'NoneType' object has no attribute 'strip'
+2025-11-27 21:34:14,189 - tracking.database - INFO - Tracking PKPQ34B2ZJSRIXE1C941WZM status updated from CONFIRMAR_PAGO to EN_TRANSITO
+2025-11-27 21:34:14,190 - tracking.admin_panel - INFO - Getting full route with checkpoints for PKPQ34B2ZJSRIXE1C941WZM
+2025-11-27 21:34:14,190 - tracking.openroute_service - INFO - Geocoding sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc, 08004, Barcelona España
+2025-11-27 21:34:14,838 - tracking.openroute_service - ERROR - HTTP error geocoding address 'Carrer d'Anníbal, 2-6, Sants-Montjuïc, 08004': Client error '400 Bad Request' for url 'https://api.openrouteservice.org/geocode/search?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImU1YWVkZGJmMzA0Zjc1NDVmZDMxZDMxMmNhODM1MWUyNjI0NzNlNzkwMTQwOTM5ZjU1NDA5YWMxIiwiaCI6Im11cm11cjY0In0%3D&text=Carrer%20d%27Ann%C3%ADbal%2C%202-6%2C%20Sants-Montju%C3%AFc%2C%2008004&size=1&boundary.country=Barcelona%20Espa%C3%B1a'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-11-27 21:34:14,838 - tracking.openroute_service - ERROR - Could not geocode sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc, 08004
+2025-11-27 21:34:14,838 - tracking.openroute_service - ERROR - Could not get route info
+2025-11-27 21:34:14,838 - tracking.admin_panel - WARNING - No checkpoints found from ORS for PKPQ34B2ZJSRIXE1C941WZM, using fallback
+2025-11-27 21:34:14,838 - tracking.admin_panel - INFO - Using fallback checkpoints for PKPQ34B2ZJSRIXE1C941WZM: Barcelona España -> Madrid España
+2025-11-27 21:34:16,261 - tracking.database - INFO - Generated route history events for tracking PKPQ34B2ZJSRIXE1C941WZM with 2 checkpoints over 5 days: ['Barcelona España', 'Madrid España']
+2025-11-27 21:34:16,262 - tracking.admin_panel - INFO - Generated route history for PKPQ34B2ZJSRIXE1C941WZM with 2 checkpoints over 5 days: ['Barcelona España', 'Madrid España']
