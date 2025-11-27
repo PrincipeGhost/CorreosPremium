@@ -42,7 +42,18 @@ Preferred communication style: Simple, everyday language.
 - **Package Tracking**: Mock tracking system with predefined tracking numbers for demonstration
 - **Timestamps**: Automatic creation timestamps for audit trails
 
-## Recent Changes (October 2025)
+## Recent Changes (November 2025)
+
+- **Distributed Timestamps and Spain Timezone Display (November 27, 2025)**:
+  - **Proportional Timestamp Distribution**: Route checkpoints are now spread across estimated delivery days (e.g., 5-day route has events at days 1, 2, 3, 4, 5)
+  - **Realistic Delivery Times**: Events skip night hours (00:00-08:00) for realistic checkpoint timestamps
+  - **Spain Timezone (Europe/Madrid)**: All datetime displays now correctly show in Spain timezone
+  - **format_datetime_spain() Helper**: Added centralized timezone conversion function that treats naive datetimes as Spain-local time
+  - **Database Convention**: Timestamps are stored as naive datetimes representing Spain local time
+  - **Dependencies**: Added `pytz` to requirements.txt for timezone handling
+  - **Files Modified**: database.py, admin_panel.py, requirements.txt
+
+## Previous Changes (October 2025)
 
 - **Comprehensive Tracking History System (October 11, 2025)**:
   - **Automatic Event Generation**: Implemented full lifecycle event tracking for all shipments
