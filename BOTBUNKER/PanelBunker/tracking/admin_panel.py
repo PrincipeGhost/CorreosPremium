@@ -7,12 +7,51 @@ from telegram.ext import ContextTypes, CallbackQueryHandler
 import logging
 import os
 from typing import List, Optional
+from datetime import datetime
 
 from .database import db_manager
 from .models import STATUS_RETENIDO, STATUS_CONFIRMAR_PAGO, STATUS_EN_TRANSITO, STATUS_ENTREGADO, STATUS_DISPLAY
 from .shipping_calculator import shipping_calc
 
 logger = logging.getLogger(__name__)
+
+try:
+    import pytz
+    SPAIN_TZ = pytz.timezone('Europe/Madrid')
+except ImportError:
+    SPAIN_TZ = None
+    logger.warning("pytz not installed, timezone conversion disabled")
+
+def format_datetime_spain(dt: Optional[datetime], fmt: str = '%d/%m/%Y %H:%M') -> str:
+    """
+    Format a datetime for display in Spain timezone.
+    
+    Database timestamps are stored as naive datetimes representing Spain local time,
+    so naive datetimes are treated as already being in Spain time.
+    Timezone-aware datetimes (e.g., UTC) are converted to Spain time.
+    
+    Args:
+        dt: datetime object (naive = Spain local, aware = convert to Spain)
+        fmt: strftime format string
+    
+    Returns:
+        Formatted datetime string in Spain timezone
+    """
+    if dt is None:
+        return 'N/A'
+    
+    try:
+        if SPAIN_TZ:
+            if dt.tzinfo is None:
+                spain_dt = SPAIN_TZ.localize(dt)
+            else:
+                spain_dt = dt.astimezone(SPAIN_TZ)
+            return spain_dt.strftime(fmt)
+        else:
+            return dt.strftime(fmt)
+    except Exception as e:
+        logger.error(f"Error converting datetime: {e}")
+        return dt.strftime(fmt) if dt else 'N/A'
 
 # Owner ID - normalize to integer for consistent comparisons
 OWNER_TELEGRAM_ID = None
@@ -203,7 +242,7 @@ Por favor, ingresa la dirección de envío:
                 summary += f"👤 {tracking.recipient_name}\n"
                 summary += f"📍 {origin} → {destination}\n"
                 summary += f"💰 {tracking.product_price}\n"
-                summary += f"📅 {tracking.created_at.strftime('%d/%m/%Y %H:%M') if tracking.created_at else 'N/A'}"
+                summary += f"📅 {format_datetime_spain(tracking.created_at)}"
                 
                 text += summary + "\n" + "─" * 30 + "\n"
                 
@@ -438,6 +477,10 @@ Por favor, ingresa la dirección de envío:
             except Exception as e:
                 logger.error(f"Error getting route from ORS for {tracking_id}: {e}")
             
+            estimated_days = 5
+            if full_route and full_route.get("route"):
+                estimated_days = full_route["route"].get("estimated_days", 5)
+            
             if not route_checkpoints:
                 origin = tracking.sender_province or tracking.sender_country or "Origen"
                 destination = tracking.recipient_province or tracking.recipient_country or "Destino"
@@ -448,9 +491,10 @@ Por favor, ingresa la dirección de envío:
                 logger.info(f"Using fallback checkpoints for {tracking_id}: {origin} -> {destination}")
             
             if len(route_checkpoints) > 0:
-                db_manager.generate_route_history_events(tracking_id, route_checkpoints)
+                start_time = datetime.now()
+                db_manager.generate_route_history_events(tracking_id, route_checkpoints, estimated_days, start_time)
                 checkpoint_names = [cp.get("name") if isinstance(cp, dict) else cp for cp in route_checkpoints]
-                logger.info(f"Generated route history for {tracking_id} with {len(route_checkpoints)} checkpoints: {checkpoint_names}")
+                logger.info(f"Generated route history for {tracking_id} with {len(route_checkpoints)} checkpoints over {estimated_days} days: {checkpoint_names}")
             
             await update.callback_query.answer("✅ Paquete marcado como enviado")
             num_checkpoints = len(route_checkpoints)
@@ -598,7 +642,7 @@ Por favor, ingresa la dirección de envío:
             for h in history[-5:]:  # Show last 5 changes
                 old_status = STATUS_DISPLAY.get(h.old_status, h.old_status) if h.old_status else "Nuevo"
                 new_status = STATUS_DISPLAY.get(h.new_status, h.new_status)
-                date_str = h.changed_at.strftime('%d/%m %H:%M') if h.changed_at else 'N/A'
+                date_str = format_datetime_spain(h.changed_at, '%d/%m %H:%M')
                 notes = f" - {h.notes}" if h.notes else ""
                 history_text += f"• {date_str}: {old_status} → {new_status}{notes}\n"
         
@@ -634,8 +678,8 @@ Por favor, ingresa la dirección de envío:
 • Telegram ID: {creator_id}
 
 📅 FECHAS:
-• Creado: {tracking.created_at.strftime('%d/%m/%Y %H:%M') if tracking.created_at else 'N/A'}
-• Actualizado: {tracking.updated_at.strftime('%d/%m/%Y %H:%M') if tracking.updated_at else 'N/A'}{history_text}"""
+• Creado: {format_datetime_spain(tracking.created_at)}
+• Actualizado: {format_datetime_spain(tracking.updated_at)}{history_text}"""
         
         # Return to user trackings list if owner, otherwise main menu
         if is_owner and creator_id != 'N/A':
@@ -678,13 +722,12 @@ Por favor, ingresa la dirección de envío:
                     # Format last tracking date
                     last_date = stat['last_tracking_date']
                     if last_date:
-                        from datetime import datetime
                         if isinstance(last_date, str):
                             try:
                                 last_date = datetime.fromisoformat(last_date.replace('Z', '+00:00'))
                             except:
                                 pass
-                        last_date_str = last_date.strftime('%d/%m/%Y') if hasattr(last_date, 'strftime') else 'N/A'
+                        last_date_str = format_datetime_spain(last_date, '%d/%m/%Y') if hasattr(last_date, 'strftime') else 'N/A'
                     else:
                         last_date_str = 'N/A'
                     
@@ -763,7 +806,7 @@ Por favor, ingresa la dirección de envío:
                 }.get(tracking.status, "⚪")
                 
                 # Format dates
-                created_date = tracking.created_at.strftime('%d/%m/%Y') if tracking.created_at else 'N/A'
+                created_date = format_datetime_spain(tracking.created_at, '%d/%m/%Y')
                 
                 # Get creator info
                 creator = tracking.username or 'Desconocido'
@@ -869,7 +912,7 @@ Por favor, ingresa la dirección de envío:
                     STATUS_ENTREGADO: "🟢"
                 }.get(tracking.status, "⚪")
                 
-                created_date = tracking.created_at.strftime('%d/%m') if tracking.created_at else 'N/A'
+                created_date = format_datetime_spain(tracking.created_at, '%d/%m')
                 origin, destination = shipping_calc.extract_countries(tracking.sender_country, tracking.country_postal)
                 
                 text += f"{i}. {status_emoji} {tracking.tracking_id[:15]}...\n"
@@ -1040,8 +1083,8 @@ Puedes escribir el ID completo o parcial.
 • Retrasos: {tracking.actual_delay_days} días
 
 📅 **FECHAS:**
-• Creado: {tracking.created_at.strftime('%d/%m/%Y %H:%M') if tracking.created_at else 'N/A'}
-• Actualizado: {tracking.updated_at.strftime('%d/%m/%Y %H:%M') if tracking.updated_at else 'N/A'}
+• Creado: {format_datetime_spain(tracking.created_at)}
+• Actualizado: {format_datetime_spain(tracking.updated_at)}
             """.strip()
             
             keyboard = [

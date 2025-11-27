@@ -7,8 +7,15 @@ import psycopg2
 import psycopg2.extras
 from typing import List, Optional, Tuple
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import quote_plus
+import random
+
+try:
+    import pytz
+    SPAIN_TZ = pytz.timezone('Europe/Madrid')
+except ImportError:
+    SPAIN_TZ = None
 
 from .models import Tracking, ShippingRoute, StatusHistory, CREATE_TABLES_SQL
 
@@ -287,15 +294,18 @@ class DatabaseManager:
             logger.error(f"Error getting shipping route: {e}")
             return None
     
-    def generate_route_history_events(self, tracking_id: str, checkpoints: List) -> bool:
+    def generate_route_history_events(self, tracking_id: str, checkpoints: List, 
+                                       estimated_days: int = 5, start_datetime: Optional[datetime] = None) -> bool:
         """
-        Generate history events for each checkpoint along the route.
+        Generate history events for each checkpoint along the route with distributed timestamps.
         Creates 'Salió de' and 'Llegó a' events for each province/state.
         
         Args:
             tracking_id: Tracking ID
             checkpoints: List of checkpoint dicts [{"name": "Madrid", "type": "origin|transit|destination"}]
                         OR list of strings (legacy format) ["Madrid", "Toledo", "Ourense"]
+            estimated_days: Number of days estimated for the route (default 5)
+            start_datetime: When the package started transit (default: now)
         
         Returns:
             True if successful
@@ -314,36 +324,81 @@ class DatabaseManager:
                 logger.warning(f"No valid state names in checkpoints for tracking {tracking_id}")
                 return False
             
+            if start_datetime is None:
+                start_datetime = datetime.now()
+            
+            total_events = 0
+            for i in range(len(state_names)):
+                if i == 0:
+                    total_events += 1
+                elif i == len(state_names) - 1:
+                    total_events += 1
+                else:
+                    total_events += 2
+            
+            total_hours = estimated_days * 24
+            hours_per_event = total_hours / max(total_events, 1)
+            
+            def generate_event_time(event_index: int) -> datetime:
+                """Generate a realistic timestamp for an event"""
+                base_hours = event_index * hours_per_event
+                variation = random.uniform(-0.5, 0.5) * hours_per_event * 0.3
+                actual_hours = max(0, base_hours + variation)
+                
+                event_time = start_datetime + timedelta(hours=actual_hours)
+                
+                hour = event_time.hour
+                if hour < 6:
+                    event_time = event_time.replace(hour=random.randint(8, 10))
+                elif hour > 22:
+                    event_time = event_time.replace(hour=random.randint(18, 21))
+                
+                return event_time
+            
             with self.get_connection() as conn:
                 with conn.cursor() as cur:
+                    event_index = 0
+                    
                     if len(state_names) >= 1:
+                        event_time = generate_event_time(event_index)
                         cur.execute(
-                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                            (tracking_id, "EN_TRANSITO", "SALIO_ORIGEN", f"Salió de oficinas de {state_names[0]}")
+                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
+                            (tracking_id, "EN_TRANSITO", "SALIO_ORIGEN", f"Salió de oficinas de {state_names[0]}", event_time)
                         )
+                        event_index += 1
+                        logger.debug(f"Event 'Salió de {state_names[0]}' at {event_time}")
                     
                     for i in range(1, len(state_names)):
                         state = state_names[i]
                         is_last = (i == len(state_names) - 1)
                         
                         if is_last:
+                            event_time = generate_event_time(event_index)
                             cur.execute(
-                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                                (tracking_id, "EN_RUTA", "LLEGO_DESTINO", f"Llegó a oficina de {state}")
+                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
+                                (tracking_id, "EN_RUTA", "LLEGO_DESTINO", f"Llegó a oficina de {state}", event_time)
                             )
+                            logger.debug(f"Event 'Llegó a {state}' (destino) at {event_time}")
                         else:
+                            event_time = generate_event_time(event_index)
                             cur.execute(
-                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                                (tracking_id, "EN_RUTA", "LLEGO_A", f"Llegó a oficina de {state}")
+                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
+                                (tracking_id, "EN_RUTA", "LLEGO_A", f"Llegó a oficina de {state}", event_time)
                             )
+                            logger.debug(f"Event 'Llegó a {state}' at {event_time}")
+                            event_index += 1
+                            
+                            event_time = generate_event_time(event_index)
                             cur.execute(
-                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                                (tracking_id, "LLEGO_A", "SALIO_DE", f"Salió de oficinas de {state}")
+                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
+                                (tracking_id, "LLEGO_A", "SALIO_DE", f"Salió de oficinas de {state}", event_time)
                             )
+                            logger.debug(f"Event 'Salió de {state}' at {event_time}")
+                            event_index += 1
                     
                     conn.commit()
             
-            logger.info(f"Generated route history events for tracking {tracking_id} with {len(state_names)} states: {state_names}")
+            logger.info(f"Generated route history events for tracking {tracking_id} with {len(state_names)} states over {estimated_days} days: {state_names}")
             return True
         except Exception as e:
             logger.error(f"Error generating route history: {e}")
