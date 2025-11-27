@@ -115,13 +115,16 @@ export class DatabaseStorage implements IStorage {
         .orderBy(statusHistory.changedAt, statusHistory.id);
     }
     
-    const now = new Date();
+    // Use Spain timezone (UTC+1/+2) for accurate comparison
+    const nowSpain = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" }));
+    console.log(`[TrackingHistory] Filtering events before: ${nowSpain.toISOString()}`);
+    
     return await db.select().from(statusHistory)
       .where(and(
         eq(statusHistory.trackingId, trackingId),
         or(
           isNull(statusHistory.changedAt),
-          lte(statusHistory.changedAt, now)
+          lte(statusHistory.changedAt, nowSpain)
         )
       ))
       .orderBy(statusHistory.changedAt, statusHistory.id);

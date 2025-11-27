@@ -414,12 +414,17 @@ Por favor, ingresa la dirección de envío:
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
+        username = update.effective_user.username or str(admin_id)
+        logger.info(f"[CONFIRMAR PAGO] User {username} ({admin_id}) confirming payment for tracking {tracking_id}")
+        
         success = db_manager.update_tracking_status(tracking_id, STATUS_CONFIRMAR_PAGO, "Pago confirmado")
         
         if success:
+            logger.info(f"[CONFIRMAR PAGO] SUCCESS - Tracking {tracking_id} payment confirmed by {username}")
             await update.callback_query.answer("✅ Pago confirmado exitosamente")
             text = f"✅ **PAGO CONFIRMADO**\n\nTracking {tracking_id} listo para envío."
         else:
+            logger.error(f"[CONFIRMAR PAGO] FAILED - Could not confirm payment for {tracking_id}")
             await update.callback_query.answer("❌ Error al confirmar pago")
             text = f"❌ **ERROR**\n\nNo se pudo confirmar el pago para {tracking_id}."
         
@@ -445,9 +450,13 @@ Por favor, ingresa la dirección de envío:
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
+        username = update.effective_user.username or str(admin_id)
+        logger.info(f"[ENVIADO] User {username} ({admin_id}) marking tracking {tracking_id} as shipped")
+        
         success = db_manager.update_tracking_status(tracking_id, STATUS_EN_TRANSITO, "Paquete en tránsito")
         
         if success:
+            logger.info(f"[ENVIADO] SUCCESS - Tracking {tracking_id} marked as shipped by {username}")
             route_checkpoints = []
             try:
                 from .openroute_service import ors_service

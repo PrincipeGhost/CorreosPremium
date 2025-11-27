@@ -1,0 +1,29 @@
+2025-11-27 21:56:01,345 - __main__ - INFO - Usuario Sofi_lovee (8305740334) ejecutó /start
+2025-11-27 21:56:01,785 - __main__ - INFO - Usuario 8305740334 - Estado en canal: member
+2025-11-27 21:56:08,577 - __main__ - INFO - Usuario 8305740334 - Estado en canal: member
+2025-11-27 21:56:08,753 - __main__ - INFO - User Sofi_lovee (8305740334) accessed tracking bot
+2025-11-27 21:56:10,334 - tracking.admin_panel - INFO - Tracking creation started from admin panel by user Sofi_lovee (8305740334)
+2025-11-27 21:57:31,380 - tracking.shipping_calculator - INFO - Calculating route from Carrer d'Anníbal, 2-6, Sants-Montjuïc (ES) to Gran Vía 23 (ES)
+2025-11-27 21:57:31,380 - tracking.openroute_service - INFO - Geocoding sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc, ES
+2025-11-27 21:57:32,040 - tracking.openroute_service - INFO - Geocoding recipient address: Gran Vía 23, ES
+2025-11-27 21:57:32,719 - tracking.openroute_service - INFO - Calculating route...
+2025-11-27 21:57:33,516 - tracking.shipping_calculator - INFO - Route calculated: 858.42km, 4 days
+2025-11-27 21:57:35,499 - tracking.database - INFO - Tracking PKLE4Z87WWZ6VNRYY6NX9I8 saved successfully with initial history
+2025-11-27 21:57:35,680 - __main__ - INFO - Tracking PKLE4Z87WWZ6VNRYY6NX9I8 created and saved to database by user Sofi_lovee
+2025-11-27 21:59:02,264 - tracking.database - INFO - Tracking PKLE4Z87WWZ6VNRYY6NX9I8 status updated from RETENIDO to CONFIRMAR_PAGO
+2025-11-27 21:59:19,806 - tracking.shipping_calculator - INFO - Calculating route from Carrer d'Anníbal, 2-6, Sants-Montjuïc (ES) to Gran Vía 23 (DE)
+2025-11-27 21:59:19,806 - tracking.openroute_service - INFO - Geocoding sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc, ES
+2025-11-27 21:59:20,478 - tracking.openroute_service - INFO - Geocoding recipient address: Gran Vía 23, DE
+2025-11-27 21:59:21,212 - tracking.openroute_service - INFO - Calculating route...
+2025-11-27 21:59:22,169 - tracking.shipping_calculator - INFO - Route calculated: 2119.76km, 10 days
+2025-11-27 21:59:37,521 - tracking.database - INFO - Tracking PKLE4Z87WWZ6VNRYY6NX9I8 status updated from CONFIRMAR_PAGO to EN_TRANSITO
+2025-11-27 21:59:37,522 - tracking.admin_panel - INFO - Getting full route with checkpoints for PKLE4Z87WWZ6VNRYY6NX9I8
+2025-11-27 21:59:37,522 - tracking.openroute_service - INFO - Geocoding sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc, 08004, Barcelona, España
+2025-11-27 21:59:38,153 - tracking.openroute_service - ERROR - HTTP error geocoding address 'Carrer d'Anníbal, 2-6, Sants-Montjuïc, 08004, Barcelona': Client error '400 Bad Request' for url 'https://api.openrouteservice.org/geocode/search?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImU1YWVkZGJmMzA0Zjc1NDVmZDMxZDMxMmNhODM1MWUyNjI0NzNlNzkwMTQwOTM5ZjU1NDA5YWMxIiwiaCI6Im11cm11cjY0In0%3D&text=Carrer%20d%27Ann%C3%ADbal%2C%202-6%2C%20Sants-Montju%C3%AFc%2C%2008004%2C%20Barcelona&size=1&boundary.country=Espa%C3%B1a'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+2025-11-27 21:59:38,153 - tracking.openroute_service - ERROR - Could not geocode sender address: Carrer d'Anníbal, 2-6, Sants-Montjuïc, 08004, Barcelona
+2025-11-27 21:59:38,153 - tracking.openroute_service - ERROR - Could not get route info
+2025-11-27 21:59:38,153 - tracking.admin_panel - WARNING - No checkpoints found from ORS for PKLE4Z87WWZ6VNRYY6NX9I8, using fallback
+2025-11-27 21:59:38,153 - tracking.admin_panel - INFO - Using fallback checkpoints for PKLE4Z87WWZ6VNRYY6NX9I8: Barcelona -> Madrid
+2025-11-27 21:59:39,579 - tracking.database - INFO - Generated route history events for tracking PKLE4Z87WWZ6VNRYY6NX9I8 with 2 checkpoints over 5 days: ['Barcelona', 'Madrid']
+2025-11-27 21:59:39,579 - tracking.admin_panel - INFO - Generated route history for PKLE4Z87WWZ6VNRYY6NX9I8 with 2 checkpoints over 5 days: ['Barcelona', 'Madrid']
