@@ -4,11 +4,58 @@ OpenRouteService API integration for geocoding and routing
 
 import os
 import logging
+import json
+import asyncio
 import httpx
 from typing import Optional, Dict, Tuple, List
 from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
+
+def decode_polyline(encoded: str, precision: int = 5) -> List[Tuple[float, float]]:
+    """
+    Decode an encoded polyline string into a list of (lon, lat) tuples.
+    ORS uses precision=5 by default.
+    """
+    coordinates = []
+    index = 0
+    lat = 0
+    lon = 0
+    
+    while index < len(encoded):
+        # Decode latitude
+        shift = 0
+        result = 0
+        while True:
+            b = ord(encoded[index]) - 63
+            index += 1
+            result |= (b & 0x1f) << shift
+            shift += 5
+            if b < 0x20:
+                break
+        
+        dlat = ~(result >> 1) if result & 1 else result >> 1
+        lat += dlat
+        
+        # Decode longitude
+        shift = 0
+        result = 0
+        while True:
+            b = ord(encoded[index]) - 63
+            index += 1
+            result |= (b & 0x1f) << shift
+            shift += 5
+            if b < 0x20:
+                break
+        
+        dlon = ~(result >> 1) if result & 1 else result >> 1
+        lon += dlon
+        
+        # Convert to actual coordinates
+        coordinates.append((lon / (10 ** precision), lat / (10 ** precision)))
+    
+    return coordinates
+
 
 class OpenRouteService:
     """Handle OpenRouteService API calls for geocoding and routing"""
@@ -39,7 +86,7 @@ class OpenRouteService:
             params = {
                 "api_key": self.api_key,
                 "text": address,
-                "size": 1  # Only get best result
+                "size": 1
             }
             
             if country:
@@ -57,14 +104,17 @@ class OpenRouteService:
                 if data.get("features") and len(data["features"]) > 0:
                     feature = data["features"][0]
                     coords = feature["geometry"]["coordinates"]
+                    props = feature["properties"]
                     
                     return {
                         "lon": coords[0],
                         "lat": coords[1],
-                        "formatted_address": feature["properties"].get("label", address),
-                        "confidence": feature["properties"].get("confidence", 0),
-                        "country": feature["properties"].get("country", ""),
-                        "city": feature["properties"].get("locality", "")
+                        "formatted_address": props.get("label", address),
+                        "confidence": props.get("confidence", 0),
+                        "country": props.get("country", ""),
+                        "region": props.get("region", ""),
+                        "county": props.get("county", ""),
+                        "city": props.get("locality", "") or props.get("localadmin", "")
                     }
                 
                 logger.warning(f"No geocoding results found for: {address}")
@@ -118,8 +168,7 @@ class OpenRouteService:
                     route = data["routes"][0]
                     summary = route["summary"]
                     
-                    # Convert to more usable units
-                    distance_km = summary["distance"]  # Already in km
+                    distance_km = summary["distance"]
                     duration_seconds = summary["duration"]
                     duration_hours = duration_seconds / 3600
                     
@@ -147,22 +196,8 @@ class OpenRouteService:
                             recipient_postal_code: str = "", recipient_province: str = "") -> Optional[Dict]:
         """
         Get complete route information from sender to recipient
-        
-        Args:
-            sender_address: Full sender address
-            sender_country: Sender country code (e.g., 'ES')
-            recipient_address: Full recipient address
-            recipient_country: Recipient country code (e.g., 'CO')
-            sender_postal_code: Sender postal code (optional)
-            sender_province: Sender province (optional)
-            recipient_postal_code: Recipient postal code (optional)
-            recipient_province: Recipient province (optional)
-        
-        Returns:
-            Dict with geocoded addresses, route info, estimated delivery days
         """
         try:
-            # Build complete sender address with postal code and province for better geocoding
             complete_sender_address = sender_address
             if sender_postal_code or sender_province:
                 parts = [sender_address]
@@ -172,7 +207,6 @@ class OpenRouteService:
                     parts.append(sender_province)
                 complete_sender_address = ", ".join(parts)
             
-            # Build complete recipient address with postal code and province for better geocoding
             complete_recipient_address = recipient_address
             if recipient_postal_code or recipient_province:
                 parts = [recipient_address]
@@ -182,7 +216,6 @@ class OpenRouteService:
                     parts.append(recipient_province)
                 complete_recipient_address = ", ".join(parts)
             
-            # Geocode sender address
             logger.info(f"Geocoding sender address: {complete_sender_address}, {sender_country}")
             sender_geo = await self.geocode_address(complete_sender_address, sender_country)
             
@@ -190,7 +223,6 @@ class OpenRouteService:
                 logger.error(f"Could not geocode sender address: {complete_sender_address}")
                 return None
             
-            # Geocode recipient address
             logger.info(f"Geocoding recipient address: {complete_recipient_address}, {recipient_country}")
             recipient_geo = await self.geocode_address(complete_recipient_address, recipient_country)
             
@@ -198,7 +230,6 @@ class OpenRouteService:
                 logger.error(f"Could not geocode recipient address: {recipient_address}")
                 return None
             
-            # Calculate route
             logger.info("Calculating route...")
             route = await self.calculate_route(
                 (sender_geo["lon"], sender_geo["lat"]),
@@ -209,13 +240,10 @@ class OpenRouteService:
                 logger.error("Could not calculate route")
                 return None
             
-            # Estimate delivery days based on distance
-            # Basic logic: ~500km per day for truck shipping
-            estimated_days = max(2, int(route["distance_km"] / 500) + 1)
+            estimated_days = max(3, min(7, int(route["distance_km"] / 400) + 2))
             
-            # Add international shipping buffer
             if sender_geo.get("country") != recipient_geo.get("country"):
-                estimated_days += 3  # Add customs/international processing time
+                estimated_days = min(10, estimated_days + 3)
             
             return {
                 "sender": {
@@ -223,6 +251,7 @@ class OpenRouteService:
                     "lat": sender_geo["lat"],
                     "lon": sender_geo["lon"],
                     "country": sender_geo.get("country", ""),
+                    "region": sender_geo.get("region", ""),
                     "city": sender_geo.get("city", "")
                 },
                 "recipient": {
@@ -230,6 +259,7 @@ class OpenRouteService:
                     "lat": recipient_geo["lat"],
                     "lon": recipient_geo["lon"],
                     "country": recipient_geo.get("country", ""),
+                    "region": recipient_geo.get("region", ""),
                     "city": recipient_geo.get("city", "")
                 },
                 "route": {
@@ -247,13 +277,6 @@ class OpenRouteService:
     async def reverse_geocode(self, lat: float, lon: float) -> Optional[Dict]:
         """
         Reverse geocode coordinates to get location details including state/region
-        
-        Args:
-            lat: Latitude
-            lon: Longitude
-        
-        Returns:
-            Dict with location details including region/state
         """
         try:
             params = {
@@ -279,7 +302,7 @@ class OpenRouteService:
                     return {
                         "country": props.get("country", ""),
                         "region": props.get("region", ""),
-                        "locality": props.get("locality", ""),
+                        "locality": props.get("locality", "") or props.get("localadmin", ""),
                         "county": props.get("county", ""),
                         "label": props.get("label", "")
                     }
@@ -291,73 +314,185 @@ class OpenRouteService:
             return None
     
     async def get_route_states(self, geometry_encoded: str, total_distance_km: float, 
-                               sender_state: str, sample_points: int = 4) -> List[str]:
+                               sender_region: str, recipient_region: str,
+                               min_sample_points: int = 8) -> List[Dict]:
         """
-        Sample points along route and get states/regions via reverse geocoding
+        Sample points along route and get states/regions via reverse geocoding.
+        Returns a list of unique regions/provinces along the route with their details.
         
         Args:
-            geometry_encoded: Encoded geometry from route
-            total_distance_km: Total route distance
-            sender_state: Origin state (fallback)
-            sample_points: Number of intermediate points to sample (default 4)
+            geometry_encoded: Encoded polyline geometry from route
+            total_distance_km: Total route distance in km
+            sender_region: Origin region/province name
+            recipient_region: Destination region/province name
+            min_sample_points: Minimum number of points to sample along the route
         
         Returns:
-            List of unique states along the route
+            List of dicts with region info: [{"name": "Madrid", "type": "origin|transit|destination"}]
         """
-        states = [sender_state]  # Start with origin state
+        states = []
+        seen_regions = set()
         
         try:
-            # Decode geometry (assuming it's encoded as polyline or GeoJSON)
-            # For OpenRouteService, geometry is typically a list of coordinates
-            import json
+            if sender_region:
+                states.append({"name": sender_region, "type": "origin"})
+                seen_regions.add(sender_region.upper().strip())
             
-            # Try to parse as JSON geometry
+            coordinates = []
             if isinstance(geometry_encoded, str):
                 try:
                     geom_data = json.loads(geometry_encoded)
                     if isinstance(geom_data, dict) and "coordinates" in geom_data:
                         coordinates = geom_data["coordinates"]
-                    else:
+                    elif isinstance(geom_data, list):
                         coordinates = geom_data
-                except:
-                    logger.warning("Could not parse geometry, using fallback")
-                    return [sender_state]
+                except (json.JSONDecodeError, ValueError):
+                    try:
+                        coordinates = decode_polyline(geometry_encoded)
+                        logger.info(f"Decoded polyline with {len(coordinates)} points")
+                    except Exception as decode_error:
+                        logger.error(f"Could not decode polyline: {decode_error}")
+                        
             elif isinstance(geometry_encoded, dict):
                 coordinates = geometry_encoded.get("coordinates", [])
-            else:
+            elif isinstance(geometry_encoded, list):
                 coordinates = geometry_encoded
             
             if not coordinates or len(coordinates) < 2:
-                return [sender_state]
+                logger.warning("No valid coordinates found in geometry")
+                if recipient_region and recipient_region.upper().strip() not in seen_regions:
+                    states.append({"name": recipient_region, "type": "destination"})
+                return states
             
-            # Sample points evenly along the route
+            logger.info(f"Processing route with {len(coordinates)} coordinate points")
+            
+            num_samples = max(min_sample_points, min(20, len(coordinates) // 50))
+            
             total_points = len(coordinates)
-            step = max(1, total_points // (sample_points + 1))
+            step = max(1, total_points // (num_samples + 1))
             
-            seen_states = {sender_state.upper()}
+            sample_indices = []
+            for i in range(1, num_samples + 1):
+                idx = min(i * step, total_points - 1)
+                sample_indices.append(idx)
             
-            for i in range(step, total_points, step):
-                if len(seen_states) >= sample_points + 2:  # Limit total states
-                    break
+            logger.info(f"Sampling {len(sample_indices)} points along route")
+            
+            for i, idx in enumerate(sample_indices):
+                if idx >= len(coordinates):
+                    continue
+                
+                if i > 0:
+                    await asyncio.sleep(0.5)
                     
-                coord = coordinates[i]
+                coord = coordinates[idx]
                 lon, lat = coord[0], coord[1]
                 
-                # Reverse geocode this point
                 location = await self.reverse_geocode(lat, lon)
                 
                 if location:
-                    state = location.get("region") or location.get("county") or location.get("locality")
-                    if state and state.upper() not in seen_states:
-                        states.append(state)
-                        seen_states.add(state.upper())
-                        logger.info(f"Found state along route: {state}")
+                    region = location.get("region") or location.get("county")
+                    
+                    if region:
+                        region_key = region.upper().strip()
+                        if region_key not in seen_regions:
+                            states.append({"name": region, "type": "transit"})
+                            seen_regions.add(region_key)
+                            logger.info(f"Found transit region: {region}")
             
+            if recipient_region:
+                recipient_key = recipient_region.upper().strip()
+                if recipient_key not in seen_regions:
+                    states.append({"name": recipient_region, "type": "destination"})
+                else:
+                    for state in states:
+                        if state["name"].upper().strip() == recipient_key:
+                            state["type"] = "destination"
+                            break
+            
+            logger.info(f"Total route states found: {len(states)} - {[s['name'] for s in states]}")
             return states
             
         except Exception as e:
             logger.error(f"Error getting route states: {e}")
-            return [sender_state]  # Fallback to origin only
+            if sender_region:
+                states = [{"name": sender_region, "type": "origin"}]
+            if recipient_region and recipient_region.upper().strip() != (sender_region.upper().strip() if sender_region else ""):
+                states.append({"name": recipient_region, "type": "destination"})
+            return states
 
-# Global instance
-ors_service = OpenRouteService()
+    async def get_full_route_with_checkpoints(self, sender_address: str, sender_country: str,
+                                              recipient_address: str, recipient_country: str,
+                                              sender_postal_code: str = "", sender_province: str = "",
+                                              recipient_postal_code: str = "", recipient_province: str = "") -> Optional[Dict]:
+        """
+        Get complete route information with all checkpoints/provinces along the way.
+        This is the main function to call when shipping a package.
+        
+        Returns:
+            Dict with route info and list of checkpoints with scheduled times
+        """
+        try:
+            route_info = await self.get_route_info(
+                sender_address, sender_country,
+                recipient_address, recipient_country,
+                sender_postal_code, sender_province,
+                recipient_postal_code, recipient_province
+            )
+            
+            if not route_info:
+                logger.error("Could not get route info")
+                return None
+            
+            geometry = route_info["route"].get("geometry")
+            distance_km = route_info["route"]["distance_km"]
+            estimated_days = route_info["route"]["estimated_days"]
+            
+            sender_region = route_info["sender"].get("region") or sender_province or route_info["sender"].get("city")
+            recipient_region = route_info["recipient"].get("region") or recipient_province or route_info["recipient"].get("city")
+            
+            logger.info(f"Getting route states from {sender_region} to {recipient_region}")
+            
+            route_states = []
+            if geometry:
+                route_states = await self.get_route_states(
+                    geometry, 
+                    distance_km,
+                    sender_region,
+                    recipient_region,
+                    min_sample_points=8
+                )
+            
+            if len(route_states) < 2:
+                route_states = []
+                if sender_region:
+                    route_states.append({"name": sender_region, "type": "origin"})
+                if recipient_region and recipient_region != sender_region:
+                    route_states.append({"name": recipient_region, "type": "destination"})
+            
+            return {
+                "sender": route_info["sender"],
+                "recipient": route_info["recipient"],
+                "route": {
+                    "distance_km": distance_km,
+                    "duration_hours": route_info["route"]["duration_hours"],
+                    "estimated_days": estimated_days,
+                    "geometry": geometry
+                },
+                "checkpoints": route_states
+            }
+            
+        except Exception as e:
+            logger.error(f"Error getting full route with checkpoints: {e}")
+            return None
+
+
+try:
+    if os.getenv('ORS_API_KEY'):
+        ors_service = OpenRouteService()
+    else:
+        ors_service = None
+        logger.warning("ORS_API_KEY not set, OpenRouteService not initialized")
+except Exception as e:
+    ors_service = None
+    logger.error(f"Could not initialize OpenRouteService: {e}")

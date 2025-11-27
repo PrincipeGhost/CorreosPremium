@@ -390,11 +390,10 @@ Por favor, ingresa la dirección de envío:
         await self._edit_message_smart(update, text, reply_markup=reply_markup, parse_mode='Markdown')
     
     async def ship_package(self, update: Update, context: ContextTypes.DEFAULT_TYPE, tracking_id: str):
-        """Mark package as shipped and generate route history"""
+        """Mark package as shipped and generate route history with all checkpoints"""
         if not update.effective_user:
             return
         
-        # Verify admin has access to this tracking
         admin_id = update.effective_user.id
         is_owner = self.is_owner(admin_id)
         tracking = db_manager.get_tracking(tracking_id)
@@ -407,59 +406,55 @@ Por favor, ingresa la dirección de envío:
             await update.callback_query.answer("❌ No tienes permiso para modificar este tracking")
             return
         
-        # Update status to EN_TRANSITO
         success = db_manager.update_tracking_status(tracking_id, STATUS_EN_TRANSITO, "Paquete en tránsito")
         
         if success:
-            # Generate route history events
+            route_checkpoints = []
             try:
                 from .openroute_service import ors_service
-                import asyncio
                 
-                # Get route information to extract states
-                route_info = await ors_service.get_route_info(
-                    tracking.sender_address,
-                    tracking.sender_country,
-                    tracking.delivery_address,
-                    tracking.recipient_country,
-                    tracking.sender_postal_code,
-                    tracking.sender_province,
-                    tracking.recipient_postal_code,
-                    tracking.recipient_province
-                )
-                
-                route_states = []
-                if route_info and route_info.get("route", {}).get("geometry"):
-                    # Get states along the route
-                    geometry = route_info["route"]["geometry"]
-                    distance = route_info["route"]["distance_km"]
+                if ors_service:
+                    logger.info(f"Getting full route with checkpoints for {tracking_id}")
                     
-                    route_states = await ors_service.get_route_states(
-                        geometry, 
-                        distance,
-                        tracking.sender_province if tracking.sender_province else tracking.sender_country,
-                        sample_points=4
+                    full_route = await ors_service.get_full_route_with_checkpoints(
+                        tracking.sender_address,
+                        tracking.sender_country,
+                        tracking.delivery_address,
+                        tracking.recipient_country,
+                        tracking.sender_postal_code,
+                        tracking.sender_province,
+                        tracking.recipient_postal_code,
+                        tracking.recipient_province
                     )
+                    
+                    if full_route and full_route.get("checkpoints"):
+                        route_checkpoints = full_route["checkpoints"]
+                        logger.info(f"Found {len(route_checkpoints)} checkpoints for route: {[cp.get('name') for cp in route_checkpoints]}")
+                    else:
+                        logger.warning(f"No checkpoints found from ORS for {tracking_id}, using fallback")
                 else:
-                    # Fallback: use only origin province/country
-                    route_states = [tracking.sender_province if tracking.sender_province else tracking.sender_country]
-                
-                # Add destination province/country if different
-                dest_location = tracking.recipient_province if tracking.recipient_province else tracking.recipient_country
-                if dest_location and dest_location not in route_states:
-                    route_states.append(dest_location)
-                
-                # Generate all route history events
-                if len(route_states) > 0:
-                    db_manager.generate_route_history_events(tracking_id, route_states)
-                    logger.info(f"Generated route history for {tracking_id} with states: {route_states}")
+                    logger.warning("ORS service not available, using fallback checkpoints")
                 
             except Exception as e:
-                logger.error(f"Error generating route history for {tracking_id}: {e}")
-                # Continue anyway, basic EN_TRANSITO status is already set
+                logger.error(f"Error getting route from ORS for {tracking_id}: {e}")
+            
+            if not route_checkpoints:
+                origin = tracking.sender_province or tracking.sender_country or "Origen"
+                destination = tracking.recipient_province or tracking.recipient_country or "Destino"
+                route_checkpoints = [
+                    {"name": origin, "type": "origin"},
+                    {"name": destination, "type": "destination"}
+                ]
+                logger.info(f"Using fallback checkpoints for {tracking_id}: {origin} -> {destination}")
+            
+            if len(route_checkpoints) > 0:
+                db_manager.generate_route_history_events(tracking_id, route_checkpoints)
+                checkpoint_names = [cp.get("name") if isinstance(cp, dict) else cp for cp in route_checkpoints]
+                logger.info(f"Generated route history for {tracking_id} with {len(route_checkpoints)} checkpoints: {checkpoint_names}")
             
             await update.callback_query.answer("✅ Paquete marcado como enviado")
-            text = f"✅ **PAQUETE ENVIADO**\n\nTracking {tracking_id} está ahora en tránsito."
+            num_checkpoints = len(route_checkpoints)
+            text = f"✅ **PAQUETE ENVIADO**\n\nTracking {tracking_id} está ahora en tránsito.\n\n📍 Ruta calculada con {num_checkpoints} puntos de control."
         else:
             await update.callback_query.answer("❌ Error al enviar paquete")
             text = f"❌ **ERROR**\n\nNo se pudo marcar como enviado {tracking_id}."

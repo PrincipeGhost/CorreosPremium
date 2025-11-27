@@ -287,53 +287,63 @@ class DatabaseManager:
             logger.error(f"Error getting shipping route: {e}")
             return None
     
-    def generate_route_history_events(self, tracking_id: str, route_states: List[str]) -> bool:
+    def generate_route_history_events(self, tracking_id: str, checkpoints: List) -> bool:
         """
-        Generate history events for each state along the route
-        Creates 'Salió de' and 'Llegó a' events for each state
+        Generate history events for each checkpoint along the route.
+        Creates 'Salió de' and 'Llegó a' events for each province/state.
         
         Args:
             tracking_id: Tracking ID
-            route_states: List of states along the route (including origin)
+            checkpoints: List of checkpoint dicts [{"name": "Madrid", "type": "origin|transit|destination"}]
+                        OR list of strings (legacy format) ["Madrid", "Toledo", "Ourense"]
         
         Returns:
             True if successful
         """
         try:
+            if not checkpoints or len(checkpoints) == 0:
+                logger.warning(f"No checkpoints provided for tracking {tracking_id}")
+                return False
+            
+            if isinstance(checkpoints[0], dict):
+                state_names = [cp.get("name", "") for cp in checkpoints if cp.get("name")]
+            else:
+                state_names = [str(cp) for cp in checkpoints if cp]
+            
+            if len(state_names) == 0:
+                logger.warning(f"No valid state names in checkpoints for tracking {tracking_id}")
+                return False
+            
             with self.get_connection() as conn:
                 with conn.cursor() as cur:
-                    # First event: "Salió de oficinas de [estado origen]"
-                    if len(route_states) > 0:
+                    if len(state_names) >= 1:
                         cur.execute(
                             "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                            (tracking_id, "EN_TRANSITO", "SALIO_ORIGEN", f"Salió de oficinas de {route_states[0]}")
+                            (tracking_id, "EN_TRANSITO", "SALIO_ORIGEN", f"Salió de oficinas de {state_names[0]}")
                         )
                     
-                    # Intermediate states: "Llegó a" and "Salió de"
-                    for i in range(1, len(route_states) - 1):
-                        state = route_states[i]
+                    for i in range(1, len(state_names)):
+                        state = state_names[i]
+                        is_last = (i == len(state_names) - 1)
                         
-                        # Llegó a oficina de [estado]
-                        cur.execute(
-                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                            (tracking_id, "EN_RUTA", "LLEGO_A", f"Llegó a oficina de {state}")
-                        )
-                        
-                        # Salió de oficinas de [estado]
-                        cur.execute(
-                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                            (tracking_id, "LLEGO_A", "SALIO_DE", f"Salió de oficinas de {state}")
-                        )
-                    
-                    # Final state: "Llegó a oficina de [estado destino]"
-                    if len(route_states) > 1:
-                        cur.execute(
-                            "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
-                            (tracking_id, "EN_RUTA", "LLEGO_DESTINO", f"Llegó a oficina de {route_states[-1]}")
-                        )
+                        if is_last:
+                            cur.execute(
+                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                                (tracking_id, "EN_RUTA", "LLEGO_DESTINO", f"Llegó a oficina de {state}")
+                            )
+                        else:
+                            cur.execute(
+                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                                (tracking_id, "EN_RUTA", "LLEGO_A", f"Llegó a oficina de {state}")
+                            )
+                            cur.execute(
+                                "INSERT INTO status_history (tracking_id, old_status, new_status, notes) VALUES (%s, %s, %s, %s)",
+                                (tracking_id, "LLEGO_A", "SALIO_DE", f"Salió de oficinas de {state}")
+                            )
                     
                     conn.commit()
-            logger.info(f"Generated route history events for tracking {tracking_id} with {len(route_states)} states")
+            
+            logger.info(f"Generated route history events for tracking {tracking_id} with {len(state_names)} states: {state_names}")
             return True
         except Exception as e:
             logger.error(f"Error generating route history: {e}")
