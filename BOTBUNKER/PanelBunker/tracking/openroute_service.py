@@ -317,11 +317,14 @@ class OpenRouteService:
     async def get_route_states(self, geometry_encoded: str, total_distance_km: float, 
                                sender_region: str, recipient_region: str,
                                estimated_days: int = 3,
-                               min_sample_points: int = 10) -> List[Dict]:
+                               min_sample_points: int = 15) -> List[Dict]:
         """
         Sample points along route and get localities/cities via reverse geocoding.
         Returns a list of unique locations along the route with their details.
         Guarantees minimum checkpoints based on estimated_days for realistic tracking.
+        
+        For SHORT routes (fewer days), we generate MORE checkpoints to simulate frequent updates.
+        For LONG routes (more days), fewer checkpoints per day is acceptable.
         
         Args:
             geometry_encoded: Encoded polyline geometry from route
@@ -338,7 +341,14 @@ class OpenRouteService:
         seen_locations = set()
         all_found_locations = []
         
-        min_checkpoints = max(4, estimated_days + 2)
+        if estimated_days <= 3:
+            min_checkpoints = max(4, estimated_days + 2)
+        elif estimated_days <= 5:
+            min_checkpoints = max(4, estimated_days + 1)
+        else:
+            min_checkpoints = max(4, estimated_days)
+        
+        logger.info(f"Route: {total_distance_km}km, {estimated_days} days -> min_checkpoints: {min_checkpoints}")
         
         try:
             if sender_region:
@@ -374,7 +384,9 @@ class OpenRouteService:
             
             logger.info(f"Processing route with {len(coordinates)} coordinate points")
             
-            num_samples = max(min_sample_points, min(25, len(coordinates) // 30))
+            num_samples = max(min_sample_points, min(20, len(coordinates) // 25))
+            
+            logger.info(f"Sampling {num_samples} points for {total_distance_km}km route")
             
             total_points = len(coordinates)
             step = max(1, total_points // (num_samples + 1))
@@ -513,6 +525,7 @@ class OpenRouteService:
         if recipient_region:
             states.append({"name": recipient_region, "type": "destination"})
         
+        logger.info(f"Generated {len(states)} interpolated checkpoints for {distance_km}km route")
         return states
     
     def _generate_transit_names(self, sender_region: str, recipient_region: str, 

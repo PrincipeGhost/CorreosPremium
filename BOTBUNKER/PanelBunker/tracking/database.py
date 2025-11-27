@@ -459,15 +459,27 @@ class DatabaseManager:
             logger.error(f"Error generating route history: {e}")
             return False
     
-    def get_tracking_history(self, tracking_id: str) -> List[StatusHistory]:
-        """Get status change history for tracking"""
+    def get_tracking_history(self, tracking_id: str, include_future: bool = False) -> List[StatusHistory]:
+        """Get status change history for tracking
+        
+        Args:
+            tracking_id: Tracking ID
+            include_future: If True, includes future scheduled events. 
+                           If False (default), only shows events up to current time.
+        """
         try:
             with self.get_connection() as conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-                    cur.execute(
-                        "SELECT * FROM status_history WHERE tracking_id = %s ORDER BY changed_at ASC, id ASC",
-                        (tracking_id,)
-                    )
+                    if include_future:
+                        cur.execute(
+                            "SELECT * FROM status_history WHERE tracking_id = %s ORDER BY changed_at ASC, id ASC",
+                            (tracking_id,)
+                        )
+                    else:
+                        cur.execute(
+                            "SELECT * FROM status_history WHERE tracking_id = %s AND (changed_at IS NULL OR changed_at <= NOW()) ORDER BY changed_at ASC, id ASC",
+                            (tracking_id,)
+                        )
                     rows = cur.fetchall()
                     return [StatusHistory(**dict(row)) for row in rows]
         except Exception as e:

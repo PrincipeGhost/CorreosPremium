@@ -103,7 +103,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      const history = await storage.getTrackingHistory(trackingId);
+      const history = await storage.getTrackingHistory(trackingId, false);
 
       // Build full address from new fields or fallback to legacy fields
       const recipientPostalCode = tracking.recipientPostalCode || '';
@@ -175,7 +175,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      const history = await storage.getTrackingHistory(trackingNumber);
+      const history = await storage.getTrackingHistory(trackingNumber, false);
 
       // Build full address from new fields or fallback to legacy fields
       const recipientPostalCode = tracking.recipientPostalCode || '';

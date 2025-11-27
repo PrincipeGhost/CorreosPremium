@@ -10,7 +10,7 @@ import {
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { db } from "./db";
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc, and, lte, or, isNull } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -27,7 +27,7 @@ export interface IStorage {
   getTracking(trackingId: string): Promise<Tracking | undefined>;
   createTracking(tracking: InsertTracking): Promise<Tracking>;
   updateTrackingStatus(trackingId: string, newStatus: TrackingStatusType, notes?: string): Promise<boolean>;
-  getTrackingHistory(trackingId: string): Promise<StatusHistory[]>;
+  getTrackingHistory(trackingId: string, includeFuture?: boolean): Promise<StatusHistory[]>;
   getAllTrackings(): Promise<Tracking[]>;
   
   // Shipping routes operations
@@ -108,9 +108,22 @@ export class DatabaseStorage implements IStorage {
     }
   }
 
-  async getTrackingHistory(trackingId: string): Promise<StatusHistory[]> {
+  async getTrackingHistory(trackingId: string, includeFuture: boolean = true): Promise<StatusHistory[]> {
+    if (includeFuture) {
+      return await db.select().from(statusHistory)
+        .where(eq(statusHistory.trackingId, trackingId))
+        .orderBy(statusHistory.changedAt, statusHistory.id);
+    }
+    
+    const now = new Date();
     return await db.select().from(statusHistory)
-      .where(eq(statusHistory.trackingId, trackingId))
+      .where(and(
+        eq(statusHistory.trackingId, trackingId),
+        or(
+          isNull(statusHistory.changedAt),
+          lte(statusHistory.changedAt, now)
+        )
+      ))
       .orderBy(statusHistory.changedAt, statusHistory.id);
   }
 
