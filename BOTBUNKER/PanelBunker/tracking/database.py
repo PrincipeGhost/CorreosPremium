@@ -298,7 +298,10 @@ class DatabaseManager:
                                        estimated_days: int = 5, start_datetime: Optional[datetime] = None) -> bool:
         """
         Generate history events for each checkpoint along the route with distributed timestamps.
-        Creates 'Salió de' and 'Llegó a' events for each province/state.
+        Creates 'Salió de' and 'Llegó a' events for each locality/city.
+        
+        Uses realistic processing times per stop (~8-12 hours) and varied hours
+        to make tracking look natural and not robotic.
         
         Args:
             tracking_id: Tracking ID
@@ -337,35 +340,77 @@ class DatabaseManager:
                     total_events += 2
             
             total_hours = estimated_days * 24
-            hours_per_event = total_hours / max(total_events, 1)
+            min_total_hours = max(48, total_hours)
             
-            def generate_event_time(event_index: int) -> datetime:
-                """Generate a realistic timestamp for an event"""
+            hours_per_event = min_total_hours / max(total_events, 1)
+            hours_per_event = max(6, min(18, hours_per_event))
+            
+            def adjust_to_work_hours(event_time: datetime) -> datetime:
+                """Adjust timestamp to work hours (6:00-21:59) without going backwards in time"""
+                hour = event_time.hour
+                minute = random.randint(0, 59)
+                
+                if hour < 6:
+                    new_hour = random.randint(7, 11)
+                    event_time = event_time.replace(hour=new_hour, minute=minute)
+                elif hour >= 22:
+                    event_time = event_time + timedelta(days=1)
+                    new_hour = random.randint(6, 10)
+                    event_time = event_time.replace(hour=new_hour, minute=minute)
+                else:
+                    event_time = event_time.replace(minute=minute)
+                
+                return event_time
+            
+            def generate_event_time(event_index: int, previous_time: Optional[datetime] = None) -> datetime:
+                """Generate a realistic timestamp for an event with natural variation.
+                GUARANTEES: result > previous_time (strictly ascending)"""
                 base_hours = event_index * hours_per_event
-                variation = random.uniform(-0.5, 0.5) * hours_per_event * 0.3
+                
+                variation_range = hours_per_event * 0.3
+                variation = random.uniform(-variation_range, variation_range)
                 actual_hours = max(0, base_hours + variation)
                 
                 event_time = start_datetime + timedelta(hours=actual_hours)
                 
-                hour = event_time.hour
-                if hour < 6:
-                    event_time = event_time.replace(hour=random.randint(8, 10))
-                elif hour > 22:
-                    event_time = event_time.replace(hour=random.randint(18, 21))
+                event_time = adjust_to_work_hours(event_time)
+                
+                if previous_time and event_time <= previous_time:
+                    min_gap = random.uniform(4, 10)
+                    event_time = previous_time + timedelta(hours=min_gap)
+                    event_time = adjust_to_work_hours(event_time)
+                    
+                    if event_time <= previous_time:
+                        event_time = previous_time + timedelta(hours=random.uniform(5, 12))
                 
                 return event_time
+            
+            def generate_departure_time(arrival_time: datetime) -> datetime:
+                """Generate departure time after arrival with processing delay.
+                GUARANTEES: result > arrival_time (strictly ascending)"""
+                processing_hours = random.uniform(6, 14)
+                departure = arrival_time + timedelta(hours=processing_hours)
+                
+                departure = adjust_to_work_hours(departure)
+                
+                if departure <= arrival_time:
+                    departure = arrival_time + timedelta(hours=random.uniform(8, 14))
+                
+                return departure
             
             with self.get_connection() as conn:
                 with conn.cursor() as cur:
                     event_index = 0
+                    last_event_time = None
                     
                     if len(state_names) >= 1:
-                        event_time = generate_event_time(event_index)
+                        event_time = generate_event_time(event_index, None)
                         cur.execute(
                             "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
                             (tracking_id, "EN_TRANSITO", "SALIO_ORIGEN", f"Salió de oficinas de {state_names[0]}", event_time)
                         )
                         event_index += 1
+                        last_event_time = event_time
                         logger.debug(f"Event 'Salió de {state_names[0]}' at {event_time}")
                     
                     for i in range(1, len(state_names)):
@@ -373,32 +418,42 @@ class DatabaseManager:
                         is_last = (i == len(state_names) - 1)
                         
                         if is_last:
-                            event_time = generate_event_time(event_index)
+                            event_time = generate_event_time(event_index, last_event_time)
+                            
+                            min_final_gap = timedelta(hours=max(24, estimated_days * 12))
+                            if event_time < start_datetime + min_final_gap:
+                                event_time = start_datetime + min_final_gap + timedelta(hours=random.uniform(-4, 8))
+                            
+                            hour = event_time.hour
+                            if hour < 8 or hour > 20:
+                                event_time = event_time.replace(hour=random.randint(10, 18), minute=random.randint(0, 59))
+                            
                             cur.execute(
                                 "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
                                 (tracking_id, "EN_RUTA", "LLEGO_DESTINO", f"Llegó a oficina de {state}", event_time)
                             )
                             logger.debug(f"Event 'Llegó a {state}' (destino) at {event_time}")
                         else:
-                            event_time = generate_event_time(event_index)
+                            arrival_time = generate_event_time(event_index, last_event_time)
                             cur.execute(
                                 "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
-                                (tracking_id, "EN_RUTA", "LLEGO_A", f"Llegó a oficina de {state}", event_time)
+                                (tracking_id, "EN_RUTA", "LLEGO_A", f"Llegó a oficina de {state}", arrival_time)
                             )
-                            logger.debug(f"Event 'Llegó a {state}' at {event_time}")
+                            logger.debug(f"Event 'Llegó a {state}' at {arrival_time}")
                             event_index += 1
                             
-                            event_time = generate_event_time(event_index)
+                            departure_time = generate_departure_time(arrival_time)
                             cur.execute(
                                 "INSERT INTO status_history (tracking_id, old_status, new_status, notes, changed_at) VALUES (%s, %s, %s, %s, %s)",
-                                (tracking_id, "LLEGO_A", "SALIO_DE", f"Salió de oficinas de {state}", event_time)
+                                (tracking_id, "LLEGO_A", "SALIO_DE", f"Salió de oficinas de {state}", departure_time)
                             )
-                            logger.debug(f"Event 'Salió de {state}' at {event_time}")
+                            logger.debug(f"Event 'Salió de {state}' at {departure_time}")
                             event_index += 1
+                            last_event_time = departure_time
                     
                     conn.commit()
             
-            logger.info(f"Generated route history events for tracking {tracking_id} with {len(state_names)} states over {estimated_days} days: {state_names}")
+            logger.info(f"Generated route history events for tracking {tracking_id} with {len(state_names)} checkpoints over {estimated_days} days: {state_names}")
             return True
         except Exception as e:
             logger.error(f"Error generating route history: {e}")

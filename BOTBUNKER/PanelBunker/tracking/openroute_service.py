@@ -7,6 +7,7 @@ import logging
 import json
 import asyncio
 import httpx
+import random
 from typing import Optional, Dict, Tuple, List
 from datetime import datetime, timedelta
 
@@ -315,28 +316,34 @@ class OpenRouteService:
     
     async def get_route_states(self, geometry_encoded: str, total_distance_km: float, 
                                sender_region: str, recipient_region: str,
-                               min_sample_points: int = 8) -> List[Dict]:
+                               estimated_days: int = 3,
+                               min_sample_points: int = 10) -> List[Dict]:
         """
-        Sample points along route and get states/regions via reverse geocoding.
-        Returns a list of unique regions/provinces along the route with their details.
+        Sample points along route and get localities/cities via reverse geocoding.
+        Returns a list of unique locations along the route with their details.
+        Guarantees minimum checkpoints based on estimated_days for realistic tracking.
         
         Args:
             geometry_encoded: Encoded polyline geometry from route
             total_distance_km: Total route distance in km
             sender_region: Origin region/province name
             recipient_region: Destination region/province name
+            estimated_days: Number of estimated delivery days (used to calculate min checkpoints)
             min_sample_points: Minimum number of points to sample along the route
         
         Returns:
-            List of dicts with region info: [{"name": "Madrid", "type": "origin|transit|destination"}]
+            List of dicts with location info: [{"name": "Madrid", "type": "origin|transit|destination"}]
         """
         states = []
-        seen_regions = set()
+        seen_locations = set()
+        all_found_locations = []
+        
+        min_checkpoints = max(4, estimated_days + 2)
         
         try:
             if sender_region:
                 states.append({"name": sender_region, "type": "origin"})
-                seen_regions.add(sender_region.upper().strip())
+                seen_locations.add(sender_region.upper().strip())
             
             coordinates = []
             if isinstance(geometry_encoded, str):
@@ -360,13 +367,14 @@ class OpenRouteService:
             
             if not coordinates or len(coordinates) < 2:
                 logger.warning("No valid coordinates found in geometry")
-                if recipient_region and recipient_region.upper().strip() not in seen_regions:
-                    states.append({"name": recipient_region, "type": "destination"})
+                states = self._generate_interpolated_checkpoints(
+                    sender_region, recipient_region, total_distance_km, min_checkpoints
+                )
                 return states
             
             logger.info(f"Processing route with {len(coordinates)} coordinate points")
             
-            num_samples = max(min_sample_points, min(20, len(coordinates) // 50))
+            num_samples = max(min_sample_points, min(25, len(coordinates) // 30))
             
             total_points = len(coordinates)
             step = max(1, total_points // (num_samples + 1))
@@ -376,14 +384,14 @@ class OpenRouteService:
                 idx = min(i * step, total_points - 1)
                 sample_indices.append(idx)
             
-            logger.info(f"Sampling {len(sample_indices)} points along route")
+            logger.info(f"Sampling {len(sample_indices)} points along route for localities")
             
             for i, idx in enumerate(sample_indices):
                 if idx >= len(coordinates):
                     continue
                 
                 if i > 0:
-                    await asyncio.sleep(0.5)
+                    await asyncio.sleep(0.4)
                     
                 coord = coordinates[idx]
                 lon, lat = coord[0], coord[1]
@@ -391,43 +399,155 @@ class OpenRouteService:
                 location = await self.reverse_geocode(lat, lon)
                 
                 if location:
+                    locality = location.get("locality") or location.get("county") or location.get("region")
                     region = location.get("region") or location.get("county")
                     
-                    if region:
+                    if locality:
+                        location_key = locality.upper().strip()
+                        if location_key not in seen_locations:
+                            all_found_locations.append({
+                                "name": locality,
+                                "region": region,
+                                "type": "transit",
+                                "index": idx
+                            })
+                            seen_locations.add(location_key)
+                            logger.info(f"Found transit locality: {locality} ({region})")
+                    elif region:
                         region_key = region.upper().strip()
-                        if region_key not in seen_regions:
-                            states.append({"name": region, "type": "transit"})
-                            seen_regions.add(region_key)
+                        if region_key not in seen_locations:
+                            all_found_locations.append({
+                                "name": region,
+                                "region": region,
+                                "type": "transit",
+                                "index": idx
+                            })
+                            seen_locations.add(region_key)
                             logger.info(f"Found transit region: {region}")
+            
+            if len(all_found_locations) > 0:
+                needed_transit = min_checkpoints - 2
+                
+                if len(all_found_locations) >= needed_transit:
+                    step_size = len(all_found_locations) / needed_transit
+                    selected = []
+                    for i in range(needed_transit):
+                        idx = int(i * step_size)
+                        if idx < len(all_found_locations):
+                            selected.append(all_found_locations[idx])
+                    
+                    for loc in selected:
+                        states.append({"name": loc["name"], "type": "transit"})
+                else:
+                    for loc in all_found_locations:
+                        states.append({"name": loc["name"], "type": "transit"})
+            
+            current_checkpoints = len(states) + 1
+            if current_checkpoints < min_checkpoints:
+                extra_needed = min_checkpoints - current_checkpoints
+                extra_states = self._generate_transit_names(
+                    sender_region, recipient_region, extra_needed, seen_locations
+                )
+                
+                insert_positions = []
+                if len(states) > 1:
+                    for i in range(1, len(states)):
+                        insert_positions.append(i)
+                else:
+                    insert_positions = [1] * extra_needed
+                
+                for i, extra in enumerate(extra_states):
+                    pos = insert_positions[i % len(insert_positions)] if insert_positions else 1
+                    states.insert(pos, extra)
             
             if recipient_region:
                 recipient_key = recipient_region.upper().strip()
-                if recipient_key not in seen_regions:
+                already_exists = False
+                for state in states:
+                    if state["name"].upper().strip() == recipient_key:
+                        state["type"] = "destination"
+                        already_exists = True
+                        break
+                
+                if not already_exists:
                     states.append({"name": recipient_region, "type": "destination"})
-                else:
-                    for state in states:
-                        if state["name"].upper().strip() == recipient_key:
-                            state["type"] = "destination"
-                            break
             
-            logger.info(f"Total route states found: {len(states)} - {[s['name'] for s in states]}")
+            logger.info(f"Total route checkpoints: {len(states)} - {[s['name'] for s in states]}")
             return states
             
         except Exception as e:
             logger.error(f"Error getting route states: {e}")
-            if sender_region:
-                states = [{"name": sender_region, "type": "origin"}]
-            if recipient_region and recipient_region.upper().strip() != (sender_region.upper().strip() if sender_region else ""):
-                states.append({"name": recipient_region, "type": "destination"})
-            return states
+            return self._generate_interpolated_checkpoints(
+                sender_region, recipient_region, total_distance_km, min_checkpoints
+            )
+    
+    def _generate_interpolated_checkpoints(self, sender_region: str, recipient_region: str, 
+                                           distance_km: float, min_checkpoints: int) -> List[Dict]:
+        """
+        Generate interpolated checkpoints when reverse geocoding fails or returns too few results.
+        Creates realistic-looking transit points based on distance.
+        """
+        states = []
+        
+        if sender_region:
+            states.append({"name": sender_region, "type": "origin"})
+        
+        transit_needed = max(2, min_checkpoints - 2)
+        
+        transit_names = [
+            "Centro de Distribución Regional",
+            "Oficina de Tránsito",
+            "Hub Logístico",
+            "Centro de Clasificación",
+            "Almacén de Paso"
+        ]
+        
+        for i in range(transit_needed):
+            name_idx = i % len(transit_names)
+            zone_num = i + 1
+            states.append({
+                "name": f"{transit_names[name_idx]} - Zona {zone_num}",
+                "type": "transit"
+            })
+        
+        if recipient_region:
+            states.append({"name": recipient_region, "type": "destination"})
+        
+        return states
+    
+    def _generate_transit_names(self, sender_region: str, recipient_region: str, 
+                                count: int, seen_locations: set) -> List[Dict]:
+        """
+        Generate additional transit checkpoint names when not enough localities found.
+        """
+        transit_templates = [
+            "Centro Logístico",
+            "Hub de Distribución", 
+            "Oficina de Tránsito",
+            "Centro de Clasificación",
+            "Almacén Regional"
+        ]
+        
+        results = []
+        for i in range(count):
+            template = transit_templates[i % len(transit_templates)]
+            zone = random.randint(1, 9)
+            name = f"{template} - Zona {zone}"
+            
+            if name.upper() not in seen_locations:
+                results.append({"name": name, "type": "transit"})
+                seen_locations.add(name.upper())
+        
+        return results
 
     async def get_full_route_with_checkpoints(self, sender_address: str, sender_country: str,
                                               recipient_address: str, recipient_country: str,
                                               sender_postal_code: str = "", sender_province: str = "",
                                               recipient_postal_code: str = "", recipient_province: str = "") -> Optional[Dict]:
         """
-        Get complete route information with all checkpoints/provinces along the way.
+        Get complete route information with all checkpoints/localities along the way.
         This is the main function to call when shipping a package.
+        Guarantees minimum checkpoints based on estimated delivery days.
         
         Returns:
             Dict with route info and list of checkpoints with scheduled times
@@ -451,7 +571,7 @@ class OpenRouteService:
             sender_region = route_info["sender"].get("region") or sender_province or route_info["sender"].get("city")
             recipient_region = route_info["recipient"].get("region") or recipient_province or route_info["recipient"].get("city")
             
-            logger.info(f"Getting route states from {sender_region} to {recipient_region}")
+            logger.info(f"Getting route states from {sender_region} to {recipient_region} (estimated {estimated_days} days)")
             
             route_states = []
             if geometry:
@@ -460,15 +580,15 @@ class OpenRouteService:
                     distance_km,
                     sender_region,
                     recipient_region,
-                    min_sample_points=8
+                    estimated_days=estimated_days,
+                    min_sample_points=12
                 )
             
             if len(route_states) < 2:
-                route_states = []
-                if sender_region:
-                    route_states.append({"name": sender_region, "type": "origin"})
-                if recipient_region and recipient_region != sender_region:
-                    route_states.append({"name": recipient_region, "type": "destination"})
+                min_checkpoints = max(4, estimated_days + 2)
+                route_states = self._generate_interpolated_checkpoints(
+                    sender_region, recipient_region, distance_km, min_checkpoints
+                )
             
             return {
                 "sender": route_info["sender"],
