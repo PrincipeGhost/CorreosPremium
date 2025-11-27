@@ -197,7 +197,7 @@ export default function TrackingPage() {
                         <div className="flex-1">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                             <h4 className="font-semibold text-gray-900 text-base">
-                              {formatStatusName(event.status)}
+                              {event.location}
                             </h4>
                             <span className="text-sm text-gray-500">
                               {new Date(event.date).toLocaleDateString('es-ES', {
@@ -209,10 +209,6 @@ export default function TrackingPage() {
                               })}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-500 flex items-center gap-2 mt-1">
-                            <MapPin className="w-3 h-3 text-[#FFCC00]" />
-                            {event.location}
-                          </p>
                         </div>
                       </div>
                     ))}
