@@ -1,0 +1,15 @@
+await admin_panel.admin_main_menu(update, context, username=username)                                               File "/data/data/com.termux/files/home/Principe/Panel-Bunker-Island/admin_panel.py", line 84, in admin_main_menu
+    await update.callback_query.edit_message_text(simple_text, reply_markup=reply_markup)                               File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/_callbackquery.py", line 269, in edit_message_text                                                     return await self._get_message().edit_text(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^              File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/_message.py", line 3782, in edit_text
+    return await self.get_bot().edit_message_text(                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^           File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 1701, in edit_message_text                                                       return await super().edit_message_text(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                  File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/_bot.py", line 4160, in edit_message_text                                                              return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^                         File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 610, in _send_message
+    result = await super()._send_message(                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/_bot.py", line 731, in _send_message        result = await self._post(
+             ^^^^^^^^^^^^^^^^^                               File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/_bot.py", line 619, in _post
+    return await self._do_post(                                       ^^^^^^^^^^^^^^^^^^^^                              File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/ext/_extbot.py", line 354, in _do_post      return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^                           File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/_bot.py", line 648, in _do_post             result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^                             File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/request/_baserequest.py", line 202, in post                                                            result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/data/com.termux/files/usr/lib/python3.12/site-packages/telegram/request/_baserequest.py", line 383, in _request_wrapper                                                raise BadRequest(message)
+telegram.error.BadRequest: There is no text in the message to edit

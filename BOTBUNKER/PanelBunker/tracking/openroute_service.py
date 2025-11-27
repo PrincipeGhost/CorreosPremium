@@ -1,0 +1,363 @@
+"""
+OpenRouteService API integration for geocoding and routing
+"""
+
+import os
+import logging
+import httpx
+from typing import Optional, Dict, Tuple, List
+from datetime import datetime, timedelta
+
+logger = logging.getLogger(__name__)
+
+class OpenRouteService:
+    """Handle OpenRouteService API calls for geocoding and routing"""
+    
+    def __init__(self):
+        self.api_key = os.getenv('ORS_API_KEY')
+        if not self.api_key:
+            raise ValueError("ORS_API_KEY environment variable is required")
+        
+        self.base_url = "https://api.openrouteservice.org"
+        self.headers = {
+            "Authorization": self.api_key,
+            "Content-Type": "application/json"
+        }
+    
+    async def geocode_address(self, address: str, country: Optional[str] = None) -> Optional[Dict]:
+        """
+        Convert address to coordinates using geocoding
+        
+        Args:
+            address: Full address string
+            country: Country code to filter results (e.g., 'ES', 'CO', 'MX')
+        
+        Returns:
+            Dict with lat, lon, formatted_address, or None if not found
+        """
+        try:
+            params = {
+                "api_key": self.api_key,
+                "text": address,
+                "size": 1  # Only get best result
+            }
+            
+            if country:
+                params["boundary.country"] = country
+            
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                response = await client.get(
+                    f"{self.base_url}/geocode/search",
+                    params=params
+                )
+                response.raise_for_status()
+                
+                data = response.json()
+                
+                if data.get("features") and len(data["features"]) > 0:
+                    feature = data["features"][0]
+                    coords = feature["geometry"]["coordinates"]
+                    
+                    return {
+                        "lon": coords[0],
+                        "lat": coords[1],
+                        "formatted_address": feature["properties"].get("label", address),
+                        "confidence": feature["properties"].get("confidence", 0),
+                        "country": feature["properties"].get("country", ""),
+                        "city": feature["properties"].get("locality", "")
+                    }
+                
+                logger.warning(f"No geocoding results found for: {address}")
+                return None
+                
+        except httpx.HTTPError as e:
+            logger.error(f"HTTP error geocoding address '{address}': {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error geocoding address '{address}': {e}")
+            return None
+    
+    async def calculate_route(self, origin_coords: Tuple[float, float], 
+                             dest_coords: Tuple[float, float],
+                             profile: str = "driving-car") -> Optional[Dict]:
+        """
+        Calculate route between two coordinates
+        
+        Args:
+            origin_coords: (lon, lat) tuple for origin
+            dest_coords: (lon, lat) tuple for destination
+            profile: Transport mode (driving-car, driving-hgv, cycling-regular, foot-walking)
+        
+        Returns:
+            Dict with distance (km), duration (hours), route_geometry, or None if failed
+        """
+        try:
+            body = {
+                "coordinates": [
+                    [origin_coords[0], origin_coords[1]],
+                    [dest_coords[0], dest_coords[1]]
+                ],
+                "format": "json",
+                "preference": "fastest",
+                "units": "km",
+                "geometry": True,
+                "instructions": True
+            }
+            
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                response = await client.post(
+                    f"{self.base_url}/v2/directions/{profile}",
+                    headers=self.headers,
+                    json=body
+                )
+                response.raise_for_status()
+                
+                data = response.json()
+                
+                if data.get("routes") and len(data["routes"]) > 0:
+                    route = data["routes"][0]
+                    summary = route["summary"]
+                    
+                    # Convert to more usable units
+                    distance_km = summary["distance"]  # Already in km
+                    duration_seconds = summary["duration"]
+                    duration_hours = duration_seconds / 3600
+                    
+                    return {
+                        "distance_km": round(distance_km, 2),
+                        "duration_hours": round(duration_hours, 2),
+                        "duration_seconds": duration_seconds,
+                        "geometry": route.get("geometry", None),
+                        "instructions": route.get("segments", [])
+                    }
+                
+                logger.warning(f"No route found between coordinates")
+                return None
+                
+        except httpx.HTTPError as e:
+            logger.error(f"HTTP error calculating route: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error calculating route: {e}")
+            return None
+    
+    async def get_route_info(self, sender_address: str, sender_country: str,
+                            recipient_address: str, recipient_country: str,
+                            sender_postal_code: str = "", sender_province: str = "",
+                            recipient_postal_code: str = "", recipient_province: str = "") -> Optional[Dict]:
+        """
+        Get complete route information from sender to recipient
+        
+        Args:
+            sender_address: Full sender address
+            sender_country: Sender country code (e.g., 'ES')
+            recipient_address: Full recipient address
+            recipient_country: Recipient country code (e.g., 'CO')
+            sender_postal_code: Sender postal code (optional)
+            sender_province: Sender province (optional)
+            recipient_postal_code: Recipient postal code (optional)
+            recipient_province: Recipient province (optional)
+        
+        Returns:
+            Dict with geocoded addresses, route info, estimated delivery days
+        """
+        try:
+            # Build complete sender address with postal code and province for better geocoding
+            complete_sender_address = sender_address
+            if sender_postal_code or sender_province:
+                parts = [sender_address]
+                if sender_postal_code:
+                    parts.append(sender_postal_code)
+                if sender_province:
+                    parts.append(sender_province)
+                complete_sender_address = ", ".join(parts)
+            
+            # Build complete recipient address with postal code and province for better geocoding
+            complete_recipient_address = recipient_address
+            if recipient_postal_code or recipient_province:
+                parts = [recipient_address]
+                if recipient_postal_code:
+                    parts.append(recipient_postal_code)
+                if recipient_province:
+                    parts.append(recipient_province)
+                complete_recipient_address = ", ".join(parts)
+            
+            # Geocode sender address
+            logger.info(f"Geocoding sender address: {complete_sender_address}, {sender_country}")
+            sender_geo = await self.geocode_address(complete_sender_address, sender_country)
+            
+            if not sender_geo:
+                logger.error(f"Could not geocode sender address: {complete_sender_address}")
+                return None
+            
+            # Geocode recipient address
+            logger.info(f"Geocoding recipient address: {complete_recipient_address}, {recipient_country}")
+            recipient_geo = await self.geocode_address(complete_recipient_address, recipient_country)
+            
+            if not recipient_geo:
+                logger.error(f"Could not geocode recipient address: {recipient_address}")
+                return None
+            
+            # Calculate route
+            logger.info("Calculating route...")
+            route = await self.calculate_route(
+                (sender_geo["lon"], sender_geo["lat"]),
+                (recipient_geo["lon"], recipient_geo["lat"])
+            )
+            
+            if not route:
+                logger.error("Could not calculate route")
+                return None
+            
+            # Estimate delivery days based on distance
+            # Basic logic: ~500km per day for truck shipping
+            estimated_days = max(2, int(route["distance_km"] / 500) + 1)
+            
+            # Add international shipping buffer
+            if sender_geo.get("country") != recipient_geo.get("country"):
+                estimated_days += 3  # Add customs/international processing time
+            
+            return {
+                "sender": {
+                    "address": sender_geo["formatted_address"],
+                    "lat": sender_geo["lat"],
+                    "lon": sender_geo["lon"],
+                    "country": sender_geo.get("country", ""),
+                    "city": sender_geo.get("city", "")
+                },
+                "recipient": {
+                    "address": recipient_geo["formatted_address"],
+                    "lat": recipient_geo["lat"],
+                    "lon": recipient_geo["lon"],
+                    "country": recipient_geo.get("country", ""),
+                    "city": recipient_geo.get("city", "")
+                },
+                "route": {
+                    "distance_km": route["distance_km"],
+                    "duration_hours": route["duration_hours"],
+                    "estimated_days": estimated_days,
+                    "geometry": route.get("geometry")
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Error getting route info: {e}")
+            return None
+
+    async def reverse_geocode(self, lat: float, lon: float) -> Optional[Dict]:
+        """
+        Reverse geocode coordinates to get location details including state/region
+        
+        Args:
+            lat: Latitude
+            lon: Longitude
+        
+        Returns:
+            Dict with location details including region/state
+        """
+        try:
+            params = {
+                "api_key": self.api_key,
+                "point.lat": lat,
+                "point.lon": lon,
+                "size": 1
+            }
+            
+            async with httpx.AsyncClient(timeout=10.0) as client:
+                response = await client.get(
+                    f"{self.base_url}/geocode/reverse",
+                    params=params
+                )
+                response.raise_for_status()
+                
+                data = response.json()
+                
+                if data.get("features") and len(data["features"]) > 0:
+                    feature = data["features"][0]
+                    props = feature["properties"]
+                    
+                    return {
+                        "country": props.get("country", ""),
+                        "region": props.get("region", ""),
+                        "locality": props.get("locality", ""),
+                        "county": props.get("county", ""),
+                        "label": props.get("label", "")
+                    }
+                
+                return None
+                
+        except Exception as e:
+            logger.error(f"Error reverse geocoding ({lat}, {lon}): {e}")
+            return None
+    
+    async def get_route_states(self, geometry_encoded: str, total_distance_km: float, 
+                               sender_state: str, sample_points: int = 4) -> List[str]:
+        """
+        Sample points along route and get states/regions via reverse geocoding
+        
+        Args:
+            geometry_encoded: Encoded geometry from route
+            total_distance_km: Total route distance
+            sender_state: Origin state (fallback)
+            sample_points: Number of intermediate points to sample (default 4)
+        
+        Returns:
+            List of unique states along the route
+        """
+        states = [sender_state]  # Start with origin state
+        
+        try:
+            # Decode geometry (assuming it's encoded as polyline or GeoJSON)
+            # For OpenRouteService, geometry is typically a list of coordinates
+            import json
+            
+            # Try to parse as JSON geometry
+            if isinstance(geometry_encoded, str):
+                try:
+                    geom_data = json.loads(geometry_encoded)
+                    if isinstance(geom_data, dict) and "coordinates" in geom_data:
+                        coordinates = geom_data["coordinates"]
+                    else:
+                        coordinates = geom_data
+                except:
+                    logger.warning("Could not parse geometry, using fallback")
+                    return [sender_state]
+            elif isinstance(geometry_encoded, dict):
+                coordinates = geometry_encoded.get("coordinates", [])
+            else:
+                coordinates = geometry_encoded
+            
+            if not coordinates or len(coordinates) < 2:
+                return [sender_state]
+            
+            # Sample points evenly along the route
+            total_points = len(coordinates)
+            step = max(1, total_points // (sample_points + 1))
+            
+            seen_states = {sender_state.upper()}
+            
+            for i in range(step, total_points, step):
+                if len(seen_states) >= sample_points + 2:  # Limit total states
+                    break
+                    
+                coord = coordinates[i]
+                lon, lat = coord[0], coord[1]
+                
+                # Reverse geocode this point
+                location = await self.reverse_geocode(lat, lon)
+                
+                if location:
+                    state = location.get("region") or location.get("county") or location.get("locality")
+                    if state and state.upper() not in seen_states:
+                        states.append(state)
+                        seen_states.add(state.upper())
+                        logger.info(f"Found state along route: {state}")
+            
+            return states
+            
+        except Exception as e:
+            logger.error(f"Error getting route states: {e}")
+            return [sender_state]  # Fallback to origin only
+
+# Global instance
+ors_service = OpenRouteService()
